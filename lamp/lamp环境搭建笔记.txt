@@ -1,0 +1,27 @@
+linux环境下搭建php运行环境
+一、安装httpd-2.2.34.tar.gz
+1.到官网下载  http://httpd.apache.org/
+2.解压	tar  -zxvf httpd-2.2.34.tar.gz
+	tar命令:
+	-z,--gzip,--ungzip
+	用 gzip 对存档压缩或解压。用gzip来压缩/解压缩文件，加上该选项后可以将档案文件进行压缩，但还原时也一定要使用该选项进行解压缩。
+	-x 从档案文件中释放文件。
+	-v 详细报告tar处理的文件信息。如无此选项，tar不报告文件信息。-v,--verbose详细显示处理的文件
+	-f 使用档案文件或设备，这个选项通常是必选的。--file [HOSTNAME:]F指定存档或设备 （缺省为 /dev/rmt0)
+3.建立目标文件夹（注意以下所有操作都时在root用户下执行的）
+mkdir /usr/local/apache
+也就是说等下安装的apache要安装到这个文件夹里面
+4.配置
+回到原来解压之后产生的文件夹
+./configure --prefix=/usr/local/apache --enable-module=shared
+要加上后面的参数，否则无法使用php，-enable-module=shared表示Apache可以动态的加载模块
+
+	什么是apr,apr-util,iconv
+	The mission of the Apache Portable Runtime (APR) project is to create and maintain software libraries that provide a predictable and consistent interface to underlying platform-specific implementations. The primary goal is to provide an API to which software developers may code and be assured of predictable if not identical behaviour regardless of the platform on which their software is built, relieving them of the need to code special-case conditions to work around or take advantage of platform-specific deficiencies or features.
+	APR(Apache portable Run-time libraries，Apache可移植运行库)，主要为上层的应用程序提供一个可以跨越多操作系统平台使用的底层支持接口库。在早期 的Apache版本中，应用程序本身必须能够处理各种具体操作系统平台的细节，并针对不同的平台调用不同的处理函数。
+	那安装Apache的时候为什么必须安装Apr呢？
+	在早期的Apache版本中，应用程序本身必须能够处理各种具体操作系统平台的细节，并针对不同的平台调用不同的处理函数。随着Apache的进一步开发，Apache组织决定将这些通用的函数独立出来并发展成为一个新的项目。这样，APR的开发就从Apache中独立出来，Apache仅仅是使用APR而已。
+	一般情况下，APR开发包很容易理解为仅仅是一个开发包，不过事实上并不是。目前，完整的APR实际上包含了三个开发包：apr、apr-util以及apr-iconv，每一个开发包分别独立开发，并拥有自己的版本。
+	apr中包含了一些通用的开发组件，包括mmap，DSO等等
+	apr-util该目录中也是包含了一些常用的开发组件。这些组件与apr目录下的相比，它们与apache的关系更加密切一些。比如存储段和存储段组，加密等等。
+	apr-iconv包中的文件主要用于实现iconv编码。目前的大部分编码转换过程都是与本地编码相关的。在进行转换之前必须能够正确地设置本地编码。因此假如两个非本地编码A和B需要转换，则转换过程大致为A->Local以及Local->B或者B->Local以及Local->A。
