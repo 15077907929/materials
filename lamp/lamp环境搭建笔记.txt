@@ -25,3 +25,9 @@ mkdir /usr/local/apache
 	apr中包含了一些通用的开发组件，包括mmap，DSO等等
 	apr-util该目录中也是包含了一些常用的开发组件。这些组件与apr目录下的相比，它们与apache的关系更加密切一些。比如存储段和存储段组，加密等等。
 	apr-iconv包中的文件主要用于实现iconv编码。目前的大部分编码转换过程都是与本地编码相关的。在进行转换之前必须能够正确地设置本地编码。因此假如两个非本地编码A和B需要转换，则转换过程大致为A->Local以及Local->B或者B->Local以及Local->A。
+	
+	安装apr和apr-util(安装apache需要这两个扩展包). tar -zxvf
+	安装apr ./configure --prefix=/usr/local/apr make make install
+	安装apr-util ./confgiure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr make make install
+	
+	安装apache ./configure --prefix=/usr/local/apache2 --enable-module=shared --with-included-apr
