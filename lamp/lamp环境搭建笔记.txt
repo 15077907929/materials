@@ -31,3 +31,63 @@ mkdir /usr/local/apache
 	安装apr-util ./confgiure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr make make install
 	
 	安装apache ./configure --prefix=/usr/local/apache2 --enable-module=shared --with-included-apr
+	
+	
+	编辑 /usr/local/apache2/conf/httpd.conf 文件     
+	找到：
+	AddType  application/x-compress .Z
+	AddType application/x-gzip .gz .tgz
+	在后面添加：
+	AddType application/x-httpd-php .php（使Apcche支持PHP）
+	AddType application/x-httpd-php-source .php5
+    找到：
+    <IfModule dir_module>
+    DirectoryIndex index.html
+    </IfModule>
+    添加：
+    <IfModule dir_module>
+    DirectoryIndex index.html index.php
+    </IfModule>
+    找到：
+    ＃ServerName www.example.com:80
+    修改为：
+    ServerName 127.0.0.1:80或者ServerName localhost:80
+    记得要去掉前面的“＃”
+
+二、安装php
+1.建立目标文件夹 
+2.配置 
+	./configure --prefix=/usr/local/php  --with-apxs2=/usr/local/apache2/bin/apxs
+	注意这里有一个-with-apxs2=/usr/local/apache/bin/apxs选项，其中apxs是在安装Apache时产生的，apxs是一个为Apache HTTP服务器编译和安装扩展模块的工具，使之可以用由mod_so提供的LoadModule指令在运行时加载到Apache服务器中。我的理解是通过这个工具把PHP模块动态加载到Apache中
+3.配置文件
+    cp php.ini-development /usr/local/php/lib/php.ini
+    把原来位于源代码里面的php.ini-development拷贝到/usr/local/php/lib/php.ini下，并且重命名为php.ini
+	设置时区
+
+三、安装MySQL
+1.下载
+    到官网下载mysql-5.1.65.tar.gz（注意是源码包）（版本较低）
+2.建立目标文件夹
+    mkdir /usr/local/mysql
+3.配置
+	./configure --prefix=/usr/local/mysql/
+4.编译安装 make && make install
+5.启动
+    MySQL服务并不会自动启动，还需要先初始化MySQL数据库，操作如下：
+    cd /usr/local/mysql/bin
+    sudo ./mysql_install_db --user=root
+    注意，这里最后的root是指可以操作数据库的用户，可以是当前用户，也可以新建用户，与linux上的root用户是两回事，可以自己取一个名字
+    ./mysqld_safe --user=root & 这条命令负责启动mysql服务的守护进程，此外最后的&时必须的，因为希望守护进程在后台运行
+    这里的root就是刚才的那个
+6.为根用户创建密码
+	./mysqladmin -u root password 123456
+	如果root已经设置过密码，采用如下方法
+	./mysqladmin -u root password oldpass ‘123456’ 
+7.测试
+	
+四、将PHP与MySQL结合起来
+1.重新配置PHP，改变配置选项，只需重复PHP安装时的最后的三步configure, make, 以及 make install，然后需要重新启动 Apache 使新模块生效，Apache不需要重新编译。
+2.配置
+./configure --prefix=/usr/local/php  --with-apxs2=/usr/local/apache2/bin/apxs --with-mysqli=/usr/local/mysql/bin/mysql_config  注意mysql_config 的路径
+
+安装mbstring扩展
