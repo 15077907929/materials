@@ -1,0 +1,6 @@
+1. ob_start()函数
+	ob是output buffering的简称，就是输出缓冲区。如果使用了ob_start函数，那么之后的输出内容（echo等）就不进行实际输出，而是存入缓冲区里面，随后可以使用ob_flush实际输出、
+	ob_clean删除、ob_get_contents获得内容保存到静态文件等。
+	
+	在php中，ob_start()函数用于打开缓冲区，比如header()函数之前如果就有输出，包括回车/空格/换行/都会有"Header had all ready send by"的错误。
+	此时可以先用ob_start()打开缓冲区PHP代码的数据块和echo()输出都会进入缓冲区而不会立刻输出。
