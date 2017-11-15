@@ -1,0 +1,7 @@
+php如果需要使用redis，需要开启redis扩展，可以在gethub上下载到。https://github.com/phpredis/phpredis/downloads
+
+一、下载redis安装包。https://github.com/dmajkic/redis/downloads
+二、下载完成后，在磁盘新建一个文件夹，将64位文件夹里的内容复制过去。比如在E盘新建一个redis文件夹，然后将64位文件夹的内容全部复制过去。
+三、在dos窗口下输入redis-server.exe redis.conf命令，然后回车，开启redis服务。
+四、服务端窗口不要关，另打开一个dos窗口，输入：redis-cli.exe -h 127.0.0.1 -p 6379然后回车，打开客户端。
+五、测试：设置一个key=》value；然后能获取则安装成功！！set yy 22,get yy
