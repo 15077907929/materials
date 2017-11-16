@@ -1,40 +1,29 @@
-﻿<?php
-$cookie_file=tempnam('./temp','cookie');
-$ch = curl_init();
-$url1 = 'http://appmanta.com/app/keywordanalytics.html?appid=com.word.wordzenen&country=usa&store=gp&device=1';
-curl_setopt($ch,CURLOPT_URL,$url1);
-curl_setopt($ch,CURLOPT_HTTP_VERSION,CURL_HTTP_VERSION_1_1);
-curl_setopt($ch,CURLOPT_HEADER,0);
+<?php
+//采集第一页并获得数据总页数
+$ch=curl_init();
+$url='http://appmanta.com/ASOWeb/appword/findappword.do';
+$curlPost='country=usa&device=1&sdate=2017-11-15&edate=2017-11-16&appid=com.word.wordzenen&uid=AAAA&page=1&sort=asc&col=pos&pagesize=100&timezone=-480&isGoogle=yes';
+curl_setopt($ch,CURLOPT_URL,$url);
+curl_setopt($ch,CURLOPT_POST,1);
+curl_setopt($ch,CURLOPT_POSTFIELDS,$curlPost);
 curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-curl_setopt($ch,CURLOPT_FOLLOWLOCATION,1);
-curl_setopt($ch, CURLOPT_ENCODING ,'gzip'); //加入gzip解析
-//设置连接结束后保存cookie信息的文件
-curl_setopt($ch,CURLOPT_COOKIEJAR,$cookie_file);
+curl_setopt($ch, CURLOPT_ENCODING, 'gzip'); 
 $content=curl_exec($ch);
- 
 curl_close($ch);
- 
-$ch3 = curl_init();
-$url3 = 'http://appmanta.com/ASOWeb/appword/findappword.do';
-$curlPost='country=usa&device=1&sdate=2017-11-07&edate=2017-11-06&appid=com.word.wordzenen&uid=AAAA&page=1&sort=asc&col=pos&pagesize=100&timezone=-480&isGoogle=yes';
-curl_setopt($ch3,CURLOPT_URL,$url3);
-curl_setopt($ch3,CURLOPT_POST,1);
-curl_setopt($ch3,CURLOPT_POSTFIELDS,$curlPost);
- 
-//设置连接结束后保存cookie信息的文件
-curl_setopt($ch3,CURLOPT_RETURNTRANSFER,1);
-curl_setopt($ch3,CURLOPT_COOKIEFILE,$cookie_file); 
-curl_setopt($ch3, CURLOPT_ENCODING, 'gzip'); 
-$content1=curl_exec($ch3);
-$object=json_decode($content1);
+$object=json_decode($content);
 $arrlist=$object->list;
 if($arrlist){
 	require('D:\phpStudy\www\pickup\conn\conn.php');
 	foreach($arrlist as $key=>$val){
-		$query='insert into pickup1 set ranking='.$val->ranking.',count='.$val->count.',word=\''.$val->word.'\',change_num='.$val->change;
-		if(!mysql_query($query)){
-			echo 'insert db error!';
-			exit;	
+		$query='select id from pickup1 where word=\''.$val->word.'\'';	//此处判断数据是否已经采集过了，采集过的数据则不插入
+		$res=mysql_query($query);
+		$num=mysql_num_rows($res);
+		if($num==0){
+			$query='insert into pickup1 set ranking='.$val->ranking.',count='.$val->count.',word=\''.$val->word.'\',change_num='.$val->change;
+			if(!mysql_query($query)){
+				echo 'insert db error!';
+				exit;	
+			}
 		}
 	}
 }
@@ -43,47 +32,38 @@ if($arrlist){
 $totalpages=$object->totalPages;
 $nums=ceil($totalpages/100);
 
-//分页采集
+
+//分页采集(剩余的页面)
 for($i=2;$i<=$nums;$i++){
-	$cookie_file=tempnam('./temp','cookie');
-	$ch = curl_init();
-	$url1 = 'http://appmanta.com/app/keywordanalytics.html?appid=com.word.wordzenen&country=usa&store=gp&device=1';
-	curl_setopt($ch,CURLOPT_URL,$url1);
-	curl_setopt($ch,CURLOPT_HTTP_VERSION,CURL_HTTP_VERSION_1_1);
-	curl_setopt($ch,CURLOPT_HEADER,0);
-	curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-	curl_setopt($ch,CURLOPT_FOLLOWLOCATION,1);
-	curl_setopt($ch, CURLOPT_ENCODING ,'gzip'); //加入gzip解析
-	//设置连接结束后保存cookie信息的文件
-	curl_setopt($ch,CURLOPT_COOKIEJAR,$cookie_file);
-	$content=curl_exec($ch);
-	 
-	curl_close($ch);
-	 
-	$ch3 = curl_init();
-	$url3 = 'http://appmanta.com/ASOWeb/appword/findappword.do';
-	$curlPost='country=usa&device=1&sdate=2017-11-07&edate=2017-11-06&appid=com.word.wordzenen&uid=AAAA&page='.$i.'&sort=asc&col=pos&pagesize=100&timezone=-480&isGoogle=yes';
-	curl_setopt($ch3,CURLOPT_URL,$url3);
-	curl_setopt($ch3,CURLOPT_POST,1);
-	curl_setopt($ch3,CURLOPT_POSTFIELDS,$curlPost);
-	 
-	//设置连接结束后保存cookie信息的文件
-	curl_setopt($ch3,CURLOPT_RETURNTRANSFER,1);
-	curl_setopt($ch3,CURLOPT_COOKIEFILE,$cookie_file); 
-	curl_setopt($ch3, CURLOPT_ENCODING, 'gzip'); 
-	$content1=curl_exec($ch3);
-	$object=json_decode($content1);
+	$ch2=curl_init();
+	$url3='http://appmanta.com/ASOWeb/appword/findappword.do';
+	$curlPost='country=usa&device=1&sdate=2017-11-15&edate=2017-11-16&appid=com.word.wordzenen&uid=AAAA&page='.$i.'&sort=asc&col=pos&pagesize=100&timezone=-480&isGoogle=yes';
+	curl_setopt($ch2,CURLOPT_URL,$url3);
+	curl_setopt($ch2,CURLOPT_POST,1);
+	curl_setopt($ch2,CURLOPT_POSTFIELDS,$curlPost);
+	curl_setopt($ch2,CURLOPT_RETURNTRANSFER,1);
+	curl_setopt($ch2, CURLOPT_ENCODING, 'gzip'); 
+	$content2=curl_exec($ch2);
+	curl_close($ch2);
+	
+	$object=json_decode($content2);
 	$arrlist=$object->list;
 	if($arrlist){
 		require('D:\phpStudy\www\pickup\conn\conn.php');
 		foreach($arrlist as $key=>$val){
-			$query='insert into pickup1 set ranking='.$val->ranking.',count='.$val->count.',word=\''.$val->word.'\',change_num='.$val->change;
-			if(!mysql_query($query)){
-				echo 'insert db error!';
-				exit;	
+			$query='select id from pickup1 where word=\''.$val->word.'\'';	//此处判断数据是否已经采集过了，采集过的数据则不插入
+			$res=mysql_query($query);
+			$num=mysql_num_rows($res);
+			if($num==0){
+				$query='insert into pickup1 set ranking='.$val->ranking.',count='.$val->count.',word=\''.$val->word.'\',change_num='.$val->change;
+				if(!mysql_query($query)){
+					echo 'insert db error!';
+					exit;	
+				}
 			}
 		}
 	}	
 }
+ob_start();
 echo 'pickup data success!';
 ?>
