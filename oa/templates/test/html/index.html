@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$school_name}--{$sitetitle}</title>
+<meta name="keywords" content="{$keywords}" />
+<meta name="description" content="{$description}" />
+<link type="text/css" rel="stylesheet" href="templates/{$style}/css/base.css" />
+<link type="text/css" rel="stylesheet" href="templates/{$style}/css/style.css" />
+<script type="text/javascript" src="templates/{$style}/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="templates/{$style}/js/admin.js"></script>
+</head>
+<body>
+<div class="header">
+	<h2 class="logo"><img src="templates/{$style}/images/left_banner.gif" /></h2>
+	<div class="header_sub clearfix">
+		<div class="welcome fl">{$school_name}欢迎您</div>
+		<div class="toolbar fr">
+			<ul class="clearfix">{$toolbar}</ul>
+		</div>
+	</div>
+</div>
+<table class="container clearfix">
+	<tr>
+		<td class="leftMenu">
+			<div class="hd">
+				<h4>我的菜单<span class="ico fr"></span></h4>
+				<ul class="clearfix">
+					<li><a href="">网路硬盘</a></li>
+					<li><a href="">短信箱</a></li>
+					<li><a href="">我的桌面</a></li>
+				</ul>
+			</div>
+			<div class="bd">
+				<ul>
+					<li>我的办公桌<span class="ico fr"></span></li>
+					<li>系统管理<span class="ico fr"></span></li>
+				</ul>
+			</div>
+			<div class="sub">
+				<ul class="clearfix">
+					<li class="qj"><a href="">请 假</a></li>
+					<li><a href="">收藏夹</a></li>
+					<li><a href="">发表文章</a></li>
+				</ul>
+			</div>
+		</td>
+		<td class="main">
+			<div class="location">
+				<ul class="clearfix">
+					<li>我的桌面</li>
+				</ul>
+			</div>
+			<div class="bd clearfix">
+				<div class="lArea fl">
+					<div class="daily">
+						<div class="tit">
+							<span>今日信息</span></div>
+						<div class="content">
+							今日无信息
+						</div>
+					</div>
+					<div class="categories">
+						<div class="tit">
+							<ul class="clearfix">
+								<li>行政通知</li>
+								<li>工作安排</li>
+								<li>资料下载</li>
+								<li>会议通知</li>
+							</ul>
+						</div>
+						<div class="content">
+						暂无信息
+						</div>
+					</div>
+					<div class="absent">
+						<div class="tit">
+							<span><b>公病事假</b>(今日)</span></div>
+						<div class="content">
+							今日无信息
+						</div>
+					</div>
+					<div class="preorder">
+						<div class="tit">
+							<span><b>多媒体教师预定</b>(今日)</span></div>
+						<div class="content">
+							今日无信息
+						</div>
+					</div>
+					<div class="preorder">
+						<div class="tit">
+							<span><b>多媒体教师预定</b>(今日)</span></div>
+						<div class="content">
+							今日无信息
+						</div>
+					</div>
+				</div>
+				<div class="rArea fr">
+					<div class="climate">
+						<div class="tit">气象预报</div>
+					</div>
+					<div class="affairs">
+						<div class="tit">今日事物</div>
+					</div>
+					<div class="reminder">
+						<div class="tit">代办提醒</div>
+					</div>
+				</div>
+			</div>
+		</td>
+	</tr>
+</table>
+<div class="footer clearfix">
+	<div class="info fl">
+		<span class="user">当前用户：<b>{$real_name}</b></span>
+		<span class="department">部门：<b>{$managename}</b></span>
+	</div>
+	<div class="copyright fr">
+		技术支持
+	</div>
+</div>
+</body>
+</html>
