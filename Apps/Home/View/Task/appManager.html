@@ -1,0 +1,79 @@
+<div class="clear"></div>
+<table>
+    <th>ID</th
+	><th>游戏id</th>
+	<th>游戏名称</th>
+	<th>包名</th>
+	<th>CP</th>
+	<th>修改时间</th>
+	<th>是否启用</th>
+	<th>是否抓关键字</th>
+	<th>账号详细</th>
+	<th>操作</th>
+    <volist name="data" id="vo">
+        <tr>
+            <td><{$vo.id}></td>
+            <td><{$vo.game_id}></td>
+            <td><{$vo.game_name}></td>
+            <td><{$vo.package_name}></td>
+            <td><{$vo.cp_name}></td>
+            <td><{$vo.update_time}></td>
+            <td><{$vo.status}></td>
+			<td><{$vo.gkw}></td>
+            <td><{$vo.zhankai}></td>
+            <td><{$vo.caozuo}></td>
+        </tr>
+    </volist>
+</table>
+
+<div class="group_detail_div" style="display: none;position: absolute;background-color: #00E8D7;padding: 10px">
+    <div style="height: 18px;text-align: right"><span class="icon_delete group_close" style="cursor: pointer"></span></div>
+    <div class="group_detail"></div>
+</div>
+
+<script>
+    $(".open_group").click(function(){
+        var groupid = $(this).attr('attr');
+        var url = "index.php?m=Home&c=Task&a=appGroupDetailList";
+        $.ajax({
+            url : url,
+            type : 'post',
+            data:{groupid:groupid},
+            success : function(data){
+                $(".group_detail").html(data);
+                var top = ($(window).height() - $("#popDiv").height())/2;
+                var scrollTop = $(document).scrollTop();
+                $(".group_detail_div").css( { 'display' : 'block', 'top' : top + scrollTop - 400,'margin-left' : '30px'} ).show();
+
+                $("table .ajax").each(function () {
+                    $(this).click(function () {
+                        var the = $(this);
+                        var url = $(this).attr('ajax');
+                        var url_arr = url.split("&");
+                        if (url == '' || $(the).hasClass('ajax_sel'))
+                            return;
+
+                        var load = setTimeout('loading(1)', 300);
+                        $.post(url, '', function (data) {
+                            clearTimeout(load);
+                            loading(0);
+                            notice(data.info);
+                            if (data.status == 1) {
+                                $(".ajax", $(the).parent()).removeClass('ajax_sel');
+                                $(the).addClass('ajax_sel');
+                                if(url.indexOf("table=client_mst")){
+                                    window.location.reload();
+                                }
+                            }
+                        }, 'json');
+                    });
+                });
+            }
+        });
+        return false;
+    });
+
+    $(".group_close").click(function(){
+        $(".group_detail_div").hide();
+    });
+</script>

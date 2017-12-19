@@ -1,0 +1,16 @@
+<form enctype="multipart/form-data" method="post" action="<{:U('Task/agreementList', array('method'=>'add'))}>">
+    <ul>
+        <li>
+            <div class="l">TAG：</div>
+            <div class="r"><{$tag}></div>
+        </li>
+        <li>
+            <div class="l">线程数：</div>
+            <div class="r"><{$thread}></div>
+        </li>
+        <input type="hidden" name="method" value="add">
+        <li>
+            <input type="submit" value="添加">
+        </li>
+    </ul>
+</form>

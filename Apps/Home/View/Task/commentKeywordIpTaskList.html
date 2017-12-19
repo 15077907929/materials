@@ -1,0 +1,136 @@
+<div>
+    &nbsp;&nbsp;&nbsp;<input type="button" name="redis" class="redis" value="立即更新任务" onclick="updateTask();"><br /><br />
+</div>
+<div class="clear"></div>
+
+<div class="clear"></div>
+
+上一个小时段配额量：<{$last_hour_count}> &nbsp;&nbsp;&nbsp;&nbsp; 成功量：<b style="color: red"><{$last_hour_success}></b>&nbsp;&nbsp; &nbsp;&nbsp; 当前小时配额量：<{$now_hour_count}>
+<br />
+下发总数：<b style="color: red"><{$total.issued_num}></b> &nbsp;&nbsp;&nbsp;&nbsp;
+提交总数：<b style="color: red"><{$total.submit_nums}></b>&nbsp;&nbsp; &nbsp;&nbsp;
+提交率：<b style="color: red"><{$total.submit_rate}></b>&nbsp;&nbsp; &nbsp;&nbsp;
+成功总数：<b style="color: red"><{$total.success_nums}></b>&nbsp;&nbsp; &nbsp;&nbsp;
+成功率：<b style="color: red"><{$total.success_rate}></b>&nbsp;&nbsp; &nbsp;&nbsp;
+<br />
+<br />
+
+<table>
+    <th>ID</th><th>TAG</th><th>开始/结束时间</th><th>国家/语言</th><th>应用名</th><th>包名</th><th>关键词</th><th>数量</th><th>是否启用</th><th>下发数</th><th>提交数</th><th>成功数</th><!--<th>统计</th>--><th>操作</th><th>统计</th><!--<th>下载地址</th>--><th>版本号</th><th>版本名称</th><th>优先级</th><th>评论概率</th><th>评论操作</th><th>备注</th><th>操作</th>
+    <volist name="data" id="vo">
+        <tr>
+            <td><{$vo.id}></td>
+            <td><{$vo.tag}></td>
+            <td><{$vo.start}><br><{$vo.end}></td>
+            <td><{$vo.country}>/<{$vo.language}></td>
+            <?php
+                $appannieUrl = ''; 
+                $appannieUrl = 'https://www.appannie.com/apps/google-play/app/' . $vo['package_name'] . '/keywords/?countries=' . $vo['country'] . '&device=&start_date=' . date('Y-m-d',strtotime($vo['start_date'])-7*86400) . '&end_date=' . date('Y-m-d', time() - 2*86400);
+                ?>
+            <td><div style="overflow-y: scroll;width: 200px;height: 50px;white-space: normal;"><{$vo.nick_name}><br/><{$vo.game_id}></div></td>
+            <td><div style="overflow-y: scroll;width: 200px;height: 50px;white-space: normal;"><a target="_blank" href="<{$appannieUrl}>" title="点击查看appannie"><{$vo.package_name}></a></div></td>
+            <td><div style="overflow-y: scroll;width: 200px;height: 50px;white-space: normal;"><{$vo.keyword}></div></td>
+            <td><{$vo.count}></td>
+            <td class=<{$vo.exception}> ><{$vo.status}></td>
+            <td><{$vo.issued_num}></td>
+            <td><{$vo.submit_nums}></td>
+            <td>
+            	<b style="color: red">
+                	<{$vo.success_nums}>
+            		<if condition="$vo['comment_success']">
+                    	<br />(评论<{$vo['comment_success']}>)
+                    </if>
+            	</b>
+            </td>
+            <!--<td>
+            	<div style="overflow-y: scroll;width: 300px;height: 50px;white-space: normal;">
+            	<?php 
+                if($vo['result_arr']){
+                	foreach($vo['result_arr'] as $key => $val){
+                    	echo $result_type_arr[$key] . ':' . $val . '<br />';
+                   	}
+               	}
+                ?>
+                </div>
+            </td>-->
+            <td><{$vo.caozuo}></td>
+            <td><{$vo.zhankai}></td>
+            <!--<td><div style="overflow-y: scroll;width: 200px;height: 50px;white-space: normal;"><{$vo.signature}></div></td>-->
+            <td><{$vo.app_version}></td>
+            <td><{$vo.versionName}></td>
+            <td><{$vo.score}></td>
+            <td><{$vo.comment_rate}></td>
+            <td><{$vo.comment_type}></td>
+            <td><div style="overflow-y: scroll;width: 200px;height: 50px;white-space: normal;"><{$vo.remark}></div></td>
+            <td><{$vo.admin_name}><{$vo.operate_type}></td>
+        </tr>
+    </volist>
+</table>
+
+<div class="task_result_div" style="display: none;position: absolute;background-color: #00E8D7;padding: 10px">
+    <div style="height: 18px;text-align: right"><span class="icon_delete group_close" style="cursor: pointer"></span></div>
+    <div class="result_div"></div>
+</div>
+
+<script>
+	$(function(){
+		$('select[name="task_status"]').val("<{$task_status}>");
+	});
+
+    function updateTask() {
+        $.ajax({
+            url : "index.php?m=Home&c=Task&a=updateTask",
+            type : 'post',
+            data:{option:'update'},
+            success : function(data){
+                alert(data);
+                window.location.reload();
+            }
+        });
+    }
+	
+	$(".open_group").click(function(){
+        var taskid = $(this).attr('attr');
+        var url = "index.php?m=Home&c=Task&a=task_result_detail";
+        $.ajax({
+            url : url,
+            type : 'post',
+            data:{task_id:taskid},
+            success : function(data){
+                $(".result_div").html(data);
+                var top = ($(window).height() - 300);
+                var scrollTop = $(document).scrollTop();
+                $(".task_result_div").css( { 'display' : 'block', 'top' : top + scrollTop - 400,'margin-left' : '450px'} ).show();
+
+                $("table .ajax").each(function () {
+                    $(this).click(function () {
+                        var the = $(this);
+                        var url = $(this).attr('ajax');
+                        var url_arr = url.split("&");
+                        if (url == '' || $(the).hasClass('ajax_sel'))
+                            return;
+
+                        var load = setTimeout('loading(1)', 300);
+                        $.post(url, '', function (data) {
+                            clearTimeout(load);
+                            loading(0);
+                            notice(data.info);
+                            if (data.status == 1) {
+                                $(".ajax", $(the).parent()).removeClass('ajax_sel');
+                                $(the).addClass('ajax_sel');
+                                if(url.indexOf("table=client_mst")){
+                                    window.location.reload();
+                                }
+                            }
+                        }, 'json');
+                    });
+                });
+            }
+        });
+        return false;
+    });
+
+    $(".group_close").click(function(){
+        $(".task_result_div").hide();
+    });
+</script>

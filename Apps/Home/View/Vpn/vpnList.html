@@ -1,0 +1,123 @@
+&nbsp;&nbsp;&nbsp;<input type="button" name="quxuan" class="quxuan" value="批量修改" onclick="groupEdit();">
+<div class="groupEdit" style="display: none;position: absolute;left: 500px;top: 200px;background-color: #00E8D7;padding: 10px">
+    <div style="height: 18px;text-align: right"><span class="icon_delete group_close" style="cursor: pointer"></span></div>
+    组id：<{$group_groupid}><br/>
+    账号到期时间：<{$group_lasttime}><br/>
+    状态：<{$group_status}><br/>
+    国内/国外：<{$group_country_type}><br/>
+    是否删除：<{$group_del}>
+    <br/><br/><br/><span class="success_log_field" style="width: 100px; height: 30px;display: block;font-size: 16px;line-height: 30px;text-align: center;" onclick="groupEditResult();">修改</span>
+</div>
+<form action="/index.php?m=Home&c=Vpn&a=vpnList&method=import" method="post" id="submitform">
+    <br style="height: 3px;"/>
+    <table>
+        <th><input type="checkbox" name="all" onclick="checkAll($(this),'id[]');"/></th>
+        <th>ID</th>
+        <th>组名称</th>
+        <th>账号来源</th>
+        <th>优先级</th>
+        <th>当前客户端</th>
+        <th>是否动态</th>
+        <th>是否启用</th>
+        <th style="width: 75px;">账号到期时间</th>
+        <th>国内/国外</th>
+        <th>备注</th>
+        <th width="65px">操作</th>
+        <th>数据</th>
+        <volist name="data" id="vo">
+            <tr id=<{$vo.exception}> >
+                <td><{$vo.selectid}></td>
+                <td><{$vo.id}></td>
+                <td><{$vo.group_id}></td>
+                <td><{$vo.channel}></td>
+                <td><{$vo.score}></td>
+                <td><{$vo.sid}></td>
+                <td><{$vo.dynamic}></td>
+                <td><{$vo.status}></td>
+                <td><{$vo.lasttime}></td>
+                <td><{$vo.country_type}></td>
+                <td><{$vo.remark}></td>
+                <td><{$vo.caozuo}></td>
+                <td>
+                    <div style="overflow-y: scroll;width: 400px;height: 40px;white-space: normal;"><{$vo.data}></div>
+                </td>
+            </tr>
+        </volist>
+    </table>
+</form>
+<script>
+    function checkAll(obj, target) {
+        if (!target) {
+            alert('您没有指定操作vpnid！');
+            return false;
+        }
+        $(':checkbox[name="' + target + '"]').each(function () {
+            $(this).prop('checked', obj.is(':checked'));
+        });
+    }
+
+    function groupEdit() {
+        if ($(':checkbox[name="id[]"]:checked').length <= 0) {
+            alert('请选择导出账号ID');
+            return false;
+        }
+        var id = '';
+        $(':checkbox[name="id[]"]').each(function () {
+            if ($(this).is(':checked')) {
+                id += id ? ',' + $(this).val() : $(this).val();
+            }
+        });
+        if (!id) {
+            alert('请选择导出账号ID');
+            return false;
+        }
+        $(".groupEdit").show();
+    }
+
+    function groupEditResult() {
+        if ($(':checkbox[name="id[]"]:checked').length <= 0) {
+            alert('请选择导出账号ID');
+            return false;
+        }
+        var id = '';
+        $(':checkbox[name="id[]"]').each(function () {
+            if ($(this).is(':checked')) {
+                id += id ? ',' + $(this).val() : $(this).val();
+            }
+        });
+        if (!id) {
+            alert('请选择导出账号ID');
+            return false;
+        }
+        var group_groupid = $('select[name="group_groupid"]').val();
+        var group_country_type = $('select[name="group_country_type"]').val();
+        var group_lasttime = $('input[name="group_lasttime"]').val();
+        var group_status = $('input[name="group_status"]:checked').val();
+        var group_del = $('input[name="group_del"]:checked').val();
+        $.ajax({
+            url : "index.php?m=Home&c=Vpn&a=vpnList&method=group",
+            type : 'post',
+            data:{id:id,group_groupid:group_groupid,group_country_type:group_country_type,group_lasttime:group_lasttime,group_status:group_status,group_del:group_del},
+            success : function(data){
+                alert(data);
+                window.location.reload();
+            }
+        });
+    }
+
+    $(".group_close").click(function(){
+        $(".groupEdit").hide();
+    });
+
+    function updateRedis() {
+        $.ajax({
+            url : "index.php?m=Home&c=Account&a=updateRedis",
+            type : 'post',
+            data:{table:'vpn_mst'},
+            success : function(data){
+                alert(data);
+                window.location.reload();
+            }
+        });
+    }
+</script>

@@ -1,0 +1,64 @@
+<ul>
+    <li>
+        <div class="l">原文：</div>
+        <div class="r"><textarea id="text" cols="100" rows="12"></textarea></div>
+    </li>
+    <li><input type="submit" value="检测" onclick="check()"></li>
+    <li>
+        <div class="l">结果：</div>
+        <div class="r">
+            <div id="result" style="padding:2px;border:1px solid #ccc;border-radius:5px;box-shadow:inset 0px 0px 5px 0px #ccc;width:720px;height:240px;"></div>
+        </div>
+    </li>
+</ul>
+<script type="text/javascript">
+//    var words =
+//        ["国家级","世界级","最高级","最佳","最大","第一","唯一","首个","首选","最好","精确","顶级","最高","最低","最","最具","最便宜","最新","最先进",
+//        "最大程度","最新技术","最先进科学","国家级产品","填补国内空白","绝对","独家","首家","第一品牌","金牌","名牌","优秀","最先",
+//        "全网销量第一","全球首发","全国首家","全网首发","世界领先","顶级工艺","最新科学","最先进加工工艺","最时尚","极品","顶尖","终极","最受欢迎",
+//        "王牌","销量冠军","NO.1","Top1","极致","永久","掌门人","领袖品牌","独一无二","绝无仅有","前无古人","史无前例","万能独一无二","最精密",
+//        "最畅销","无限","最清晰","最快","完美","100%","全球性","无与伦比","全球领航者","一流","领跑全球","领先","领头羊","独占鳌头","快人一步","固若金汤"];
+    var words = '<{$words}>'.split('|');
+
+    function check()
+    {
+        var text = $('#text').val();
+        var uniq = [];
+        var end = 0;
+        for(var i=0; i<words.length; i++)
+        {
+            var cw = words[i];
+            for(var j=0; j<text.length; j++)
+            {
+                if(text.substr(j, cw.length) == cw)
+                {
+                    if(uniq[j])
+                    {
+                        if(cw.length > uniq[j])
+                            uniq[j] = cw.length;
+                    }
+                    else
+                        uniq[j] = cw.length;
+                }
+            }
+        }
+
+        var html = '';
+        for(var k in uniq)
+        {
+            var s = k;//开始位置
+            var l = uniq[k];//长度
+            if(s != 0)
+            {
+                if(html.length == 0)
+                    html += text.substring(0, s);
+                if(s-end>0 && end>0)
+                    html += text.substring(end, s);
+            }
+            html += "<span style='background-color:#3185b9;font-weight:bold;color:#FFF'>"+text.substr(s, l)+"</span>";
+            end = parseInt(s) + parseInt(l);//上个关键字结束的位置
+        }
+        html += text.substring(end, text.length);
+        $('#result').html(html);
+    }
+</script>

@@ -1,0 +1,64 @@
+<form enctype="multipart/form-data" method="post" action="<{:U('Task/accountBindingList', array('method'=>'add'))}>">
+    <ul>
+        <li>
+            <div class="l">TAG：</div>
+            <div class="r"><{$tag}></div>
+        </li>
+        <li>
+            <div class="l">开始时间：</div>
+            <div class="r"><{$start}></div>
+        </li>
+        <li>
+            <div class="l">结束时间：</div>
+            <div class="r"><{$end}></div>
+        </li>
+        <li>
+            <div class="l">数值类型：</div>
+            <div class="r"><{$type}></div>
+        </li>
+        <li>
+            <div class="l">值：</div>
+            <div class="r"><{$count}></div>
+        </li>
+        <li>
+            <div class="l">国家：</div>
+            <div class="r"><{$country_id}></div>
+        </li>
+        <li>
+            <div class="l">手机模式：</div>
+            <div class="r"><{$model_type}></div>
+        </li>
+        <li>
+            <div class="l">任务模式：</div>
+            <div class="r"><{$task_type}></div>
+        </li>
+        <li>
+            <div class="l">是否启用：</div>
+            <div class="r"><{$status}></div>
+        </li>
+        <li>
+            <div class="l">账号追踪组：</div>
+            <div class="r"><{$group_id}></div>
+        </li>
+        <li>
+            <div class="l">国家表名：</div>
+            <div class="r gid_ajax"><{$table_name}></div>
+        </li>
+        <input type="hidden" name="method" value="add">
+        <li>
+            <input type="submit" value="添加">
+        </li>
+    </ul>
+</form>
+<script>
+    $('select[name="country_id"]').change(function () {
+        var cp = $(this).children('option:selected').val();
+        $.ajax({
+            url: 'index.php?m=Home&c=Task&a=accountBindingList&method=ajax&country_id=' + cp,
+            type: 'get',
+            success: function (data) {
+                $('.gid_ajax').html(data);
+            }
+        });
+    });
+</script>

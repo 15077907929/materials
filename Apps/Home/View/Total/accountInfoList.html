@@ -1,0 +1,54 @@
+<form method="post" action="<{$url}>">
+    <table>
+        <tr>
+            <td>开始时间：<{$start}></td>
+            <td>结束时间：<{$end}></td>
+            <td style="text-align: left" colspan="2"><input type="submit" value="查询" ></td>
+        </tr>
+    </table>
+</form>
+<div class="clear"></div>
+<br/>
+<span>机器总数：<b style="color: red"><{$total.machine_count}></b></span>&nbsp;&nbsp;&nbsp;&nbsp;
+<span>任务总数：<b style="color: red"><{$total.count}></b></span>&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>
+<table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>机器名</th>
+        <th>数量</th>
+    </tr>
+    </thead>
+    <tbody>
+    <volist name="data" id="vo">
+        <tr>
+            <td><{$vo.machine_name}></td>
+            <td><{$vo.count}></td>
+        </tr>
+    </volist>
+    </tbody>
+</table>
+<script>
+    $(document).ready(function() {
+        $('#example').dataTable({
+            "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0 ] }],
+            "aaSorting": [[ 0, "desc" ]],
+            "aLengthMenu":[300,200,100],
+            "oLanguage": {    // 语言设置
+                "sLengthMenu": "每页显示 _MENU_ 条记录",
+                "sZeroRecords": "抱歉， 没有找到",
+                "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                "sInfoEmpty": "没有数据",
+                "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+                "sZeroRecords": "没有检索到数据",
+                "sSearch": "检索:",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+                }
+            },
+        });
+    });
+</script>

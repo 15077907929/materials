@@ -1,0 +1,152 @@
+<style>
+    select{width:100px}
+</style>
+<form method="post" action="<{$url}>">
+    <table>
+        <tr>
+            <td>TAG：<{$search_tag}></td>
+            <td>SID：<{$search_id}></td>
+            <td>IP段：<{$search_sid_group}></td>
+            <td style="text-align: left" colspan="2"><input type="submit" value="查询" ></td>
+        </tr>
+    </table>
+</form>
+<div>
+    &nbsp;&nbsp;&nbsp;<input type="button" name="quxuan" class="quxuan" value="批量修改" onclick="groupEdit();">
+    &nbsp;&nbsp;&nbsp;<input type="button" name="redis" class="redis" value="更新缓存" onclick="updateRedis();">
+</div>
+<div class="groupEdit" style="display: none;position: absolute;left: 500px;top: 200px;background-color: #00E8D7;padding: 10px;z-index: 1000">
+    <div style="height: 18px;text-align: right"><span class="icon_delete group_close" style="cursor: pointer"></span></div>
+    TAG：<{$group_tag}><br/>
+    线程数：<{$group_thread}><br/>
+    是否启用：<{$group_status}><br/>
+    <!--是否删除Iphone：<{$group_del}>-->
+    <br/><br/><br/><span class="success_log_field" style="width: 100px; height: 30px;display: block;font-size: 16px;line-height: 30px;text-align: center;" onclick="groupEditResult();">修改</span>
+</div>
+
+<form action="/index.php?m=Home&c=Task&a=agreementList&method=import" method="post" id="submitform">
+    <br style="height: 3px;"/>
+    <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th><input type="checkbox" name="all" onclick="checkAll($(this),'id[]');"/></th>
+            <th>ID</th><th>心跳时间</th><th>TAG</th><th>SID</th><th>线程数</th><th>当前vpn</th><th>是否启用</th><th width="65px">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="data" id="vo">
+            <tr>
+                <td><{$vo.selectid}></td>
+                <td><{$vo.id}></td>
+                <td><{$vo.heartbeat}></td>
+                <td><{$vo.tag}></td>
+                <td><{$vo.sid}></td>
+                <td><{$vo.thread}></td>
+                <td><{$vo.used_vpn}></td>
+                <td><{$vo.status}></td>
+                <td><{$vo.caozuo}></td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+</form>
+<div>共<span style="color: red;"><{$count}></span>条</div>
+<script>
+    $(document).ready(function() {
+        $('#example').dataTable({
+            "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0 ] }],
+            "aaSorting": [[ 1, "desc" ]],
+            "aLengthMenu":[300,200,100],
+            "oLanguage": {    // 语言设置
+                "sLengthMenu": "每页显示 _MENU_ 条记录",
+                "sZeroRecords": "抱歉， 没有找到",
+                "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                "sInfoEmpty": "没有数据",
+                "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+                "sZeroRecords": "没有检索到数据",
+                "sSearch": "检索:",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+                }
+            },
+        });
+    });
+    function checkAll(obj, target) {
+        if (!target) {
+            alert('您没有指定操作vpnid！');
+            return false;
+        }
+        $(':checkbox[name="' + target + '"]').each(function () {
+            $(this).prop('checked', obj.is(':checked'));
+        });
+    }
+
+    function groupEdit() {
+        if ($(':checkbox[name="id[]"]:checked').length <= 0) {
+            alert('请选择导出账号ID');
+            return false;
+        }
+        var id = '';
+        $(':checkbox[name="id[]"]').each(function () {
+            if ($(this).is(':checked')) {
+                id += id ? ',' + $(this).val() : $(this).val();
+            }
+        });
+        if (!id) {
+            alert('请选择导出账号ID');
+            return false;
+        }
+        $(".groupEdit").show();
+    }
+
+    function updateRedis() {
+        $.ajax({
+            url : "index.php?m=Home&c=Account&a=updateRedis",
+            type : 'post',
+            data:{table:'agreement_mst'},
+            success : function(data){
+                alert(data);
+                window.location.reload();
+            }
+        });
+    }
+
+    function groupEditResult() {
+        if ($(':checkbox[name="id[]"]:checked').length <= 0) {
+            alert('请选择导出账号ID');
+            return false;
+        }
+        var id = '';
+        $(':checkbox[name="id[]"]').each(function () {
+            if ($(this).is(':checked')) {
+                id += id ? ',' + $(this).val() : $(this).val();
+            }
+        });
+        if (!id) {
+            alert('请选择导出账号ID');
+            return false;
+        }
+        var group_tag = $('select[name="group_tag"]').val();
+        var group_thread = $('input[name="group_thread"]').val();
+        var group_status = $('select[name="group_status"]').val();
+        var group_del = $('input[name="group_del"]:checked').val();
+        $.ajax({
+            url : "index.php?m=Home&c=Task&a=agreementList&method=group",
+            type : 'post',
+            data:{
+                id:id,group_tag:group_tag,group_thread:group_thread,group_status:group_status,group_del:group_del
+            },
+            success : function(data){
+                alert(data);
+                window.location.reload();
+            }
+        });
+    }
+
+    $(".group_close").click(function(){
+        $(".groupEdit").hide();
+    });
+</script>

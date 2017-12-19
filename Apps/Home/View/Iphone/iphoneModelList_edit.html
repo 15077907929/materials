@@ -1,0 +1,17 @@
+<form enctype="multipart/form-data" method="post" action="<{:U('Iphone/iphoneModelList', array('method'=>'edit'))}>">
+    <ul>
+        <li>
+            <div class="l">编号：</div>
+            <div class="r"><{$mid}></div>
+        </li>
+        <li>
+            <div class="l">名称：</div>
+            <div class="r"><{$name}></div>
+        </li>
+        <input type="hidden" name="method" value="add">
+        <input type="hidden" name="id" value="<{$id}>">
+        <li>
+            <input type="submit" value="添加">
+        </li>
+    </ul>
+</form>

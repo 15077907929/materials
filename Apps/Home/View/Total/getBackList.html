@@ -1,0 +1,192 @@
+<form method="post" action="<{$url}>">
+    <table>
+        <tr>
+            <td>任务类型：<{$task_type}></td>
+            <td>开始时间：<{$start}></td>
+            <td>结束时间：<{$end}></td>
+            <td>关键字：<{$keyword}></td>
+            <td>任务id：<{$task_id}></td>
+            <td>手机tag：<{$search_iphone_tag}></td>
+            <td>sid段：<{$search_sid_duan}></td>
+            <td style="text-align: left" colspan="2"><input type="submit" value="查询" ></td>
+        </tr>
+    </table>
+</form>
+<div class="clear"></div>
+<if condition="$success_count">
+	<span>共绑定账号<b style="color: red"><{$success_count}></b>条</span>&nbsp;&nbsp;&nbsp;&nbsp;
+</if>
+
+
+<if condition="$find_success_count">
+	<span>共成功找回账号<b style="color: blue"><{$find_success_count}></b>条</span>&nbsp;&nbsp;&nbsp;&nbsp;
+</if>
+<!--<if condition="$search_total_list">
+	<volist name="search_total_list" id="vo">
+    	<span>包名：<{$search_list[$vo['search_key']]['package_name']}>，关键字：<{$search_list[$vo['search_key']]['keyword']}>&nbsp;&nbsp;成功数 <b style="color: red"><{$vo['success_count']}></b>条</span>
+		<br/>
+    </volist>
+</if>-->
+<if condition="$task_slot_list">
+    <span>成功数：<b style="color: red"><{$search_total_list_sum.success_count}></b></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <span>下发数：<b style="color: red"><{$search_total_list_sum.issued}></b></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <span>提交数：<b style="color: red"><{$search_total_list_sum.submit}></b></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <span>成功率：<b style="color: red"><{$search_total_list_sum.success_rate}></b></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <span>提交率：<b style="color: red"><{$search_total_list_sum.submit_rate}></b></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/>
+    <table>
+        <tr><th>任务id</th><th>国家</th><th>TAG</th><th>应用名</th><th>包名</th><th>关键字</th><!--<th>评论类型</th>--><th>开始时间</th><th>结束时间</th><th>计划数</th><th>成功数</th><th>下发数</th><th>提交数</th><th>分段统计</th></tr>
+        <volist name="search_total_list" id="vo">
+        	<tr>
+            	<td><{$vo.search_key}></td>
+                <td><{$search_list[$vo['search_key']]['country']}></td>
+                <td><{$iphone_tag_list[$search_list[$vo['search_key']]['tag']]}></td>
+                <td><{$search_list[$vo['search_key']]['game_name']}></td>
+            	<?php
+                $appannieUrl = ''; 
+                $appannieUrl = 'https://www.appannie.com/apps/google-play/app/' . $search_list[$vo['search_key']]['package_name'] . '/keywords/?countries=' . $search_list[$vo['search_key']]['country'] . '&device=&start_date=' . date('Y-m-d',strtotime(date('Y-m-d', $search_task_list[$vo['search_key']]['start']))-7*86400) . '&end_date=' . date('Y-m-d', time() - 2*86400);
+                ?>
+            	<td><a target="_blank" href="<{$appannieUrl}>"><{$search_list[$vo['search_key']]['package_name']}></a></td>
+                <td><a target="_blank" href="<{$appannieUrl}>"><{$search_list[$vo['search_key']]['keyword']}></a></td>
+                
+                <td><?php echo date('Y-m-d H:i:s', $search_task_list[$vo['search_key']]['start']); ?></td>
+                <td><?php echo date('Y-m-d H:i:s', $search_task_list[$vo['search_key']]['end']); ?></td>
+                <td><b><{$search_list[$vo['search_key']]['count']}></b></td>
+                <td><b style="color: red"><{$vo['success_count']}></b></td>
+                <td><b><{$search_issued_list[$vo['search_key']]}></b></td>
+                <td><b><{$search_submit_list[$vo['search_key']]}></b></td>
+                <td>
+                	<volist name="task_slot_list[$vo['search_key']]" id="count">
+                        [<{$count['time']}>]成功数：<b style="color: blue"><{$count['t']}></b>;&nbsp;&nbsp;
+                    </volist>
+                </td>
+            </tr>
+        </volist>
+        
+        <if condition="$error_task_list">
+        	<volist id="vo" name="error_task_list">
+            	<tr>
+                    <td><{$vo.search_key}></td>
+                    <td><{$search_list[$vo['search_key']]['country']}></td>
+                    <?php
+                    $appannieUrl = ''; 
+                    $appannieUrl = 'https://www.appannie.com/apps/google-play/app/' . $search_list[$vo['search_key']]['package_name'] . '/keywords/?countries=' . $search_list[$vo['search_key']]['country'] . '&device=&start_date=' . date('Y-m-d',strtotime(date('Y-m-d', $search_task_list[$vo['search_key']]['start']))-7*86400) . '&end_date=' . date('Y-m-d', time() - 2*86400);
+                    ?>
+                    <td><a target="_blank" href="<{$appannieUrl}>"><{$search_list[$vo['search_key']]['package_name']}></a></td>
+                    <td><a target="_blank" href="<{$appannieUrl}>"><{$search_list[$vo['search_key']]['keyword']}></a></td>
+                    <td><?php echo date('Y-m-d H:i:s', $search_task_list[$vo['search_key']]['start']); ?></td>
+                    <td><?php echo date('Y-m-d H:i:s', $search_task_list[$vo['search_key']]['end']); ?></td>
+                    <td><b><{$search_list[$vo['search_key']]['count']}></b></td>
+                    <td><b style="color: red"><{$vo['success_count']}></b></td>
+                    <td><b><{$search_issued_list[$vo['search_key']]}></b></td>
+                    <td><b><{$search_submit_list[$vo['search_key']]}></b></td>
+                    <td>
+                        
+                    </td>
+                </tr>
+            </volist>
+        </if>
+    </table>
+</if>
+
+
+<table>
+    <tr><th>状态码</th><th>数量</th><th>占比</th></tr>
+    <volist name="total" id="vo1">
+        <tr>
+            <td><{$vo1.name}></td>
+            <td><{$vo1.count}></td>
+            <td><{$vo1.rate}></td>
+        </tr>
+    </volist>
+</table>
+
+<div class="clear"></div>
+
+<table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th width="5%">时间</th>
+        <th width="5%">SID</th>
+        <volist name="result_type_list" id="result_val" key="k">
+            <th width="5%"><div style="overflow-y: scroll;width: 120px;white-space: normal;"><{$result_val}></div></th>
+        </volist>
+        <!--<th>找回成功(27)</th>
+        <th>账号超时(11)</th>
+        <th>密码超时(12)</th>
+        <th>接受协议超时(14)</th>
+        <th>谷歌服务超时(15)</th>
+        <th>未能成功获取电话号码(22)</th>
+        <th>选择电话地区失败(23)</th>
+        <th>点击验证失败(24)</th>
+        <th>输入验证码失败(25)</th>
+        <th>获取验证码失败(26)</th>-->
+        <th width="5%">占比</th>
+    </tr>
+    </thead>
+    <tbody>
+    <volist name="data" id="vo">
+        <tr>
+            <td><{$vo.add_time}></td>
+            <td><{$vo.sid}></td>
+            <volist name="result_type_list" id="result_val">
+                <td>
+                	<{$vo[$key]}>
+                	<?php 
+                    //if($key == 'all'){
+//                    	if($get_type == 1 || $get_type == 3){
+//                        	echo '(<b style="color:red">' . $vo['type1'] . '</b>)';
+//                       	}elseif($get_type == 2){
+//                        	echo '(<b style="color:red">' . $vo['type100'] . '</b>)';
+//                       	}
+//                   	}
+                    ?>
+                </td>
+            </volist>
+            <!--<td><{$vo.type27}></td>
+            <td><{$vo.type11}></td>
+            <td><{$vo.type12}></td>
+            <td><{$vo.type14}></td>
+            <td><{$vo.type15}></td>
+            <td><{$vo.type22}></td>
+            <td><{$vo.type23}></td>
+            <td><{$vo.type24}></td>
+            <td><{$vo.type25}></td>
+            <td><{$vo.type26}></td>-->
+            <td><{$vo.rate}></td>
+        </tr>
+    </volist>
+    </tbody>
+</table>
+
+
+<script>
+    $(document).ready(function() {
+        $('#example').dataTable({
+            "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0 ] }],
+            "aaSorting": [[ 4, "desc" ]],
+            "aLengthMenu":[300,200,100],
+            "oLanguage": {    // 语言设置
+                "sLengthMenu": "每页显示 _MENU_ 条记录",
+                "sZeroRecords": "抱歉， 没有找到",
+                "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                "sInfoEmpty": "没有数据",
+                "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+                "sZeroRecords": "没有检索到数据",
+                "sSearch": "检索:",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+                }
+            },
+        });
+    });
+	
+	$(function(){
+		$('#end').datetimepicker({
+			maxDate:"<{:date('Y-m-d H:00:00')}>"
+		});
+	});
+</script>

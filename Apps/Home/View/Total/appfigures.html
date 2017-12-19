@@ -1,0 +1,61 @@
+<h3>本页面是用来管理本站采集appfigure数据接口的用户名和密码的，过期的密码请及时删除，填写新的可用的账号以及密码！！！</h3>
+<form method="post" action="http://36.7.151.221:8086/index.php?m=Home&c=Total&a=appfigures&action=add">
+    <table>
+		<tr>
+			<td colspan="3"><b>增加用户</b></td>
+		</tr>
+        <tr>
+            <td>用户名：<{$user_name}></td>
+            <td>密码：<{$password}></td>
+            <td style="text-align: left" colspan="2"><input type="submit" value="确认" ></td>
+        </tr>
+    </table>
+</form>
+<{$msg}>
+<form method="get">
+    <table>
+		<tr>
+			<td colspan="5"><b>删除用户</b></td>
+		</tr>
+        <tr>
+			<td>用户id</td>
+			<td>用户名</td>
+			<td>用户密码</td>
+			<td>用户状态</td>
+			<td>操作</td>
+        </tr>        
+		<volist name="user_arr" id="val">
+			<tr>
+				<td><{$val.id}></td>
+				<td><{$val.user_name}></td>
+				<td><{$val.password}></td>
+				<td><{$val.status}></td>
+				<td><a href="http://36.7.151.221:8086/index.php?m=Home&c=Total&a=appfigures&action=delete&id=<{$val.id}>">删除</a></td>
+			</tr>
+		</volist>
+    </table>
+</form>
+<script>
+    $(document).ready(function() {
+        $('#example').dataTable({
+            "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0 ] }],
+            "aaSorting": [[ 4, "desc" ]],
+            "aLengthMenu":[300,200,100],
+            "oLanguage": {    // 语言设置
+                "sLengthMenu": "每页显示 _MENU_ 条记录",
+                "sZeroRecords": "抱歉， 没有找到",
+                "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                "sInfoEmpty": "没有数据",
+                "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+                "sZeroRecords": "没有检索到数据",
+                "sSearch": "检索:",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+                }
+            },
+        });
+    });
+</script>

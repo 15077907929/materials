@@ -1,0 +1,59 @@
+<div>
+    &nbsp;&nbsp;&nbsp;<input type="button" name="redis" class="redis" value="立即更新任务" onclick="updateRedis();"><br /><br />
+</div>
+<table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr><th>ID</th><th>版本号</th><th>主类名</th><th>方法名</th><th>进程名</th><th>TAG</th><th>类型名称</th><th>文件名称</th><th>文件MD5</th><th>文件路径</th><th>操作</th></tr>
+    </thead>
+    <tbody>
+    <volist name="data" id="vo">
+        <tr>
+            <td><{$vo.id}></td>
+            <td><{$vo.version}></td>
+            <td><{$vo.main_class}></td>
+            <td><{$vo.entry}></td>
+            <td><{$vo.process}></td>
+            <td><{$vo.tid}></td>
+            <td><{$vo.type_key}></td>
+            <td><{$vo.file_name}></td>
+            <td><{$vo.file_md5}></td>
+            <td><{$vo.url}></td>
+            <td><{$vo.caozuo}></td>
+        </tr>
+    </volist>
+    </tbody>
+</table>
+<script>
+    function updateRedis() {
+        $.ajax({
+            url : "index.php?m=Home&c=Dynamic&a=update_dynamic_redis",
+            type : 'post',
+            data:{option:'update'},
+            success : function(data){
+                alert(data);
+                window.location.reload();
+            }
+        });
+    }
+    $(document).ready(function() {
+        $('#example').dataTable({
+            "aaSorting": [[ 0, "desc" ]],
+            "aLengthMenu":[100,50,10],
+            "oLanguage": {    // 语言设置
+                "sLengthMenu": "每页显示 _MENU_ 条记录",
+                "sZeroRecords": "抱歉， 没有找到",
+                "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                "sInfoEmpty": "没有数据",
+                "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+                "sZeroRecords": "没有检索到数据",
+                "sSearch": "检索:",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+                }
+            }
+        });
+    });
+</script>

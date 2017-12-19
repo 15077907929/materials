@@ -1,0 +1,54 @@
+<form method="post" action="<{$url}>">
+    <table>
+        <tr>
+            <td>开始时间：<{$start_time}></td>
+            <td>结束时间：<{$end_time}></td>
+            <td>商务：<{$join_business}></td>
+            <td style="text-align: left"><input type="submit" value="查询" ></td>
+        </tr>
+    </table>
+</form><br/>
+<div class="clear"></div>
+<table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr><th>ID</th><th>订单日期</th><th>对接商务</th><th>产品名称</th><th>包名</th><th>收支类型</th><th>金额</th><th>货币种类</th></tr>
+    </thead>
+    <tbody>
+    <volist name="result" id="vo">
+        <tr>
+            <td><{$vo.id}></td>
+            <td><{$vo.bill_time}></td>
+            <td><{$vo.join_business}></td>
+            <td><{$vo.game_name}></td>
+            <td><{$vo.package_name}></td>
+            <td><{$vo.type}></td>
+            <td><{$vo.money}></td>
+            <td><{$vo.money_type}></td>
+        </tr>
+    </volist>
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function() {
+        $('#example').dataTable({
+            "aaSorting": [[ 0, "asc" ]],
+            "aLengthMenu":[100,50,10],
+            "oLanguage": {    // 语言设置
+                "sLengthMenu": "每页显示 _MENU_ 条记录",
+                "sZeroRecords": "抱歉， 没有找到",
+                "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                "sInfoEmpty": "没有数据",
+                "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+                "sZeroRecords": "没有检索到数据",
+                "sSearch": "检索:",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+                }
+            }
+        });
+    });
+</script>

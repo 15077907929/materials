@@ -1,0 +1,166 @@
+<style>
+    select{width:100px}
+</style>
+<form method="post" action="<{$url}>">
+    <table>
+        <tr>
+            <td>时间：<{$time_start}>--<{$time_end}></td>
+            <td>类型：<{$search_type}></td>
+            <td>国家：<{$search_country}></td>
+            <td>模式：<{$search_model}></td>
+            <td style="text-align: left" colspan="2"><input type="submit" value="查询" ></td>
+        </tr>
+    </table>
+</form>
+<div class="clear"></div>
+<br/>
+<div>
+    <!--&nbsp;&nbsp;&nbsp;<input type="button" name="quxuan" class="quxuan" value="批量修改" onclick="groupEdit();">-->
+    <!--&nbsp;&nbsp;&nbsp;<input type="button" name="redis" class="redis" value="更新缓存" onclick="updateRedis();">-->
+</div>
+<div class="groupEdit" style="display: none;position: absolute;left: 500px;top: 200px;background-color: #00E8D7;padding: 10px;z-index: 1000">
+    <div style="height: 18px;text-align: right"><span class="icon_delete group_close" style="cursor: pointer"></span></div>
+    类型：<{$group_type}><br/>
+    值：<{$group_count}><br/>
+    国家：<{$group_country_id}><br/>
+    模式：<{$group_model_type}><br/>
+    是否删除Iphone：<{$group_del}>
+    <br/><br/><br/><span class="success_log_field" style="width: 100px; height: 30px;display: block;font-size: 16px;line-height: 30px;text-align: center;" onclick="groupEditResult();">修改</span>
+</div>
+
+<form action="/index.php?m=Home&c=Iphone&a=accountBindingList&method=import" method="post" id="submitform">
+    <br style="height: 3px;"/>
+    <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <!--<th><input type="checkbox" name="all" onclick="checkAll($(this),'id[]');"/></th>-->
+            <th>ID</th><th>tag</th><th>数值类型</th><th>值</th><th>国家</th><th>手机模式</th><th>任务模式</th><th>开始/结束/入库时间</th><th>是否启用</th><th>下发数</th><th>成功数</th><th>表</th><th>来源账号</th><th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="data" id="vo">
+            <tr>
+                <!--<td><{$vo.selectid}></td>-->
+                <td><{$vo.id}></td>
+                <td><{$vo.tag}></td>
+                <td><{$vo.type}></td>
+                <td><{$vo.count}></td>
+                <td><{$vo.country_id}></td>
+                <td><{$vo.model_type}></td>
+                <td><{$vo.task_type}></td>
+                <td><{$vo.start}><br><{$vo.end}><br><{$vo.time}></td>
+                <td><{$vo.status}></td>
+                <td><{$vo.issued_num}></td>
+                <td><b style="color:red;"><{$vo.success_num}></b></td>
+                <td><{$vo.table_name}></td>
+                <td><{$vo.group_id}></td>
+                <td><{$vo.caozuo}></td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+</form>
+<div>共<span style="color: red;"><{$count}></span>条</div>
+<script>
+    $(document).ready(function() {
+        $('#example').dataTable({
+            "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0 ] }],
+            "aaSorting": [[ 4, "desc" ]],
+            "aLengthMenu":[300,200,100],
+            "oLanguage": {    // 语言设置
+                "sLengthMenu": "每页显示 _MENU_ 条记录",
+                "sZeroRecords": "抱歉， 没有找到",
+                "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                "sInfoEmpty": "没有数据",
+                "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+                "sZeroRecords": "没有检索到数据",
+                "sSearch": "检索:",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+                }
+            },
+        });
+    });
+    function checkAll(obj, target) {
+        if (!target) {
+            alert('您没有指定操作vpnid！');
+            return false;
+        }
+        $(':checkbox[name="' + target + '"]').each(function () {
+            $(this).prop('checked', obj.is(':checked'));
+        });
+    }
+
+    function groupEdit() {
+        if ($(':checkbox[name="id[]"]:checked').length <= 0) {
+            alert('请选择导出账号ID');
+            return false;
+        }
+        var id = '';
+        $(':checkbox[name="id[]"]').each(function () {
+            if ($(this).is(':checked')) {
+                id += id ? ',' + $(this).val() : $(this).val();
+            }
+        });
+        if (!id) {
+            alert('请选择导出账号ID');
+            return false;
+        }
+        $(".groupEdit").show();
+    }
+
+    function updateRedis() {
+        $.ajax({
+            url : "index.php?m=Home&c=Account&a=updateRedis",
+            type : 'post',
+            data:{table:'iphone_mst'},
+            success : function(data){
+                alert(data);
+                window.location.reload();
+            }
+        });
+    }
+
+    function groupEditResult() {
+        if ($(':checkbox[name="id[]"]:checked').length <= 0) {
+            alert('请选择导出账号ID');
+            return false;
+        }
+        var id = '';
+        $(':checkbox[name="id[]"]').each(function () {
+            if ($(this).is(':checked')) {
+                id += id ? ',' + $(this).val() : $(this).val();
+            }
+        });
+        if (!id) {
+            alert('请选择导出账号ID');
+            return false;
+        }
+        var group_status = $('input[name="group_status"]:checked').val();
+        var group_hosts_can_update = $('input[name="group_hosts_can_update"]:checked').val();
+        var group_lua_can_update = $('input[name="group_lua_can_update"]:checked').val();
+        var group_apk_can_update = $('input[name="group_apk_can_update"]:checked').val();
+        var group_net_type = $('select[name="group_net_type"]').val();
+        var group_tag = $('input[name="group_tag"]').val();
+        var group_port = $('input[name="group_port"]').val();
+        var group_del = $('input[name="group_del"]:checked').val();
+        $.ajax({
+            url : "index.php?m=Home&c=Iphone&a=iphoneList&method=group",
+            type : 'post',
+            data:{
+                id:id,group_status:group_status,group_hosts_can_update:group_hosts_can_update,group_lua_can_update:group_lua_can_update,group_apk_can_update:group_apk_can_update,group_net_type:group_net_type,group_tag:group_tag,group_port:group_port,group_del:group_del
+            },
+            success : function(data){
+                alert(data);
+                window.location.reload();
+            }
+        });
+    }
+
+    $(".group_close").click(function(){
+        $(".groupEdit").hide();
+    });
+</script>

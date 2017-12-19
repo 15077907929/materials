@@ -1,0 +1,22 @@
+<form enctype="multipart/form-data" method="post" action="<{:U('Account/accountManage', array('method'=>'edit'))}>">
+    <ul>
+        <li>
+            <div class="l">名称：</div>
+            <div class="r"><{$uname}></div>
+        </li>
+        <li>
+            <div class="l">密码：</div>
+            <div class="r"><{$upass}></div>
+            <div class="r">不填就是默认不修改</div>
+        </li>
+        <li>
+            <div class="l">权限：</div>
+            <div class="r"><{$power}></div>
+        </li>
+        <input type="hidden" name="method" value="edit">
+        <input type="hidden" name="id" value="<{$id}>">
+        <li>
+            <input type="submit" value="修改">
+        </li>
+    </ul>
+</form>

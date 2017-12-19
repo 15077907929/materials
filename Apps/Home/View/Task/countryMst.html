@@ -1,0 +1,13 @@
+<table>
+    <th>ID</th><th>国家名</th><th>简写</th><th>语言</th><th>账号数统计</th><th>操作</th>
+    <volist name="data" id="vo">
+        <tr>
+            <td><{$vo.id}></td>
+            <td><{$vo.name}></td>
+            <td><{$vo.short_name}></td>
+            <td><{$vo.language}></td>
+            <td><{$vo.count}></td>
+            <td><{$vo.caozuo}></td>
+        </tr>
+    </volist>
+</table>

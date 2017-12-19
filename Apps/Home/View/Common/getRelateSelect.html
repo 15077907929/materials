@@ -1,0 +1,31 @@
+<{$parent}><{$child}>
+<select name="<{$keys.child_name}>_all" style="display:none">
+    <volist name="data" id="vo">
+        <option value="<{$vo[0]}>" attr="<{$vo[2]}>"><{$vo[1]}></option>
+    </volist>
+</select>
+
+<script>
+    $(function(){
+        var parent_name = "<{$keys.parent_name}>";
+        var child_name = "<{$keys.child_name}>";
+        var all_name = child_name + "_all";
+        var parent_item = $("select[name='"+parent_name+"']");
+        var child = $("select[name='"+child_name+"']");
+        var all = $("select[name='"+all_name+"']");
+        //alert($("option",parent_item).length);
+        $(parent_item).change(function(){
+            var val = $(":selected",this).val();
+            $("option",child).remove();
+            $("option",all).each(function(){
+                if($(this).attr("attr") == val)
+                {
+                    $(child).append($(this).clone());
+                }
+            });
+            return true;
+        });
+
+    });
+</script>
+

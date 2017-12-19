@@ -1,0 +1,13 @@
+<form enctype="multipart/form-data" method="post" action="<{:U('Task/countryDBMst', array('method'=>'edit'))}>">
+    <ul>
+        <li>
+            <div class="l">备注：</div>
+            <div class="r"><{$remark}></div>
+        </li>
+        <input type="hidden" name="method" value="edit">
+        <input type="hidden" name="id" value="<{$id}>">
+        <li>
+            <input type="submit" value="修改">
+        </li>
+    </ul>
+</form>

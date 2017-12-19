@@ -1,0 +1,127 @@
+<form method="post" action="<{$url}>">
+    <table>
+        <tr>
+            <td>包名：<{$search_package_name}></td>
+            <td>关键词：<{$search_keyword}></td>
+            <td>开始日期：<{$search_start}></td>
+            <td>结束日期：<{$search_end}></td>
+            <td style="text-align: left"><input type="submit" value="查询" ></td>
+        </tr>
+    </table>
+</form><br/>
+<{$export}><br/>
+<table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr><th>包名</th><th>关键词</th><th>历史</th></tr>
+    </thead>
+    <tbody>
+    <volist name="result" id="vo">
+        <tr>
+            <td><{$vo.package_name}></td>
+            <td><{$vo.keyword}></td>
+            <td><{$vo.history}></td>
+        </tr>
+    </volist>
+    </tbody>
+</table>
+
+<div class="group_detail_div" style="display: none;position: absolute;background-color: #00E8D7;padding: 10px">
+    <div style="height: 18px;text-align: right"><span class="icon_delete group_close" style="cursor: pointer"></span></div>
+    <div id="container" style="min-width: 1240px; height: 800px; width:1240px; margin: 0 auto"></div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#example').dataTable({
+            "aaSorting": [[ 0, "asc" ]],
+            "aLengthMenu":[100,50,10],
+            "oLanguage": {    // 语言设置
+                "sLengthMenu": "每页显示 _MENU_ 条记录",
+                "sZeroRecords": "抱歉， 没有找到",
+                "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                "sInfoEmpty": "没有数据",
+                "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+                "sZeroRecords": "没有检索到数据",
+                "sSearch": "检索:",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+                }
+            }
+        });
+    });
+
+    $(".history").click(function(){
+        var datas = $(this).attr('attr');
+        var top = ($(window).height())/2;
+        var scrollTop = $(document).scrollTop();
+        $(".group_detail_div").css( { 'display' : 'block', 'top' : top + scrollTop - 400,'margin-left' : '30px'} ).show();
+        var url = "index.php?m=Home&c=Task&a=getRankListData";
+        $.ajax({
+            url : url,
+            type : 'post',
+            data:{datas:datas},
+            dataType:'json',
+            success : function(result){
+                $('#container').highcharts({
+                    chart: {
+                        zoomType: 'xy'
+                    },
+                    title: {
+                        text: result.title
+                    },
+                    subtitle: {
+                        text: result.subtitle
+                    },
+                    xAxis: [{
+                        tickInterval: result.tickInterval,
+                        categories: result.time,
+                        crosshair: true
+                    }],
+                    yAxis: [{ // ranking yAxis
+                        title: {
+                            text: '排名',
+                            style: {
+                                color: Highcharts.getOptions().colors[0]
+                            }
+                        },
+                        labels: {
+                            format: '{value}名',
+                            style: {
+                                color: Highcharts.getOptions().colors[0]
+                            }
+                        },
+                        reversed: true,
+                        tickPositions: [1, 25, 50, 75, 100 ,125 ,150 ,175 ,200 ,225 ,251]
+                    }, { // success yAxis
+                        title: {
+                            text: '成功数',
+                            style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        },
+                        labels: {
+                            format: '{value}个',
+                            style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        },
+                        opposite: true
+                    }],
+                    tooltip: {
+                        shared: true
+                    },
+                    series: result.series
+                });
+            }
+        });
+        return false;
+    });
+
+    $(".group_close").click(function(){
+        $('#container').html("");
+        $(".group_detail_div").hide();
+    });
+</script>
+<script language="javascript" src="__PUBLIC__/js/admin/highcharts.js"></script>

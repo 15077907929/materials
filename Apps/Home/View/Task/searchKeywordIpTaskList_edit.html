@@ -1,0 +1,232 @@
+<style>
+    form .click_list input{
+        width:135px;
+    }
+    form .click_list .group_content{
+        width:80px;
+        display: inline;
+        line-height: 30px;
+        text-align: center;
+    }
+    .combo-select input {
+        width:220px;
+        height: 30px;
+    }
+    .combo-dropdown option{
+        font-size: 14px;
+    }
+</style>
+<form enctype="multipart/form-data" method="post" action="<{:U('Task/searchKeywordIpTaskList', array('method'=>'edit'))}>">
+    <ul>
+        <li>
+            <div class="l">TAG：</div>
+            <div class="r"><{$tag}></div>
+        </li>
+        <!--<li>
+            <div class="l">IP段：</div>
+            <div class="r"><{$ip}></div>
+        </li>
+        <li>
+            <div class="l">起始ip：</div>
+            <div class="r"><{$ip_start}></div>
+            <div class="r">&nbsp;&nbsp;<span style="color: orange;">必须是数字</span></div>
+        </li>
+        <li>
+            <div class="l">结束ip：</div>
+            <div class="r"><{$ip_end}></div>
+            <div class="r">&nbsp;&nbsp;<span style="color: orange;">必须是数字，且结束大于起始</span></div>
+        </li>-->
+        <li>
+            <div class="l">google play 商店国家：</div>
+            <div class="r"><{$store_country}></div>
+        </li>
+        <li>
+            <div class="l">CP：</div>
+            <div class="r"><{$cp}></div>
+        </li>
+        <li>
+            <div class="l">包名：</div>
+            <div class="r gid_ajax"><{$package_name}></div>
+        </li>
+        <li>
+            <div class="l">应用名：</div>
+            <div class="r"><{$nick_name}></div>
+        </li>
+        <li>
+            <div class="l">关键词：</div>
+            <div class="r"><{$keyword}></div>
+        </li>
+        <li>
+            <div class="l">备用关键词：</div>
+            <div class="r"><{$secord_keyword}></div>
+            <div class="r">
+            	多个用$$分割
+            </div>
+        </li>
+        <li>
+            <div class="l">位置：</div>
+            <div class="r">
+            	<{$position}>
+            </div>
+            <div class="r">
+            	<span style="color:orange">技术人员使用</span>
+            </div>
+        </li>
+        <li>
+            <div class="l">走关键词数量：</div>
+            <div class="r"><{$num_keyword}></div>
+        </li>
+        <li>
+            <div class="l">走detail数量：</div>
+            <div class="r"><{$num_detail}></div>
+        </li>
+        <li>
+            <div class="l">开始时间：</div>
+            <div class="r"><{$start}></div>
+        </li>
+        <li>
+            <div class="l">结束时间：</div>
+            <div class="r"><{$end}></div>
+        </li>
+        <li>
+            <div class="l">账号国家：</div>
+            <div class="r"><{$country}></div>
+        </li>
+        <li>
+            <div class="l">国家表名：</div>
+            <div class="r table_gid_ajax"><{$table_name}></div>
+        </li>
+        <li>
+            <div class="l">下载URL：</div>
+            <div class="r"><{$signature}></div>
+        </li>
+        <li>
+            <div class="l">版本号：</div>
+            <div class="r"><{$app_version}></div>
+        </li>
+        <li>
+            <div class="l">版本名称：</div>
+            <div class="r"><{$versionName}></div>
+        </li>
+        <li>
+            <div class="l">开发商：</div>
+            <div class="r"><{$developerName}></div>
+        </li>
+        <li>
+            <div class="l">类型：</div>
+            <div class="r"><{$type}></div>
+        </li>
+        <li>
+            <div class="l">优先级：</div>
+            <div class="r"><{$score}></div>
+        </li>
+        <li>
+            <div class="l">下载后操作：</div>
+            <div class="r"><{$is_open}></div>
+        </li>
+        <li>
+            <div class="l">评论概率：</div>
+            <div class="r"><{$comment_rate}></div>
+            <div class="r"><span style="color:orange">（范围0-1000；只评星概率为10‰，评星并评论为1‰较为合适）</span></div>
+        </li>
+        <li>
+            <div class="l">评论操作：</div>
+            <div class="r"><{$comment_type}></div>
+        </li>
+        <li>
+            <div class="l">评论星级概率：</div>
+            <div class="r"><{$star}></div>
+            <div class="r"><span style="color:orange">（竖线分隔，和为100。例：20|30|50）</span></div>
+        </li>
+        <li>
+            <div class="l">评论详情：</div>
+            <div class="r"><{$comment_detail}></div>
+            <div class="r"><span style="color:orange">（标题内容用"||"分割，不同评论用"$$"分割。例：title||content$$title||content$$title||content）</span></div>
+        </li>
+        <li>
+            <div class="l">评论起始id：</div>
+            <div class="r"><{$comment_start_id}></div>
+        </li>
+        <li>
+            <div class="l">热度：</div>
+            <div class="r"><{$hot}></div>
+        </li>
+        <li>
+            <div class="l">有效排名：</div>
+            <div class="r"><{$effective_rank}></div>
+        </li>
+        <li>
+            <div class="l">任务分类：</div>
+            <div class="r"><{$task_class}></div>
+        </li>
+        <li>
+            <div class="l">是否改绑：</div>
+            <div class="r"><{$is_update}></div>
+        </li>
+        <li>
+            <div class="l">改绑账号国家：</div>
+            <div class="r"><{$update_country}></div>
+        </li>
+        <li>
+            <div class="l">改绑国家表名：</div>
+            <div class="r table_gid_ajax1"><{$update_table_name}></div>
+        </li>
+        <li>
+            <div class="l">是否快速输入：</div>
+            <div class="r"><{$is_fast}></div>
+        </li>
+        <li>
+            <div class="l">是否enter：</div>
+            <div class="r"><{$is_enter}></div>
+        </li>
+        <li>
+            <div class="l">删除方式：</div>
+            <div class="r"><{$del_model}></div>
+        </li>
+        <li>
+            <div class="l">备注：</div>
+            <div class="r"><{$remark}></div>
+        </li>
+        <input type="hidden" name="method" value="edit">
+        <input type="hidden" name="id" value="<{$id}>">
+        <li>
+            <input type="submit" value="修改">
+        </li>
+    </ul>
+</form>
+<script>
+    $('select[name="package_name"]').comboSelect();
+    $('select[name="cp"]').change(function(){
+        var cp = $(this).children('option:selected').val();
+        $.ajax({
+            url : 'index.php?m=Home&c=Task&a=gidSelectAjax&cp='+cp+'&type=2',
+            type : 'get',
+            success : function(data){
+                $('.gid_ajax').html(data);
+                $('select[name="package_name"]').comboSelect();
+            }
+        });
+    });
+
+    $('select[name="country"]').change(function () {
+        var cp = $(this).children('option:selected').val();
+        $.ajax({
+            url: 'index.php?m=Home&c=Task&a=searchKeywordIpTaskList&method=ajax&short_name=' + cp,
+            type: 'get',
+            success: function (data) {
+                $('.table_gid_ajax').html(data);
+            }
+        });
+    });
+
+    $('select[name="update_country"]').change(function () {
+        var cp = $(this).children('option:selected').val();
+        $.ajax({
+            url: 'index.php?m=Home&c=Task&a=searchKeywordIpTaskList&method=ajax1&short_name=' + cp,
+            type: 'get',
+            success: function (data) {
+                $('.table_gid_ajax1').html(data);
+            }
+        });
+    });
+</script>

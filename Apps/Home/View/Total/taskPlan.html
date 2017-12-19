@@ -1,0 +1,56 @@
+<form method="post" action="<{$url}>">
+    <table>
+        <tr>
+            <td>日期：<{$date}></td>
+            <td style="text-align: left"><input type="submit" value="查询" ></td>
+        </tr>
+    </table>
+</form>
+<br><hr style="width:950px;clear:both;"/><br>
+<div class="clear"></div>
+<table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>时间段</th>
+        <th>详细任务量</th>
+        <th>累计下发数</th>
+        <th>累计成功数</th>
+        <th>累计失败数</th>
+    </tr>
+    </thead>
+    <tbody>
+    <volist name="result" id="vo">
+        <tr id=<{$vo.exception}> >
+            <td><{$vo.timecut}></td>
+            <td><{$vo.count}></td>
+            <td><{$vo.send_count}></td>
+            <td><{$vo.success_count}></td>
+            <td><{$vo.error_count}></td>
+        </tr>
+    </volist>
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function() {
+        $('#example').dataTable({
+            "aaSorting": [[ 0, "asc" ]],
+            "aLengthMenu":[100,50,10],
+            "oLanguage": {    // 语言设置
+                "sLengthMenu": "每页显示 _MENU_ 条记录",
+                "sZeroRecords": "抱歉， 没有找到",
+                "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                "sInfoEmpty": "没有数据",
+                "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+                "sZeroRecords": "没有检索到数据",
+                "sSearch": "检索:",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+                }
+            }
+        });
+    });
+</script>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+<title>google平台</title>
+<link href="/Public/css/admin.css" rel="stylesheet" type="text/css"/>
+<link href="/Public/css/bootstrap.min.css" rel="stylesheet">
+<link href="/Public/css/jquery.dataTables.min.css" rel="stylesheet">
+<script type="text/javascript" src="/Public/js/admin/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="/Public/js/admin/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/appfigures.js"></script>
+<script type="text/javascript" src="js/highcharts.js"></script>
+<script type="text/javascript" src="js/exporting.js"></script>
+<script type="text/javascript" src="js/oldie.js"></script>
+<script type="text/javascript" src="js/highcharts-zh_CN.js"></script>
+</head>
+<body>
+
+{include file="../Public/header2.html"}
+
+<div id="main" class="clearfix">
+    
+	{include file="../Public/left2.html"}
+
+	<div id="m_right">
+		<div class="nav">
+			<div class="item selected">
+				<span><div class="icon_grid  icon_transparent"></div>zhaoning</span>
+			</div>
+		</div>
+		<div id="container" style="min-width:800px;height:800px"></div>
+		<script type="text/javascript">
+			var chart = Highcharts.chart('container', {
+				chart: {
+					type: 'spline'
+				},
+				title: {
+					text: '成功量'
+				},
+				subtitle: {
+					text: '数据来源: google平台'
+				},
+				xAxis: {
+					categories: [{$dates}]
+				},
+				yAxis:{
+					title: {
+						text: 'success_num'
+					},
+					labels: {
+						formatter: function () {
+							return this.value;
+						}
+					}
+				},
+				tooltip: {
+					crosshairs: true,
+					shared: true
+				},
+				plotOptions: {
+					spline: {
+						marker: {
+							radius: 4,
+							lineColor: '#666666',
+							lineWidth: 1
+						}
+					}
+				},
+				series: [{$series}]
+			});
+		</script>
+		<table id="example" class="display" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>包名</th>
+					<th>应用名称</th>
+					<th>国家</th>
+					<th>type</th>
+					{foreach from=$date_arr key=key item=item}
+						<th>{$item}(成功量)(任务量)</th>
+					{/foreach}
+				</tr>
+			</thead>
+			{foreach from=$result_arr key=key item=item}
+				<tr>
+					<td>{$item.sort_num}</td>
+					<td>{$item.package_name}</td>
+					<td>{$item.game_name}</td>
+					<td>{$item.country}</td>
+					<td>{$item.type}</td>
+					<td>{$item.success1}/{$item.count1}</td>
+					<td>{$item.success2}/{$item.count2}</td>
+					<td>{$item.success3}/{$item.count3}</td>
+					<td>{$item.success4}/{$item.count4}</td>
+					<td>{$item.success5}/{$item.count5}</td>
+					<td>{$item.success6}/{$item.count6}</td>
+					<td>{$item.success7}/{$item.count7}</td>
+				</tr>
+			{/foreach}
+		</table>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#example').dataTable({
+					"aaSorting": [[ 0, "asc" ]],
+					"aLengthMenu":[100,50,10],
+					"oLanguage": {    // 语言设置
+						"sLengthMenu": "每页显示 _MENU_ 条记录",
+						"sZeroRecords": "抱歉， 没有找到",
+						"sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+						"sInfoEmpty": "没有数据",
+						"sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+						"sZeroRecords": "没有检索到数据",
+						"sSearch": "检索:",
+						"oPaginate": {
+							"sFirst": "首页",
+							"sPrevious": "前一页",
+							"sNext": "后一页",
+							"sLast": "尾页"
+						}
+					}
+				});
+			});
+		</script>
+	</div>
+</div>
+
+{include file="../Public/footer2.html"}
+
+</body>
+</html>

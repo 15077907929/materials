@@ -1,0 +1,53 @@
+<style>
+    input {width:200px}
+</style>
+<form enctype="multipart/form-data" method="post" action="<{:U('Dynamic/dynamicPackageList', array('method'=>'add'))}>">
+    <ul>
+        <li>
+            <div class="l">版本号：</div>
+            <div class="r"><{$version}></div>
+        </li>
+        <li>
+            <div class="l">主类名：</div>
+            <div class="r"><{$main_class}></div>
+        </li>
+        <li>
+            <div class="l">方法名：</div>
+            <div class="r"><{$entry}></div>
+        </li>
+        <li>
+            <div class="l">进程名：</div>
+            <div class="r"><{$process}></div>
+        </li>
+        <li>
+            <div class="l">类型名KEY：</div>
+            <div class="r"><{$type_key}></div>
+        </li>
+        <li>
+            <div class="l">上传类型：</div>
+            <div class="r"><{$file_type}></div>
+        </li>
+        <div class="file_ajax">
+            <li>
+                <div class="l">文件：</div>
+                <div class="r"><{$efile}></div>
+            </li>
+        </div>
+        <input type="hidden" name="method" value="add">
+        <li>
+            <input type="submit" value="添加">
+        </li>
+    </ul>
+</form>
+<script>
+    $("input:radio[name='file_type']").change(function () {
+        var cp = $('input[name="file_type"]:checked').val();
+        $.ajax({
+            url: 'index.php?m=Home&c=Dynamic&a=dynamicPackageList&method=ajax&file_type=' + cp,
+            type: 'get',
+            success: function (data) {
+                $('.file_ajax').html(data);
+            }
+        });
+    });
+</script>

@@ -1,0 +1,17 @@
+<div id="m_left">
+	<ul>
+		{foreach from=$leftNav key=key item=item}
+			{if $item['selected'] eq 1}
+				<li class="selected">{$key}
+					<div class="icon_text icon_transparent"></div>
+				</li>
+			{else}
+				<a href="{$item.link}">
+					<li>{$key}
+						<div class="icon_text icon_transparent"></div>
+					</li>
+				</a>
+			{/if}
+		{/foreach}
+	</ul>
+</div>

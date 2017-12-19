@@ -1,0 +1,20 @@
+<form enctype="multipart/form-data" method="post" action="<{:U('Sale/collectionList', array('method'=>'add'))}>">
+    <ul>
+        <li>
+            <div class="l">姓名：</div>
+            <div class="r"><{$name}></div>
+        </li>
+        <li>
+            <div class="l">相关信息：</div>
+            <div class="r"><{$info}></div>
+        </li>
+        <li>
+            <div class="l">卡号：</div>
+            <div class="r"><{$number}></div>
+        </li>
+        <input type="hidden" name="method" value="add">
+        <li>
+            <input type="submit" value="添加">
+        </li>
+    </ul>
+</form>

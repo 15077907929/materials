@@ -1,0 +1,43 @@
+<table>
+    <thead>
+        <tr>
+            <th>段</th>
+            <th>真机数量</th>
+            <th>心跳正常数量</th>
+            <th>心跳正常占比</th>
+            <th>备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><{$total.segment}></td>
+            <td><{$total.count}></td>
+            <td><{$total.time_count}></td>
+            <td><{$total.count_rate}></td>
+            <td></td>
+        </tr>
+        <volist name="total_result" id="vo">
+            <tr>
+                <td><{$vo.segment}></td>
+                <td><{$vo.count}></td>
+                <td><{$vo.time_count}></td>
+                <td><{$vo.count_rate}></td>
+                <td><{$vo.remark}></td>
+            </tr>
+        </volist>
+    </tbody>
+</table>
+<script>
+    $('input[name="remark"]').change(function(){
+        var sid = $(this).attr('attr');
+        var remark = $(this).val();
+        $.ajax({
+            url : 'index.php?m=Home&c=Iphone&a=iphoneClientListSegmentShow&method=ajax',
+            type : 'post',
+            data: {sid: sid,remark:remark},
+            success : function(data){
+                alert(data);
+            }
+        });
+    });
+</script>

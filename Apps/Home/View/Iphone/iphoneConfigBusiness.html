@@ -1,0 +1,68 @@
+<ul>
+    <li>
+        <div style="float:left;border-right: 1px solid red;width: 200px"><{$hosts_max_version}></div>
+        <div style="float:right;margin-left: 20px">
+            <form method="post" enctype="multipart/form-data">
+                hosts格式：<{$hosts_file}>密码：<{$hosts_file_password}><input name="submit" type="submit" value="确定">
+            </form>
+            <span style="float:right;margin-left: 20px">文件名：<{$hosts_zip_name}>&nbsp;&nbsp;时间：<{$hosts_lasttime}></span>
+        </div>
+    </li>
+    <li>
+        <div style="float:left;border-right: 1px solid red;width: 200px"><{$lua_max_version}></div>
+        <div style="float:right;margin-left: 20px">
+            <form method="post" enctype="multipart/form-data">
+                zip格式：<{$lua_file}>密码：<{$lua_file_password}><input name="submit" type="submit" value="确定">
+            </form>
+            <span style="float:right;margin-left: 20px">文件名：<{$lua_zip_name}>&nbsp;&nbsp;时间：<{$lua_lasttime}></span>
+        </div>
+    </li>
+    <li>
+        <div style="float:left;border-right: 1px solid red;width: 200px"><{$apk_max_version}></div>
+        <div style="float:right;margin-left: 20px">
+            <form method="post" enctype="multipart/form-data">
+                apk格式：<{$apk_file}>密码：<{$apk_file_password}><input name="submit" type="submit" value="确定">
+            </form>
+            <span style="float:right;margin-left: 20px">文件名：<{$apk_zip_name}>&nbsp;&nbsp;时间：<{$apk_lasttime}></span>
+        </div>
+    </li>
+    <li>
+        <div style="float:left;border-right: 1px solid red;width: 200px"><{$down_apk_max_version}></div>
+        <div style="float:right;margin-left: 20px">
+            <form method="post" enctype="multipart/form-data">
+                down_apk格式：<{$down_apk_file}>密码：<{$down_apk_file_password}><input name="submit" type="submit" value="确定">
+            </form>
+            <span style="float:right;margin-left: 20px">文件名：<{$down_apk_zip_name}>&nbsp;&nbsp;时间：<{$down_apk_lasttime}></span>
+        </div>
+    </li>
+    <li>
+        <{$google_iphone_commands}>
+    </li>
+</ul>
+<script type="text/javascript">
+    $(".success_log_field").click(function(){
+        if(confirm("确定要修改吗")){
+            var attr = $(this).attr("attr");
+            var val  = "";
+            if (attr == 'google_iphone_commands') {
+                val  = $("textarea[name="+attr+"]").val();
+            } else {
+                val  = $("input[name="+attr+"]").val();
+            }
+            if (val == "") {
+                alert("没有值");return false;
+            }
+            var url = "index.php?m=Home&c=Iphone&a=iphoneConfigBusiness";
+            $.ajax({
+                url : url,
+                type : 'post',
+                data:{val:val,maxversion:"yes",types:attr},
+                success : function(data){
+                    alert(data);
+                    window.location.reload();
+                }
+            });
+            return false;
+        }
+    });
+</script>

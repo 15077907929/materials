@@ -1,0 +1,57 @@
+<form enctype="multipart/form-data" method="post" action="<{:U('Vpn/vpnFileImport')}>">
+    <ul>
+        <li>
+            <div class="l">vpn组：</div>
+            <div class="r"><{$group_id}></div>
+        </li>
+        <li>
+            <div class="l">账号来源：</div>
+            <div class="r"><{$channel}></div>
+        </li>
+        <li>
+            <div class="l">是否动态：</div>
+            <div class="r"><{$dynamic}></div>
+        </li>
+        <li>
+            <div class="l">到期时间：</div>
+            <div class="r"><{$lasttime}></div>
+        </li>
+        <li>
+            <div class="l">国内国外：</div>
+            <div class="r"><{$country_type}></div>
+        </li>
+        <li>
+            <div class="l">文件格式：</div>
+            <div class="r"><{$type}></div>
+        </li>
+        <li>
+            <div class="l">文件：</div>
+            <div class="r">
+                <{$efile}>txt文件
+            </div>
+        </li>
+        <li>
+            <input type="submit" value="VPN文件导入" />
+        </li>
+    </ul>
+
+    <table>
+        <tr>
+            <td>
+                文件格式一示范(UTF8格式)：<br/>
+                账号:joy51 密码:joy123<br/>
+                IP:218.65.30.40<br/>
+                账号:joy52 密码:joy123<br/>
+                IP:182.100.67.24<br/>
+                ...
+            </td>
+            <td>
+                文件格式二示范(UTF8格式,@符后面代表修改数据的id)：<br/>
+                180.168.86.174,joy112,joy.123@1<br/>
+                219.142.64.198,joy113,joy.123<br/>
+                219.142.64.198,joy113,joy.123<br/>
+                ...
+            </td>
+        </tr>
+    </table>
+</form>

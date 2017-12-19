@@ -1,0 +1,118 @@
+<style>
+    #keyword_ajax {clear:both}
+    #keyword_ajax span {width:85px;margin-left: 5px;display:inline-block;text-align: center}
+    #keyword_ajax span input {width:75px}
+</style>
+<form enctype="multipart/form-data" method="post" action="<{:U('Sale/asoBillList', array('method'=>'edit'))}>">
+    <ul>
+        <li>
+            <div class="l">对接商务：</div>
+            <div class="r"><{$join_business}></div>
+        </li>
+        <li>
+            <div class="l">账号国家：</div>
+            <div class="r"><{$country}></div>
+        </li>
+        <li>
+            <div class="l">CP：</div>
+            <div class="r"><{$cp}></div>
+        </li>
+        <li>
+            <div class="l">包名：</div>
+            <div class="r gid_ajax"><{$package_name}></div>
+        </li>
+        <li>
+            <div class="l">下单时间：</div>
+            <div class="r"><{$time}></div>
+        </li>
+        <li>
+            <div class="l">投放时间开始：</div>
+            <div class="r"><{$send_time}></div>
+        </li>
+        <li>
+            <div class="l">投放时间结束：</div>
+            <div class="r"><{$send_time_end}></div>
+        </li>
+        <li>
+            <div class="l">订单类型：</div>
+            <div class="r"><{$sale_bill_type}></div>
+        </li>
+        <li>
+            <div class="l">任务概要：</div>
+            <div class="r"><{$bill_detail}></div>
+        </li>
+        <li>
+            <div class="l">订单价格：</div>
+            <div class="r"><{$bill_amount}></div>
+        </li>
+        <li>
+            <div class="l">订单预付款：</div>
+            <div class="r"><{$bill_product}></div>
+        </li>
+        <li>
+            <div class="l">订单实际收入：</div>
+            <div class="r"><{$bill_true_amount}></div>
+        </li>
+        <li>
+            <div class="l">货币种类：</div>
+            <div class="r"><{$money_type}></div>
+        </li>
+        <li>
+            <div class="l">订单完成情况：</div>
+            <div class="r"><{$bill_status}></div>
+        </li>
+        <li>
+            <div class="l">是否结清：</div>
+            <div class="r"><{$is_finish}></div>
+        </li>
+        <li>
+            <div class="l">收款信息：</div>
+            <div class="r"><{$collection_id}></div>
+        </li>
+        <li>
+            <div class="l">CPI值：</div>
+            <div class="r"><{$cpi_count}></div>
+        </li>
+        <li>
+            <div class="l">收款凭证1原图：</div>
+            <div class="r"><{$file_name1}></div>
+        </li>
+        <li>
+            <div class="l">收款凭证1：</div>
+            <div class="r"><{$efile1}></div>
+        </li>
+        <li>
+            <div class="l">收款凭证2原图：</div>
+            <div class="r"><{$file_name2}></div>
+        </li>
+        <li>
+            <div class="l">收款凭证2：</div>
+            <div class="r"><{$efile2}></div>
+        </li>
+        <li>
+            <div class="l">收款凭证3原图：</div>
+            <div class="r"><{$file_name3}></div>
+        </li>
+        <li>
+            <div class="l">收款凭证3：</div>
+            <div class="r"><{$efile3}></div>
+        </li>
+        <input type="hidden" name="method" value="edit">
+        <input type="hidden" name="id" value="<{$id}>">
+        <li>
+            <input type="submit" value="修改">
+        </li>
+    </ul>
+</form>
+<script type="text/javascript">
+    $('select[name="cp"]').change(function(){
+        var cp = $(this).children('option:selected').val();
+        $.ajax({
+            url : 'index.php?m=Home&c=Task&a=gidSelectAjax&cp='+cp+'&type=2',
+            type : 'get',
+            success : function(data){
+                $('.gid_ajax').html(data);
+            }
+        });
+    });
+</script>

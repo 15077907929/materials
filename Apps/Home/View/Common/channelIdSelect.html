@@ -1,0 +1,56 @@
+<style>
+    #select_id_box{
+        border:solid 1px #ddd;
+        overflow: hidden;
+        padding: 5px;
+    }
+</style>
+<present name="allModel">
+    <label for="channel_id_all_1">全部渠道</label>
+    <input name="channel_id_all" id="channel_id_all_1" type="radio" value="1" checked="checked"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <label for="channel_id_all_0">部分渠道</label>
+    <input name="channel_id_all" id="channel_id_all_0" type="radio" value="0" />
+
+    <div id="select_id_box" style="display: none">
+        <present name="exceptModel">
+            <input name="channel_id_except" type="checkbox" value="1" checked="checked"/>
+            <else />
+            <input name="channel_id_except" type="checkbox" value="1" />
+        </present>
+        排除模式
+        <{$selectMove}>
+    </div>
+<else />
+    <label for="channel_id_all_1">全部渠道</label>
+    <input name="channel_id_all" id="channel_id_all_1" type="radio" value="1" />
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <label for="channel_id_all_0">部分渠道</label>
+    <input name="channel_id_all" id="channel_id_all_0" type="radio" value="0" checked="checked"/>
+
+    <div id="select_id_box">
+    <present name="exceptModel">
+        <input name="channel_id_except" type="checkbox" value="1" checked="checked"/>
+        <else />
+        <input name="channel_id_except" type="checkbox" value="1" />
+    </present>
+    排除模式
+
+    <{$selectMove}>
+    </div>
+</present>
+
+<script>
+    $(function(){
+        $("input[name='channel_id_all']").on("click",function(){
+            if(  $("input[name='channel_id_all']:checked").val() == 1)
+                $("#select_id_box").hide();
+            else
+                $("#select_id_box").show();
+        });
+
+
+
+    });
+
+</script>

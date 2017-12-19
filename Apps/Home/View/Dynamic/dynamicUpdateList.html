@@ -1,0 +1,60 @@
+<div>
+    &nbsp;&nbsp;&nbsp;<input type="button" name="redis" class="redis" value="立即更新任务" onclick="updateRedis();"><br /><br />
+</div>
+
+<table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr><th>ID</th><th>TAG</th><th>类型名KEY</th><th>版本</th><th>允许更新sid段</th><th>SDK版本号范围</th><th>动态包范围</th><th>排序</th><th>备注</th><th>操作</th></tr>
+    </thead>
+    <tbody>
+    <volist name="data" id="vo">
+        <tr>
+            <td><{$vo.id}></td>
+            <td><{$vo.tid}></td>
+            <td><{$vo.type_key}></td>
+            <td><{$vo.version}></td>
+            <td><div style="overflow-y: scroll;width: 300px;height: 40px;white-space: normal;"><{$vo.sid_part}></div></td>
+            <td><{$vo.sdk_version}></td>
+            <td><{$vo.dynamic_version}></td>
+            <td><{$vo.score}></td>
+            <td><div style="overflow-y: scroll;width: 300px;height: 40px;white-space: normal;"><{$vo.memo}></div></td>
+            <td><{$vo.caozuo}></td>
+        </tr>
+    </volist>
+    </tbody>
+</table>
+<script>
+    function updateRedis() {
+        $.ajax({
+            url : "index.php?m=Home&c=Dynamic&a=update_dynamic_redis",
+            type : 'post',
+            data:{option:'update'},
+            success : function(data){
+                alert(data);
+                window.location.reload();
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        $('#example').dataTable({
+            "aaSorting": [[ 0, "desc" ]],
+            "aLengthMenu":[100,50,10],
+            "oLanguage": {    // 语言设置
+                "sLengthMenu": "每页显示 _MENU_ 条记录",
+                "sZeroRecords": "抱歉， 没有找到",
+                "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                "sInfoEmpty": "没有数据",
+                "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+                "sZeroRecords": "没有检索到数据",
+                "sSearch": "检索:",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+                }
+            }
+        });
+    });
+</script>
