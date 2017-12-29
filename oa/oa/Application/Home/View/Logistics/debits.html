@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<title>巢湖市槐林中学--oa管理系统</title>
+<link type="text/css" href="Public/css/bootstrap.min.css" rel="stylesheet">
+<link type="text/css" href="Public/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="Public/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="Public/js/base.js"></script>
+</head> 
+<body>
+
+{include file="Public/header.html"}
+
+<div class="home_container clearfix">
+
+	{include file="Public/left.html"}
+	
+	<div class="home_right">
+		<div class="main clearfix">
+			<div class="breadcrumb" style="margin:0;"><a>后勤管理 >> 电教资料借记</a></div>
+			<div class="debits">	
+				<div class="wrap">
+					<p>&nbsp;</p>
+					<div class="c_hd clearfix">
+						当前用户：[{cookie('realname')}] <a href="">首页</a> | <a href="">物品信息库</a> | <a href="">借记管理</a> | <a href="">我的借记</a> | <a href="">物品入库</a> | <a href="">管 理</a>  
+					</div>
+					<div class="c_bd">
+						<table>
+							<tr>
+								<th width="10%"></th>
+								<th>数据统计</th>
+								<th width="10%"></th>
+							</tr>
+							<tr>
+								<td></td>
+								<td>1、当前的电教资料总数为:0</td>
+								<td></td>
+							</tr>							
+							<tr>
+								<td></td>
+								<td>2、出借的电教资料为:0</td>
+								<td></td>
+							</tr>							
+							<tr>
+								<td></td>
+								<td>3、预借的电教资料为:0</td>
+								<td></td>
+							</tr>							
+							<tr>
+								<td></td>
+								<td>4、总共借记次数为:</td>
+								<td></td>
+							</tr>
+						</table>						
+						<table>
+							<tr>
+								<th width="10%"></th>
+								<th>使用说明</th>
+								<th width="10%"></th>
+							</tr>
+							<tr>
+								<td></td>
+								<td>1、此系统由【技术支持】独立开发，为自由软件可以自由传播；</td>
+								<td></td>
+							</tr>							
+							<tr>
+								<td></td>
+								<td>2、只有注册为本校网站系统的用户才能使用此系统（必须通过审核）；</td>
+								<td></td>
+							</tr>							
+							<tr>
+								<td></td>
+								<td>3、在物品信息库中查找电教资料并预借，然后到电教管理员处完成借记；</td>
+								<td></td>
+							</tr>							
+							<tr>
+								<td></td>
+								<td>4、一般预借天数为7天，超过了本系统将自动删除此信息，请重新预借。</td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{include file="Public/footer.html"}
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<title>巢湖市槐林中学--oa管理系统</title>
+<link type="text/css" href="Public/css/bootstrap.min.css" rel="stylesheet">
+<link type="text/css" href="Public/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="Public/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="Public/js/base.js"></script>
+</head> 
+<body>
+
+{include file="Public/header.html"}
+
+<div class="home_container clearfix">
+
+	{include file="Public/left.html"}
+	
+	<div class="home_right">
+		<div class="main clearfix">
+			<div class="breadcrumb"><a>我的办公桌</a></div>
+			<div class="manage_items">
+				<b>管理选项：</b><a href="">收件箱</a> | <a href="">发件箱</a> | <a href="">新建短信</a> 
+			</div>
+			<div class="location">
+				<b>当前位置 >> 短信箱</b>
+			</div>
+			<div class="message">
+				<table>
+					<tr>
+						<th>序列</th>
+						<th>短信标题</th>
+						<th>发信者</th>
+						<th>发送日期</th>
+					</tr>
+					{foreach from=$result_arr key=key item=item}
+						<tr>
+							<td>{$item['id']}</td>
+							<td title="{$item['content']}">{$item['title']}</td>
+							<td>{$item['send']}</td>
+							<td>{$item['sendtime']}</td>
+						</tr>
+					{/foreach}
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+{include file="Public/footer.html"}
+
+</body>
+</html>

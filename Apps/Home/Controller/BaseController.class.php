@@ -22,7 +22,17 @@ class BaseController extends Controller
         debug($_SESSION);
         $this->readConfigFromDb();
         $this->getNavigation();
-
+		$leftNavParsed = array();
+		foreach($this->leftNav as $key=>$v){
+			if(empty($v['parent']))
+				$leftNavParsed[$key] = $v;
+			else
+				$leftNavParsed[$v['parent']][$key] = $v;
+		}
+		// echo '<pre>';
+		// print_r($leftNavParsed);
+		// echo '</pre>';
+		$this->assign('leftNavParsed',$leftNavParsed);
     }
 
 
@@ -97,6 +107,8 @@ class BaseController extends Controller
                     $rep = str_replace( "m=home&c={$v2['c']}&a={$v2['a']}&" . $v2['p'] , '' , $p) ;
 //                    debug($rep);
 //                    debug($v2);
+if($_GET['test']=='test')
+	echo $rep;
                     if(( $rep == "" || strpos($rep , "&") === 0))
                     {
                         $this->leftNavigation[$k][$k2]['selected'] = true;

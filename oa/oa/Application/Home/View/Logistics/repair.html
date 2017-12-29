@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<title>巢湖市槐林中学--oa管理系统</title>
+<link type="text/css" href="Public/css/bootstrap.min.css" rel="stylesheet">
+<link type="text/css" href="Public/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="Public/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="Public/js/base.js"></script>
+</head> 
+<body>
+
+{include file="Public/header.html"}
+
+<div class="home_container clearfix">
+
+	{include file="Public/left.html"}
+	
+	<div class="home_right">
+		<div class="main clearfix">
+			<div class="breadcrumb" style="margin:0;"><a>后勤管理 >> 网上报修</a></div>
+			<div class="repair">	
+				<div class="wrap">
+					<p>&nbsp;</p>
+					<div class="c_hd clearfix">
+						当前用户：[{cookie('realname')}] <a href="">首页</a> | <a href="">申请报修</a> | <a href="">我的报修</a> | <a href="">管 理</a>  
+					</div>
+					<div class="c_bd">
+						<div class="sub_items">
+							<b>当前位置：首页</b>
+							<a href="">全部</a> | <a href="">申请</a> | <a href="">未维修</a> | <a href="">维修中</a> | <a href="">送外维修</a> | <a href="">完成维修</a>  
+						</div>
+						<table>
+							<tr>
+								<th>维修地点</th>
+								<th>报修人</th>
+								<th>分类</th>
+								<th>报修原因</th>
+								<th>报修时间</th>
+								<th>维修情况</th>
+								<th>维修时间</th>
+								<th>操作</th>
+							</tr>
+							{foreach from=$result_arr key=key item=item}
+								<tr>
+									<td>{$item['address']}</td>
+									<td>{$item['realname']}</td>
+									<td>{$item['type']}</td>
+									<td>{$item['content']}</td>
+									<td>{date('Y/m/d',$item['intime'])}</td>
+									<td>{$item['state']}</td>
+									<td>{date('Y/m/d',$item['retime'])}</td>
+									<td><a href="">编辑</a> | <a href="">管理</a></td>
+								</tr>
+							{/foreach}
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{include file="Public/footer.html"}
+
+</body>
+</html>

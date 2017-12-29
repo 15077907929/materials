@@ -358,6 +358,15 @@ class TaskController extends RoleController
                 if($admin_name == 'admin'){
                     //echo $wh;exit;
                 }
+				if($wh=='')
+					$wh.='comment_rate=0';
+				else
+					$wh.='and comment_rate=0';
+				
+				if($_GET['test']==1)
+				{	
+					echo $wh.'test';
+				}
 
                 $count = $group_db->where($wh)->count();
                 $pagesize = 300;
@@ -798,6 +807,7 @@ class TaskController extends RoleController
                                     $arr['group_count'] = trim($v['13']);
                                     $arr['group_start'] = date("Y-m-d H:i:s",strtotime(trim($v['14'])));
                                     $arr['group_end'] = date("Y-m-d H:i:s",strtotime(trim($v['15'])));
+
                                     $update = $group_db->add($arr);
                                     if ($update) {
                                         $arr1['count'] = trim($v['13']);
@@ -1025,6 +1035,16 @@ class TaskController extends RoleController
                     }
                     $wh .= $temp_where;
                 }
+				
+								if($wh=='')
+					$wh.='comment_rate=0';
+				else
+					$wh.='and comment_rate=0';
+				
+				if($_GET['test']==1)
+				{	
+					echo $wh.'test';
+				}
 
                 $count = $db->where($wh)->count();
                 $pagesize = 100;

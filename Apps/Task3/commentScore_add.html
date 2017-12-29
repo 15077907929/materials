@@ -1,0 +1,175 @@
+<style>
+    #business_groups select{
+        width:75px;
+        min-width: 50px;
+    }
+</style>
+<form enctype="multipart/form-data" method="post" action="<{:U('Task/taskManager', array('method'=>'add'))}>" onsubmit="return check_submit();">
+    <ul>
+        <li>
+            <div class="l">TAG：</div>
+            <div class="r"><{$tag}></div>
+        </li>
+        <li>
+            <div class="l">CP：</div>
+            <div class="r"><{$cp}></div>
+        </li>
+        <li>
+            <div class="l">包名：</div>
+            <div class="r gid_ajax"><{$package_name}></div>
+        </li>
+        <li>
+            <div class="l">任务标题：</div>
+            <div class="r"><{$task_name}></div>
+        </li>
+        <li>
+            <div class="l">任务类型：</div>
+            <div class="r"><{$task_type}></div>
+        </li>
+        <li>
+            <div class="l">账号&商店归属：</div>
+            <div class="r"><{$country}></div>
+        </li>
+        <li>
+            <div class="l">语言：</div>
+            <div class="r"><{$language}></div>
+        </li>
+        <li>
+            <div class="l">国家表名：</div>
+            <div class="r table_gid_ajax"><{$table_name}></div>
+        </li>
+        <li>
+            <div class="l">优先级：</div>
+            <div class="r"><{$score}></div>
+        </li>
+        <li>
+            <div class="l">评论概率：</div>
+            <div class="r"><{$comment_rate}></div>
+            <div class="r"><span style="color:orange">（范围0-1000；只评星概率为10‰，评星并评论为1‰较为合适）</span></div>
+        </li>
+        <li>
+            <div class="l">评论操作：</div>
+            <div class="r"><{$comment_type}></div>
+        </li>
+        <li>
+            <div class="l">评论星级概率：</div>
+            <div class="r"><{$star}></div>
+            <div class="r"><span style="color:orange">（竖线分隔，和为100。例：20|30|50）</span></div>
+        </li>
+        <li>
+            <div class="l">评论详情：</div>
+            <div class="r"><{$comment_detail}></div>
+            <div class="r"><span style="color:orange">（标题内容用"||"分割，不同评论用"$$"分割。例：title||content$$title||content$$title||content）</span></div>
+        </li>
+        <li>
+            <div class="l">回答问题条目概率：</div>
+            <div class="r"><{$answer_amount}></div>
+            <div class="r"><span style="color:orange">（竖线分隔，和为100。例：20|30|50  表示回答1个问题概率20%|2个问题概率30%|3个问题概率50%）</span></div>
+        </li>
+        <li>
+            <div class="l">备注：</div>
+            <div class="r"><{$remark}></div>
+        </li>
+        <li>
+            <div class="l"><span id="add1" class="ajax_sel2">添加任务</span></div>
+            <div class="r"><span style="color:orange">（多个关键词用逗号隔开）</span></div>
+        </li>
+        <li id = "business_groups">
+            <div style="display: inline-block">
+                <div class="r">数量：<{$count}></div>
+                <div class="r">开始时间：<{$start}></div>
+                <div class="r">结束时间：<{$end}></div>
+                <div class="r">关键词：<{$keyword}></div>
+                <div class="r">是否平均：<{$is_average}></div>
+            </div>
+        </li>
+        <input type="hidden" name="method" value="add_business_group">
+        <li>
+            <input type="submit" value="添加">
+        </li>
+    </ul>
+</form>
+<div id="hidden_group" style="display: none">
+    <div style="display: inline-block">
+        <div class="r">数量：<{$count}></div>
+        <div class="r">开始时间：<{$start}></div>
+        <div class="r">结束时间：<{$end}></div>
+        <div class="r">关键词：<{$keyword}></div>
+        <div class="r">是否平均：<{$is_average}></div>
+        <div class="r">&nbsp;&nbsp;&nbsp;<span class="icon_delete" style="cursor: pointer"></span></div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('select[name="cp"]').change(function(){
+        var cp = $(this).children('option:selected').val();
+        $.ajax({
+            url : 'index.php?m=Home&c=Task&a=gidSelectAjax&cp='+cp+'&type=2',
+            type : 'get',
+            success : function(data){
+                $('.gid_ajax').html(data);
+            }
+        });
+    });
+
+    $('select[name="country"]').change(function () {
+        var cp = $(this).children('option:selected').val();
+        $.ajax({
+            url: 'index.php?m=Home&c=Task&a=searchKeywordIpTaskList&method=ajax&short_name=' + cp,
+            type: 'get',
+            success: function (data) {
+                $('.table_gid_ajax').html(data);
+            }
+        });
+    });
+
+    $("#add1").click(function(){
+        var length = $("#business_groups").children().length;
+        var val1 = $("input[name='count[]']:eq("+(length-1)+")").val();
+        var val2 = $("input[name='start[]']:eq("+(length-1)+")").val();
+        var val3 = $("input[name='end[]']:eq("+(length-1)+")").val();
+        val2 = addDay(val2);
+        val3 = addDay(val3);
+        var val4 = $("textarea[name='keyword[]']:eq("+(length-1)+")").val();
+        var str = $("#hidden_group").html();
+        $("#business_groups").append(str);
+        $("input[name='count[]']:eq("+(length)+")").val(val1);
+        $("input[name='start[]']:eq("+(length)+")").val(val2);
+        $("input[name='end[]']:eq("+(length)+")").val(val3);
+        $("textarea[name='keyword[]']:eq("+(length)+")").val(val4);
+
+        $(".icon_delete").click(function(){
+            $(this).parent().parent().remove();
+        });
+    });
+
+    function check_submit() {
+        var tasknum = $("#business_groups").children().length;
+        var flag = false;
+        if (tasknum > 0) {
+            for (var i = 0; i < tasknum; i++) {
+                if (!$("input[name='count[]']:eq("+(i)+")").val()) {
+                    alert('请填写 任务' + (i+1) + '数量！');
+                    return false;
+                }
+                if (!$("input[name='start[]']:eq("+(i)+")").val()) {
+                    alert('请填写 任务' + (i+1) + '开始时间！');
+                    return false;
+                }
+                if (!$("input[name='end[]']:eq("+(i)+")").val()) {
+                    alert('请填写 任务' + (i+1) + '结束时间！');
+                    return false;
+                }
+                if (!$("textarea[name='keyword[]']:eq("+(i)+")").val()) {
+                    alert('请填写 任务' + (i+1) + '关键词！');
+                    return false;
+                }
+                flag = true;
+            }
+        }
+        if (!flag) {
+            alert('请添加任务量！');
+            return false;
+        }
+        return true;
+    }
+</script>

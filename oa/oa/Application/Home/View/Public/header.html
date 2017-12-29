@@ -1,0 +1,33 @@
+<div class="header">
+	<div class="logo"><img src="Public/images/logo.gif" /></div>
+	<div class="header_sub clearfix">
+		<h6 class="fl">巢湖市槐林中学欢迎您</h6>
+		<div class="header_nav fr">
+			<ul class="clearfix">
+				<li class="home"><a href="index.php?m=Home&c=Index&a=index">我的桌面</a></li>
+				{foreach from=$header_nav key=key item=item}
+					<li>
+						<span>{$item['name']}</span>
+						<dl class="sub_nav hide">
+							{foreach from=$item['sub_nav'] item=sub_item}
+								<dt>
+									{if $sub_item['third_nav'] neq ''}
+										<span><a>{$sub_item['name']}</a></span>
+										<div class="third_nav hide">
+											{foreach from=$sub_item['third_nav'] item=third_item}
+												<a href="{$third_item['actionurl']}">{$third_item['name']}</a>
+											{/foreach}
+										</div>
+									{else}
+										<a href="{$sub_item['actionurl']}">{$sub_item['name']}</a>
+									{/if}
+								</dt>
+							{/foreach}
+						</dl>
+					</li>
+				{/foreach}
+				<li><a href="index.php?m=Home&c=Login&a=logout">注销</a></li>
+			</ul>
+		</div>
+	</div>
+</div>

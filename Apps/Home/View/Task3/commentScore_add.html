@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<title>google平台</title>
+<link href="/Public/css/admin.css" rel="stylesheet" type="text/css"/>
+<link href="/Public/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="/Public/js/admin/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="/Public/js/admin/Task/commentScore.js"></script>
+</head>
+<body>
+
+{include file="../Public/header2.html"}
+
+<div id="main" class="clearfix">
+    
+	{include file="../Public/left3.html"}
+
+	<div id="m_right">
+		<div class="nav">
+			<div class="item">
+				<a href="index.php?m=Home&c=Task3&a=commentScore"><div class="icon_grid icon_image_black  icon_transparent"></div>评分功能管理</a>
+			</div>
+			<div class="item selected">
+				<span><div class="icon_add  icon_transparent"></div>评分功能添加</span>
+			</div>
+		</div>
+		<form action="index.php?m=Home&c=Task3&a=commentScore&method=add" method="post" onsubmit="return check_submit();">
+			<ul>
+				<li>
+					<div class="l">CP:</div>
+					<div class="r">{$cp}</div>
+				</li>
+				<li>
+					<div class="l">包名：</div>
+					<div class="r gid_ajax">
+						<select name="package_name"> 
+							<option value="">请选择包名</option>
+						</select>
+					</div>
+				</li>
+				<li>
+					<div class="l">游戏名称：</div>
+					<div class="r">
+						<input name="game_name" type="text" />
+					</div>
+				</li>				
+				<li>
+					<div class="l">评分模式：</div>
+					<div class="r">
+						<div class="radio">
+							<label>
+								<input class="score_type1" type="radio" name="score_type" value="1" checked="checked"> 自助评分
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input class="score_type2" type="radio" name="score_type" value="2">固定评分
+							</label>
+						</div>
+					</div>
+				</li>				
+				<li class="score_rate">
+					<div class="l">评分比例：</div>
+					<div class="r"><input name="score_rate" type="text" /></div>
+				</li>
+				<li class="country hide">
+					<div class="l">固定评分国家列表：</div>
+					<div class="r table_gid_ajax">
+						<input name="country[]" value="HK" type="checkbox">HK 
+						<input name="country[]" value="TW" type="checkbox">TW 
+						<input checked name="country[]" value="SG" type="checkbox">SG 
+						<input checked name="country[]" value="GB" type="checkbox">GB 
+						<input name="country[]" value="FR" type="checkbox">FR 
+						<input checked name="country[]" value="US" type="checkbox">US 
+						<input name="country[]" value="DE" type="checkbox">DE 
+						<input name="country[]" value="BR" type="checkbox">BR 
+						<input name="country[]" value="RU" type="checkbox">RU 
+						<input name="country[]" value="CA" type="checkbox">CA 
+						<input name="country[]" value="JP" type="checkbox">JP 
+						<input name="country[]" value="KR" type="checkbox">KR 
+						<input name="country[]" value="FI" type="checkbox">FI 
+						<input name="country[]" value="IN" type="checkbox">IN 
+						<input name="country[]" value="TH" type="checkbox">TH 
+						<input name="country[]" value="AU" type="checkbox">AU 
+						<input name="country[]" value="IR" type="checkbox">IR 
+						<input name="country[]" value="ID" type="checkbox">ID 
+						<input name="country[]" value="SA" type="checkbox">SA 
+						<input checked name="country[]" value="ES" type="checkbox">ES 
+						<input name="country[]" value="AE" type="checkbox">AE 
+					</div>
+				</li>
+				<li>
+					<div class="l">优先级：</div>
+					<div class="r"><input name="score" type="text"></div>
+				</li>
+				<li>
+					<input type="submit" value="添加">
+				</li>
+			</ul>
+		</form>
+	</div>
+</div>
+
+{include file="../Public/footer2.html"}
+
+</body>
+</html>

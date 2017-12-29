@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<title>巢湖市槐林中学--oa管理系统</title>
+<link type="text/css" href="Public/css/bootstrap.min.css" rel="stylesheet">
+<link type="text/css" href="Public/css/admin.css" rel="stylesheet">
+<script type="text/javascript" src="Public/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="Public/js/base.js"></script>
+</head> 
+<body>
+
+{include file="Public/header.html"}
+
+<div class="home_container clearfix">
+
+	{include file="Public/left.html"}
+	
+	<div class="home_right">
+		<div class="main clearfix">
+			<div class="breadcrumb"><a>我的办公桌</a></div>
+			<div class="manage_items">
+				<b>管理选项：</b><a href="">公共收藏夹</a> | <a href="">我的收藏夹</a> | <a href="">编辑网址</a> | <a href="">添加网址</a> 
+			</div>
+			<div class="location">
+				<b>当前位置 >> 收藏夹 >> 公共收藏夹</b>
+			</div>
+			<div class="favorite">
+				<div class="frequency">
+					<div class="t"><b> 常 用 网 址 </b></div>
+					<div class="detail">
+						<ul class="clearfix">
+							{foreach from=$result_arr['common'] key=key item=item}
+								<li>
+								<b class="red">{$key}：</b>
+								{foreach from=$item key=sub_key item=sub_item}
+									<a href="">{$sub_item['title']}</a> | 
+								{/foreach}
+								</li>
+							{/foreach}
+						</ul>
+					</div>
+					<div class="categories">
+						<font color="blue">分类：</font>
+						{foreach from=$result_arr['categories'] key=key item=item}
+							<a href="index.php?m=Home&c=MyDesk&a=favorite&category={$item['id']}">{$item['name']}</a> | 
+						{/foreach}
+					</div>
+				</div>
+				<div class="current_category">
+					<div class="t"><b>当前分类 -> ({$result_arr['category']}) </b></div>
+					<table>
+						{foreach from=$result_arr['favorite_cur'] key=key item=item}
+							<tr>
+								<td>[{$result_arr['category']}]</td>
+								<td>
+									<a href="{$item['weburl']}">{$item['title']}</a>
+									〖{$item['note']}〗-- 
+									{if $item['isshare'] eq 1}
+									共享
+									{else}
+									私有
+									{/if}
+								</td>
+							</tr>
+						{/foreach}
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{include file="Public/footer.html"}
+
+</body>
+</html>

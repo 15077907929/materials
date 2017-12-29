@@ -192,6 +192,11 @@ $conf1 = array(
                 'link' =>  '/Total/proTaskPlan',
                 'power' => 'PTASKP',
                 'parent' => '协议任务管理',
+            ),            
+			'评分功能' => array(
+                'link' =>  '/Task3/commentScore',
+                'power' => 'PFGN',
+                'parent' => '协议任务管理',
             ),
             '下载真机任务列表' => array(
                 'link' =>  '/Task/searchKeywordIpTaskList',
@@ -373,6 +378,7 @@ $conf1 = array(
             '组任务管理启用禁用' => 'GTASKO1',
             '单条任务查看' => 'OTMS',
             '协议任务评估' => 'PTASKP',
+			'评分功能' => 'PFGN',
             '真机任务列表查看' => 'SKITLS',
             '真机任务列表操作' => 'SKITLO',
             '真机任务计划评估' => 'TASKPS',

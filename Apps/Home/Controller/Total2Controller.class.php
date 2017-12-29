@@ -7,16 +7,16 @@ class Total2Controller extends RoleController{
 	var $sort_num=1;	
 	function get_result($table,$redis){
 		if($table=='google_task_config'){
-			$table_nickname='真机';
-		}elseif($table=='search_keyword_ip_task'){
 			$table_nickname='协议';
+		}elseif($table=='search_keyword_ip_task'){
+			$table_nickname='真机';
 		}
 		$start=date('Y-m-d',strtotime(date('Y-m-d').'-7 day')).' 16:00:00';	//前i天
 		$end=date('Y-m-d').' 16:00:00';
 		$db2=M('google_app_config');
-		$where='cp=\'自有游戏\' and start>\''.$start.'\' and start<=\''.$end.'\'';	
+		$where='cp=\'自有游戏\' and start>=\''.$start.'\' and start<\''.$end.'\'';	
 		if(I('get.sub_where')=='comment'){	//评论
-			$sub_where='cp=\'自有游戏\' and comment_rate>0';
+			$sub_where='cp=\'自有游戏\' and comment_rate>0 ';
 		}elseif(I('get.sub_where')=='nocomment'){
 			$sub_where='cp=\'自有游戏\' and comment_rate=0';	//不包括评论
 		}		
@@ -34,6 +34,7 @@ class Total2Controller extends RoleController{
 					$sub_start=date('Y-m-d',strtotime(date('Y-m-d').'-'.$i.' day')).' 16:00:00';	//前i天
 					$sub_end=date('Y-m-d',strtotime(date('Y-m-d').'-'.($i-1).' day')).' 16:00:00';
 					$data=$db->where($sub_where.' and package_name=\''.$value['package_name'].'\' and country=\''.$v['country'].'\' and start>\''.$sub_start.'\' and start<=\''.$sub_end.'\'')->select();
+					//if($_GET['test']){ echo $db->getLastSql();}
 					foreach ($data as $sub_k=>$sub_v){
 						$success_sum+=intval(getRedis()->get($redis."{$sub_v['id']}"));
 					}
@@ -125,10 +126,10 @@ class Total2Controller extends RoleController{
 					$dates=trim($dates,',');
 					$series=trim($series,',');
 					//把查询的到数据缓存入redis数据库
-					getRedis()->set($now_date.'_result_arr_'.$sub_where,$result_arr,86400);
-					getRedis()->set($now_date.'_date_arr_'.$sub_where,$date_arr,86400);
-					getRedis()->set($now_date.'_dates_'.$sub_where,$dates,86400);
-					getRedis()->set($now_date.'_series_'.$sub_where,$series,86400);
+					getRedis()->set($now_date.'_result_arr_'.$sub_where,$result_arr,3600);
+					getRedis()->set($now_date.'_date_arr_'.$sub_where,$date_arr,3600);
+					getRedis()->set($now_date.'_dates_'.$sub_where,$dates,3600);
+					getRedis()->set($now_date.'_series_'.$sub_where,$series,3600);
 				}
                 $this->assign('result_arr', $result_arr);
 				$this->assign('date_arr', $date_arr);
