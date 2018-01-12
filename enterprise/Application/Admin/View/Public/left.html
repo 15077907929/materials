@@ -1,0 +1,129 @@
+<div class="left">
+	<div class="hd">
+		<a href="index.php?m=Home&c=Index&a=index" target="_blank">前台首页</a>&nbsp;|
+		<a href="index.php?m=Admin&c=Index&a=index">后台首页</a>&nbsp;|
+		<a href="index.php?m=Admin&c=Login&a=logout">退出</a>&nbsp;
+	</div>
+	<div class="bd">
+		<ul>
+			<li class="list-group">
+				<div class="first list-group-item">基本配置</div>
+				<dl class="sub hide">
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Admin&a=index">管理员管理</a></dt>
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Basic&a=index">基本信息</a></dt>
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Skin&a=index">界面风格</a></dt>
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Img&a=index">图片配置</a></dt>
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Column&a=index">栏目配置</a></dt>
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=IndexSet&a=index">首页配置</a></dt>
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=SEO&a=index">优化推广</a></dt>
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Footer&a=index">底部信息</a></dt>
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Banner&a=index">banner管理</a></dt>
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=StrContent&a=index">热门标签</a></dt>
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Online&a=index">在线交流</a></dt>
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Html&a=index">静态页面生成</a></dt>
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Parameter&a=index&type=product">产品模块参数</a></dt>
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Parameter&a=index&type=download">下载模块参数</a></dt>
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Parameter&a=index&type=img">图片模块参数</a></dt>				
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Database&a=index">数据库备份</a></dt>
+					<dt><a class="list-group-item list-group-item-danger" href="">技术支持</a></dt>
+				</dl>
+			</li>
+			<!-- 简介模块 -->
+			{foreach from=$common_arr['module1'] key=key item=item}
+			<li class="list-group">
+				<div class="first list-group-item">{$item['name']}</div>
+				<dl class="sub hide">
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Module1&a=index&id={$item['id']}">{$item['name']}</a></dt>	
+					{foreach from=$item['sub'] key=sub_key item=sub_item}
+						<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Module1&a=index&id={$sub_item['id']}">{$sub_item['name']}</a></dt>	
+					{/foreach}						
+				</dl>
+			</li>	
+			{/foreach}	
+			<!-- 文章模块 -->	
+			{foreach from=$common_arr['module2'] key=key item=item}			
+			<li class="list-group">
+				<div class="first list-group-item">{$item['name']}</div>
+				<dl class="sub hide">
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Module2&a=index&method=add&class1={$item['id']}">添加{$item['name']}</a></dt>	
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Module2&a=index&method=list&class1={$item['id']}">管理{$item['name']}</a></dt>						
+				</dl>
+			</li>
+			{/foreach}	
+			<!-- 产品模块 -->	
+			{foreach from=$common_arr['module3'] key=key item=item}	
+			<li class="list-group">
+				<div class="first list-group-item">{$item['name']}</div>
+				<dl class="sub hide">
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Module3&a=index&method=add&class1={$item['id']}">添加{$item['name']}</a></dt>	
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Module3&a=index&method=list&class1={$item['id']}">管理{$item['name']}</a></dt>						
+				</dl>
+			</li>
+			{/foreach}	
+			<!-- 下载模块 -->	
+			{foreach from=$common_arr['module4'] key=key item=item}	
+			<li class="list-group">
+				<div class="first list-group-item">{$item['name']}</div>
+				<dl class="sub hide">
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Module4&a=index&method=add&class1={$item['id']}">添加{$item['name']}</a></dt>	
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Module4&a=index&method=list&class1={$item['id']}">管理{$item['name']}</a></dt>						
+				</dl>
+			</li>
+			{/foreach}
+			<!-- 图片模块 -->	
+			{foreach from=$common_arr['module5'] key=key item=item}	
+			<li class="list-group">
+				<div class="first list-group-item">{$item['name']}</div>
+				<dl class="sub hide">
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Module5&a=index&method=add&class1={$item['id']}">添加{$item['name']}</a></dt>	
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Module5&a=index&method=list&class1={$item['id']}">管理{$item['name']}</a></dt>						
+				</dl>
+			</li>
+			{/foreach}
+			<!-- 招聘模块 -->	
+			{foreach from=$common_arr['module6'] key=key item=item}	
+			<li class="list-group">
+				<div class="first list-group-item">{$item['name']}</div>
+				<dl class="sub hide">
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Module6&a=index&method=add&class1={$item['id']}">添加{$item['name']}</a></dt>	
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Module6&a=index&method=list&class1={$item['id']}">管理{$item['name']}</a></dt>						
+				</dl>
+			</li>
+			{/foreach}	
+			<!-- 留言模块 -->	
+			{foreach from=$common_arr['module7'] key=key item=item}				
+			<li class="list-group">
+				<div class="first list-group-item">{$item['name']}</div>
+				<dl class="sub hide">
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Module7&a=index&method=set&class1={$item['id']}">{$item['name']}配置</a></dt>	
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Module7&a=index&method=list&class1={$item['id']}">留言信息管理</a></dt>						
+				</dl>
+			</li>
+			{/foreach}	
+			<!-- 反馈模块 -->		
+			<li class="list-group">
+				<div class="first list-group-item">系统反馈</div>
+				<dl class="sub hide">
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Feedback&a=index&method=set&class1=19">反馈系统设置</a></dt>	
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Feedback&a=index&method=setlist&class1=19">反馈列表字段设置</a></dt>		
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Feedback&a=index&method=list&class1=19">反馈信息管理</a></dt>						
+				</dl>			
+			</li>
+			<!-- 友情链接 -->				
+			<li class="list-group">
+				<div class="first list-group-item">友情链接</div>
+				<dl class="sub hide">
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Link&a=index&method=add&class1=21">友情链接添加</a></dt>	
+					<dt><a class="list-group-item list-group-item-danger" href="index.php?m=Admin&c=Link&a=index&method=list&class1=21">友情链接管理</a></dt>							
+				</dl>			
+			</li>
+		</ul>
+	</div>
+	<div class="lcontact">
+		<b>版权所有：</b><a href="">企业网站</a>
+	</div>
+</div>
+
+    
+
+<script type="text/javascript" src="Public/js/jquery.cookie.js"></script> 

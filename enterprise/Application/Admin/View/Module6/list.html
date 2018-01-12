@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv='content-type' content='text/html;charset=utf-8' />
+<meta name='description' content=''>
+<meta name='keywords' content=''>
+<link type="text/css" href="Public/css/bootstrap.min.css" rel="stylesheet">
+<link rel='stylesheet' type='text/css' href='Public/css/base.css' />
+<link rel='stylesheet' type='text/css' href='Public/css/admin.css' />
+<script type="text/javascript" src="Public/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="Public/js/admin.js"></script>
+<script type="text/javascript" src="Public/ckeditor/ckeditor.js"></script>
+<title>网站后台管理系统</title>
+</head>
+<body>
+
+{include file="Public/header.html"}
+
+<table width="100%" class="tablemain">
+	<tr>
+		<td valign="top" width="182">
+		
+			{include file="Public/left.html"}
+			
+		</td>
+		<td valign="top">
+			<div class="module6 main">
+				<div class="hd"><b>{$result_arr['class1']['name']}管理</b></div>
+				<div class="bd">
+					<div class="set_search clearfix">
+						二级栏目：
+						{foreach from=$result_arr['sub'] key=key item=item}
+						<a href="">{$item['name']}&nbsp;&nbsp;|&nbsp;</a>
+						{/foreach}
+					</div>
+					<table>
+						<tr class="th">
+							<td>选中</td>
+							<td>ID</td>
+							<td>招聘职位</td>
+							<td>招聘人数</td>
+							<td>工作地点</td>
+							<td>有效天数</td>
+							<td>发布日期</td>
+							<td>操作</td>
+						</tr>
+						{foreach from=$result_arr['data'] key=key item=item}
+						<tr style="border-bottom:1px solid #036;">
+							<td class="th"><input type="checkbox" /></td>
+							<td>{$item['id']}</a></td>
+							<td>{$item['position']}</td>
+							<td>{$item['count']}</td>
+							<td>{$item['place']}</td>
+							<td>{$item['useful_life']}</td>
+							<td>{date('Y-m-d H:i:s',$item['updatetime'])}</td>
+							<td>
+								<a href="">编辑 |</a>
+								<a onclick="return ConfirmDel();" href="delete.php?id=<?php echo $val['id']; ?>">删除 </a>
+							</td>
+						</tr>
+						{/foreach}
+					</table>
+					<form class="del">
+						<input type="checkbox"> 选中本页显示的所有文章
+						<button type="submit" class="btn btn-default">删除选定的条目</button>
+					</form>
+					<form name="search" action="index.php?search=detail_search" method="">
+						<b>当前栏目文章查找：</b>
+						<input class="form-control" name="user_name" value="" type="text">
+						<button type="submit" class="btn btn-default">查 询</button>
+						请输入文章标题关键字。如果为空，则查找所有文章。
+					</form>
+					<div class="page">{$result_arr['page']}</div>
+				</div>
+			</div>
+		</td>
+	</tr>
+</table>
+
+{include file="Public/footer.html"}
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

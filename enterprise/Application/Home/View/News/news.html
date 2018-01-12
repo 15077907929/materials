@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv='content-type' content='text/html;charset=utf-8' />
+<meta name='description' content=''>
+<meta name='keywords' content=''>
+<link type="text/css" href="Public/css/bootstrap.min.css" rel="stylesheet">
+<link rel='stylesheet' type='text/css' href='Public/css/base.css' />
+<link rel='stylesheet' type='text/css' href='Public/css/inside.css' />
+<script type="text/javascript" src="Public/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="Public/js/base.js"></script>
+<title>{if $common_arr['third'] neq ''}{$common_arr['third']['name']}--{$common_arr['second']['name']}--{elseif $common_arr['second'] neq ''}{$common_arr['second']['name']}--{/if}{$common_arr['base']['name']}--企业网站--技术支持</title>
+</head>
+<body>
+
+{include file="Public/header.html"}
+
+<div class="container">
+	<div class="wrap clearfix">
+		<div class="main">
+			<div class="hd">
+				<a href="index.php"> 首页</a> > 
+				<a href="{$common_arr['base']['url']}">{$common_arr['base']['name']}</a>
+				{if $common_arr['second']['name'] neq ''}
+					> <a href="{$common_arr['second']['url']}">{$common_arr['second']['name']}</a>
+				{/if}
+			</div>
+			<div class="bd">
+				<div class="newslist">
+					<ul>
+						{foreach from=$result_arr['news_list'] key=key item=item}
+							<li>
+								<span class="pic"><img src="Public/images/list.gif" /></span>
+								<a href="" target="_blank">{$item['title']}</a>
+								({date('Y-m-d H:i:s',$item['updatetime'])})
+								<阅读<font>{$item['hits']}</font>次>
+							</li>
+						{/foreach}
+					</ul>
+				</div>	
+				<div class="page">{$result_arr['page']}</div>
+			</div>
+		</div>
+		
+		{include file="Public/right.html"}
+
+	</div>
+</div>
+
+{include file="Public/footer.html"}
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

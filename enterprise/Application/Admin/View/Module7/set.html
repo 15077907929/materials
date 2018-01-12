@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv='content-type' content='text/html;charset=utf-8' />
+<meta name='description' content=''>
+<meta name='keywords' content=''>
+<link type="text/css" href="Public/css/bootstrap.min.css" rel="stylesheet">
+<link rel='stylesheet' type='text/css' href='Public/css/base.css' />
+<link rel='stylesheet' type='text/css' href='Public/css/admin.css' />
+<script type="text/javascript" src="Public/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="Public/js/admin.js"></script>
+<script type="text/javascript" src="Public/ckeditor/ckeditor.js"></script>
+<title>网站后台管理系统</title>
+</head>
+<body>
+
+{include file="Public/header.html"}
+
+<table width="100%" class="tablemain">
+	<tr>
+		<td valign="top" width="182">
+		
+			{include file="Public/left.html"}
+			
+		</td>
+		<td valign="top">
+			<div class="main module7">
+				<div class="hd"><b>添加招聘信息</b></div>
+				<form class="bd" method="post" action="" name="index_set">
+					<input type="hidden" name="action" value="modify" />
+					<table>
+						<tr>
+							<td>防刷新时间：</td>
+							<td><input class="form-control" type="text" value="" name="fd_time" />秒，同一IP2次提交的最小间接时间</td>
+						</tr>							
+						<tr>
+							<td>敏感字符过滤：</td>
+							<td>
+								<textarea class="form-control" cols="50" rows="3" name="fd_word"></textarea>
+								多个字符请用"|"隔开
+							</td>
+						</tr>
+						<tr>
+							<td>显示方式：</td>
+							<td>
+								<input type="checkbox" value="" name="logo" />
+								客户留言后需要在后台回复审核才显示
+							</td>
+						</tr>
+						<tr>
+							<td>每页显示留言条数：</td>
+							<td>
+								<input class="form-control" type="text" value="" name="fd_no" />条
+							</td>
+						</tr>
+						<tr>
+							<td>是否发送邮件：</td>
+							<td>
+								<input type="checkbox" value="" name="" checked />
+								是否将客户留言自动发生到指定邮箱
+							</td>
+						</tr>
+						<tr>
+							<td>反馈邮件接收邮箱：</td>
+							<td>
+								<input class="form-control" type="text" value="" name="" />多个邮箱请用"|"隔开
+							</td>
+						</tr>
+						<tr>
+							<td>自动回复：</td>
+							<td><input type="checkbox" value="" name="" />自动回复邮件的标题</td>
+						</tr>								
+						<tr>
+							<td>回复邮件标题：</td>
+							<td><input class="form-control" type="text" value="" name="" />多种格式请用"|"隔开</td>
+						</tr>
+						<tr>
+							<td>回复邮件内容：</td>
+							<td><textarea class="form-control" cols="50" rows="3" name="fd_content"></textarea>支持HTML语言</td>
+						</tr>
+						<tr>
+							<td width="180"></td>
+							<td style="text-align:center;">
+								<button type="submit" class="btn btn-default">提 交</button>
+								<button type="reset" class="btn btn-default">重 置</button>
+							</td>
+						</tr>				
+					</table>
+				</form>
+			</div>
+		</td>
+	</tr>
+</table>
+
+{include file="Public/footer.html"}
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

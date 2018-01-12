@@ -1,0 +1,379 @@
+/*登录*/
+.login{ margin:180px auto 0; width:555px; background:#f0f0f0; padding-bottom:40px; border-radius:15px; text-align:center; }
+.login .hd{ font-size:20px; font-weight:700; padding:25px 0 5px; border-bottom:1px solid #f0f0f0; margin-bottom:10px; }
+.login form.bd{ }
+.login form.bd p{ height:30px; font-weight:bold; line-height:30px; }
+.login .bd table{ width:90%; margin:auto; }
+.login .bd table tr{}
+.login .bd table tr td{ line-height:40px; text-align:left; height:40px; }
+.login .bd table tr td.t{ text-align:right; }
+.login .bd table tr td input.chknumber{ display:inline-block; width:80px; }
+.login .bd table tr td img{ height:80%; }
+.login .bd table tr td.sub{ text-align:right; }
+.login .bd table tr td.sub a{ }
+.login .bd table tr td.sub input{ padding:0 5px; }
+
+/*头部*/
+.header{ height:42px; background:#036; line-height:42px; color:#fff; }
+.header .wel{ font-size:12px; }
+.header .tit{ font-size:14px; }
+
+.t4{ color:#800000; padding-right:8px; }
+.t6{ color:#ff0000; font-weight:bold; }
+
+/*底部*/
+.footer{ color:#036; line-height:36px; }
+.footer a{}
+
+/*左侧菜单*/
+.left{ width:180px; }
+.left .hd{ border:1px solid #036; height:25px; line-height:25px; }
+.left .hd a{ color:#036; font-weight:bold; }
+.left .bd{ border:1px solid #036; }
+.left .bd ul{}
+.left .bd ul li{ line-height:25px; margin-bottom:2px; }
+.left .bd ul li .first{ font-weight:bold; color:#036; cursor:pointer; }
+.left .bd ul li .active{ color:#f60; }
+.left .bd ul li .first:hover{ color:#f60; }
+.left .bd ul li dl.sub{ }
+.left .bd ul li dl.sub dt{ text-align:left; line-height:23px; }
+.left .bd ul li .list-group-item{ padding:5px 15px; }
+.left .bd ul li dl.sub dt a.list-group-item{ color:#036; padding:2px 15px; }
+.left .lcontact{ line-height:25px; border:1px solid #036; border-top:none; padding:5px 0; }
+.left .lcontact a{ color:#036; }
+
+/*后台主体部分公共样式*/
+.tablemain .main{ padding:8px 20px 0; border:1px solid #036; margin-left:8px; min-height:800px; background:#f0f8ff; }
+.tablemain .main .hd{ background:#999; font-size:13px; height:32px; line-height:32px; }
+.tablemain .main .bd{}
+.tablemain .main table{ width:100%; }
+.tablemain .main .bd form.del{ line-height:40px; text-align:left; padding:2px 6px; border:1px solid #fff; }
+.tablemain .main form.bd td{ padding-left:5px; height:40px; line-height:40px; text-align:left; border:1px solid #fff; }
+.tablemain .main form.bd td input{ display:inline; }
+.tablemain .main form.bd td select{ display:inline; max-width:12%; }  
+
+/*系统信息*/
+.sysinfo table.bd{ }
+.sysinfo table.bd tr{ }
+.sysinfo table.bd tr td{ border:1px solid #fff; text-align:left; padding-left:5px; }
+.sysinfo table.bd tr td.detail{ text-align:left; }
+
+/*管理员管理*/
+.admin_manage{  }
+.admin_manage .bd form.search{ height:50px; line-height:50px; }
+.admin_manage .bd form.search .add{ color:#f00; font-weight:bold; }
+.admin_manage .bd form.search input{ display:inline-block; width:180px; }
+.admin_manage .bd form.search button{ vertical-align:baseline; margin:0px; }
+.admin_manage .bd table{ width:100%; border:1px solid #036; }
+.admin_manage .bd tr{}
+.admin_manage .bd .th{ background:#999; color:#036; }
+.admin_manage .bd tr.th td{ border-right:1px solid #036; border-bottom:1px solid #036; line-height:25px; }
+.admin_manage .bd td{ padding:0 8px; line-height:25px; border-right:1px solid #036; line-height:22px; }
+.admin_manage .bd td a{ color:#036; }
+
+.admin_add{}
+.admin_add .hd{}
+.admin_add .bd{}
+.admin_add .bd table{ }
+.admin_add .bd table tr{ }
+.admin_add .bd table tr td{ height:29px; line-height:29px; text-align:left; }
+.admin_add .bd table tr td.sub{ text-align:center; }
+.admin_add .bd table tr td .tj{ padding:0 6px; border:1px solid #036; }
+
+.container .main{ padding:1px 20px 0; border:1px solid #036; margin-left:8px; min-height:500px; }
+.container .main .hd{ background:#999; font-size:13px; height:25px; line-height:25px; }
+.maintable .hd{}
+.maintable .hd b{ color:#036; }
+
+
+/*基本配置*/
+
+/*基本信息*/
+.basic_set{}
+.basic_set table{ }
+.basic_set tr{}
+.basic_set td input{ max-width:18%; }
+.basic_set td input.mb{ max-width:8%; }
+
+/*界面风格*/
+.skin_set{}
+.skin_set .mbgl{ color:#f00; font-weight:bold; }
+.skin_set table{ background:#ecf5ff; }
+.skin_set tr{}
+.skin_set td input{ max-width:8%; }
+
+/*图片配置*/
+.img_set{}
+.img_set table{}
+.img_set tr{}
+.img_set td{ padding-left:5px; height:40px; line-height:40px; text-align:left; border:1px solid #fff; }
+.img_set td input{ max-width:8%; }
+.img_set td textarea{ display:inline; max-width:28%; }
+.img_set td input.num{ max-width:18%; }
+
+/*栏目管理*/
+.column_manage .bd .add{ text-align:left; }
+.column_manage .bd .add a{ line-height:50px; color:#f00; font-weight:bold; }
+.column_manage .bd table{ width:100%; border:1px solid #036; }
+.column_manage .bd tr{ border-bottom:1px solid #036; }
+.column_manage .bd .th{ background:#999; color:#036; }
+.column_manage .bd tr.tr1{ background:#dcdcdc; }
+.column_manage .bd tr.tr2{ background:#fcc; }
+.column_manage .bd tr.tr3{ background:#fff; }
+.column_manage .bd tr.th td{ border-right:1px solid #036; border-bottom:1px solid #036; line-height:25px; }
+.column_manage .bd td{ padding:0 8px; line-height:25px; border-right:1px solid #036; line-height:22px; }
+.column_manage .bd td.class1{ background:url(../images/admin/tree_big.gif) no-repeat 2px 2px; text-align:left; padding-left:16px; }
+.column_manage .bd td.class2{ background:url(../images/admin/tree_small.gif) no-repeat 12px 2px; text-align:left; padding-left:19px; }
+.column_manage .bd td.class3{ background:url(../images/admin/tree_small.gif) no-repeat 27px 2px; text-align:left; padding-left:33px; }
+.column_manage .bd td a{ color:#036; }
+
+/*首页配置*/
+.index_set{}
+.index_set tr{}
+.index_set td{ height:27px; line-height:27px; text-align:left; }
+.index_set td input{ padding:0 2px; max-width:8%; }
+
+/*优化推广设置*/
+.seo_set{}
+.seo_set table{}
+.seo_set tr{}
+.seo_set td input{ max-width:20%; }
+.seo_set td textarea{ max-width:28%; }
+
+/*底部信息*/
+.footer_set{}
+.footer_set table{}
+.footer_set tr{}
+.footer_set td input{ max-width:20%; }
+.footer_set td textarea{ max-width:28%; }
+
+/*banner管理*/
+.banner_set{}
+.banner_set table{}
+.banner_set tr{}
+.banner_set td input{ max-width:20%; }
+.banner_set td input.num{ max-width:5%; }
+
+/*热门标签*/
+.str_content{  }
+.str_content .bd form.add{ height:50px; line-height:50px; text-align:left; }
+.str_content .bd form.add input{ display:inline-block; width:180px; }
+.str_content .bd form.add button{ vertical-align:baseline; margin:0px; }
+.str_content .bd table{ width:100%; border:1px solid #036; }
+.str_content .bd tr{}
+.str_content .bd .th{ background:#999; color:#036; }
+.str_content .bd tr.th td{ border-right:1px solid #036; border-bottom:1px solid #036; line-height:25px; }
+.str_content .bd td{ padding:0 8px; line-height:25px; border-right:1px solid #036; line-height:22px; }
+.str_content .bd td a{ color:#036; }
+
+/*在线交流*/
+.online_manage{  }
+.online_manage .bd .add{ height:50px; line-height:50px; text-align:left; }
+.online_manage .bd .add a{ color:#f00; font-weight:bold; }
+.online_manage .bd table{ width:100%; border:1px solid #036; }
+.online_manage .bd tr{}
+.online_manage .bd .th{ background:#999; color:#036; }
+.online_manage .bd tr.th td{ border-right:1px solid #036; border-bottom:1px solid #036; line-height:25px; }
+.online_manage .bd td{ padding:0 8px; line-height:25px; border-right:1px solid #036; line-height:22px; }
+.online_manage .bd td a{ color:#036; }
+.online_manage .bd form[name='search']{ text-align:left; }
+.online_manage .bd form[name='search'] input{ display:inline-block; width:180px; }
+.online_manage .bd form[name='search'] button{ vertical-align:baseline; margin:0px; }
+
+/*参数配置*/
+.parameter_set{}
+.parameter_set table{ width:95%; }
+.parameter_set tr{}
+.parameter_set tr td{ text-align:center !important; }
+.parameter_set td input{ max-width:30%; }
+
+/*数据备份*/
+.database{}
+.database .bd .add{ text-align:left; line-height:50px; }
+.database .bd .add a{ color:#036; }
+.database .bd table{ width:95%; }
+.database .bd tr{}
+.tablemain .database form.bd tr td{ text-align:center !important; height:32px; line-height:32px; }
+.tablemain .database form.bd tr td button{ margin:3px auto; }
+
+/*简介模型*/
+.module1{}
+.module1 tr{}
+.module1 td input{ max-width:25%; }
+.module1 td textarea[name='description']{ max-width:50%; }
+
+/*文章模型*/
+.module2{}
+.module2 tr{}
+.module2 td input{ max-width:25%; }
+.module2 td textarea[name='description']{ max-width:50%; }
+.module2 td input[name='issue']{ max-width:10%; }
+.module2 td input[name='hits']{ max-width:10%; }
+.module2 .hd{  }
+.module2 .bd{}
+.module2 .bd .set_search{ height:36px; line-height:36px; text-align:left; background:#ff9; padding-left:8px; font-weight:bold; }
+.module2 .bd .set_search .add{ line-height:30px; color:#f00; font-weight:bold; float:left; }
+.module2 .bd .set_search form{ line-height:30px; }
+.module2 .bd table{ width:100%; border:1px solid #036; }
+.module2 .bd tr{}
+.module2 .bd .th{ background:#999; color:#036; }
+.module2 .bd tr.th td{ border-right:1px solid #036; border-bottom:1px solid #036; line-height:25px; }
+.module2 .bd td{ padding:0 8px; line-height:25px; border-right:1px solid #036; line-height:22px; }
+.module2 .bd td a{ color:#036; }
+.module2 .bd form[name='search']{ text-align:left; }
+.module2 .bd form[name='search'] input{ display:inline-block; width:180px; }
+.module2 .bd form[name='search'] button{ vertical-align:baseline; margin:0px; }
+
+/*产品模型*/
+.module3{}
+.module3 tr{}
+.module3 td input{ max-width:25%; }
+.module3 td textarea[name='description']{ max-width:50%; }
+.module3 td input[name='issue']{ max-width:10%; }
+.module3 td input[name='hits']{ max-width:10%; }
+.module3 .hd{  }
+.module3 .bd{}
+.module3 .bd .set_search{ height:36px; line-height:36px; text-align:left; background:#ff9; padding-left:8px; font-weight:bold; }
+.module3 .bd .set_search .add{ line-height:30px; color:#f00; font-weight:bold; float:left; }
+.module3 .bd .set_search form{ line-height:30px; }
+.module3 .bd table{ width:100%; border:1px solid #036; }
+.module3 .bd tr{}
+.module3 .bd .th{ background:#999; color:#036; }
+.module3 .bd tr.th td{ border-right:1px solid #036; border-bottom:1px solid #036; line-height:25px; }
+.module3 .bd td{ padding:0 8px; line-height:25px; border-right:1px solid #036; line-height:22px; }
+.module3 .bd td a{ color:#036; }
+.module3 .bd form[name='search']{ text-align:left; }
+.module3 .bd form[name='search'] input{ display:inline-block; width:180px; }
+.module3 .bd form[name='search'] button{ vertical-align:baseline; margin:0px; }
+
+/*下载模型*/
+.module4{}
+.module4 tr{}
+.module4 td input{ max-width:25%; }
+.module4 td textarea[name='description']{ max-width:50%; }
+.module4 td input[name='issue']{ max-width:10%; }
+.module4 td input[name='hits']{ max-width:10%; }
+.module4 td input[name='filesize']{ max-width:10%; }
+.module4 .hd{  }
+.module4 .bd{}
+.module4 .bd .set_search{ height:36px; line-height:36px; text-align:left; background:#ff9; padding-left:8px; font-weight:bold; }
+.module4 .bd .set_search .add{ line-height:30px; color:#f00; font-weight:bold; float:left; }
+.module4 .bd .set_search form{ line-height:30px; }
+.module4 .bd table{ width:100%; border:1px solid #036; }
+.module4 .bd tr{}
+.module4 .bd .th{ background:#999; color:#036; }
+.module4 .bd tr.th td{ border-right:1px solid #036; border-bottom:1px solid #036; line-height:25px; }
+.module4 .bd td{ padding:0 8px; line-height:25px; border-right:1px solid #036; line-height:22px; }
+.module4 .bd td a{ color:#036; }
+.module4 .bd form[name='search']{ text-align:left; }
+.module4 .bd form[name='search'] input{ display:inline-block; width:180px; }
+.module4 .bd form[name='search'] button{ vertical-align:baseline; margin:0px; }
+
+/*图片模型*/
+.module5{}
+.module5 tr{}
+.module5 td input{ max-width:25%; }
+.module5 td textarea[name='description']{ max-width:50%; }
+.module5 td input[name='issue']{ max-width:10%; }
+.module5 td input[name='hits']{ max-width:10%; }
+.module5 .hd{  }
+.module5 .bd{}
+.module5 .bd .set_search{ height:36px; line-height:36px; text-align:left; background:#ff9; padding-left:8px; font-weight:bold; }
+.module5 .bd .set_search .add{ line-height:30px; color:#f00; font-weight:bold; float:left; }
+.module5 .bd .set_search form{ line-height:30px; }
+.module5 .bd table{ width:100%; border:1px solid #036; }
+.module5 .bd tr{}
+.module5 .bd .th{ background:#999; color:#036; }
+.module5 .bd tr.th td{ border-right:1px solid #036; border-bottom:1px solid #036; line-height:25px; }
+.module5 .bd td{ padding:0 8px; line-height:25px; border-right:1px solid #036; line-height:22px; }
+.module5 .bd td a{ color:#036; }
+.module5 .bd form[name='search']{ text-align:left; }
+.module5 .bd form[name='search'] input{ display:inline-block; width:180px; }
+.module5 .bd form[name='search'] button{ vertical-align:baseline; margin:0px; }
+
+/*招聘模型*/
+.module6{}
+.module6 tr{}
+.module6 td input{ max-width:25%; }
+.module6 td textarea[name='description']{ max-width:50%; }
+.module6 td input[name='count']{ max-width:10%; }
+.module6 td input[name='useful_life']{ max-width:10%; }
+.module6 .hd{  }
+.module6 .bd{}
+.module6 .bd .set_search{ height:36px; line-height:36px; text-align:left; background:#ff9; padding-left:8px; font-weight:bold; }
+.module6 .bd .set_search .add{ line-height:30px; color:#f00; font-weight:bold; float:left; }
+.module6 .bd .set_search form{ line-height:30px; }
+.module6 .bd table{ width:100%; border:1px solid #036; }
+.module6 .bd tr{}
+.module6 .bd .th{ background:#999; color:#036; }
+.module6 .bd tr.th td{ border-right:1px solid #036; border-bottom:1px solid #036; line-height:25px; }
+.module6 .bd td{ padding:0 8px; line-height:25px; border-right:1px solid #036; line-height:22px; }
+.module6 .bd td a{ color:#036; }
+.module6 .bd form[name='search']{ text-align:left; }
+.module6 .bd form[name='search'] input{ display:inline-block; width:180px; }
+.module6 .bd form[name='search'] button{ vertical-align:baseline; margin:0px; }
+
+/*留言模型*/
+.module7{}
+.module7 tr{}
+.module7 td input{ max-width:25%; }
+.module7 td textarea[name='fd_content']{ max-width:50%; }
+.module7 td textarea[name='fd_word']{ max-width:50%; }
+.module7 td input[name='fd_time']{ max-width:10%; }
+.module7 td input[name='fd_no']{ max-width:10%; }
+.module7 .hd{  }
+.module7 .bd{}
+.module7 .bd .set_search{ height:36px; line-height:36px; text-align:left; background:#ff9; padding-left:8px; font-weight:bold; }
+.module7 .bd .set_search .add{ line-height:30px; color:#f00; font-weight:bold; float:left; }
+.module7 .bd .set_search form{ line-height:30px; }
+.module7 .bd table{ width:100%; border:1px solid #036; }
+.module7 .bd tr{}
+.module7 .bd .th{ background:#999; color:#036; }
+.module7 .bd tr.th td{ border-right:1px solid #036; border-bottom:1px solid #036; line-height:25px; }
+.module7 .bd td{ padding:0 8px; line-height:25px; border-right:1px solid #036; line-height:22px; }
+.module7 .bd td a{ color:#036; }
+.module7 .bd form[name='search']{ text-align:left; }
+.module7 .bd form[name='search'] input{ display:inline-block; width:180px; }
+.module7 .bd form[name='search'] button{ vertical-align:baseline; margin:0px; }
+
+/*外部模块-反馈模型*/
+.feedback{}
+.feedback tr{}
+.feedback td input{ max-width:25%; }
+.feedback td textarea[name='fd_content']{ max-width:50%; }
+.feedback td textarea[name='fd_word']{ max-width:50%; }
+.feedback td input[name='fd_time']{ max-width:10%; }
+.feedback td input[name='fd_no']{ max-width:10%; }
+.feedback .hd{  }
+.feedback .bd{}
+.feedback .bd .set_search{ height:36px; line-height:36px; text-align:left; background:#ff9; padding-left:8px; font-weight:bold; }
+.feedback .bd .set_search .add{ line-height:30px; color:#f00; font-weight:bold; float:left; }
+.feedback .bd table{ width:100%; border:1px solid #036; }
+.feedback .bd tr{}
+.feedback .bd tr.th td{ border-right:1px solid #036; border-bottom:1px solid #036; line-height:25px; }
+.feedback .bd td{ padding:0 8px; line-height:25px; border-right:1px solid #036; line-height:22px; }
+.feedback .bd td a{ color:#036; }
+.feedback .bd form[name='search']{ text-align:left; }
+.feedback .bd form[name='search'] input{ display:inline-block; width:180px; }
+.feedback .bd form[name='search'] button{ vertical-align:baseline; margin:0px; }
+
+/*外部模块-友情链接*/
+.link{}
+.link tr{}
+.link td input{ max-width:25%; }
+.link td textarea[name='description']{ max-width:50%; }
+.link td input[name='orderno']{ max-width:10%; }
+.link .hd{  }
+.link .bd{}
+.link .bd .set_search{ height:36px; line-height:36px; text-align:left; background:#ff9; padding-left:8px; font-weight:bold; }
+.link .bd .set_search .add{ line-height:30px; color:#f00; font-weight:bold; float:left; }
+.link .bd .set_search form{ line-height:30px; }
+.link .bd table{ width:100%; border:1px solid #036; }
+.link .bd tr{}
+.link .bd .th{ background:#999; color:#036; }
+.link .bd tr.th td{ border-right:1px solid #036; border-bottom:1px solid #036; line-height:25px; }
+.link .bd td{ padding:0 8px; line-height:25px; border-right:1px solid #036; line-height:22px; }
+.link .bd td a{ color:#036; }
+.link .bd form[name='search']{ text-align:left; }
+.link .bd form[name='search'] input{ display:inline-block; width:180px; }
+.link .bd form[name='search'] button{ vertical-align:baseline; margin:0px; }

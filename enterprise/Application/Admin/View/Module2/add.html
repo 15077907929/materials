@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv='content-type' content='text/html;charset=utf-8' />
+<meta name='description' content=''>
+<meta name='keywords' content=''>
+<link type="text/css" href="Public/css/bootstrap.min.css" rel="stylesheet">
+<link rel='stylesheet' type='text/css' href='Public/css/base.css' />
+<link rel='stylesheet' type='text/css' href='Public/css/admin.css' />
+<script type="text/javascript" src="Public/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="Public/js/admin.js"></script>
+<script type="text/javascript" src="Public/ckeditor/ckeditor.js"></script>
+<title>网站后台管理系统</title>
+</head>
+<body>
+
+{include file="Public/header.html"}
+
+<table width="100%" class="tablemain">
+	<tr>
+		<td valign="top" width="182">
+		
+			{include file="Public/left.html"}
+			
+		</td>
+		<td valign="top">
+			<div class="main module2">
+				<div class="hd"><b>添加文章</b></div>
+				<form class="bd" method="post" action="" name="index_set">
+					<input type="hidden" name="action" value="modify" />
+					<table>
+						<tr>
+							<td><b><font color="#f00">*</font>文章标题：</b></td>
+							<td><input class="form-control" type="text" name="web_online_type" value="" /></td>
+						</tr>
+						<tr>
+							<td><b><font color="#f00">*</font>所属栏目：</b></td>
+							<td>
+								<select class="form-control" name="class2">
+									<option value="" selected="selected">二级栏目</option>
+									{foreach from=$result_arr['class2'] key=key item=item}
+										<option value="{$item['id']}">{$item['name']}</option>	
+									{/foreach}
+								</select>						
+								<select class="form-control" name="class3">
+									<option value="" selected="selected">三级栏目</option>
+								</select>
+							</td>
+						</tr>							
+						<tr>
+							<td><b>内容关键词：</b></td>
+							<td>
+								<input class="form-control" type="text" name="web_online_type" value="" />
+								用于搜索引擎优化，多个关键词请用","隔开
+							</td>
+						</tr>
+						<tr>
+							<td><b>内容简短描述：</b><br/>用于搜索引擎优化</td>
+							<td>
+								<textarea name="description" class="form-control" rows="5"></textarea>
+							</td>
+						</tr>						
+						<tr>
+							<td><b>详细内容：</b></td>
+							<td>
+								<textarea name="content">{$result_arr['data']['content']}</textarea>
+								<script type="text/javascript">
+									CKEDITOR.replace('content');
+								</script>
+							</td>
+						</tr>	
+						<tr>
+							<td><b>图片文章：</b></td>
+							<td>
+								<input type="checkbox" name="web_online_type" value="" />
+								选择将在首页图片新闻中显示（需要网站模板支持）
+							</td>
+						</tr>			
+						<tr>
+							<td><b>推荐文章：</b></td>
+							<td>
+								<input type="checkbox" name="web_online_type" value="" />
+								选择将在推荐文章中显示（需要网站模板支持）
+							</td>
+						</tr>				
+						<tr>
+							<td><b>发布人：</b></td>
+							<td>
+								<input class="form-control num" type="text" name="issue" value="{cookie(username)}" />
+							</td>
+						</tr>
+						<tr>
+							<td><b>点击次数：</b></td>
+							<td>
+								<input class="form-control num" type="text" name="hits" value="0" />
+								（点击次数越多，热门信息中排名越靠前）
+							</td>
+						</tr>
+						<tr>
+							<td><b>发布时间：</b></td>
+							<td>
+								<input class="form-control" type="text" name="addtime" value="{date('Y-m-d H:i:s')}" />
+								当前时间为：2017-11-12 19:48:39 注意不要改变格式。
+							</td>
+						</tr>							
+						<tr>
+							<td><b>更新时间：</b></td>
+							<td>
+								<input class="form-control" type="text" name="updatetime" value="{date('Y-m-d H:i:s')}" />
+								当前时间为：2017-11-12 19:48:39 注意不要改变格式。
+							</td>
+						</tr>							
+						<tr>
+							<td><b>文章排序：</b></td>
+							<td>一般按更新时间的先后顺序排序，热门文章按点击次数排序，因此可以修改“发布时间”或“点击次数”来达到排序的目的。</td>
+						</tr>							
+
+						<tr>
+							<td width="180"></td>
+							<td style="text-align:center;">
+								<button type="submit" class="btn btn-default">提 交</button>
+								<button type="reset" class="btn btn-default">重 置</button>
+							</td>
+						</tr>				
+					</table>
+				</form>
+			</div>
+		</td>
+	</tr>
+</table>
+
+{include file="Public/footer.html"}
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
