@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv='content-type' content='text/html;charset=utf-8' />
+<meta name='description' content=''>
+<meta name='keywords' content=''>
+<link rel="stylesheet" type="text/css" href="/shop/Public/Common/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/shop/Public/Common/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/shop/Public/Admin/css/admin.css" />
+<script type="text/javascript" src="/shop/Public/Common/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/shop/Public/Common/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/shop/Public/Common/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/shop/Public/Admin/js/base.js"></script>
+<script type="text/javascript" src="/shop/Public/Admin/js/function.js"></script>
+<script type="text/javascript" src="/shop/Public/Admin/js/server.js"></script>
+<title>商城后台管理</title>
+</head>
+<body>
+
+{include file="Public/header.html"}
+
+<div class="main_container clearfix">
+	
+	{include file="Public/left.html"}
+	
+	<div class="main fr">
+		<div class="mainmenu">
+			<form name="search" method="post" action="">
+				<table>
+					<tr>
+						<td width="65%"></td>
+						<td>菜单名称：<input placeholder="菜单名称" class="form-control" type="text" name="name" /></td>
+						<td><button type="button" onclick="" class="btn btn-default">查询</button></td>
+					</tr>
+				</table>
+			</form>	
+			<table class="stable">
+				<tr>
+					<th></th>
+					<th>编号</th>
+					<th>菜单名称</th>
+					<th>描述</th>
+					<th>操作</th>
+				</tr>
+				{foreach from=$result_arr['mainmenu'] key=key item=item}
+					<tr>
+						<td><input type="checkbox" name="" /></td>
+						<td>{$item['no_order']}</td>
+						<td>{$item['name']}</td>
+						<td>{$item['description']}</td>
+						<td>
+							<a href="">删除</a>
+							<a href="">修改</a>
+						</td>
+					</tr>
+				{/foreach}
+			</table>
+			
+			<div class="sub_tool">
+				<input type="checkbox" /> 选择所有
+				<a href="">添加</a>
+				<a href="">删除</a>
+			</div>
+			<div class="page">{$result_arr['page']}</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

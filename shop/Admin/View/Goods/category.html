@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv='content-type' content='text/html;charset=utf-8' />
+<meta name='description' content=''>
+<meta name='keywords' content=''>
+<link rel="stylesheet" type="text/css" href="/shop/Public/Common/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/shop/Public/Common/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/shop/Public/Admin/css/admin.css" />
+<script type="text/javascript" src="/shop/Public/Common/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/shop/Public/Common/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/shop/Public/Common/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/shop/Public/Admin/js/base.js"></script>
+<script type="text/javascript" src="/shop/Public/Admin/js/function.js"></script>
+<script type="text/javascript" src="/shop/Public/Admin/js/server.js"></script>
+<title>商城后台管理</title>
+</head>
+<body>
+
+{include file="Public/header.html"}
+
+<div class="main_container clearfix">
+	
+	{include file="Public/left.html"}
+	
+	<div class="main fr">
+		<div class="category">
+			<div class="top_tool">
+				<a href="">添加</a>
+				<a href="">发布</a>
+				<a href="">不发布</a>
+			</div>	
+			<table class="stable">
+				<tr>
+					<th>ID</th>
+					<th>分类名称</th>
+					<th>链接类型</th>
+					<th>排序号</th>
+					<th>发布</th>
+					<th>操作</th>
+				</tr>
+				{foreach from=$result_arr['category'] key=key item=item}
+					<tr>
+						<td>{$item['id']}</td>
+						<td style="text-align:left;"><input type="checkbox" /> {$item['name']}</td>
+						<td>{$item['link_type']}</td>
+						<td width="12%">
+							<input placeholder="序号" class="form-control" value="" name="" type="text">
+							<a href="">修改</a>
+						</td>
+						<td></td>
+						<td>
+							<a href="">删除</a>
+							<a href="">修改</a>
+						</td>
+					</tr>
+					{foreach from=$item['sub'] key=sub_key item=sub_item}
+						<tr>
+							<td>{$sub_item['id']}</td>
+							<td style="text-align:left;"> ---- <input type="checkbox" /> {$sub_item['name']}</td>
+							<td>{$sub_item['link_type']}</td>
+							<td width="12%">
+								<input placeholder="序号" class="form-control" value="" name="" type="text">
+								<a href="">修改</a>
+							</td>
+							<td></td>
+							<td>
+								<a href="">删除</a>
+								<a href="">修改</a>
+							</td>
+						</tr>					
+					{/foreach}
+				{/foreach}
+			</table>		
+			<div class="sub_tool">
+				<a href="">添加</a>
+				<a href="">发布</a>
+				<a href="">不发布</a>
+			</div>
+			<div class="page">{$result_arr['page']}</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

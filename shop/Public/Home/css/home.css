@@ -1,0 +1,133 @@
+/*头部*/
+.header{}
+.header .top{ text-align:right; line-height:28px; height:28px; }
+
+.container .left{ float:left; width:25%; }
+
+.container .left .search{ border-radius:3px; border:1px solid #999; }
+.container .left .search h4{ margin:0px 3px; border-bottom:1px solid #999; padding:2px; font-weight:bold; color:#666; }
+.container .left .search .input-group{ padding:2% 10% 2% 2%; }
+.container .left .search .input-group input{ }
+
+.container .left .category{ border-radius:3px; border:1px solid #999; margin:8px 0; }
+.container .left .category h4{ margin:0px 3px; border-bottom:1px solid #999; padding:2px; font-weight:bold; color:#666; }
+
+.container .product{ width:45%; float:left; margin:0 2.5% 0; border-radius:3px; border:1px solid #999; }
+.container .product h4{ margin:0px 3px; border-bottom:1px solid #999; padding:2px; font-weight:bold; color:#666; }
+.container .product .bd{}
+.container .product .bd ul{}
+.container .product .bd ul li{ width:33.3%; float:left; text-align:center; height:160px; }
+
+.container .right{ float:right; width:25%; }
+
+.container .right .login{ border-radius:3px; border:1px solid #999; margin-bottom:8px; }
+.container .right .login h4{ margin:0px 3px; border-bottom:1px solid #999; padding:2px; font-weight:bold; color:#666; }
+.container .right .login form{ text-align:center; }
+.container .right .login table{ width:85%; margin:10px auto 8px; }
+.container .right .login table input{ display:inline-block; }
+.container .right .login span{ line-height:24px; }
+
+/*购物车*/
+.container .cart{ border-radius:3px; border:1px solid #999; }
+.container .cart h4{ margin:0px 3px; border-bottom:1px solid #999; padding:2px; font-weight:bold; color:#666; }
+.container .cart .bd{ padding:2px 20px; line-height:24px; }
+
+/*内页产品*/
+.container .iproduct{ width:72.5%; float:left; margin:0 0 0 2.5%; }
+.container .iproduct .bd{}
+.container .iproduct .bd ul{}
+.container .iproduct .bd ul li{ width:25%; float:left; text-align:center; height:160px; }
+.container .iproduct .bd .para{ line-height:32px; padding:0 5%; }
+.container .iproduct .bd .para .addcart{ text-align:right; }
+.container .iproduct .bd .content{ line-height:32px; }
+
+/*内页购物车*/
+.container .icart{ width:72.5%; float:left; margin:0 0 0 2.5%; }
+.container .icart .bd{}
+.container .icart .bd table{ width:100%; text-align:center; }
+.container .icart .bd tr{}
+.container .icart .bd tr th{ border:1px solid #fff; height:25px; line-height:25px;text-align:center; background:#e4e4e4; height:25px; line-height:25px; }
+.container .icart .bd tr td{ background:#f4f4f4; height:25px; line-height:25px; border:1px solid #fff; }
+.container .icart .bd tr td input{ }
+.container .icart .bd .total{ line-height:32px; text-align:right; padding:0 18px; font-weight:bold; }
+.container .icart .bd center{ padding:8px; }
+
+/*main*/
+.main{ width:72.5%; float:left; margin:0 0 0 2.5%; }
+
+.main .login{ border-radius:3px; border:1px solid #999; }
+.main .login h5{ margin:0px 3px; padding:2px; font-weight:bold; color:#666; }
+.main .login form{ text-align:center; padding:2px 3px 5px; }
+.main .login table{ width:30%; }
+.main .login table input{ display:inline-block; }
+
+/*结账*/
+.main .balance{ border-radius:3px; border:1px solid #999; padding:2px 12px 5px; }
+.main .balance table{ width:65%; }
+.main .balance table td{ height:45px; }
+.main .balance table td input[type='text']{ width:60%; }
+
+/*消息*/
+.main .message{ border-radius:3px; border:1px solid #999; padding:16px 8px; text-align:center; }
+
+
+/*page*/
+.page{ padding:20px 0px; text-align:center; }
+.page a,.page span{ display:inline-block; margin-right:10px; padding:2px 12px; border:1px #ccc solid; background:#fff; color:#808080; font-size:12px; line-height:24px; }
+.page a:hover{ color:#077ee3; background:#fff; border:1px #077ee3 solid; }
+.page span.current{ border:none; background:#077ee3; color:#fff; }
+
+/*订单信息*/
+.order{ border:1px solid #ccc; border-radius:6px; padding:6px 8px; }
+.order_info th{ border:1px solid #fff; height:25px; line-height:25px;text-align:center; background:#e4e4e4; height:25px; line-height:25px; }
+.order_info tr td{ text-align:center; background:#f4f4f4; height:25px; line-height:25px; border:1px solid #fff; }
+.order .total{ line-height:32px; text-align:right; padding:0 18px; font-weight:bold; }
+.user_info{}
+.user_info td{ height:25px; line-height:25px; }
+
+/*注册*/
+.main .register{ border-radius:3px; border:1px solid #999; }
+.main .register h5{ margin:0px 3px; padding:2px; font-weight:bold; color:#666; }
+.main .register form{ text-align:center; padding:2px 15px 5px; }
+.main .register table{ width:55%; }
+.main .register table td{ height:45px; text-align:left; }
+.main .register table input{ display:inline-block; }
+.main .register table input[name='code']{ width:45%; }
+.main .register table img{ height:34px; }
+
+/*忘记密码*/
+.forget{ border-radius:3px; border:1px solid #999; }
+.forget form{ padding:6px 12px 5px; }
+.forget table{ width:30%; }
+.forget table input{ display:inline-block; }
+
+/*user*/
+.main .user{ border-radius:3px; border:1px solid #999; }
+.main .user h5{ margin:0px 3px; padding:2px; font-weight:bold; color:#666; }
+.main .user form{ text-align:center; padding:2px 15px 5px; }
+.main .user table{ width:65%; }
+.main .user table td{ height:45px; text-align:left; }
+.main .user table input{ display:inline-block; max-width:80%; }
+.main .user table input[name='code']{ width:45%; }
+.main .user table img{ height:34px; }
+
+.user_nav{ border:1px solid #ccc; border-radius:6px; }
+.user_nav ul{ padding:6px 8px 66px 24px; }
+.user_nav ul li{ line-height:28px; }
+.user_nav ul li a{ font-weight:bold; font-size:13px; color:#666; }
+
+/*user订单*/
+.orderlist table{ width:100%; text-align:center; }
+.orderlist tr th{ border:1px solid #fff; height:25px; line-height:25px;text-align:center; background:#e4e4e4; height:25px; line-height:25px; }
+.orderlist tr td{ background:#f4f4f4; height:25px; line-height:25px; border:1px solid #fff; }
+
+/*底部*/
+.footer{ text-align:center; margin:10px 0; }
+.footer .container{ background:#f1f1ed; line-height:45px; padding-bottom:15px; }
+
+
+
+
+
+
+

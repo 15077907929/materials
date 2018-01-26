@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link type="text/css" href="/shop/Public/Common/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/shop/Public/Common/css/base.css">
+<link rel="stylesheet" type="text/css" href="/shop/Public/Home/css/home.css">
+<script type="text/javascript" src="/shop/Public/Common/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/shop/Public/Common/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/shop/Public/Home/js/base.js"></script>
+<script type="text/javascript" src="/shop/Public/Home/js/function.js"></script>
+<script type="text/javascript" src="/shop/Public/Home/js/server.js"></script>
+<title>萌女郎</title>
+</head>
+<body>
+
+{include file="Public/header.html"}
+
+<div class="container">
+	
+	{include file="Public/user_nav.html"}
+	
+	<div class="main">
+		<h5 class="breadcrumb"><a href="index.php">首页</a>-<a href="index.php?m=Home&c=User&a=index">我的资料</a></h5>
+		<div class="user">
+			<h5>我的资料</h5>
+			<form class="form-horizontal" method="post" name="user">
+				<table>				
+					<tr>
+						<td>用户名<font color="#f00">*</font>：</td>
+						<td>{$user['username']}</td>
+					</tr>
+					<tr>
+						<td>邮箱地址<font color="#f00">*</font>：</td>
+						<td><input value="{$user['email']}" class="form-control" placeholder="请输入邮箱" type="text" name="email" /></td>
+					</tr>
+					<tr>
+						<td>出生日期<font color="#f00">*</font>：</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>国家<font color="#f00">*</font>：</td>
+						<td><input value="{$user['country']}" class="form-control" placeholder="请输入国家" type="text" name="country" /></td>
+					</tr>
+					<tr>
+						<td>姓名<font color="#f00">*</font>：</td>
+						<td><input value="{$user['realname']}" class="form-control" placeholder="请输入姓名" type="text" name="realname" /></td>
+					</tr>
+					<tr>
+						<td>电话<font color="#f00">*</font>：</td>
+						<td><input value="{$user['tel']}" class="form-control" placeholder="请输入电话" type="text" name="tel" /></td>
+					</tr>
+					<tr>
+						<td>手机<font color="#f00">*</font>：</td>
+						<td><input value="{$user['mobile']}" class="form-control" placeholder="请输入邮箱" type="text" name="mobile" /></td>
+					</tr>
+					<tr>
+						<td>性别：</td>
+						<td>
+							<input type="radio" name="sex" value="1" checked />男
+							<input type="radio" name="sex" value="2" />女
+						</td>
+					</tr>
+					<tr>
+						<td>我的网站：</td>
+						<td><input value="{$user['website']}" class="form-control" placeholder="请输入我的网站" type="text" name="website" /></td>
+					</tr>
+					<tr>
+						<td>地址：</td>
+						<td><input value="{$user['address']}" class="form-control" placeholder="请输入地址" type="text" name="address" /></td>
+					</tr>
+						<tr>
+						<td>简介：</td>
+						<td><textarea rows="6" class="form-control" name="note">{$user['note']}</textarea></td>
+					</tr>
+					<tr>
+						<td>照片：</td>
+						<td><input value="{$user['phote']}" type="file" name="photo" /></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td style="text-align:center;"><button type="button" class="btn btn-default">提交</button></td>
+					</tr>
+				</table>
+			</form>
+		</div>		
+	</div>
+</div>
+
+{include file="Public/footer.html"}
+
+</body>
+</html>

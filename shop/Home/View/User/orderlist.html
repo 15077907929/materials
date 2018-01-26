@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link type="text/css" href="/shop/Public/Common/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/shop/Public/Common/css/base.css">
+<link rel="stylesheet" type="text/css" href="/shop/Public/Home/css/home.css">
+<script type="text/javascript" src="/shop/Public/Common/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/shop/Public/Common/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/shop/Public/Home/js/function.js"></script>
+<script type="text/javascript" src="/shop/Public/Home/js/server.js"></script>
+<title>萌女郎</title>
+</head>
+<body>
+
+{include file="Public/header.html"}
+
+<div class="container">
+
+	{include file="Public/user_nav.html"}
+
+	<div class="main">
+		<h5 class="breadcrumb"><a href="index.php">首页</a>-<a href="index.php?m=Home&c=User&a=orderlist">产品订单</a></h5>
+		<div class="orderlist">
+			<table>		
+				<tr>
+					<th>订单日期</th>
+					<th>订购用户</th>
+					<th>处理日期</th>
+					<th>处理用户</th>
+					<th>状态</th>
+					<th>操作</th>
+				</tr>
+				{foreach from=$result_arr key=key item=item}	
+					<tr>
+						<td>{date('Y-m-d',$item['order_time'])}</td>
+						<td>{$item['order_people']}</td>
+						<td>
+							{if $item['deal_time'] neq 0}
+							{date('Y-m-d',$item['deal_time'])}
+							{/if}
+						</td>
+						<td>{$item['deal_people']}</td>
+						<td>
+							{if $item['status'] eq 1}
+								处理中
+							{elseif $item['status'] eq 2}
+								取消
+							{elseif $item['status'] eq 3}
+								完成
+							{/if}
+						</td>
+						<td>
+							<a href="javascript:check_del('index.php?m=Home&c=User&a=orderlist&method=del&id={$item['id']}')">删除</a>
+							<a href="index.php?m=Home&c=User&a=orderlist&method=order_detail&id={$item['id']}">浏览</a>
+						</td>					
+					</tr>
+				{/foreach}
+			</table>
+		</div>
+	</div>
+</div>
+
+{include file="Public/footer.html"}
+
+</body>
+</html>

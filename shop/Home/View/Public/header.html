@@ -1,0 +1,25 @@
+<div class="header">
+	<div class="container">
+		<div class="top">
+			{if cookie('username') eq ''}
+				<a href="index.php?m=Home&c=Login&a=register">注册</a> | <a href="index.php?m=Home&c=Login&a=login">登录</a>
+			{else}
+				欢迎: {cookie('username')} | 
+				<a href="index.php?m=Home&c=User&a=index">用户空间 | 
+				<a href="index.php?m=Home&c=Login&a=logout">退出</a>
+			{/if}
+		</div>
+		<h1 class="logo"><a href="index.php"><img src="/shop/Public/Home/images/logo.gif" /></a></h1>
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="index.php">首页</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li class="{$result_arr['Product']}"><a href="index.php?m=Home&c=Product&a=index">产品</a></li>
+					<li class="{$result_arr['Cart']}"><a href="index.php?m=Home&c=Cart&a=index">购物车</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</div>
