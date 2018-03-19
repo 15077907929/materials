@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="keywords" content="" />
+<title>答题</title>
+<link rel="stylesheet" type="text/css" href="Public/Home/css/base.css" />
+<link rel="stylesheet" type="text/css" href="Public/Home/css/main.css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="Public/Home/js/server.js"></script>
+</head>
+<body>	
+<div id="question_tab">
+    <div class="top clearfix">
+		<span id="message" class="fl">当前:{$rst['c_num']} / 共:{$rst['num']}</span> 
+		<span id="timed" class="fr"></span>
+	</div>
+    <div class="main">
+		<div class="hd">
+			<p class="tit">{$rst['c_question']['title']}</p>
+		</div>
+		<div class="bd">
+			<div id="current_q">
+				{$rst['c_question']['content']}
+			</div>
+			<p>单选，点击下方某个答案进入下一题：</p>
+			<div id="current_a">{$rst['c_question']['answers']}</div>
+			<div class="pages">
+				<p class="next">
+					<a href="{if $rst['c_num']<$rst['num']}index.php?m=Home&c=Index&a=index&c_num={$rst['c_num']+1}{/if}">下一题</a>
+				</p>
+				<ul class="clearfix">
+					{foreach from=$rst['questions'] key=key item=item}
+						<li><a class="{if $item['no_order'] eq $rst['c_num']}current{/if}" href="index.php?m=Home&c=Index&a=index&c_num={$item['no_order']}">{$item['no_order']}</a></li>
+					{/foreach}					
+				</ul>
+			</div>
+			<p class="finish">
+				<a href="javascript:score_submit();">完成测试</a>
+			</p>
+		</div>
+	</div>
+    <div class="notes" style="color:#767676">
+		注意事项：
+		<div style="margin-left:22px;">
+			1. 在倒计时内完成所有答题，超时自动提交<br />
+			2. 答题过程中，不要重新刷新页面
+		</div>
+    </div>
+</div>
+<span id="message_archive"></span>
+<script type="text/javascript">
+	$(document).ready(function(){
+		get_s();	// 获取倒计时秒数
+		$("#current_a a").each(function(){	//当前题目选择的答案
+			if($(this).html()=="{$rst['detail'][$rst['c_num']]}"){
+				$(this).addClass('on');
+			}
+		});
+		$("#current_a a").click(function(){	
+			$.post(
+				"index.php?m=Home&c=Index&a=index&method=save_archive",
+				{ 'c_num':{$rst['c_num']},'answer':$(this).html() },
+				function(data){
+					var data = JSON.parse(data); // 解析成json对象
+					$('#message_archive').html(data.msg);
+					if({$rst['c_num']}<{$rst['num']}){
+						setTimeout("location.href='index.php?m=Home&c=Index&a=index&c_num='+{$rst['c_num']+1}", 500);
+					}else{
+						setTimeout("location.href='index.php?m=Home&c=Index&a=index&c_num='+{$rst['c_num']}", 500);
+					}
+				}
+			)
+		});
+		$(".pages ul li a").each(function(){	//记录所有答过的题目
+			if({$rst['done']}.indexOf($(this).html())!=-1){
+				$(this).addClass('done');
+			}
+		});
+	});
+</script>
+<script type="text/javascript" src="Public/Home/js/function.js"></script>
+</body>
+</html>

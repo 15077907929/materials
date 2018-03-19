@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>左侧导航menu</title>
+<link href="Public/Admin/css/left.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="Public/Admin/js/sdmenu.js"></script>
+<script type="text/javascript">
+	var myMenu;
+	window.onload = function() {
+		myMenu = new SDMenu("my_menu");
+		myMenu.init();
+	};
+</script>
+</head>
+<body>
+<div id="left-top">
+	<div><img src="Public/Admin/images/left/member.gif" width="44" height="44" /></div>
+    <span>用户：admin<br>角色：超级管理员</span>
+</div>
+    <div style="float: left" id="my_menu" class="sdmenu">
+		{foreach from=$common_arr['categories'] key=key item=item}			
+			{if $item['sub']|@count neq 0 }
+				<div>
+					<span>{$item['name']}</span>
+					{foreach from=$item['sub'] key=sub_key item=sub_item}	
+						<a href="index.php?m=Admin&c={$sub_item['c']}&a={$sub_item['a']}&{$sub_item['para']}" target="mainFrame">{$sub_item['name']}</a>
+					{/foreach}	
+				</div>
+			{else}
+				<span><a href="index.php?m=Admin&c={$item['c']}&a={$item['a']}" target="mainFrame">{$item['name']}</a></span>
+			{/if}
+		{/foreach}
+		<script type="text/javascript">
+			var len=document.getElementById("my_menu").getElementsByTagName("a").length;
+			for(var i=0;i<len;i++){
+				var obj=document.getElementById("my_menu").getElementsByTagName("a")[i];
+				obj.onclick=function(){
+					var len=document.getElementById("my_menu").getElementsByTagName("a").length;
+					for(var i=0;i<len;i++){		
+						document.getElementById("my_menu").getElementsByTagName("a")[i].className='';
+					}				
+					this.className="active";
+				}
+			}
+			document.getElementById("my_menu").getElementsByTagName("a")[0].click();
+		</script>
+		<div style="display:none;">
+			<span>系统设置</span>
+			<a href="main.html" target="mainFrame">分组权限</a>
+			<a href="main_list.html" target="mainFrame">级别权限</a>
+			<a href="main_info.html" target="mainFrame">角色管理</a>
+			<a href="main.html" target="mainFrame">自定义权限</a>
+		</div>
+    </div>
+</body>
+</html>

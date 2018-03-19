@@ -1,0 +1,95 @@
+*{  margin: 0;  padding: 0;  }
+body{font-family: "寰蒋闆呴粦";width:100%; min-width:1200px; width:expression((documentElement.clientWidth < 1200px) ? "1200px" : "100%" ); zoom:1; }
+input::-ms-clear { display: none; }
+a { color: #37e; text-decoration: none; }
+a:hover { color: #F55;  text-decoration: none; }
+table{ border-collapse: collapse;  border-spacing: 0; }
+fieldset, img {  border: 0;  max-width: 100%; vertical-align: middle;}
+address, caption, cite, code, dfn, em, th,
+var{ font-style: normal;  font-weight: normal; }
+ol, ul ,li{ list-style: none;  }
+caption, th { text-align: left;  }
+h1, h2, h3, h4, h5, h6 { font-size: 100%;  font-weight: normal; }
+q:before, q:after { content: ''; }
+abbr, acronym { border: 0; }
+a{color: #666; text-decoration: none;}
+a:hover{color: #438eb9; text-decoration: none;}
+.fl{float: left; display: inline;}
+.fr{float: right; display: inline;}
+.clearfix:after{display:block;clear:both;content:"";visibility:hidden;height:0} 
+.clearfix{zoom:1} 
+.clear{clear: both; zoom:1; }
+
+/*login*/
+.login_body{ background: url(../images/login-bg.jpg) center top repeat-x #FFF; }
+.login{padding:1px 0 0 0;background:url(../images/login-bg.jpg) center top no-repeat #FFF;padding:150px 0 0 0;}
+.login input.submit{border:none;font-weight:bold;color:#FFF;margin:25px 0 0 150px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;-webkit-box-shadow: #CCC 0px 0px 5px;-moz-box-shadow: #CCC 0px 0px 5px;box-shadow: #CCC 0px 0px 5px;background: #31b6e7;cursor: pointer;}
+.login input.submit:hover{background:#ff9229;}
+.login input.submit{padding:6px 20px;}
+.login .box{position:relative;z-index:100;margin:0 auto;width:700px;height:320px;background:url(../images/login.png) center top no-repeat;}
+.login .log{position:relative;width:370px;height:260px;margin:0 auto;padding:70px 0 0 20px;}
+.login .logo{height:85px;position:absolute;top:15px;left:180px;background:url(../images/logo-login.png) no-repeat;width:350px;height:50px;}
+.login label{display:inline-block;width:70px;text-align:right;padding-right:20px;vertical-align:middle;}
+.login .name{padding:10px 5px;font-size:14px;}
+.login .code{padding:10px 5px;font-size:14px;}
+.login .code .text{ width:110px; }
+.login .code img{ vertical-align:middle; cursor:pointer; }
+.login .pwd{padding:10px 5px;font-size:14px;}
+.login .alt{position:absolute;top:43px;left:260px;font-size:20px;}
+.login .text,.login .code img{filter:alpha(opacity=80);-moz-opacity:0.8;opacity:0.8;}
+.login .copyright{position:absolute;left:0;width:100%;bottom:-40px;text-align:center;color:#AAA;}
+.login .air-balloon{position:absolute;top:-100px;left:-100px;z-index:50;}
+.login .air-balloon.ab-1{width:43px;height:78px;background:url(../images/air-balloon-1.png) no-repeat;}
+.login .air-balloon.ab-2{width:24px;height:31px;background:url(../images/air-balloon-2.png) no-repeat;}
+.login .footer{position: fixed;left:0;bottom:0;z-index:-1;width:100%;height:198px;background:url(../images/login-foot.jpg) center bottom repeat-x;}
+.text{border:1px solid #CCC;padding:5px;background-color:#FCFCFC;line-height:14px;width:220px;font-size:12px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-webkit-box-shadow: #CCC 0px 0px 5px;-moz-box-shadow: #CCC 0px 0px 5px;box-shadow: #CCC 0px 0px 5px;border:1px solid #CCC;font-size:12px;}
+.text:focus{border:1px solid #31b6e7;background-color:#FFF;-webkit-box-shadow: #CCC 0px 0px 5px;-moz-box-shadow: #CCC 0px 0px 5px;box-shadow: #0178a4 0px 0px 5px;}
+.text:hover{background-color:#FFF;}
+.login .tip{ height:20px; line-height:20px; color:#f00; text-align:center; }
+
+.header{ background: #438eb9; height:45px; line-height:45px; }
+.header .logo a{ padding:0 12px; font-size:18px; color:#fff; }
+
+.main_container{ background:#f2f2f2; }
+
+.sidebar{ width:190px; float:left; border-bottom:1px solid #ccc; position:relative; padding:12px 0 25px; }
+.sidebar ul li{ cursor:pointer; line-height:38px; border-bottom: 1px solid #e5e5e5; border-top: 1px solid #fcfcfc; text-indent:20px; }
+.sidebar ul li a{ color:#585858; }
+.sidebar ul li:hover,.sidebar ul li.current{ background:white; }
+.sidebar ul li:hover a,.sidebar ul li.current a{ color:#1963aa; cursor:pointer; }
+
+
+.main_content { margin-left: 190px; background:#fff; border-left:1px solid #ccc; min-height:360px; }
+.breadcrumbs{ border-bottom: 1px solid #e5e5e5; background: #f5f5f5; min-height: 41px; line-height: 40px; padding: 0 12px 0 22px;}
+.breadcrumbs a{ font-size:13px; color:#4c8fbd; }
+
+.page-content { background: #fff;padding: 8px 20px 24px; }
+
+.score h1 {  margin: 0 8px; font-size: 24px; color: #2679b5; text-align:center; }
+
+form[name="question"]{}
+form[name="question"] table{}
+form[name="question"] table td{ padding:4px 2px; }
+form[name="question"] table td input[type='text']{ border:1px solid #d5d5d5; padding:5px 4px; width:6%; }
+form[name="question"] table td input[name='title']{ border:1px solid #d5d5d5; padding:5px 4px; width:36%; }
+form[name="question"] table td input[type='text']:hover{ border:1px solid #b5b5b5; }
+form[name="question"] table td input[type='text']:focus{ border:1px solid #f59942; }
+form[name="question"] table td input[name='sub']{ background-color: #4f99c6; border:1px solid #6fb3e0; padding:6px 12px; color:#fff; cursor:pointer; }
+form[name="question"] table td input[name='res']{ background-color: #4f99c6; border:1px solid #6fb3e0; padding:6px 12px; color:#fff; cursor:pointer; }
+form[name="question"] table tr:nth-child(2n+1) td{ background: #f9f9f9; }
+form[name="question"] table tr td{ border: 1px solid #ddd; padding:5px 8px; color:#393939; }
+form[name="question"] table tr:hover td{ background-color: #f5f5f5; }
+
+#example_filter input{ border:1px solid #d5d5d5; padding:5px 4px; }
+#example_filter input:hover{ border:1px solid #b5b5b5; }
+#example_filter input:focus{ border:1px solid #f59942; }
+
+.questions .hd{ margin: 0 0 12px; border-bottom: 1px dotted #e2e2e2; padding-bottom: 16px; padding-top: 7px; }
+.questions .hd h1{ margin: 0 8px; font-size: 18px; color: #2679b5; }
+.questions .bd table{}
+.questions .bd table th{ border: 1px solid #ddd; border-bottom-width: 2px; background: #f2f2f2; color: #707070; padding:8px; }
+.questions .bd tr:nth-child(2n+1) td{ background: #f9f9f9; }
+.questions .bd tr td{ border: 1px solid #ddd; padding:5px 8px; color:#393939; }
+.questions .bd tr:hover td{ background-color: #f5f5f5; }
+
+

@@ -1,0 +1,64 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>主要内容区main</title>
+<link href="Public/Admin/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Admin/css/style.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="Public/Common/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="Public/Admin/js/check.js"></script>
+</head>
+<body>
+<div class="main">
+	<div class="breadcrumbs">
+		<div class="breadcrumb">您的位置：成绩管理&nbsp;&nbsp;>&nbsp;&nbsp;测试结果</div>
+	</div>
+    <div class="search clearfix">
+		<form method="post" action="" class="fl">
+			<span>关键字：</span>
+			<input type="text" name="" value="" class="text-word">
+			<input name="" type="button" value="查询" class="text-but">
+		</form>
+		<p class="fr"><a href="add.html" target="mainFrame" class="add">新增用户</a></p>
+	</div>
+    <table width="100%" class="main-tab qlist" id="example">
+		<thead>
+			<tr>
+				<th class="id">ID</th>
+				<th>姓名</th>
+				<th>手机号</th>
+				<th>提交时间</th>
+				<th>分数2</th>
+				<th>用时</th>
+				<th>锁定</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		{foreach from=$result_arr['scores'] key=key item=item}	
+		<tr>
+			<td>{$item['id']}</td>
+			<td>{$item['name']}</td>
+			<td>{$item['tel']}</td>
+			<td>{$item['addtime']}</td>
+			<td>{$item['score_2']}</td>
+			<td>{$item['use_time']}</td>
+			<td>
+				{if $item['lock'] eq 1}已锁定{/if}
+				{if $item['lock'] eq 0}未锁定{/if}
+			</td>
+			<td>
+				<a href="index.php?m=Admin&c=ScoreManage&a=index&method=edit&id={$item['id']}" target="mainFrame" class="add">修改</a>
+				<span class="gray">&nbsp;|&nbsp;</span>
+				<a href="javascript:check_del('index.php?m=Admin&c=ScoreManage&a=index&method=del&id={$item['id']}')" target="mainFrame" class="add">删除</a>
+			</td>
+		</tr>
+		{/foreach}
+    </table>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#example').DataTable();
+			$(".id").click();
+		});
+	</script>
+</body>
+</html>
