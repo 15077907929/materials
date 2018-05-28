@@ -1,0 +1,97 @@
+body{ background:#f2f0f5; padding:15px 0px 10px 5px; }
+.main{ }
+
+
+/*sys_info*/
+.main span.time{ font-size:14px; color:#528dc5; width:100%; padding-bottom:10px; float:left}
+.main div.top{ width:100%; background:url(../images/main/main_r2_c2.jpg) no-repeat 0 10px; padding:0 0 0 15px; line-height:35px; float:left}
+.main div.sec{ width:100%; background:url(../images/main/main_r2_c2.jpg) no-repeat 0 15px; padding:0 0 0 15px; line-height:35px; float:left}
+.main span.num{  font-size:30px; color:#538ec6; font-family:"Georgia","Tahoma","Arial";}
+div.main-tit{ font-size:14px; font-weight:bold; color:#4e4e4e; background:url(../images/main/main_r4_c2.jpg) no-repeat 0 33px; width:100%; padding:30px 0 0 20px; float:left}
+div.main-con{ width:100%; float:left; padding:10px 0 0 20px; line-height:36px;}
+div.main-corpy{ font-size:14px; font-weight:bold; color:#4e4e4e; background:url(../images/main/main_r6_c2.jpg) no-repeat 0 33px; width:100%; padding:30px 0 0 20px; float:left}
+div.main-order{ line-height:30px; padding:10px 0 0 0;}
+
+/*面包屑*/
+.breadcrumbs{ text-align:left; line-height:28px; padding-bottom:4px; }
+
+
+/*ftab*/
+.ftab{ width:100%; border:1px solid #eaeaea; background:#FFF; font-size:12px; }
+.ftab th{ font-size:12px; background:url(../images/main/list_bg.jpg) repeat-x; height:32px; line-height:32px; border-right: 1px solid #ebebeb; }
+.ftab tr{ background:#fff; }
+.ftab tr:hover{ background:#edf5ff; }
+.ftab td{ line-height:40px; border:1px solid #ebebeb; padding:10px; }
+.ftab td a{ font-size:12px; color:#548fc9;}
+.ftab td a:hover{color:#565656; text-decoration:underline;}
+.ftab input[type='text'],.ftab input[type='password']{ width:310px; height:36px; line-height:36px; border:#ebebeb 1px solid; background:#FFF; padding:0 10px; }
+.ftab input[name='no_order']{ width:50px; }
+.ftab select { width: 310px; height: 36px; line-height: 36px; border: #ebebeb 1px solid; background: #FFF; color: #666; }
+.ftab textarea{ width:520px; height:108px; line-height:36px; border:#ebebeb 1px solid; background:#FFF; padding:0 10px; }
+
+
+/*category*/
+form[name='category'] table{ width:100%; background:#fff; } 
+form[name='category'] table th{ background:url(../images/main/list_bg.jpg) repeat-x; height:32px; line-height:32px; border: 1px solid #ebebeb; }
+form[name='category'] table td{ line-height:40px; border: 1px solid #ebebeb; }
+form[name='category'] table td span{ color:#dbdbdb; }
+form[name='category'] input[name='ord[]']{ width: 50px; height: 24px; border: #ebebeb 1px solid; background: #FFF; text-align:center; }
+
+
+
+/*search*/
+form[name='search']{ background: #548fc9; text-align:right; height: 40px; line-height: 40px; }
+form[name='search'] a{ background: url(../images/main/add.jpg) no-repeat -3px 7px; display:inline-block; padding:0 26px; font-size: 14px; font-weight: bold; color: #FFF; }
+
+
+/*article*/
+form[name='article'] table{ width:100%; background:#fff; } 
+form[name='article'] table tr:nth-child(odd){ background:#f9f9f9; }
+form[name='article'] table tr:hover{ background:#edf5ff; }
+form[name='article'] table th{ background:url(../images/main/list_bg.jpg) repeat-x; height:32px; line-height:32px; border: 1px solid #ebebeb; }
+form[name='article'] table td{ line-height:40px; border: 1px solid #ebebeb; }
+form[name='article'] table td span{ color:#dbdbdb; }
+form[name='article'] input[name='ord[]']{ width: 50px; height: 24px; border: #ebebeb 1px solid; background: #FFF; text-align:center; }
+form[name='article'] input[name='editor']{ width: 120px; }
+#file_upload{ display:inline-block; }
+#thumbImg img{ margin:6px; }
+
+/*link*/
+form[name='link'] table{ width:100%; background:#fff; } 
+form[name='link'] table tr:nth-child(odd){ background:#f9f9f9; }
+form[name='link'] table tr:hover{ background:#edf5ff; }
+form[name='link'] table th{ background:url(../images/main/list_bg.jpg) repeat-x; height:32px; line-height:32px; border: 1px solid #ebebeb; }
+form[name='link'] table td{ line-height:40px; border: 1px solid #ebebeb; }
+form[name='link'] table td span{ color:#dbdbdb; }
+form[name='link'] input[name='ord[]']{ width: 50px; height: 24px; border: #ebebeb 1px solid; background: #FFF; text-align:center; }
+form[name='link'] input[name='editor']{ width: 120px; }
+
+/*nav*/
+form[name='nav'] table{ width:100%; background:#fff; } 
+form[name='nav'] table tr:nth-child(odd){ background:#f9f9f9; }
+form[name='nav'] table tr:hover{ background:#edf5ff; }
+form[name='nav'] table th{ background:url(../images/main/list_bg.jpg) repeat-x; height:32px; line-height:32px; border: 1px solid #ebebeb; }
+form[name='nav'] table td{ line-height:40px; border: 1px solid #ebebeb; }
+form[name='nav'] table td span{ color:#dbdbdb; }
+form[name='nav'] input[name='ord[]']{ width: 50px; height: 24px; border: #ebebeb 1px solid; background: #FFF; text-align:center; }
+form[name='nav'] input[name='editor']{ width: 120px; }
+
+/*page*/
+.page{ padding:10px 20px; }
+.page ul li.active span{ background:none; color:#548fc9; }
+.page ul li{ display:inline-block; text-align:right; }
+.page ul li span,.page ul li a{ color:#fff; display:inline-block; padding:3px 8px; background:#548fc9; margin:2px 3px; cursor:pointer; }
+
+/*config*/
+.config table{ width:100%; background:#fff; } 
+.config table tr:nth-child(odd){ background:#f9f9f9; }
+.config table tr:hover{ background:#edf5ff; }
+.config table th{ background:url(../images/main/list_bg.jpg) repeat-x; height:32px; line-height:32px; border: 1px solid #ebebeb; }
+.config table td{ line-height:40px; border: 1px solid #ebebeb; }
+.config table td span{ color:#dbdbdb; }
+.config input[type='text']{ width: 250px; padding:0 10px; height: 24px; border: #ebebeb 1px solid; background: #FFF; text-align:left; }
+.config input[name='ord[]']{ width: 50px; height: 24px; border: #ebebeb 1px solid; background: #FFF; text-align:center; }
+.config input[type='radio'],form[name='config'] input[type='radio']{ margin-left: 6px; vertical-align:middle; margin-top:-2px; margin-bottom:1px; }
+.config textarea{ width:320px; height:58px; margin-top:10px; line-height:36px; border:#ebebeb 1px solid; background:#FFF; padding:0 10px; }
+
+.sub{ padding:20px 0; }
