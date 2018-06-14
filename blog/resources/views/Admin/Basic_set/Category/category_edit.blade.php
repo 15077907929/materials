@@ -5,6 +5,7 @@
 <title>主要内容区main</title>
 <link href="{{asset('Admin/css/base.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('Admin/css/style.css')}}" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="{{asset('Common/js/jquery-3.3.1.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('Admin/js/check.js')}}"></script>
 </head>
 <body>
@@ -59,6 +60,33 @@
 				<td align="right" class="bggray">描述：</td>
 				<td align="left">
 					<textarea name="description">{{$field->description}}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td align="right" class="bggray">缩略图：</td>
+				<td align="left">
+					<input type="text" name="thumb" value="{{$field->thumb}}" />
+					<input id="file_upload" name="file_upload" type="file" multiple="true" />
+					<script src="{{asset('Common/org/uploadify/jquery.uploadify.min.js')}}" type="text/javascript"></script>
+					<link rel="stylesheet" type="text/css" href="{{asset('Common/org/uploadify/uploadify.css')}}" />
+					<script type="text/javascript">
+						$(function() {
+							$('#file_upload').uploadify({
+								'buttonText': '图片上传',
+								'formData'     : {
+									'method' : 'modify',
+									'thumb_o': '{{$field->thumb}}',
+								},
+								'swf'      : '{{asset("Common/org/uploadify/uploadify.swf")}}',
+								'uploader' : '{{url("admin/upload")}}',
+								'onUploadSuccess':function(file,data,response){
+									$("input[name='thumb']").val(data);
+									$('#thumbImg').html("<img height='48' src='"+data+"' />");
+								}
+							});
+						});
+					</script>
+					<div id="thumbImg"><img src="{{$field->thumb}}" height="48" /></div>
 				</td>
 			</tr>
 			<tr>

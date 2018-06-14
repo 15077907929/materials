@@ -9,7 +9,6 @@ class IndexController extends CommonController{
 		foreach($article as $key=>&$val){
 			$val['cate_name']=Category::where('id',$val['cate_id'])->first()['name'];
 		}
-		// dd($article);
 		return view('Home/index')->with('article',$article);
 	}	
 

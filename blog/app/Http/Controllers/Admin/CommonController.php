@@ -26,8 +26,10 @@ class CommonController extends Controller{
 		$file=Input::file('Filedata');
 		if($file->isValid()){
 			if($_POST['method']=='modify'){
-				if(file_exists(base_path().'/public'.$_POST['thumb_o'])){
-					unlink(base_path().'/public'.$_POST['thumb_o']);
+				if(isset($_POST['thumb_o'])){
+					if(file_exists(base_path().'/public'.$_POST['thumb_o'])){
+						unlink(base_path().'/public'.$_POST['thumb_o']);
+					}		
 				}					
 			}
 			$extension=$file ->getClientOriginalExtension();	//上传文件的后缀

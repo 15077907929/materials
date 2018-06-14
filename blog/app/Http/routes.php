@@ -13,8 +13,15 @@
 
 Route::group(['middleware'=>['web']],function(){
 	Route::get('/','Home\IndexController@index');
-	Route::get('/cate','Home\IndexController@cate');
+	
+	Route::get('/cate/{id}','Home\CategoryController@cate');
+	Route::get('/arts/{id}','Home\CategoryController@arts');
+	Route::get('/art/{id}','Home\ArticleController@art');
+	
+	
 	Route::get('/art','Home\IndexController@article');
+	
+	
 	Route::get('/conc','Home\IndexController@contact');
 });
 
