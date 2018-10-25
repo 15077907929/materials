@@ -1,0 +1,9 @@
+<import src="../../utils/template/jisuangongju.wxml"></import>
+<view class="content">
+    <view class="address-add" wx:for="{{adId}}">
+        <ad unitId="{{item.id}}"></ad>
+    </view>
+    <view class="list-container">
+        <template is="life-item" data="{{item:item}}" wx:for="{{life}}" wx:key="{{life.title}}"></template>
+    </view>
+</view>

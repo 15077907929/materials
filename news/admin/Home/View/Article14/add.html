@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>小程序后台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="Public/Home/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Home/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="Public/Common/js/calendar/laydate.js"></script>
+</head>
+<body>
+
+{include file="../Common/header.html"}
+
+{include file="../Common/left.html"}
+
+<section class="container">
+	<div class="breadcrumbs">
+		<div class="location">文章管理</div>
+		<div class="breadcrumb">
+			<img src="Public/Home/images/home.png" /> 
+			<a href="{U('Index/index')}">首页</a> &gt; 文章管理 &gt; 添加文章
+			<a class="back fr" href="javascript:history.back();">返回</a>
+		</div>
+	</div>
+	<div class="main">
+		<font color="#f00"></font>
+		<form name="fadd" action="{U('Article14/index?method=add')}" method="post" onsubmit="return check();">
+			<table>
+				<tr>
+					<td width="18%"><font color="#f00">*</font>文章标题：</td>
+					<td><input type="text" name="art_tit" value="" /></td>
+				</tr>
+				<!--<tr>
+					<td><font color="#f00">*</font>关键词：</td>
+					<td>
+						<select name="art_cate">
+							<option value="">请选择文章关键词</option>
+							{foreach from=$res['art_keyword'] key=key item=item}
+								<option selected value="{$item['art_keyword']}">{$item['art_keyword']}</option>
+							{/foreach}
+						</select>
+					</td>
+				</tr>-->
+				<tr>
+					<td>文章类型：</td>
+					<td>
+						<select name="art_cate">
+							<option value="">请选择文章类型</option>
+							{foreach from=$res['cates'] key=key item=item}
+								<option value="{$item['cate_id']}">{$item['cate_name']}</option>
+							{/foreach}
+						</select>	
+					</td>
+				</tr>				
+				<tr>
+					<td>图片：</td>
+					<td>
+						<input type="text" name="art_img" value="" style="margin-right:10px;" /><input id="uploadFile" onchange="uploadImg();" type="file" name="upfile" /><br/>
+						<img class="hide" id="art_img" style="height:80px; margin-top:8px;" src="" />
+					</td>
+				</tr>				
+				<tr>
+					<td>浏览次数：</td>
+					<td><input type="text" name="art_view" value="" /></td>
+				</tr>					
+				<tr>
+					<td>排序：</td>
+					<td><input type="text" name="art_order" value="" /></td>
+				</tr>					
+				<!--<tr>
+					<td>发布时间：</td>
+					<td><input name="start" id="start" value="" onclick="laydate({ elem: '#start',istime: true, format: 'YYYY-MM-DD hh:mm:ss' })" readonly="readonly" type="text" /></td>
+				</tr>-->
+				<tr>
+					<td>内容：</td>
+					<td>
+						<script type="text/javascript" src="Public/Common/org/ueditor/ueditor.config.js"></script>
+						<script type="text/javascript" src="Public/Common/org/ueditor/ueditor.all.min.js"> </script>
+						<script type="text/javascript" src="Public/Common/org/ueditor/lang/zh-cn/zh-cn.js"></script>
+						<script id="editor" name="art_content" type="text/plain" style="line-height:20px;width:860px;height:360px;"></script>
+						<script type="text/javascript">
+							var ue = UE.getEditor('editor');
+						</script>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" name="sub" value="保存" />
+						<input type="reset" name="res" value="重置" />
+					</td>
+				</tr>
+			</table>
+		</form>
+		<script type="text/javascript">
+			function check(){
+				if(fadd.art_tit.value==''){
+					alert('文章标题不能为空！');
+					fadd.art_tit.focus();
+					return false;
+				}	
+				if(fadd.art_order.value!=''){
+					var reg = /^[0-9]*$/;
+					if (!reg.test(fadd.art_order.value)){
+						alert("请输入数字!");
+						fadd.art_order.focus();
+						return false;
+					}
+				}				
+			}
+			
+			function uploadImg(){
+				var data = new FormData();
+				$.each($('#uploadFile')[0].files, function(i, file) {
+					data.append('upfile', file);
+				});
+				$.ajax({
+					url:'index.php?m=Home&c=Common&a=uploadImg',
+					type:'POST',
+					data:data,
+					cache: false,
+					dataType: "json",
+					contentType: false,        //不可缺参数
+					processData: false,        //不可缺参数
+					success:function(data){
+						var obj=jQuery.parseJSON(data);
+						if(data.status==1){
+							$('#art_img').attr('src',data.src);
+							$('input[name=art_img]').val(data.src);
+							$('#art_img').removeClass('hide');
+						}else{
+							alert(data.msg);
+						}
+					}
+				});
+			}
+		</script>
+	</div>
+</section>
+</body>
+</html>

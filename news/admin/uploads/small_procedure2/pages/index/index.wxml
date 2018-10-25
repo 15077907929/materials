@@ -1,0 +1,64 @@
+<!--pages/index/index.wxml-->
+<view class='content'>
+
+<form bindsubmit='bannerJump'>
+  <swiper class="swiper banner" indicator-dots="true" indicatorActiveColor="#fff" indicatorColor="#777" autoplay="true" interval="5000" duration="1000">  
+    <swiper-item wx:for="{{banner}}">
+      <block wx:if="{{is_jump != 1}}">
+          <navigator  target="miniProgram">
+              <button data-url="{{item.url}}" data-jump="true" formType="submit">
+                <image class="slide-image" mode="aspectFill" src="http://newsadmin.hmset.com{{item.image}}"></image>
+                <view class='cover'></view>
+                <view class='tit'>{{item.title}}</view>
+              </button>
+          </navigator>
+      </block>
+      <block  wx:else>
+          <navigator  target="miniProgram" app-id="{{item.jump_appid}}" extra-data="{{item.jump_extend}}" path="{{item.jump_extend}}" >
+              <button data-url="{{item.url}}" data-jump="false"  formType="submit">
+                <image class="slide-image" mode="aspectFill" src="http://newsadmin.hmset.com{{item.image}}"></image>
+                <view class='cover'></view>
+                <view class='tit'>{{item.title}}</view>
+              </button>
+          </navigator>
+      </block>
+    </swiper-item>  
+  </swiper>
+</form>
+
+<view class="list">
+    <view class="item" wx:for="{{loadtitle}}">
+      <block wx:if="{{is_jump == 1}}">
+          <navigator target = "miniProgram" app-id="{{appId}}" path="pages/index/index" open-type='navigate'>
+            <view class="pic"><image src="http://newsadmin.hmset.com/{{item.art_img}}" mode='center' mode='aspectFill'></image></view>
+            <view class="cover"></view>
+            <view class="tit"><view>{{item.art_tit}}</view></view>
+          </navigator>
+      </block>
+      <block  wx:else>
+          <navigator url='../display/display?id={{item.art_id}}'>
+            <view class="pic"><image src="http://newsadmin.hmset.com/{{item.art_img}}" mode='center' mode='aspectFill'></image></view>
+            <view class="cover"></view>
+            <view class="tit"><view>{{item.art_tit}}</view></view>
+          </navigator>
+      </block>
+    </view> 
+</view>
+
+</view>
+
+
+<view class='fresh' bindtap='fresh'>
+  <image src="/images/fresh.jpg" mode='widthFix'></image>
+</view>
+
+
+
+
+
+
+
+
+
+
+

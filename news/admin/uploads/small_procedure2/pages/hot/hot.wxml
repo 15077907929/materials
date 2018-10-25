@@ -1,0 +1,13 @@
+<!--pages/hot/hot.wxml-->
+<view class='list'>
+
+  <block wx:for="{{loadtitle}}">
+    <view class='item clearfix' id='{{item.art_id}}' bindtap='jumpFn'>
+      <view class='left fl'>
+        <view class='tit order'><text>{{index+1}}</text>{{item.art_tit}}</view>
+      </view>
+      <view class='pic fr'><image src="http://newsadmin.hmset.com/{{item.art_img}}" mode='scaleToFill'></image></view>
+    </view>  
+  </block>
+
+</view>

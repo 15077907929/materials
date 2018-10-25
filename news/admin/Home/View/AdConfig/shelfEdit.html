@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>小程序</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="Public/Home/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Home/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="Public/Common/js/calendar/laydate.js"></script>
+</head>
+<body>
+
+{include file="../Common/header.html"}
+
+{include file="../Common/left.html"}
+
+<section class="container">
+	<div class="breadcrumbs">
+		<div class="location">配置广告</div>
+		<div class="breadcrumb">
+			<img src="Public/Home/images/home.png" /> 
+			<a href="{U('Index/index')}">首页</a> &gt; 配置广告 &gt; 编辑上线广告
+			<a class="back fr" href="{U('AdConfig/onShelf?method=list')}">返回</a>
+		</div>
+	</div>
+	<div class="main">
+		<font color="#f00"></font>
+		<form name="fadd" action="{U('AdConfig/onShelf?method=edit')}" method="post" onsubmit="return check();">
+			<table>
+				<tr>
+					<input type="text" style="display: none" name="id" value="{$smarty.get.id}">
+					<td><font color="#f00">*</font>选择广告：</td>
+					<td>
+						<select name="ad_id" id="ad_id">
+							{foreach from=$ads key=key item=item}
+							<option value="{$item['id']}">{$item['title']}</option>
+							{/foreach}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><font color="#f00">*</font>选择位置：</td>
+					<td>
+						<select name="position_id" id="position_id">
+							{foreach from=$positions key=key item=item}
+							<option value="{$item['position_id']}">{$item['describe']}({$item['app_id']})</option>
+							{/foreach}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" name="sub" value="保存" />
+						<input type="reset" name="res" value="重置" />
+					</td>
+				</tr>
+			</table>
+		</form>
+		<script type="text/javascript">
+			$(function () {
+                var ad = "{$res['ad_id']}";
+                var position = "{$res['position_id']}";
+				$('#ad_id').val(ad);
+				$('#position_id').val(position);
+            });
+			function check(){
+				return true;
+			}
+		</script>
+	</div>
+</section>
+</body>
+</html>

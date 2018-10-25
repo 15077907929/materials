@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>小程序后台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="Public/Home/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Home/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+{include file="../Common/header.html"}
+
+{include file="../Common/left.html"}
+
+<section class="container">
+	<div class="breadcrumbs">
+		<div class="location">小程序管理</div>
+		<div class="breadcrumb">
+			<img src="Public/Home/images/home.png" /> 
+			<a href="{U('Index/index')}">首页</a> &gt; 小程序管理 &gt; 小程序列表
+			<a class="back fr" href="javascript:history.back();">返回</a>
+		</div>
+	</div>
+	<div class="main mlist">
+		<form name="search" action="{U('WeChat/index?method=search')}" method="get">
+			<input type="hidden" name="c" value="QQGroup" />
+			<input type="hidden" name="method" value="search" />
+			<select name="labels">
+				<option value="">请选择小程序类型</option>
+				{foreach from=$labels key=key item=item}
+				<option value="{$item['labels']}">{$item['labels']}</option>
+				{/foreach}
+			</select>
+			<input type="text" name="keyword" />
+			<input type="submit" name="sub" value="搜索" />
+		</form>
+		<div class="artbar">
+			<a class="del" href=""><img src="Public/Home/images/trash.png" height="12" /> 批量删除</a>
+			<a class="add" href="{U('WeChat/index?method=add')}"><img src="Public/Home/images/add.png" /> 添加小程序</a>
+			<span class="fr">共有数据：<b>{$res['count']}</b> 条</span>
+		</div>
+		<table>	
+			<tr>
+				<th width="4%"></th>
+				<th width="6%">ID</th>
+				<th width="12%">app_id</th>
+				<th>小程序中文名</th>
+				<th>小程序英文名</th>
+				<th width="12%">秘钥</th>
+				<!--<th width="6%">类型</th>
+				<th width="16%">url</th>-->
+				<th width="12%">添加日期</th>
+				<th width="12%">操作</th>
+			</tr>
+			{foreach from=$res['list'] key=key item=item}
+			<tr>
+				<td><input value="" name="" type="checkbox" /></td>
+				<td>{$item.id}</td>
+				<td>{$item.app_id}</td>
+				<td>{$item.cn_name}</td>
+				<td>{$item.name}</td>
+				<td>{$item.secret}</td>
+				<!--<td>{$item.type}</td>
+				<td>{$item.url}</td>-->
+				<td>{$item.add_time}</td>
+				<td>
+					<a href="{U('WeChat/index?method=edit')}&id={$item.id}"><img src="Public/Home/images/edit.png" /></a>
+					<a onclick="javascript:check_del({$item.id})">
+						<img src="Public/Home/images/delete.png" />
+					</a>
+				</td>
+			</tr>
+			{/foreach}			
+		</table>
+		<div class="pages">{$res['page']}</div>
+	</div>
+</section>
+<script type="text/javascript">
+	//确定删除
+	function check_del(id){  
+		var mymessage=confirm("确认要删除该条记录吗？");  
+		if(mymessage==true){  
+			location.href='index.php?m=Home&c=WeChat&a=index&method=del&id='+id;
+		} 
+	} 
+</script>
+</body>
+</html>

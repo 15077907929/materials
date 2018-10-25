@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>小程序后台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="Public/Home/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Home/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="Public/Common/js/calendar/laydate.js"></script>
+</head>
+<body>
+
+{include file="../Common/header.html"}
+
+{include file="../Common/left.html"}
+
+<section class="container">
+	<div class="breadcrumbs">
+		<div class="location">文章管理</div>
+		<div class="breadcrumb">
+			<img src="Public/Home/images/home.png" /> 
+			<a href="{U('Index/index')}">首页</a> &gt; 文章管理 &gt; 修改文章
+			<a class="back fr" href="javascript:history.back();">返回</a>
+		</div>
+	</div>
+	<div class="main">
+		<font color="#f00"></font>
+		<form name="edit" action="{U('Nbox/cates?method=edit')}" method="post" onsubmit="return check();">
+			<input type="hidden" value="{$res['field']['id']}" name="id" />
+			<table>				
+				<tr>
+					<td width="18%"><font color="#f00">*</font>文章标题：</td>
+					<td><input type="text" name="name" value="{$res['field']['name']}" /></td>
+				</tr>
+				<tr>
+					<td>图标：</td>
+					<td>
+						<input type="text" name="img" value="{$res['field']['img']}" style="margin-right:10px;" />
+						<input id="uploadFile" onchange="uploadImg();" type="file" name="upfile" /><br/>
+						<img id="img" style="height:80px; margin-top:8px;" src="{$res['field']['img']}" />
+					</td>
+				</tr>				
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" name="sub" value="保存" />
+						<input type="reset" name="res" value="重置" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</section>
+<script type="text/javascript">
+	function check(){				
+		if(edit.name.value==''){
+			alert('名称不能为空！');
+			edit.name.focus();
+			return false;
+		}			
+	}	
+	
+	function uploadImg(){
+		var data = new FormData();
+		$.each($('#uploadFile')[0].files, function(i, file) {
+			data.append('upfile', file);
+		});
+		$.ajax({
+			url:'index.php?m=Home&c=Common&a=uploadImg',
+			type:'POST',
+			data:data,
+			cache: false,
+			dataType: "json",
+			contentType: false,        //不可缺参数
+			processData: false,        //不可缺参数
+			success:function(data){
+				var obj=jQuery.parseJSON(data);
+				if(data.status==1){
+					$('#img').attr('src',data.src);
+					$('input[name=img]').val(data.src);
+					$('#img').removeClass('hide');
+				}else{
+					alert(data.msg);
+				}
+			}
+		});
+	}	
+</script>	
+</body>
+</html>

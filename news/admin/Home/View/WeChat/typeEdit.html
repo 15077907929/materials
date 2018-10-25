@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>小程序</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="Public/Home/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Home/css/style.css" rel="stylesheet" type="text/css" />
+<link href="Public/Common/js/chosen_v1.8.4/chosen.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="Public/Common/js/chosen_v1.8.4/chosen.jquery.js"></script>
+</head>
+<body>
+
+{include file="../Common/header.html"}
+
+{include file="../Common/left.html"}
+
+<section class="container">
+	<div class="breadcrumbs">
+		<div class="location">小程序管理</div>
+		<div class="breadcrumb">
+			<img src="Public/Home/images/home.png" /> 
+			<a href="{U('Index/index')}">首页</a> &gt; 小程序管理 &gt; 盒子类型配置
+			<a class="back fr" href="{U('WeChat/gameTypeMange?method=list')}">返回</a>
+		</div>
+	</div>
+	<div class="main">
+		<font color="#f00"></font>
+		<form name="fadd" action="{U('WeChat/gameTypeMange?method=edit')}" method="post" onsubmit="return check();">
+			<table>
+				<input type="text" style="display: none" name="id" value="{$smarty.get.id}">
+				<tr>
+					<td><font color="#f00">*</font>盒子：</td>
+					<td>
+						<input type="text" readonly value="{$app}"/>
+					</td>
+				</tr>
+				<input type="text" name="editid" style="display: none;" value="{$smarty.get.id}"/>
+				<tr>
+					<td><font color="#f00">*</font>(请用半角逗号分隔)分类名：</td>
+					<td>
+						<input type="text" name="cate" value="{$cate}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>已有类型</td>
+					<td>{$tips}</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" name="sub" value="保存" />
+						<input type="reset" name="res" value="重置" />
+					</td>
+				</tr>
+			</table>
+		</form>
+		<script type="text/javascript">
+			$(function () {
+                $('#apps').chosen();
+            });
+			function check(){
+				return true;
+			}
+		</script>
+	</div>
+</section>
+</body>
+</html>

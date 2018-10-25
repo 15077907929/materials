@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>小程序</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="Public/Home/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Home/css/style.css" rel="stylesheet" type="text/css" />
+<link href="Public/Common/js/chosen_v1.8.4/chosen.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="Public/Common/js/chosen_v1.8.4/chosen.jquery.js"></script>
+<script type="text/javascript" src="Public/Common/js/layDate-v5.0.9/laydate/laydate.js"></script>
+
+</head>
+<body>
+
+{include file="../Common/header.html"}
+
+{include file="../Common/left.html"}
+
+<section class="container">
+	<div class="breadcrumbs">
+		<div class="location">广告配置</div>
+		<div class="breadcrumb">
+			<img src="Public/Home/images/home.png" /> 
+			<a href="{U('Index/index')}">首页</a> &gt; 广告配置 &gt; 添加广告
+			<a class="back fr" href="index.php?m=Home&c=AdConfig&a={$action}&method=list">返回</a>
+		</div>
+	</div>
+	<div class="main">
+		<font color="#f00"></font>
+		<form name="fadd" action="index.php?m=Home&c=AdConfig&a={$action}&method=add" method="post" onsubmit="return check();">
+			<table>
+				<tr>
+					<td><font color="#f00">*</font>选择应用：</td>
+					<td>
+						<select name="apps[]" multiple id="apps">
+							{foreach from=$apps key=key item=item}
+							<option value="{$item['app_id']}">{$item['name']}--{$item['cn_name']}</option>
+							{/foreach}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><font color="#f00">*</font>标题：</td>
+					<td>
+						<input type="text" name="title" />
+					</td>
+				</tr>
+				<tr>
+					<td><font color="#f00">*</font>封面：</td>
+					<td>
+						<input type="text" name="imageUrl" style="display: none;" id="imgUrl"/>
+						<input type="file" name="image" id="imageUrl"/>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<img src="" alt="封面图片" style="width: 260px;" id="coverImg">
+					</td>
+				</tr>
+				<tr>
+					<td>(跳转到小程序可不填)内容链接：</td>
+					<td>
+						<input type="text" name="url" />
+					</td>
+				</tr>
+				<tr>
+					<td><font color="#f00">*</font>是否置顶：</td>
+					<td>
+						<select name="is_top">
+							<option value="0">否</option>
+							<option value="1">是</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><font color="#f00">*</font>排序值(越大越靠前)：</td>
+					<td>
+						<input type="number" max="999" min="0" name="sort" />
+					</td>
+				</tr>
+				<tr>
+					<td><font color="#f00">*</font>开始时间：</td>
+					<td>
+						<input name="start_time" class="time"  type="text" readonly="readonly" />
+					</td>
+				</tr>
+				<tr>
+					<td><font color="#f00">*</font>结束时间：</td>
+					<td>
+						<input name="end_time" class="time" type="text" readonly="readonly" />
+					</td>
+				</tr>
+				<tr>
+					<td>(没有不填)跳转APPID：</td>
+					<td>
+						<input type="text"  name="jump_appid" />
+					</td>
+				</tr>
+				<tr>
+					<td>(没有不填)跳转参数：</td>
+					<td>
+						<input type="text" name="jump_extend" />
+					</td>
+				</tr>
+				<tr>
+					<td>(没有不填)跳转页面：</td>
+					<td>
+						<input type="text" name="jump_path" />
+					</td>
+				</tr>
+				<tr>
+					<td>(非直跳广告)二维码：</td>
+					<td>
+						<input type="text" name="code_url" style="display: none;" id="codeUrl"/>
+						<input type="file"  id="codeFile"/>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<img src="" alt="二维码图片" style="width: 100px;" id="codeShow">
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" name="sub" value="保存" />
+						<input type="reset" name="res" value="重置" />
+					</td>
+				</tr>
+			</table>
+		</form>
+		<script type="text/javascript">
+			$(function () {
+
+                lay('.time').each(function(){
+                    laydate.render({
+                        elem: this
+                        ,type: 'datetime'
+                    });
+                });
+                $('#apps').chosen();
+				//绑定上传
+                $('#imageUrl').on('change',function () {
+                    //触发异步上传
+                    var url = "{U('AdConfig/ajaxImgSave')}";
+                    var file = document.getElementById("imageUrl").files[0];
+                    var formData = new FormData();
+                    formData.append('file',file);
+                    $.ajax({
+                        url: url,
+                        type: "post",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        mimeType: "multipart/form-data",
+                        success: function (data) {
+							var values = JSON.parse(data);
+							if(values.status == 1){
+                                $('#coverImg').attr('src',values.path);
+                                $('#imgUrl').val(values.path);
+							}
+                        },
+                        error: function (data) {
+                            console.log(data);
+                        }
+                    });
+                });
+
+                $('#codeFile').on('change',function () {
+                    //触发异步上传
+                    var url = "{U('AdConfig/ajaxImgSave')}";
+                    var file = document.getElementById("codeFile").files[0];
+                    var formData = new FormData();
+                    formData.append('file',file);
+                    $.ajax({
+                        url: url,
+                        type: "post",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        mimeType: "multipart/form-data",
+                        success: function (data) {
+                            var values = JSON.parse(data);
+                            if(values.status == 1){
+                                $('#codeShow').attr('src',values.path);
+                                $('#codeUrl').val(values.path);
+                            }
+                        },
+                        error: function (data) {
+                            console.log(data);
+                        }
+                    });
+                });
+
+
+            });
+			function check(){
+				return true;
+			}
+		</script>
+	</div>
+</section>
+</body>
+</html>

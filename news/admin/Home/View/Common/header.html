@@ -1,0 +1,24 @@
+<header> 
+	<div class="logo fl"><a href="admin/index">小程序</a></div>
+	<div class="userbar fr">
+		用户：
+		<span>{cookie('user_name')}
+			<img src="Public/Home/images/more_unfold.png" />
+			<ul class="hide">
+				<li><a href="{U('Index/index')}">系统首页</a></li>
+				<li><a href="">个人信息</a></li>
+				<li><a href="{U('Login/logout')}">退出</a></li>
+			</ul>
+		</span> 
+		<span>
+			信息
+		</span>
+	</div>
+</header>
+<script type="text/javascript">
+	$('.userbar span').hover(function(){
+		$(this).find('ul').removeClass('hide');
+	},function(){
+		$(this).find('ul').addClass('hide');
+	});
+</script>

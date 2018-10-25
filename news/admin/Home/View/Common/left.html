@@ -1,0 +1,129 @@
+<aside class="left">
+	<ul>
+		{if cookie('id') eq 1 or cookie('id') eq 2}
+		<li>
+			<a onclick="switchMenu($(this).next())">文章管理<img src="Public/Home/images/menu_dropdown-arrow.png" /></a>
+			<dl>
+				<dt class="{if $cur_nav eq 'list'}on{/if}"><a href="{U('Article/index?method=list')}">文章列表</a></dt>
+				<dt class="{if $cur_nav eq 'pickup'}on{/if}"><a href="{U('Article/pickup')}">文章采集</a></dt>
+				<dt class="{if $cur_nav eq 'keyword'}on{/if}"><a href="{U('Article/keyword')}">关键词</a></dt>
+			</dl>
+		</li>
+		<li>
+			<a onclick="switchMenu($(this).next())">小程序内容<img src="Public/Home/images/menu_dropdown-arrow.png" /></a>
+			<dl>
+				{foreach from=$apps key=key item=item}
+					{if cookie('user_type') eq 1 or cookie('appid') eq $item['id']}
+					<dt class="{if $cur_nav eq $item['id']}on{/if}"><a href="index.php?m=Home&c=Article{$item['id']}&a=index&method=list&table={$item['app_id']}">{$item['cn_name']}</a></dt>
+					{/if}
+				{/foreach}
+				<dt class="{if $cur_nav eq 'appConfigList'}on{/if}"><a href="{U('WeChat/appConfig?method=list')}">盒子游戏配置</a></dt>
+			</dl>
+		</li>
+		<li>
+			<a onclick="switchMenu($(this).next())">广告配置<img src="Public/Home/images/menu_dropdown-arrow.png" /></a>
+			<dl>
+				<dt class="{if $cur_nav eq 'simple_ad_List'}on{/if}"><a href="{U('AdConfig/adConfig?method=list')}">广告信息</a></dt>
+				<dt class="{if $cur_nav eq 'jumpList'}on{/if}"><a href="{U('AdConfig/jump?method=list')}">跳转配置</a></dt>
+			</dl>
+		</li>
+
+		<li>
+			<a onclick="switchMenu($(this).next())">小程序管理<img src="Public/Home/images/menu_dropdown-arrow.png" /></a>
+			<dl>
+				<dt class="{if $cur_nav eq 'list'}on{/if}"><a href="{U('WeChat/index?method=list')}">小程序列表</a></dt>
+				<dt class="{if $cur_nav eq 'typeList'}on{/if}"><a href="{U('WeChat/gameTypeMange?method=list')}">盒子类型配置</a></dt>
+				<dt class="{if $cur_nav eq 'download'}on{/if}"><a href="{U('WeChat/downLoadApp')}">下载小程序</a></dt>
+				<dt class="{if $cur_nav eq 'homeworkbox'}on{/if}"><a href="{U('WeChat/downLoadHomeworkBox')}">数学小工具下载</a></dt>
+				<dt class="{if $cur_nav eq 'create'}on{/if}"><a href="{U('WeChat/createAdmin')}">生成小程序后台</a></dt>
+			</dl>
+		</li>		
+		<li>
+			<a onclick="switchMenu($(this).next())">新游戏盒子<img src="Public/Home/images/menu_dropdown-arrow.png" /></a>
+			<dl>
+				<dt class="{if $cur_nav eq 'nlist'}on{/if}"><a href="{U('Nbox/index?method=list')}">游戏列表</a></dt>
+				<dt class="{if $cur_nav eq 'ncates'}on{/if}"><a href="{U('Nbox/cates?method=list')}">游戏类型</a></dt>
+			</dl>
+		</li>		
+		<li>
+			<a onclick="switchMenu($(this).next())">系统管理<img src="Public/Home/images/menu_dropdown-arrow.png" /></a>
+			<dl>
+				<dt class="{if $cur_nav eq 'list'}on{/if}"><a href="{U('User/index?method=list')}">用户列表</a></dt>
+			</dl>
+		</li>
+		{elseif cookie('id') eq 8 or cookie('id') eq 11 or cookie('id') eq 12 or (cookie('id')>12 and cookie('id')<37) or cookie('id')>37}
+		<li>
+			<a onclick="switchMenu($(this).next())">文章管理<img src="Public/Home/images/menu_dropdown-arrow.png" /></a>
+			<dl>
+				<dt class="{if $cur_nav eq 'list'}on{/if}"><a href="{U('Article/index?method=list')}">文章列表</a></dt>
+				<dt class="{if $cur_nav eq 'pickup'}on{/if}"><a href="{U('Article/pickup')}">文章采集</a></dt>
+				<dt class="{if $cur_nav eq 'keyword'}on{/if}"><a href="{U('Article/keyword')}">关键词</a></dt>
+			</dl>
+		</li>
+		<li>
+			<a onclick="switchMenu($(this).next())">小程序内容<img src="Public/Home/images/menu_dropdown-arrow.png" /></a>
+			<dl>
+				{foreach from=$apps key=key item=item}
+				{if cookie('user_type') eq 1 or cookie('appid') eq $item['id']}
+				<dt class="{if $cur_nav eq $item['id']}on{/if}"><a href="index.php?m=Home&c=Article{$item['id']}&a=index&method=list&table={$item['app_id']}">{$item['cn_name']}</a></dt>
+				{/if}
+				{if cookie('appid') eq $item['id']}
+					<dt class="{if $cur_nav eq 'gz'}on{/if}"><a href="index.php?m=Home&c=Article{$item['id']}&a=gzConfig&method=edit">内页关注</a></dt>
+					{/if}
+				{/foreach}
+			</dl>
+		</li>
+		<li>
+			<a onclick="switchMenu($(this).next())">广告配置<img src="Public/Home/images/menu_dropdown-arrow.png" /></a>
+			<dl>
+				<dt class="{if $cur_nav eq 'simple_ad_List'}on{/if}"><a href="{U('AdConfig/adConfig?method=list')}">广告信息</a></dt>
+				{if cookie('user_type') eq 1}
+				<dt class="{if $cur_nav eq 'jumpList'}on{/if}"><a href="{U('AdConfig/jump?method=list')}">{cookie('user_type')}跳转配置</a></dt>
+				{/if}
+			</dl>
+		</li>
+		{elseif cookie('id') eq 9 or cookie('id') eq 37}
+		<li>
+			<a onclick="switchMenu($(this).next())">广告配置<img src="Public/Home/images/menu_dropdown-arrow.png" /></a>
+			<dl>
+				<dt class="{if $cur_nav eq 'simple_ad_List'}on{/if}"><a href="{U('AdConfig/adBoxConfig?method=list')}">广告信息</a></dt>
+			</dl>
+		</li>
+		<li>
+			<a onclick="switchMenu($(this).next())">小程序管理<img src="Public/Home/images/menu_dropdown-arrow.png" /></a>
+			<dl>
+				<dt class="{if $cur_nav eq 'appConfigList'}on{/if}"><a href="{U('WeChat/appConfig?method=list')}">盒子游戏配置</a></dt>
+				<dt class="{if $cur_nav eq 'typeList'}on{/if}"><a href="{U('WeChat/gameTypeMange?method=list')}">盒子类型配置</a></dt>
+				<dt class="{if $cur_nav eq 'download'}on{/if}"><a href="{U('WeChat/downLoadApp')}">下载小程序</a></dt>
+			</dl>
+		</li>
+		{/if}
+	</ul>
+</aside>
+<script type="text/javascript" src="Public/Common/js/jquery.cookie.js"></script>
+<script type="text/javascript">
+	function switchMenu(obj){
+		//初始化效果
+		$('.left dl').slideUp();
+		$('.left dl').prev().removeClass('selected');
+		$('.left dl dt').removeClass('on');
+		//切换
+		if(obj.css('display')=='none'){
+			obj.slideDown();
+			obj.prev().addClass('selected');
+			//设置cookie
+			var len=$('.left li').length;
+			for(var i=0;i<len;i++){
+				if($('.left li:eq('+i+') dl').prev().attr('class')=='selected'){
+					$.cookie('selected', i,{ path: '/' });
+				}
+			}
+		}else{
+			obj.slideUp();
+			$('.left dl').prev().removeClass('selected');
+			$.cookie('selected',null);
+		}
+	}
+	$('.left li:eq('+$.cookie('selected')+') dl').css('display','block');	//读取cookie
+	$('.left li:eq('+$.cookie('selected')+') dl').prev().addClass('selected');
+</script>

@@ -1,0 +1,23 @@
+<import src="../../utils/IndexSearchInput/wxSearch.wxml"></import>
+<template is="wxSearch" data="{{wxSearchData:wxSearchData}}"></template>
+<view class="message__list">
+    <block wx:for="{{messages}}" wx:key="{{title}}">
+        <view bindtap="bindtap{{index}}" class="item" hover="true" hoverClass="hover_item">
+            <view class="item-left">
+                <image class="image" mode="scaleToFill" src="{{item.url}}"></image>
+            </view>
+            <view class="item-middle">
+                <view class="item_juzhong">
+                    <text class="title">{{item.title}}</text>
+                </view>
+            </view>
+            <view class="item_right">
+                <image class="tree_image_right" src="{{item.rightImage}}"></image>
+            </view>
+        </view>
+        <view class="line" wx:if="{{index!=8}}"></view>
+    </block>
+    <view class="address-add" wx:for="{{adId}}">
+        <ad unitId="{{item.id}}"></ad>
+    </view>
+</view>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>QQ后台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="Public/Home/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Home/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="Public/Common/js/calendar/laydate.js"></script>
+</head>
+<body>
+
+{include file="../Common/header.html"}
+
+{include file="../Common/left.html"}
+
+<section class="container">
+	<div class="breadcrumbs">
+		<div class="location">广告任务管理</div>
+		<div class="breadcrumb">
+			<img src="Public/Home/images/home.png" /> 
+			<a href="{U('Index/index')}">首页</a> &gt; 广告任务管理 &gt; 添加广告任务
+			<a class="back fr" href="javascript:history.back();">返回</a>
+		</div>
+	</div>
+	<div class="main">
+		<font color="#f00"></font>
+		<form name="task" action="{U('AdTask/index?method=add')}" method="post" onsubmit="return check();">
+			<table>
+				<tr>
+					<td><font color="#f00">*</font>群标签：</td>
+					<td>
+						<select name="labels">
+							<option value="">请选择群标签</option>
+							{foreach from=$labels key=key item=item}
+							<option value="{$item['labels']}">{$item['labels']}</option>
+							{/foreach}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="18%"><font color="#f00">*</font>群数量：</td>
+					<td><input type="text" name="group_num" /></td>
+				</tr>	
+				<tr>
+					<td><font color="#f00">*</font>任务类型：</td>
+					<td>
+						<select name="task_type">
+							<option value="1">群发</option>
+						</select>
+					</td>
+				</tr>				
+				<tr>
+					<td>开始时间：</td>
+					<td><input name="start" id="start" value="{date('Y-m-d')} 00:00:00" onclick="laydate({ elem: '#start',istime: true, format: 'YYYY-MM-DD hh:mm:ss' })" readonly="readonly" type="text" /></td>
+				</tr>
+				<tr>
+					<td>结束时间：</td>
+					<td><input name="end" id="end" value="{date('Y-m-d')} 23:59:59" onclick="laydate({ elem: '#end',istime: true, format: 'YYYY-MM-DD hh:mm:ss' })" readonly="readonly" type="text" /></td>
+				</tr>
+				<tr>
+					<td>内容：</td>
+					<td>
+						<script type="text/javascript" src="Public/Common/org/ueditor/ueditor.config.js"></script>
+						<script type="text/javascript" src="Public/Common/org/ueditor/ueditor.all.min.js"> </script>
+						<script type="text/javascript" src="Public/Common/org/ueditor/lang/zh-cn/zh-cn.js"></script>
+						<script id="editor" name="content" type="text/plain" style="line-height:20px;width:860px;height:360px;"></script>
+						<script type="text/javascript">
+							var ue = UE.getEditor('editor');
+						</script>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" name="sub" value="保存" />
+						<input type="reset" name="res" value="重置" />
+					</td>
+				</tr>
+			</table>
+		</form>
+		<script type="text/javascript">
+			function check(){
+				/*if(task.labels.value==''){
+					alert('请选择群标签');
+					task.labels.focus();
+					return false;
+				}				
+				if(task.group_num.value==''){
+					alert('群数量不能为空');
+					task.group_num.focus();
+					return false;
+				}*/
+				if(task.group_num.value!=''){
+					var reg = /^[0-9]*$/;
+					if (!reg.test(task.group_num.value)){
+						alert("请输入数字!");
+						task.group_num.focus();
+						return false;
+					}
+				}				
+			}
+		</script>
+	</div>
+</section>
+</body>
+</html>

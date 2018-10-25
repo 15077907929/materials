@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>小程序后台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="Public/Home/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Home/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+{include file="../Common/header.html"}
+
+{include file="../Common/left.html"}
+
+<section class="container">
+	<div class="breadcrumbs">
+		<div class="location">小程序管理</div>
+		<div class="breadcrumb">
+			<img src="Public/Home/images/home.png" /> 
+			<a href="{U('Index/index')}">首页</a> &gt; 小程序管理 &gt; 用户列表
+			<a class="back fr" href="javascript:history.back();">返回</a>
+		</div>
+	</div>
+	<div class="main mlist">
+		<form name="search" action="{U('User/index?method=search')}" method="get">
+			<input type="hidden" name="c" value="User" />
+			<input type="hidden" name="method" value="search" />
+			<select name="labels">
+				<option value="">请选择标签</option>
+				{foreach from=$labels key=key item=item}
+				<option value="{$item['labels']}">{$item['labels']}</option>
+				{/foreach}
+			</select>
+			<input type="text" name="keyword" />
+			<input type="submit" name="sub" value="搜索" />
+		</form>
+		<div class="artbar">
+			<a class="del" href=""><img src="Public/Home/images/trash.png" height="12" /> 批量删除</a>
+			<a class="add" href="{U('User/index?method=add')}"><img src="Public/Home/images/add.png" /> 添加</a>
+			<span class="fr">共有数据：<b>{$count}</b> 条</span>
+		</div>
+		<table>	
+			<tr>
+				<th width="6%"></th>
+				<th width="8%">ID</th>
+				<th width="10%">用户名</th>
+				<th width="10%">密码</th>
+				<th width="10%">用户类别</th>
+				<th width="10%">appid</th>
+				<th width="10%">添加日期</th>
+				<th width="8%">操作</th>
+			</tr>
+			{foreach from=$res['list'] key=key item=item}
+			<tr>
+				<td><input value="" name="" type="checkbox" /></td>
+				<td>{$item.id}</td>
+				<td>{$item.user_name}</td>
+				<td>{$item.user_pass}</td>
+				<td>{$item.user_type}</td>
+				<td>{$item.appid}</td>
+				<td>{$item.addtime}</td>
+				<td>
+					<a href="index.php?m=Home&c=User&a=index&method=edit&id={$item['id']}"><img src="Public/Home/images/edit.png" /></a>
+					<a onclick="">
+						<img src="Public/Home/images/delete.png" />
+					</a>
+				</td>
+			</tr>
+			{/foreach}			
+		</table>
+		<div class="pages">{$res['page']}</div>
+	</div>
+</section>
+</body>
+</html>

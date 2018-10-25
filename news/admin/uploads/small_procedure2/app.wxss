@@ -1,0 +1,15 @@
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.userinfo-avatar { width: 128rpx; height: 128rpx; margin: 20rpx; border-radius: 50%; }
+
+.show{ display: block !important; }
+.hide{ display: none !important; }
+
+.fl{ float: left; }
+.fr{ float: right; }

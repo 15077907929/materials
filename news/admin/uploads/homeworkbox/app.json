@@ -1,0 +1,77 @@
+{
+    "pages": [
+        "pages/math_jisuangongju/math_jisuangongju",
+        "pages/math_index/math_index",
+        "pages/math_index/formula/formula",
+        "pages/about/about",
+        "pages/math_jisuangongju/kexuejisuan/kexuejisuan",
+        "pages/math_nenglitisheng/NLTS_index",
+        "pages/math_nenglitisheng/xuexiyushiji/xuexiyushiji",
+        "pages/math_nenglitisheng/xuexiyushiji/xuexiyushiji_template/xuexiyushiji_template",
+        "pages/math_jisuangongju/daohang_template/daohang_template",
+        "pages/math_jisuangongju/jisuangongju_item/changdu/changdu",
+        "pages/math_jisuangongju/jisuangongju_item/quyu/quyu",
+        "pages/math_jisuangongju/jisuangongju_item/liang/liang",
+        "pages/math_jisuangongju/jisuangongju_item/sangedingdiandesanjiaoqu/sangedingdiandesanjiaoqu",
+        "pages/math_jisuangongju/jisuangongju_item/zhongliang/zhongliang",
+        "pages/math_jisuangongju/jisuangongju_item/shijian/shijian",
+        "pages/math_jisuangongju/jisuangongju_item/shudu/shudu",
+        "pages/math_jisuangongju/jisuangongju_item/wendu/wendu",
+        "pages/math_jisuangongju/jisuangongju_item/jiaodu/jiaodu",
+        "pages/math_jisuangongju/jisuangongju_item/sanjiao/sanjiao",
+        "pages/math_jisuangongju/jisuangongju_item/liangdianzhijiandejuli/liangdianzhijiandejuli",
+        "pages/math_jisuangongju/jisuangongju_item/yuanxin/yuanxin",
+        "pages/math_jisuangongju/jisuangongju_item/shanxin/shanxin",
+        "pages/math_jisuangongju/jisuangongju_item/zuiti/zuiti",
+        "pages/math_jisuangongju/jisuangongju_item/jinzita/jinzita",
+        "pages/math_jisuangongju/jisuangongju_item/xianxinfangcheng/xianxinfangcheng",
+        "pages/math_jisuangongju/jisuangongju_item/ercifangcheng/ercifangcheng",
+        "pages/math_jisuangongju/jisuangongju_item/zhengduobianxin/zhengduobianxin",
+        "pages/math_jisuangongju/jisuangongju_item/qiu/qiu",
+        "pages/math_jisuangongju/jisuangongju_item/yuanzhuti/yuanzhuti",
+        "pages/math_nenglitisheng/2renyouxi/2renyouxi",
+        "pages/translate/translate",
+        "pages/pages/index/index",
+        "pages/pages/main/main",
+        "pages/pages/history/history"
+    ],
+    "window": {
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#12b7f5",
+        "navigationBarTitleText": "数学小工具",
+        "navigationBarTextStyle": "white",
+        "backgroundColor": "#fbf9fe"
+    },
+    "tabBar": {
+        "color": "#9B9DB1",
+        "selectedColor": "#3cc51f",
+        "borderStyle": "black",
+        "backgroundColor": "#ffffff",
+        "list": [
+            {
+                "pagePath": "pages/math_jisuangongju/math_jisuangongju",
+                "text": "计算工具",
+                "iconPath": "images/tab_contact_normal.png",
+                "selectedIconPath": "images/tab_contact_selected.png"
+            },
+            {
+                "pagePath": "pages/math_index/math_index",
+                "text": "公式",
+                "iconPath": "images/tab_message_normal.png",
+                "selectedIconPath": "images/tab_message_selected.png"
+            },
+            {
+                "pagePath": "pages/math_nenglitisheng/NLTS_index",
+                "text": "能力提升",
+                "iconPath": "images/tab_dynamic_normal.png",
+                "selectedIconPath": "images/tab_dynamic_selected.png"
+            },
+            {
+                "pagePath": "pages/translate/translate",
+                "text": "翻译",
+                "iconPath": "images/discovery.png",
+                "selectedIconPath": "images/discovery_focus.png"
+            }
+        ]
+    }
+}

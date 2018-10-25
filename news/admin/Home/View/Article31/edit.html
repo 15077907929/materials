@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>小程序后台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="Public/Home/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Home/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="Public/Common/js/calendar/laydate.js"></script>
+</head>
+<body>
+
+{include file="../Common/header.html"}
+
+{include file="../Common/left.html"}
+
+<section class="container">
+	<div class="breadcrumbs">
+		<div class="location">任务管理</div>
+		<div class="breadcrumb">
+			<img src="Public/Home/images/home.png" /> 
+			<a href="{U('Index/index')}">首页</a> &gt; 任务管理 &gt; 修改任务
+			<a class="back fr" href="javascript:history.back();">返回</a>
+		</div>
+	</div>
+	<div class="main">
+		<font color="#f00"></font>
+		<form name="edit" action="{U('Article31/index?method=edit')}" method="post" onsubmit="return check();">
+			<input type="hidden" value="{$res['field']['id']}" name="id" />
+			<table>				
+				<tr>
+					<td width="18%"><font color="#f00">*</font>任务名称：</td>
+					<td><input type="text" name="name" id="name" value="{$res['field']['name']}" /></td>
+				</tr>
+				<tr>
+					<td>图片：</td>
+					<td>
+						<input type="text" name="img" id="img_val" value="{$res['field']['img']}" style="margin-right:10px;" />
+						<input id="uploadFile" onchange="uploadImg();" type="file" name="upfile" /><br/>
+						<img id="img" style="height:80px; margin-top:8px;" src="{$res['field']['img']}" />
+					</td>
+				</tr>								
+				<tr>
+					<td>任务数量：</td>
+					<td><input type="text" name="num" id="num" value="{$res['field']['num']}" /></td>
+				</tr>				
+				<tr>
+					<td>奖励：</td>
+					<td><input type="text" name="award" id="award" value="{$res['field']['award']}" /></td>
+				</tr>				
+				<tr>
+					<td>排序：</td>
+					<td><input type="text" name="no_order" id="no_order" value="{$res['field']['no_order']}" /></td>
+				</tr>					
+				<tr>
+					<td>开始时间：</td>
+					<td><input name="starttime" id="start" value="{$res['field']['starttime']}" onclick="laydate({ elem: '#start',istime: true, format: 'YYYY-MM-DD hh:mm:ss' })" readonly="readonly" type="text" /></td>
+				</tr>				
+				<tr>
+					<td>结束时间：</td>
+					<td><input name="endtime" id="stop" value="{$res['field']['endtime']}" onclick="laydate({ elem: '#start',istime: true, format: 'YYYY-MM-DD hh:mm:ss' })" readonly="readonly" type="text" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" name="sub" value="保存" />
+						<input type="button" onclick="showPop();" name="btn" value="另存为" />
+						<input type="reset" name="res" value="重置" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</section>
+<div class="cover hide"></div>
+<form name="move" class="pop hide" action="{U('Article31/index?method=move')}" method="post" onsubmit="fill();">
+	<h3>把本篇任务存入下列小程序表：</h3>
+	<div class="pbd">
+		<input type="hidden" value="{$res['field']['id']}" name="id" />
+		
+		<input type="hidden" name="tit" value="" />
+		<input type="hidden" name="cate" value="" />
+		<input type="hidden" name="view" value="" />
+		<input type="hidden" name="order" value="" />
+		<input type="hidden" name="content" value='' />
+		<input type="hidden" name="img" value="" />
+		{foreach from=$apps key=key item=item}
+		{if cookie('user_type') eq 1 or cookie('appid') eq $item['id']}
+		{$item.cn_name}：<input type="checkbox" name="table[]" value="{$item.app_id}" /><br/>
+		{/if}
+		{/foreach}
+		<div class="btn">
+			<input type="submit" name="sub" value="确定" />
+			<input type="button" onclick="cancel();" name="can" value="取消" />
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+	function check(){				
+		if(edit.tit.value==''){
+			alert('任务标题不能为空！');
+			edit.tit.focus();
+			return false;
+		}
+		if(edit.view.value!=''){
+			var reg = /^[0-9]*$/;
+			if (!reg.test(edit.view.value)){
+				alert("请输入数字！");
+				edit.view.focus();
+				return false;
+			}
+		}				
+	}	
+	
+	function fill(){
+		$('.pbd input[name=tit]').val($('#tit').val());
+		$('.pbd input[name=cate]').val($('#cate').val());
+		$('.pbd input[name=order]').val($('#order').val());
+		$('.pbd input[name=view]').val($('#view').val());
+		$('.pbd input[name=img]').val($('#img_val').val());
+		$('.pbd input[name=content]').val(UE.getEditor('editor').getContent());
+	}
+	
+	function showPop(){
+		$('.cover').removeClass('hide');
+		$('.pop').removeClass('hide');
+	}
+	
+	function cancel(){
+		$('.cover').addClass('hide');
+		$('.pop').addClass('hide');	
+	}
+	
+	function uploadImg(){
+		var data = new FormData();
+		$.each($('#uploadFile')[0].files, function(i, file) {
+			data.append('upfile', file);
+		});
+		$.ajax({
+			url:'index.php?m=Home&c=Common&a=uploadImg',
+			type:'POST',
+			data:data,
+			cache: false,
+			dataType: "json",
+			contentType: false,        //不可缺参数
+			processData: false,        //不可缺参数
+			success:function(data){
+				var obj=jQuery.parseJSON(data);
+				if(data.status==1){
+					$('#img').attr('src',data.src);
+					$('input[name=img]').val(data.src);
+					$('#img').removeClass('hide');
+				}else{
+					alert(data.msg);
+				}
+			}
+		});
+	}	
+	
+	function uploadAttachment(){
+		var data = new FormData();
+		$.each($('#attachment')[0].files, function(i, file) {
+			data.append('upfile2', file);
+		});
+		$.ajax({
+			url:'index.php?m=Home&c=Common&a=uploadAttachment',
+			type:'POST',
+			data:data,
+			cache: false,
+			dataType: "json",
+			contentType: false,        //不可缺参数
+			processData: false,        //不可缺参数
+			success:function(data){
+				var obj=jQuery.parseJSON(data);
+				if(data.status==1){
+					$('input[name=file]').val(data.src);
+				}else{
+					alert(data.msg);
+				}
+			}
+		});
+	}
+</script>
+		
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>小程序后台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="Public/Home/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Home/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="Public/Common/js/calendar/laydate.js"></script>
+</head>
+<body>
+
+{include file="../Common/header.html"}
+
+{include file="../Common/left.html"}
+
+<section class="container">
+	<div class="breadcrumbs">
+		<div class="location">文章管理</div>
+		<div class="breadcrumb">
+			<img src="Public/Home/images/home.png" /> 
+			<a href="{U('Index/index')}">首页</a> &gt; 文章管理 &gt; 修改文章
+			<a class="back fr" href="javascript:history.back();">返回</a>
+		</div>
+	</div>
+	<div class="main">
+		<font color="#f00"></font>
+		<form name="edit" action="{U('Article14/index?method=edit')}" method="post" onsubmit="return check();">
+			<input type="hidden" value="{$res['field']['art_id']}" name="art_id" />
+			<table>
+				<tr>
+					<td>文章url：</td>
+					<td>../display/display?id={$res['field']['art_id']}</td>
+				</tr>				
+				<tr>
+					<td width="18%"><font color="#f00">*</font>文章标题：</td>
+					<td><input type="text" name="art_tit" id="art_tit" value="{$res['field']['art_tit']}" /></td>
+				</tr>
+				<tr>
+					<td>关键词：</td>
+					<td>
+						<select name="art_keyword" id="art_keyword"  disabled>
+							<option value="">请选择文章关键词</option>
+							{foreach from=$res['art_keyword'] key=key item=item}
+								{if $item['art_keyword'] neq $res['field']['art_keyword']}
+									<option value="{$item['art_keyword']}">{$item['art_keyword']}</option>
+								{else}
+									<option selected value="{$item['art_keyword']}">{$item['art_keyword']}</option>
+								{/if}
+							{/foreach}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>文章类型：</td>
+					<td>
+						<select name="art_cate" id="art_cate">
+							<option value="">请选择文章类型</option>
+							{foreach from=$res['cates'] key=key item=item}
+								{if $item['cate_id'] neq $res['field']['art_cate']}
+									<option value="{$item['cate_id']}">{$item['cate_name']}</option>
+								{else}
+									<option selected value="{$item['cate_id']}">{$item['cate_name']}</option>
+								{/if}
+							{/foreach}
+						</select>	
+					</td>
+				</tr>
+				<tr>
+					<td>状态：</td>
+					<td>
+						<select name="art_status" id="art_status">
+							<option value="">请选择状态</option>
+							<option {if $res['field']['art_status'] eq 0}selected{/if} value="0">不显示</option>
+							<option {if $res['field']['art_status'] eq 1}selected{/if} value="1">初始</option>
+							<option {if $res['field']['art_status'] eq 2}selected{/if} value="2">正常</option>
+						</select>	
+					</td>
+				</tr>
+				<tr>
+					<td>图片：</td>
+					<td>
+						<input type="text" name="art_img" id="art_img_val" value="{$res['field']['art_img']}" style="margin-right:10px;" /><input id="uploadFile" onchange="uploadImg();" type="file" name="upfile" /><br/>
+						<img id="art_img" style="height:80px; margin-top:8px;" src="{$res['field']['art_img']}" />
+					</td>
+				</tr>				
+				<tr>
+					<td>浏览次数：</td>
+					<td><input type="text" name="art_view" id="art_view" value="{$res['field']['art_view']}" /></td>
+				</tr>				
+				<tr>
+					<td>排序：</td>
+					<td><input type="text" name="art_order" id="art_order" value="{$res['field']['art_order']}" /></td>
+				</tr>					
+				<tr>
+					<td>内容：</td>
+					<td>
+						<script type="text/javascript" src="Public/Common/org/ueditor/ueditor.config.js"></script>
+						<script type="text/javascript" src="Public/Common/org/ueditor/ueditor.all.min.js"> </script>
+						<script type="text/javascript" src="Public/Common/org/ueditor/lang/zh-cn/zh-cn.js"></script>
+						<script id="editor" name="art_content" type="text/plain" style="line-height:20px;width:860px;height:360px;">{html_entity_decode($res['field']['art_content'])}</script>
+						<script type="text/javascript">
+							var ue = UE.getEditor('editor');
+						</script>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" name="sub" value="保存" />
+						<input type="button" onclick="showPop();" name="btn" value="另存为" />
+						<input type="reset" name="res" value="重置" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</section>
+<div class="cover hide"></div>
+<form name="move" class="pop hide" action="{U('Article14/index?method=move')}" method="post" onsubmit="fill();">
+	<h3>把本篇文章存入下列小程序表：</h3>
+	<div class="pbd">
+		<input type="hidden" value="{$res['field']['art_id']}" name="art_id" />
+		
+		<input type="hidden" name="art_tit" value="" />
+		<input type="hidden" name="art_cate" value="" />
+		<input type="hidden" name="art_view" value="" />
+		<input type="hidden" name="art_order" value="" />
+		<input type="hidden" name="art_content" value='' />
+		<input type="hidden" name="art_img" value="" />
+		{foreach from=$apps key=key item=item}
+		{if cookie('user_type') eq 1 or cookie('appid') eq $item['id']}
+		{$item.cn_name}：<input type="checkbox" name="table[]" value="{$item.app_id}" /><br/>
+		{/if}
+		{/foreach}
+		<div class="btn">
+			<input type="submit" name="sub" value="确定" />
+			<input type="button" onclick="cancel();" name="can" value="取消" />
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+	function check(){				
+		if(edit.art_tit.value==''){
+			alert('文章标题不能为空！');
+			edit.art_tit.focus();
+			return false;
+		}
+		if(edit.art_view.value!=''){
+			var reg = /^[0-9]*$/;
+			if (!reg.test(edit.art_view.value)){
+				alert("请输入数字！");
+				edit.art_view.focus();
+				return false;
+			}
+		}				
+	}	
+	
+	function fill(){
+		$('.pbd input[name=art_tit]').val($('#art_tit').val());
+		$('.pbd input[name=art_cate]').val($('#art_cate').val());
+		$('.pbd input[name=art_order]').val($('#art_order').val());
+		$('.pbd input[name=art_view]').val($('#art_view').val());
+		$('.pbd input[name=art_img]').val($('#art_img_val').val());
+		$('.pbd input[name=art_content]').val(UE.getEditor('editor').getContent());
+	}
+	
+	function showPop(){
+		$('.cover').removeClass('hide');
+		$('.pop').removeClass('hide');
+	}
+	
+	function cancel(){
+		$('.cover').addClass('hide');
+		$('.pop').addClass('hide');	
+	}
+	
+	function uploadImg(){
+		var data = new FormData();
+		$.each($('#uploadFile')[0].files, function(i, file) {
+			data.append('upfile', file);
+		});
+		$.ajax({
+			url:'index.php?m=Home&c=Common&a=uploadImg',
+			type:'POST',
+			data:data,
+			cache: false,
+			dataType: "json",
+			contentType: false,        //不可缺参数
+			processData: false,        //不可缺参数
+			success:function(data){
+				var obj=jQuery.parseJSON(data);
+				if(data.status==1){
+					$('#art_img').attr('src',data.src);
+					$('input[name=art_img]').val(data.src);
+					$('#art_img').removeClass('hide');
+				}else{
+					alert(data.msg);
+				}
+			}
+		});
+	}
+</script>
+		
+</body>
+</html>

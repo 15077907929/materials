@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>QQ后台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="Public/Home/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Home/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+{include file="../Common/header.html"}
+
+{include file="../Common/left.html"}
+
+<section class="container">
+	<div class="breadcrumbs">
+		<div class="location">QQ群管理</div>
+		<div class="breadcrumb">
+			<img src="Public/Home/images/home.png" /> 
+			<a href="{U('Index/index')}">首页</a> &gt; QQ群管理 &gt; QQ群搜索
+			<a class="back fr" href="javascript:history.back();">返回</a>
+		</div>
+	</div>
+	<div class="main article">
+		<form name="search" action="{U('QQGroup/index?method=search')}" method="get">
+			<input type="hidden" name="c" value="QQGroup" />
+			<input type="hidden" name="method" value="search" />
+			<select name="labels">
+				<option value="">请选择群标签</option>
+				{foreach from=$res['labels'] key=key item=item}
+				<option {if $cur_labels eq $item['labels']}selected{/if} value="{$item['labels']}">{$item['labels']}</option>
+				{/foreach}
+			</select>
+			<input type="text" name="keyword" />
+			<input type="submit" name="sub" value="搜索" />
+		</form>
+		<div class="artbar">
+			<a class="del" href=""><img src="Public/Home/images/trash.png" height="12" /> 批量删除</a>
+			<a class="add" href=""><img src="Public/Home/images/add.png" /> 添加群</a>
+			<span class="fr">共有数据：<b>{$res['count']}</b> 条</span>
+		</div>
+		<table>	
+			<tr>
+				<th width="6%"></th>
+				<th width="8%">ID</th>
+				<th width="16%">群号</th>
+				<th>群成员数</th>
+				<th width="20%">标签</th>
+				<th width="16%">添加日期</th>
+				<th width="12%">操作</th>
+			</tr>
+			{foreach from=$res['list'] key=key item=item}
+			<tr>
+				<td><input value="" name="" type="checkbox" /></td>
+				<td>{$item.id}</td>
+				<td>{$item.group_id}</td>
+				<td>{$item.group_member_num}</td>
+				<td>{$item.labels}</td>
+				<td>{$item.addtime}</td>
+				<td>
+					<a href=""><img src="Public/Home/images/edit.png" /></a>
+					<a onclick="">
+						<img src="Public/Home/images/delete.png" />
+					</a>
+				</td>
+			</tr>
+			{/foreach}			
+		</table>
+		<div class="pages">{$res['show']}</div>
+	</div>
+</section>
+</body>
+</html>

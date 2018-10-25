@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>小程序后台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="Public/Home/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Home/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+{include file="../Common/header.html"}
+
+{include file="../Common/left.html"}
+
+<section class="container">
+	<div class="breadcrumbs">
+		<div class="location">QQ群管理</div>
+		<div class="breadcrumb">
+			<img src="Public/Home/images/home.png" /> 
+			<a href="{U('Index/index')}">首页</a> &gt; 文章管理 &gt; 文章搜索
+			<a class="back fr" href="javascript:history.back();">返回</a>
+		</div>
+	</div>
+	<div class="main mlist">
+		<form name="search" action="{U('Article18/index?method=search')}" method="get">
+			<input type="hidden" name="c" value="Article18" />
+			<input type="hidden" name="method" value="search" />
+			<select name="art_status">
+				<option value="">请选择文章状态</option>
+				<option {if $cur_status eq 1}selected{/if} value="1">初始</option>
+				<option {if $cur_status eq 2}selected{/if} value="2">正常</option>
+			</select>
+			<input type="text" name="keyword" />
+			<input type="submit" name="sub" value="搜索" />
+		</form>
+		<div class="artbar">
+			<a class="del" href=""><img src="Public/Home/images/trash.png" height="12" /> 批量删除</a>
+			<a class="add" href=""><img src="Public/Home/images/add.png" /> 添加群</a>
+			<span class="fr">共有数据：<b>{$res['count']}</b> 条</span>
+		</div>
+		<table>	
+			<tr>
+				<th width="4%"></th>
+				<th width="6%">ID</th>
+				<th>文章标题</th>
+				<th width="6%">关键词</th>
+				<th width="6%">浏览次数</th>
+				<th width="6%">状态</th>
+				<th width="12%">添加日期</th>
+				<th width="12%">操作</th>
+			</tr>
+			{foreach from=$res['list'] key=key item=item}
+			<tr>
+				<td><input value="" name="" type="checkbox" /></td>
+				<td>{$item.art_id}</td>
+				<td>{$item.art_tit}</td>
+				<td>{$item.art_keyword}</td>
+				<td>{$item.art_view}</td>
+				<td>
+					{if $item.art_status eq 1}
+						<font color="red">初始</font>
+					{elseif $item.art_status eq 2}
+						正常					
+					{elseif $item.art_status eq 3}
+						
+					{/if}
+				</td>
+				<td>{$item.art_addtime}</td>
+				<td>
+					<a href="index.php?m=Home&c=Article18&a=index&method=edit&art_id={$item.art_id}"><img src="Public/Home/images/edit.png" /></a>
+					<a onclick="javascript:check_del({$item.id})">
+						<img src="Public/Home/images/delete.png" />
+					</a>
+				</td>
+			</tr>
+			{/foreach}			
+		</table>
+		<div class="pages">{$res['show']}</div>
+	</div>
+</section>
+</body>
+</html>

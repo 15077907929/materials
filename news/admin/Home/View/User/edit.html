@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>小程序后台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="Public/Home/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Home/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="Public/Common/js/calendar/laydate.js"></script>
+</head>
+<body>
+
+{include file="../Common/header.html"}
+
+{include file="../Common/left.html"}
+
+<section class="container">
+	<div class="breadcrumbs">
+		<div class="location">小程序管理</div>
+		<div class="breadcrumb">
+			<img src="Public/Home/images/home.png" /> 
+			<a href="{U('Index/index')}">首页</a> &gt; 系统管理 &gt; 用户修改
+			<a class="back fr" href="javascript:history.back();">返回</a>
+		</div>
+	</div>
+	<div class="main">
+		<font color="#f00"></font>
+		<form name="fadd" action="{U('User/index?method=edit')}" method="post" onsubmit="return check();">
+			<table>
+				<tr>
+					<td><font color="#f00">*</font>用户类别：</td>
+					<td>
+						<select name="user_type">
+							<option value="0" {if $res['field']['user_type'] eq 0}selected{/if}>普通管理员</option>
+							<option value="1" {if $res['field']['user_type'] eq 1}selected{/if}>系统管理员</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="18%"><font color="#f00">*</font>用户名：</td>
+					<td>
+						<input type="text" name="user_name" value="{$res['field']['user_name']}" />
+						<input type="hidden" name="id" value="{$res['field']['id']}" />
+					</td>
+				</tr>	
+				<tr>
+					<td><font color="#f00">*</font>用户密码：</td>
+					<td>
+						<input type="password" name="user_pass" value="" />
+					</td>
+				</tr>				
+				<!--<tr>
+					<td><font color="#f00">*</font>用户权限：</td>
+					<td>
+						文章管理：<input type="checkbox" name="user_power[]" value="" />
+						小程序管理：<input type="checkbox" name="user_power[]" value="" />
+						广告配置：<input type="checkbox" name="user_power[]" value="" />
+						系统管理：<input type="checkbox" name="user_power[]" value="" />
+					</td>
+				</tr>-->	
+				<tr>
+					<td><font color="#f00">*</font>appid：</td>
+					<td>
+						所有小程序：<input type="checkbox" name="appid[]" value="all" />
+						{foreach from=$apps key=key item=item}
+						{$item.cn_name}：<input type="checkbox" {if $res['field']['appid'] eq $item.id}checked{/if} name="appid[]" value="{$item.id}" />
+						{/foreach}
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" name="sub" value="保存" />
+						<input type="reset" name="res" value="重置" />
+					</td>
+				</tr>
+			</table>
+		</form>
+		<script type="text/javascript">
+			function check(){				
+				if(fadd.user_name.value==''){
+					alert('用户名不能为空！');
+					fadd.user_name.focus();
+					return false;
+				}				
+				if(fadd.user_pass.value==''){
+					alert('用户密码不能为空！');
+					fadd.user_pass.focus();
+					return false;
+				}				
+				if(fadd.secret.value==''){
+					alert('应用秘钥不为空！');
+					fadd.secret.focus();
+					return false;
+				}
+			}
+		</script>
+	</div>
+</section>
+</body>
+</html>

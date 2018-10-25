@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>小程序后台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="Public/Home/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Home/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="Public/Common/js/calendar/laydate.js"></script>
+</head>
+<body>
+
+{include file="../Common/header.html"}
+
+{include file="../Common/left.html"}
+
+<section class="container">
+	<div class="breadcrumbs">
+		<div class="location">文章管理</div>
+		<div class="breadcrumb">
+			<img src="Public/Home/images/home.png" /> 
+			<a href="{U('Index/index')}">首页</a> &gt; 文章管理 &gt; 修改文章
+			<a class="back fr" href="javascript:history.back();">返回</a>
+		</div>
+	</div>
+	<div class="main">
+		<font color="#f00"></font>
+		<form name="edit" action="{U('Article/index?method=edit')}" method="post" onsubmit="return check();">
+			<input type="hidden" value="{$res['field']['art_id']}" name="art_id" />
+			<table>
+				<tr>
+					<td><font color="#f00">*</font>群标签：</td>
+					<td>
+						<select name="art_cate">
+							<option value="">请选择文章类型</option>
+							{foreach from=$res['cates'] key=key item=item}
+								{if $item['cate_id'] neq $res['field']['art_cate']}
+									<option value="{$item['cate_id']}">{$item['cate_name']}</option>
+								{else}
+									<option selected value="{$item['cate_id']}">{$item['cate_name']}</option>
+								{/if}
+							{/foreach}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="18%"><font color="#f00">*</font>文章标题：</td>
+					<td><input type="text" name="art_tit" value="{$res['field']['art_tit']}" /></td>
+				</tr>				
+				<tr>
+					<td>图片：</td>
+					<td>
+						<input type="text" name="art_img" value="{$res['field']['art_img']}" /><br/>
+						<img id="art_img" style="height:80px; margin-top:8px;" src="{$res['field']['art_img']}" />
+					</td>
+				</tr>				
+				<tr>
+					<td>浏览次数：</td>
+					<td><input type="text" name="art_view" value="{$res['field']['art_view']}" /></td>
+				</tr>	
+				<tr>
+					<td>状态：</td>
+					<td>
+						<select name="art_status">
+							<option value="1" {if $item['art_status'] eq 1}selected{/if}>正常</option>
+							<option value="2">推荐</option>
+							<option value="3">广告位</option>
+						</select>
+					</td>
+				</tr>				
+				<tr>
+					<td>发布时间：</td>
+					<td><input name="start" id="start" value="{$res['field']['art_addtime']}" onclick="laydate({ elem: '#start',istime: true, format: 'YYYY-MM-DD hh:mm:ss' })" readonly="readonly" type="text" /></td>
+				</tr>
+				<tr>
+					<td>内容：</td>
+					<td>
+						<script type="text/javascript" src="Public/Common/org/ueditor/ueditor.config.js"></script>
+						<script type="text/javascript" src="Public/Common/org/ueditor/ueditor.all.min.js"> </script>
+						<script type="text/javascript" src="Public/Common/org/ueditor/lang/zh-cn/zh-cn.js"></script>
+						<script id="editor" name="art_content" type="text/plain" style="line-height:20px;width:860px;height:360px;">{html_entity_decode($res['field']['art_content'])}</script>
+						<script type="text/javascript">
+							var ue = UE.getEditor('editor');
+						</script>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" name="sub" value="保存" />
+						<input type="button" onclick="showPop();" name="btn" value="另存为" />
+						<input type="reset" name="res" value="重置" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</section>
+<div class="cover hide"></div>
+<form name="move" class="pop hide" action="{U('Article/index?method=move')}" method="post">
+	<h3>把本篇文章存入下列小程序表：</h3>
+	<div class="pbd">
+		<input type="hidden" value="{$res['field']['art_id']}" name="art_id" />
+		123456789：<input type="checkbox" name="table[]" value="123456789" /><br/>
+		987654321：<input type="checkbox" name="table[]" value="987654321" /><br/>
+		<div class="btn">
+			<input type="submit" name="sub" value="确定" />
+			<input type="button" onclick="cancel();" name="can" value="取消" />
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+	function check(){
+		if(edit.art_cate.value==''){
+			alert('请选择文章类型！');
+			edit.art_cate.focus();
+			return false;
+		}				
+		if(edit.art_tit.value==''){
+			alert('文章标题不能为空！');
+			edit.art_tit.focus();
+			return false;
+		}
+		if(edit.art_view.value!=''){
+			var reg = /^[0-9]*$/;
+			if (!reg.test(edit.art_view.value)){
+				alert("请输入数字！");
+				edit.art_view.focus();
+				return false;
+			}
+		}				
+	}	
+	
+	function showPop(){
+		$('.cover').removeClass('hide');
+		$('.pop').removeClass('hide');
+	}
+	
+	function cancel(){
+		$('.cover').addClass('hide');
+		$('.pop').addClass('hide');	
+	}
+</script>
+		
+</body>
+</html>

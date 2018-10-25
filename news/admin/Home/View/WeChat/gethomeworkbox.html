@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>小程序</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="Public/Home/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Home/css/style.css" rel="stylesheet" type="text/css" />
+<link href="Public/Common/js/chosen_v1.8.4/chosen.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+{include file="../Common/header.html"}
+
+{include file="../Common/left.html"}
+
+<section class="container">
+	<div class="breadcrumbs">
+		<div class="location">下载小程序</div>
+		<div class="breadcrumb">
+			<img src="Public/Home/images/home.png" /> 
+			<a href="{U('Index/index')}">首页</a> &gt; 小程序管理 &gt; 生成数学小工具
+			<a class="back fr" href="{U('downLoadApp')}">返回</a>
+		</div>
+	</div>
+	<div class="main">
+		<font color="#f00"></font>
+		<form name="fadd" action="" method="post" onsubmit="return check();">
+			<table>
+				<tr>
+					<td><font color="#f00">*</font>appid：</td>
+					<td>
+						<input type="text" id="appid" />
+					</td>
+				</tr>
+				<tr>
+					<td><font color="#f00">*</font>项目名：</td>
+					<td>
+						<input type="text" id="projectName" />
+					</td>
+				</tr>
+				<!--<tr>
+					<td><font color="#f00">*</font>页面标题：</td>
+					<td>
+						<input type="text" id="pageName" />
+					</td>
+				</tr>-->
+				<tr>
+					<td></td>
+					<td>
+						<input type="button" name="sub" value="生成" id="btn"/>
+						<input type="reset" name="res" value="重置" />
+					</td>
+				</tr>
+			</table>
+		</form>
+		<script type="text/javascript">
+			$(function () {
+				//绑定上传
+                $('#btn').on('click',function () {
+                    //触发异步上传
+                    var url = "{U('getHomeworkBox')}";
+                    var appid = $('#appid').val();
+                    var projectName= $('#projectName').val();
+                    var formData = new FormData();
+                    formData.append('appid',appid);
+                    formData.append('projectName',projectName);
+					formData.append('mb','1');	//采用的模板id
+					
+                    $.ajax({
+                        url: url,
+                        type: "post",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        mimeType: "multipart/form-data",
+                        success: function (data) {
+                            var value = JSON.parse(data);
+                            if(value.status == 0){
+                                alert('生成失败，原因：'+value.msg);
+							}else{
+                                window.location.href = "http://newsadmin.hmset.com/uploads/app.tar.gz";
+							}
+                        },
+                        error: function (data) {
+                            console.log(data);
+                        }
+                    });
+                });
+
+            });
+		</script>
+	</div>
+</section>
+</body>
+</html>

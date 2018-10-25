@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>小程序</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="Public/Home/css/base.css" rel="stylesheet" type="text/css" />
+<link href="Public/Home/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="Public/Common/js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+{include file="../Common/header.html"}
+
+{include file="../Common/left.html"}
+
+<section class="container">
+	<div class="breadcrumbs">
+		<div class="location">小程序管理</div>
+		<div class="breadcrumb">
+			<img src="Public/Home/images/home.png" />
+			<a href="{U('Index/index')}">首页</a> &gt; 小程序管理 &gt; 盒子类型配置
+			<a class="back fr" href="{U('Index/index')}">返回</a>
+		</div>
+	</div>
+	<div class="main mlist">
+		<div class="artbar">
+			<a class="add" href="index.php?m=Home&c=WeChat&a=gameTypeMange&method=add"><img src="Public/Home/images/add.png" /> 添加类型</a>
+			<span class="fr">共有数据：<b>{$res['count']}</b> 条</span>
+		</div>
+		<table>	
+			<tr>
+				<th width="10%">所属盒子</th>
+				<th width="79%">类型</th>
+				<th width="12%">操作</th>
+			</tr>
+			{foreach from=$res['list'] key=key item=item}
+			<tr>
+				<td>{$item.box}</td>
+				<td>{$item.type}</td>
+				<td>
+					<a href="index.php?m=Home&c=WeChat&a=gameTypeMange&method=edit&id={$item.box}"><img src="Public/Home/images/edit.png" /></a>
+					<a onclick="javascript:check_del('{$item.box}')">
+						<img src="Public/Home/images/delete.png" />
+					</a>
+				</td>
+			</tr>
+			{/foreach}			
+		</table>
+		<div class="pages">{$res['show']}</div>
+	</div>
+</section>
+<script type="text/javascript">
+	//确定删除
+	function check_del(id){  
+		var mymessage=confirm("确认要删除该条记录吗？");
+		if(mymessage==true){
+			location.href='index.php?m=Home&c=WeChat&a=gameTypeMange&method=del&id='+id;
+		}
+	} 
+</script>
+</body>
+</html>

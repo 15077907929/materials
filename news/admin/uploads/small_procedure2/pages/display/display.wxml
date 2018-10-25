@@ -1,0 +1,44 @@
+<!--pages/display/display.wxml-->
+<import src="../../wxParse/wxParse.wxml"/>
+<view class='content'>
+  <view class='hd'>
+    <view class='tit'>{{title}}</view>
+    <view class='date'>{{art_addtime}} 发布</view>
+  </view>
+
+  <view class='bd'>
+    <template is="wxParse" data="{{wxParseData:content.nodes}}"/>    
+  </view>
+
+  <view class='footer'>   
+    <view class='share'>
+      <view class='note'>资料整理不易，快分享到群给朋友看吧</view>
+      <view class='next'>-下方更精彩-</view>
+      <view class='btn clearfix'>
+        <view><button class='btn1' open-type="share">分享</button></view>
+        <view><button class='btn2' bindtap='collection'>收藏</button></view>
+      </view>
+    </view>
+    <view class='recommend'>
+        <view class='hd'><text>推荐文章</text></view>
+        <view class='list'>
+          <view class='item clearfix' id='{{item.art_id}}' wx:for="{{loadtitle}}" bindtap='recommend'>
+            <view class='fl left'>
+              <view class='tit'>{{item.art_tit}}</view>
+              <view class='date'>{{item.art_addtime}} 发布</view>
+            </view>
+            <view class='pic fr'><image src="http://newsadmin.hmset.com/{{item.art_img}}" mode='center'></image></view>
+          </view>
+        </view>
+    </view>     
+  </view>
+
+  <view class='bar clearfix'>
+    <view class='home fl' >
+      <image bindtap="goHome" style='width:110px; height:25px;' src="/images/home.jpg" mode='widthFix'></image>
+    </view>
+    <button class='share fl share-btn' open-type="share">
+      <image style='width:112px; height:18px;' src="/images/share.jpg" mode='widthFix'></image>
+    </button>
+  </view>
+</view>
