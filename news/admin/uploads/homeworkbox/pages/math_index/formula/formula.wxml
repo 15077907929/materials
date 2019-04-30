@@ -1,8 +1,0 @@
-<view wx:if="{{page_if}}">
-    <view wx:for="{{imgList[formulaID]}}" wx:key="{{imgList[index]._id}}">
-        <image src="{{item}}" style="width: 100%"></image>
-    </view>
-</view>
-<view class="is_null" wx:else>
-    <text>查询为空</text>
-</view>

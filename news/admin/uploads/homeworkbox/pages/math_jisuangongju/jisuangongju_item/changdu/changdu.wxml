@@ -1,6 +1,0 @@
-<view>
-    <view class="item_list" wx:for="{{changdu_data}}" wx:key="{{changdu_data.titel}}">
-        <text>{{item.titel}}</text>
-        <input bindinput="user_input{{index}}" class="input_data" type="digit" value="{{item.input_data}}"></input>
-    </view>
-</view>
