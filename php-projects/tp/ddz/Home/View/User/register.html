@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<title>注册</title>
+<link rel="stylesheet" type="text/css" href="/Public/css/user.css">
+<style>
+
+</style>
+</head>
+<body style="background:#ebf6e8">
+<p class="msg">
+{if $_COOKIE['message'] eq ''}
+   {cookie('message')}
+   {cookie('message',null)}
+{/if}
+</p>
+<script type="text/javascript">
+	function check(){
+		if(register.name.value==''){
+			alert("账号不能为空！");
+			return false;
+		}
+		if(register.password.value==''){
+			alert("密码不能为空！");
+			return false;
+		}
+		if(register.comform_password.value==''){
+			alert("确认密码不能为空！");
+			return false;
+		}
+		if(register.password.value!=register.comform_password.value){
+			alert("密码与确认密码不一致！");
+			return false;
+		}
+		return true;
+	}
+</script>
+<form name="register" method="post" action="index.php?m=Home&c=User&a=registerIn" onsubmit="return check();">
+	<div class="box" style="background:url('/Public/images/f_bg.gif')">
+		<table>
+			<tr>
+				<td width="89">账号：</td>
+				<td width="205"><input type="text" name="name" class="box_input" maxlength="12" /></td>
+			</tr>		
+			<tr>
+				<td>密码：</td>
+				<td><input type="password" name="password" class="box_input" maxlength="12" /></td>
+			</tr>
+			<tr>
+				<td>确认密码：</td>
+				<td><input type="password" name="comform_password" class="box_input" maxlength="12" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input type="submit" name="sub" class="box_submit" value="注册" />
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<title>开心斗地主|在线斗地主</title>
+<link rel="stylesheet" type="text/css" href="/Public/css/user.css">
+<style>
+
+</style>
+</head>
+<body style="background:#ebf6e8">
+<p class="msg">
+{if $_COOKIE['message'] eq ''}
+   {cookie('message')}
+   {cookie('message',null)}
+{/if}
+</p>
+<div class="p">开心斗地主</div>
+<script type="text/javascript">
+	function check(){
+		if(login.name.value==''){
+			alert("账号不能为空！");
+			return false;
+		}
+		if(login.password.value==''){
+			alert("密码不能为空！");
+			return false;
+		}
+		return true;
+	}
+</script>
+<form name="login" method="post" action="index.php?m=Home&c=User&a=loginIn" onsubmit="return check();">
+	<div class="box">
+		<table>
+			<tr>
+				<td width="59">账 号：</td>
+				<td width="235"><input type="text" name="name" class="box_input" maxlength="12" /></td>
+			</tr>		
+			<tr>
+				<td>密 码：</td>
+				<td><input type="password" name="password" class="box_input" maxlength="12" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input type="submit" name="sub" class="box_submit" value="登录" />
+					<a href="index.php?m=Home&c=User&a=register"><b>注册</b></a>
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,10 @@
+body{ font-size:15px; }
+a:visited,a:active,a:link{ color:#000; text-decoration:none; }
+a:hover{ color:000; text-decoration:underline; }
+.box{ padding:1px; border:1px solid #487524; text-align:right; width:320px; margin:25px auto 0; }
+.box table{ margin:5px auto; }
+.box a b{ color:#900; }
+.p{ text-align:center; font-size:36px; color:#900; font-weight:bold; padding:20px 5px; }
+.box_input{ padding:1px; border:1px solid #206300; color:#fff; background:#fcf; width:95%; }
+.box_submit{ padding:1px; border:1px solid #e19d00; color:#000; background:#ffdc04; }
+.msg{ text-align:center; line-height:25px; height:25px; }

@@ -4,6 +4,12 @@ namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
     public function index(){
+		$user=cookie('user');
+		$ori_time=time();
+		
+		if($user==''){
+			redirect('index.php?m=Home&c=User&a=login');
+		}
 		$p_new=get_p();
 		echo '<pre>';
 		print_r($p_new);
@@ -11,7 +17,16 @@ class IndexController extends Controller {
 		$p_new=implode(',',$p_new);
 		$p_new=renew($p_new);
 		echo $p_new;
-		$player_name=$_COOKIE['player_name'];
-		$ori_time=time();
+		
+		
+		
+	}
+	
+	public function hall(){
+		$user=cookie('user');
+		if($user==''){
+			redirect('index.php?m=Home&c=User&a=login');
+		}
+		$this->display();
 	}
 }
