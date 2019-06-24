@@ -1,5 +1,8 @@
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+.clearfix{*+height:1%;}
+*{ margin:0; padding:0; }
 body{ font-size:15px; }
-a:visited,a:active,a:link{ color:#000; text-decoration:none; }
+a:visited,a:active,a:link{ text-decoration:none; }
 a:hover{ color:000; text-decoration:underline; }
-.box{ padding:1px; border:1px solid #487524; text-align:right; }
-.p{ text-align:center; font-size:36px; color:#900; font-weight:bold; }
+li{ list-style:none; }
+

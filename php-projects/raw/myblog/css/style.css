@@ -1,0 +1,31 @@
+/*定义 body 样式*/
+body{ font-size:12px; background:#c6c68c; padding:0; font-family:Helvetica,sans-serif; }
+/*定义 header 样式*/
+.header{ margin-left:auto; margin-right:auto; padding:8px; height:80px; background:#e8f3fd; border-bottom:1px solid #000; 
+	font-size:16px; font-weight:bold; }
+/*定义 title 样式*/
+.title{ margin-left:auto; margin-right:auto; padding:8px; height:10px; background:#e8f3fd; border-bottom:1px solid #000; 
+	font-style:italic; }
+/*定义 left 样式*/
+.left{ float:left; margin:6px 0 4px 2px; padding:5px; width:530px; }
+/*定义 right 样式*/
+.right{ float:right; margin:6px 0 4px 2px; padding:5px; width:200px; }
+/*定义 blog_entry 样式*/
+.blog_entry{ margin:4px auto 10px; border:1px solid #000; background:#fff; }
+/*定义 blog_title 样式*/
+.blog_title{ border-bottom:1px solid #000; background:#e8ecdb; margin:0; padding:4px; font-weight:bold; font-size:13px; }
+/*定义 blog_body 样式*/
+.blog_body{ margin-left:auto; margin-right:auto; margin-top:4px; padding:6px; }
+/*定义 blog_date 样式*/
+.blog_date{ margin-right:auto; margin-left:auto; padding:0 0 8px 0; font-size:10px; }
+/*定义 sidebar 样式*/
+.sidebar{ margin-right:auto; margin-left:auto; border:1px solid #000; width:180px; background:#fff; }
+/*定义 menu_title 样式*/
+.menu_title{ border-bottom:1px solid #000; background:#e8ecdb; margin:0; padding:4px; height:10px; font-weight:bold; }
+/*定义 menu_body 样式*/
+.menu_body{ margin-left:0; margin-right:0; margin-top:4px; padding:6px; }
+/*定义 footer 样式*/
+.footer{ clear:both; text-align:center; margin-left:auto; margin-right:auto; padding:8px; height:10px; background:#e8f3fd;
+	border-top:1px solid #000; }
+/*定义 container 样式*/
+.container{ margin:2px auto 0; padding:0; width:760px; background:#f6f6f6; border:1px solid #000; }

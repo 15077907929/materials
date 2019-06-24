@@ -1,1 +1,80 @@
-<a href="index.php?m=Home&c=User&a=logout">注销</a>
+<!doctype html>
+<html>
+<head>
+<title>开心斗地主————大厅</title>
+<link rel="stylesheet" type="text/css" href="/Public/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/Public/css/main.css" />
+<style>
+
+</style>
+</head>
+<body class="hall">
+<div class="top">
+	<table>
+		<tr>
+			<td width="90%">现在位置：斗地主onWeb</td>
+			<td><a href="index.php?m=Home&c=User&a=logout">注销</a></td>
+		</tr>
+	</table>
+</div>
+<div class="rooms" id="rooms">
+	loading...
+</div>
+<script type="text/javascript">
+function send_request(url){
+	http_request=false;
+	if(window.XMLHttpRequest){
+		http_request=new XMLHttpRequest();
+		if(http_request.overrideMimeType){
+			//http_request.overrideMimeType("text/xml");
+		}
+	}else if(window.ActiveXObject){
+		try{
+			http_request=new ActiveXObject("Msxml2.XMLHTTP");
+		}catch(e){
+			try{
+				http_request=new ActiveXObject("Microsoft.XMLHTTP");
+			}catch(e){
+			
+			}
+		}
+	}
+	if(!http_request){
+		alert("不能创建XMLHttpRequest对象!");
+		return false;
+	}
+	http_request.onreadystatechange=processRequest;
+	http_request.open("GET",url,true);
+	http_request.send(null);
+}
+function send_r(url,t){
+	type=t;
+	send_request(url);
+}
+function processRequest(){
+	if(http_request.readyState==4){
+		if(http_request.status==200){
+			var text=http_request.responseText;
+			text="<ul class='clearfix'>"+text+"</ul>";
+			document.getElementById("rooms").innerHTML=text;
+		}
+	}
+}
+function get_rooms(){
+	send_request("index.php?m=Home&c=Index&a=get_rooms&time="+Math.random());
+}
+function open_menu(){
+	document.getElementById("menu").style.visibility="visible";
+	document.getElementById("menu").style.top=event.clientY+"px";
+	document.getElementById("menu").style.left=event.clientX+"px";
+}
+function close_menu(){
+	document.getElementById("menu").style.visibility="hidden";
+	document.getElementById("menu").style.top=event.clientY+"px";
+	document.getElementById("menu").style.left=event.clientX+"px";
+}
+get_rooms();
+setInterval("get_rooms()",2000);
+</script>
+</body>
+</html>
