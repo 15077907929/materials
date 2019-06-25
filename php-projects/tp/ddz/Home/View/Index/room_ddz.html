@@ -9,8 +9,27 @@
 </style>
 </head>
 <body class="room">
-
 <script type="text/javascript">
+//公用
+function copy_url(){
+	if(window.clipboardData.setData('text',document.location.href.replace('room_ddz','guest')))	//ie
+		alert('复制成功！Ctrl + v 把地址发送给好友');
+}
+
+var player1_name = "{$res['room']['player1_name']}";
+var player2_name = "{$res['room']['player2_name']}";
+var player_name = "{$res['user']['name']}";
+if(player1_name==player_name){
+	player_id='player1';
+}else{
+	player_id='player2';
+}
+var flag = "";
+var main_echo = "";
+var status = "begin";
+var now_flag = "";
+
+//AJAX
 function send_request(url){
 	http_request=false;
 	if(window.XMLHttpRequest){
@@ -38,14 +57,207 @@ function send_request(url){
 	http_request.send(null);
 }
 
+//处理返回信息
+var type = 0;
+function send_r(url,t){
+	type = t;
+	send_request(url);
+}
+
 function processRequest(){
 	if(http_request.readyState==4){
 		if(http_request.status==200){
-			var text=http_request.responseText;
+			if(type == 0){
+				var text = http_request.responseText.split("|");
+				player1_name = text[0];
+				player2_name = text[1];
+
+				lord = text[4];
+				lord_p = text[5];
+				flag = text[6];
+				
+				if(status != 'wait'){
+					do_ani_p(text[3]);
+					do_self_p(text[2]);
+					do_user_info(text[9], text[10], text[11], text[12], text[13], text[14]);
+				}
+				player1_show = text[7];
+				player2_show = text[8];
+				
+				if(status == 'begin' && self_p){
+					main_echo = '';
+					main_echo += ani_p;
+					main_echo += ani_show;
+					main_echo += user_info;
+					main_echo += self_show;
+					main_echo += self_button;
+					main_echo += self_p;
+					document.getElementById("loading").style.display = "none";
+					document.getElementById('main_echo').innerHTML = main_echo;
+					
+					if(flag == player_id){
+						do_show_p(player_id == 'player1'?player2_show:player1_show, 'ani_show');
+						document.getElementById('self_button').innerHTML = '<a href="javascript:void(0);" onclick="show_p();"><img src="Public/images/show_hand.gif" /></a>';
+						if((player_id == 'player2' && player1_show != '' && player1_show!= 'NO,') || (player_id == 'player1' && player2_show != '' && player2_show!= 'NO,')){
+							document.getElementById('self_button').innerHTML += '<a href=javascript:void(0); onclick="no_show_p();"><img src=images/no_show_hand.gif border=0></a> ';
+						}
+					}
+					else{
+						document.getElementById('self_button').innerHTML = '<img src="Public/images/loading.gif" /><br/>等待对家响应<br/>';
+						do_show_p(player_id == 'player1'?player1_show:player2_show, 'self_show');
+					}
+					document.getElementById('self_button').innerHTML += '<a href="index.php?m=Home&c=Index&a=hall"><img src="Public/images/run.gif" /></a> ';
+					status = 'ing';
+				}
+				if(lord == '' && self_p){
+					document.getElementById('self_button').innerHTML='<a href=javascript:void(0); onclick="send_r(\'index.php?m=Home&c=Index&a=get_lord&id={$res['room']['id']}&player_id='+player_id+'&time='+Math.random()+'\',1)"><img src="Public/images/lord.gif" /></a> <a href="javascript:void(0);" onclick="send_r(\'index.php?m=Home&c=Index&a=get_lord&action=no&id={$res['room']['id']}&player_id='+player_id+'&time='+Math.random()+'\',1)"><img src="Public/images/no_lord.gif" /></a>';
+				}
+				
+				//对家逃跑
+				if(status == 'ing' && (player1_name == '' || player2_name == '')){
+					send_r("index.php?m=Home&c=Index&a=end&id={$res['room']['id']}&player_id="+player_id+"&time="+Math.random(), 1);
+					alert("对家已经逃跑，点确定返回大厅。");
+					document.location.href = 'index.php?m=Home&c=Index&a=hall'
+				}
+				
+				//END
+				if(now_flag != flag){
+					now_flag = flag;
+					status = 'begin';
+				}
+				
+				if(flag && kaiguan_1 == 0){
+					status = 'begin';
+					kaiguan_1 = 1;
+				}
+				
+				if(player1_name == '' || player2_name == ''){
+					document.getElementById('main_echo').innerHTML = '<div class="wait"><img src="Public/images/loading.gif" /><br/>等待对家加入！'+(player_name == 'guest'?'':"<a title='邀请好友加入' href='javascript:void(0);' onclick='copy_url()'><img src='Public/images/invite.gif' /></a></div>");
+					document.getElementById("loading").style.display = "none";
+					status = 'wait';
+				}else if(status == 'wait'){
+					status = 'begin';
+				}
+			}
 		}
 	}
 }
 
+function do_show_p(p_ori,object){
+	if(player1_show == '' && player2_show == ''){
+
+	}else{
+		var arr_player1_show = pai_a(player1_show);
+		var arr_player2_show = pai_a(player2_show);
+		if((arr_player2_show[1] == arr_player1_show[1]) && player1_show && player2_show)
+		{
+			sound_count ++;
+		}
+		if(sound_count > 3 || arr_player1_show[2] == '0' || arr_player2_show[2] == '0' || arr_player1_show[0] == '100' || arr_player2_show[0] == '100' || arr_player1_show[2] == 'zha' || arr_player2_show[2] == 'zha')
+		sound_count = 0;
+		
+		if(sound_count == 0){
+			var arr = pai_a(p_ori);
+			
+			if(arr[2] == '0')
+			arr[2] = 'NO'+GetRandomNum(1,4);
+		
+			sound(player_ID+'_sound','./sound/'+arr[2]+'.wav');
+		}else if(sound_count > 0){
+			sound(player_ID+'_sound','./sound/dani'+sound_count+'.wav');
+		}
+	}
+	var split_p = p_ori.split(",");
+	var show = '<table align=center border="0" cellpadding="0" cellspacing="0"><tr>';
+
+	for(var i = 0;i < split_p.length - 1;i ++){
+		show += '<td background="images/'+split_p[i]+'.gif" width='+(i==split_p.length-1-1?'71':'36')+' height=96></td>';
+	
+	}
+	
+	show += '</tr></table>';
+	document.getElementById(object).innerHTML = show;
+}
+
+//用户信息
+var user_info = '';
+function do_user_info(player1_face, player2_face, player1_win_p, player2_win_p, player1_run_p, player2_run_p){
+	user_info = '<table>';
+	if(player_id == 'player1'){
+		user_info += '<tr><td width="120">对家：'+player2_name+'</td><td width="120">胜率：'+player2_win_p+' %</td><td width="120">逃跑率：'+player2_run_p+' %</td></tr>';
+		user_info += '<tr><td width="120">本家：'+player1_name+'</td><td width="120">胜率：'+player1_win_p+' %</td><td width="120">逃跑率：'+player1_run_p+' %</td></tr>';
+	}else{
+		user_info += '<tr><td width="120">对家：'+player1_name+'</td><td width="120">胜率：'+player1_win_p+' %</td><td width="120">逃跑率：'+player1_run_p+' %</td></tr>';
+		user_info += '<tr><td width="120">本家：'+player2_name+'</td><td width="120">胜率：'+player2_win_p+' %</td><td width="120">逃跑率：'+player2_run_p+' %</td></tr>';
+	
+	}
+	user_info += '</table>';
+}
+
+//本家
+self_p = "";
+function do_self_p(P){
+	p = P.split(",");
+
+	self_p = '<table align=center border="0" cellpadding="0" cellspacing="0"><tr>';
+	
+	for(var i=1;i<p.length-1;i++){
+		self_p += '<td width='+(i==p.length-1?'71':'36')+' height=24 align=center>';
+		self_p += '<div id=self_p_top_'+p[i]+'></div>';
+		self_p += '</td>';
+	}
+	
+	self_p += '</tr><tr>';
+	
+	for(var i=1;i<p.length-1;i++){
+		self_p += '<td background="Public/images/'+p[i]+'.gif" width='+(i==p.length-2?'71':'36')+' height="96">';
+		self_p += '<a href="javascript:void(0);" onclick="click_p(\''+p[i]+'\');"><img src="Public/images/blank'+(i==p.length-2?'_full':'')+'.gif" /></a>';
+		self_p += '</td>';
+	}
+	
+	self_p += '</tr></table>';
+}
+
+//对家
+var ani_p = '';
+function do_ani_p(ani_num){
+	ani_p = '<table align=center border="0" cellpadding="0" cellspacing="0"><tr>';
+	for(var i=0;i<ani_num;i++){
+		ani_p += '<td background="Public/images/BG.gif" width='+(i==ani_num-1?'71':'36')+' height=96></td>';
+	}
+	ani_p += '</tr></table>';
+}
+//对家出牌区
+var ani_show = '<div id="ani_show" class="ani_show"></div>';
+
+//本家出牌区
+var self_show = '<div id="self_show" class="self_show"></div>';
+var lord = "";
+
+//本家按纽
+var self_button = '<div id="self_button" class="self_button"></div>';
+
+var kaiguan_1 = 0;
+
+function get_info(){
+
+
+	send_r("index.php?m=Home&c=Index&a=get_info&id={$res['room']['id']}&player_id="+player_id+"&time="+Math.random(),0);
+}
+
+document.write('<div class="loading" id="loading"><img src=Public/images/loading.gif><br/>游戏加载中，请稍候！</div>');
+
+function init(){
+	document.getElementById("pla").style.display = "";
+}
+window.onload = init;
+
+</script>
+<div id="pla" style="display:none">
+	<div id="main_echo" class="main_echo"></div>
+</div>
+<script type="text/javascript">
+get_info();
 </script>
 </body>
 </html>

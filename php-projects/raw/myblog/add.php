@@ -1,6 +1,6 @@
 ﻿<?php
 $ok=true;
-if(trim($_POST['title'])!=''&&trim($_POST['content']!='')){
+if(isset($_POST['title'])&&isset($_POST['content'])){
 	$ok=true;
 	$title=trim($_POST['title']);
 	$content=trim($_POST['content']);
@@ -39,6 +39,19 @@ if(trim($_POST['title'])!=''&&trim($_POST['content']!='')){
 <head>
 <title>基于文本的简易BLOG</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript">
+	function check(){
+		if(add.title.value==''){
+			alert("标题不能为空！");
+			return false;
+		}
+		if(add.content.value==''){
+			alert("内容不能为空！");
+			return false;
+		}
+		return true;
+	}
+</script>
 </head>
 <body>
 <div class="container">
@@ -53,7 +66,7 @@ if(trim($_POST['title'])!=''&&trim($_POST['content']!='')){
 			<div class="blog_title">添加一篇新日志</div>
 			<div class="blog_body">
 				<div class="blog_date"></div>
-				<form method="POST" action="add.php">
+				<form name="add" method="POST" action="add.php" onsubmit="return check();">
 					<table>
 						<tr><td>日志标题：</td></tr>
 						<tr><td><input type="text" name="title" size="50" /></td></tr>

@@ -61,7 +61,6 @@ class IndexController extends Controller {
 		if(empty($room)){
 			die('房间不存在！');
 		}
-		$name = mysql_result($sql, 0, name);
 		$player1_name = $room['player1_name'];
 		$player2_name = $room['player2_name'];
 		$player_name=cookie('user')['name'];
@@ -69,7 +68,155 @@ class IndexController extends Controller {
 			header("location:index.php?m=Home&c=Index&a=join_game&id=".$_GET['id']);
 			exit;
 		}
+		$res['room']=$room;
+		$res['user']=$user;
+		$this->assign('res',$res);
 		$this->display();
+	}
+	
+	public function get_info(){
+		$db=M('room_ddz');
+		$udb=M('user_ddz');
+		$user=cookie('user');
+		$room=$db->where('id='.$_GET['id'])->find();
+		$player1_name=$room['player1_name'];
+		$player2_name=$room['player2_name'];
+		$player1_p=$room['player1_p'];
+		$player2_p=$room['player2_p'];
+		$lord_p=$room['lord_p'];
+		$lord=$room['lord'];
+		$flag=$room['flag'];
+		$player1_show=$room['player1_show'];
+		$player2_show=$room['player2_show'];
+		$player1_time=$room['player1_time'];
+		$player2_time=$room['player2_time'];
+		$system_time = $room['system_time'];
+		
+		if($player1_name){
+			$user1 = $udb->where('name = \''.$player1_name.'\'')->find();
+			$player1_face = $user1['face'];
+			$player1_win = $user1['win'];
+			$player1_lost = $user1['lost'];
+			$player1_run = $user1['run'];
+			$player1_win_p = ($player1_win+$player1_lost+$player1_run == 0)?0:round(100*$player1_win/($player1_win+$player1_lost+$player1_run), 2);
+			$player1_run_p = ($player1_win+$player1_lost+$player1_run == 0)?0:round(100*$player1_run/($player1_win+$player1_lost+$player1_run), 2);
+			
+		}
+		if($player2_name){	
+			$user2 = $udb->where('name = \''.$player2_name.'\'')->find();
+			$player2_face = $user2['face'];
+			$player2_win = $user2['win'];
+			$player2_lost = $user2['lost'];
+			$player2_run = $user2['run'];
+			$player2_win_p = ($player2_win+$player2_lost+$player2_run == 0)?0:round(100*$player2_win/($player2_win+$player2_lost+$player2_run), 2);
+			$player2_run_p = ($player2_win+$player2_lost+$player2_run == 0)?0:round(100*$player2_run/($player2_win+$player2_lost+$player2_run), 2);
+		}	
+	
+		if($player1_p == '' || $player2_p == ''){
+			$room['lord']='';
+			$room['player1_p']='';
+			$room['player2_p']='';
+			$room['lord_p']='';
+			$room['flag']='';
+			$room['player1_show']='';
+			$room['player2_show']='';
+			$db->where('id='.$_GET['id'])->save($room);
+			if($player1_p == '' && $lord_p){
+				$udb->query('update user_ddz set `win` = `win` + 1 where name = \''.$player1_name.'\'');
+				$udb->query('update user_ddz set `lost` = `lost` + 1 where name = \''.$player2_name.'\'');
+			}
+			if($player2_p == '' && $lord_p){
+				$udb->query('update user_ddz set `win` = `win` + 1 where name = \''.$player2_name.'\'');
+				$udb->query('update user_ddz set `lost` = `lost` + 1 where name = \''.$player1_name.'\'');
+			}
+			$lord_p = "";
+			$player1_p = "";
+			$player2_p = "";
+		}
+	
+		if($_GET['player_id'] == 'player1'){
+			if(($system_time - $player2_time > 30) && $lord_p!=''){
+				$room['player2_name']='';
+				$room['lord']='';
+				$room['player1_p']='';
+				$room['player2_p']='';
+				$room['lord_p']='';
+				$room['flag']='';
+				$room['player1_show']='';
+				$room['player2_show']='';
+				$room['player2_time']=0;
+				$room['system_time']=0;
+				$db->where('id='.$_GET['id'])->save($room);
+				$user2['run']=$user2['run']+1;
+				$udb->where('name=\''.$player2_name.'\'')->save($user2);
+			}
+		}else{
+			if(($system_time - $player1_time > 30) && $lord_p!=''){
+				$room['player1_name']='';
+				$room['lord']='';
+				$room['player1_p']='';
+				$room['player2_p']='';
+				$room['lord_p']='';
+				$room['flag']='';
+				$room['player1_show']='';
+				$room['player2_show']='';
+				$room['player1_time']=0;
+				$room['system_time']=0;
+				$db->where('id='.$_GET['id'])->save($room);
+				$user1['run']=$user2['run']+1;
+				$udb->where('name=\''.$player1_name.'\'')->save($user1);
+			}
+		}
+	
+		$player1_p_num = sizeof(explode(",", $player1_p)) - 1;
+		$player2_p_num = sizeof(explode(",", $player2_p)) - 1;
+	
+		if($lord_p == '' && $player1_name && $player2_name){
+			$p_new = get_p();
+
+			for($i = 0;$i < 17;$i ++)
+				$player1_p .= $p_new[$i].",";
+			
+			for($i = 17;$i < 34;$i ++)
+				$player2_p .= $p_new[$i].",";
+
+			for($i = 34;$i < 37;$i ++)
+				$lord_p .= $p_new[$i].",";
+			
+			$room['player1_p']=$player1_p;
+			$room['player2_p']=$player2_p;
+			$room['lord_p']=$lord_p;
+			$db->where('id='.$_GET['id'])->save($room);
+		}
+		
+		$room[$_GET['player_id'].'_name'] = $user['name'];
+		$room[$_GET['player_id'].'_time'] = time();
+		$room['system_time'] = time();
+		$db->where('id='.$_GET['id'])->save($room);
+	
+		$str=$player1_name.'|'.$player2_name.'|'.($_GET['player_id'] == 'player1'?renew($player1_p):renew($player2_p));
+		$str=$str.'|'.($_GET['player_id'] == 'player1'?$player2_p_num:$player1_p_num).'|'.$lord.'|'.renew($lord_p);
+		$str=$str.'|'.$flag.'|'.$player1_show.'|'.$player2_show.'|'.$player1_face.'|'.$player2_face;
+		$str=$str.'|'.$player1_win_p.'|'.$player2_win_p.'|'.$player1_run_p.'|'.$player2_run_p;
+		echo $str;
+	}
+	
+	public function get_lord(){
+		$db=M('room_ddz');
+		$room=$db->where('id='.$_GET['id'])->find();
+		if($_GET['action'] == no){
+			if($_GET['player_id'] == 'player1')
+				$_GET['player_id'] = 'player2';
+			else
+				$_GET['player_id'] = 'player1';
+		}
+	
+		if($room['lord'] == ''){
+			$room[$_GET['player_id'].'_p']=$room[$_GET['player_id'].'_p'].$room['lord_p'];
+			$room['lord']=$_GET['player_id'];
+			$room['flag']=$_GET['player_id'];
+			$db->where('id='.$_GET['id'])->save($room);
+		}
 	}
 	
 	public function join_game(){
@@ -109,6 +256,8 @@ class IndexController extends Controller {
 				$db->where('id='.$_GET['id'])->save($room);
 				redirect('index.php?m=Home&c=Index&a=room_ddz&id='.$_GET['id']);
 			}
+			
 		}
+		
 	}
 }
