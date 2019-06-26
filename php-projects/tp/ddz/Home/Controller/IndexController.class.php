@@ -53,11 +53,12 @@ class IndexController extends Controller {
 	}
 	
 	public function room_ddz(){
+		$db=M('room_ddz');
 		$user=cookie('user');
 		if($user==''){
 			redirect('index.php?m=Home&c=User&a=login');
 		}
-		$room=M('room_ddz')->where('id='.$_GET['id'])->find();
+		$room=$db->where('id='.$_GET['id'])->find();
 		if(empty($room)){
 			die('房间不存在！');
 		}
@@ -219,6 +220,33 @@ class IndexController extends Controller {
 		}
 	}
 	
+	public function end_game(){
+		M('room_ddz')->query('update room_ddz set player1_name = \'\', player2_name = \'\' where id = \''.$_GET['id'].'\'');
+	}
+	
+	public function show_p(){
+		$db=M('room_ddz');
+		$room=$db->where('id='.$_GET['id'])->find();
+		if($_GET['p_show_var'] == '')
+			$_GET['p_show_var'] = 'NO,';
+		$pai=$room[$_GET['player_id'].'_p'];
+		$e_pai=explode(",", $pai);
+		$e_p_show_var=explode(',', $_GET['p_show_var']);
+		for($i = 0;$i < sizeof($e_pai) - 1;$i ++){
+			$flag = 1;
+			for($j = 0;$j < sizeof($e_p_show_var) - 1;$j ++){
+				if($e_pai[$i] == $e_p_show_var[$j])
+					$flag = 0;
+			}
+			if($flag)
+				$pai_new .= $e_pai[$i].",";
+		}
+		$room[$_GET['player_id'].'_p']=$pai_new;
+		$room[$_GET['player_id'].'_show']=$_GET['p_show_var'];
+		$room['flag']=($_GET['player_id'] == 'player1'?'player2':'player1');
+		$db->where('id='.$_GET['id'])->save($room);
+	}
+	
 	public function join_game(){
 		$db=M('room_ddz');
 		$player_name=cookie('user')['name'];
@@ -256,7 +284,6 @@ class IndexController extends Controller {
 				$db->where('id='.$_GET['id'])->save($room);
 				redirect('index.php?m=Home&c=Index&a=room_ddz&id='.$_GET['id']);
 			}
-			
 		}
 		
 	}
