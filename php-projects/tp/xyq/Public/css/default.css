@@ -1,0 +1,20 @@
+*{ margin:0; padding:0; }
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+.clearfix{*+height:1%;}
+ul{ list-style:none; }
+a{ text-decoration:none; }
+
+body{ font-size:12px; background:none transparent scroll repeat 0% 0%; color:#000; word-break:break-all; 
+	font-family:arial; text-align:center; }
+div{ margin:auto; }
+table{ border:0; border-spacing:0; border-collapse:collapse; }
+
+.content { border-right:#e0a900 1px solid; border-left:#e0a900 1px solid; width:778px; background-image:url(../images/ditt.jpg); }
+.banner { background:url(../images/top.jpg) no-repeat; width:777px; height:86px }
+.bar{ margin-top:2px; padding-left:15px; background:#e0a900; width:700px; color:#006000; line-height:25px; 
+	position:relative; height:25px; text-align:left; }
+.btn{ margin-top:5px; float:right; width:72px; margin-right:10px; height:17px }
+.white { color:#ba0303 }
+
+/* footer */
+.footer{ color:#fff; background:url(../images/under.jpg) no-repeat; width:777px; padding-top:25px; height:60px; }

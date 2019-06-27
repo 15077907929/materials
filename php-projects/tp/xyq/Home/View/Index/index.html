@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="description" content="许愿墙-美好人生从你我开始" />
+<meta name="keywords" content="许愿,许愿墙,在线许愿,许愿程序" />
+<link rel="stylesheet" href="Public/css/style.css" type="text/css" />
+<link rel="stylesheet" href="Public/css/default.css" type="text/css" />
+<title>新年到了，许个愿吧</title>
+</head>
+<body>
+<div class="content">
+	<div class="banner"></div>
+		<script type="text/javascript">
+			if(self!=top){ top.location=self.location; }
+		</script>
+	<div class="bar">
+		<div class="btn"><a href="#"><img src="Public/images/btn_search.gif" onclick="showLogin(0)" /></a></div>
+		<div class="btn"><a href="index.php?m=Home&c=Index&a=new_post"><img src="Public/images/btn_paste.gif" /></a></div>
+		<!--找回纸条弹出菜单-->
+		<div class="form" id="formOne" style="display:none">
+			<form name="schFM1" action="index.php" method="post" onsubmit="return chkFM(this);">
+				<input type="hidden" name="search" value="1" />
+				<input type="text" value="输入用户署名" name="nickname" class="input" onclick="javascript:this.form.nickname.value=''"/><br />
+				将出现要找的纸条<br />
+				<input type="image" src="Public/images/submit.gif" width="45" height="19" alt="" />
+			</form>
+		</div>
+		<!--找回纸条弹出菜单-->
+		<span class="white">已有祝福 {$res['total']}条，赶紧贴上我的美好祝福，送给你的情人吧 &nbsp;<img src="Public/images/ico_smile.gif" align="absmiddle"></span>
+	</div>
+	<div class="contentarea" id="contentarea">
+	{foreach $res['wishes'] as $item}
+		<div onmousedown="onFocus(this)" id="cc{$item['id']}" class="scrip{$item['bg_id']}">
+			<table>
+				<tr>
+					<td onmousedown="onMouseDown(cc{$item['id']})" style="cursor: move" >
+						<div class="shead"><span onDblClick="onRemove()" title="双击关闭纸条">第[{$item['id']}]条{$item['add_time']}<a style="cursor: hand" onclick="onRemove()" title="关闭纸条">×</a></span></div>
+					</td>
+				</tr>
+				<tr>
+					<td style="cursor:default">
+						<div class="sbody">{$item['content']}</div>
+						<div class="sbot"><img src="Public/images/bpic_{$item['sign_id']+10}.gif" class="left" /><h2><a href="#"  style="font-size:16px;">{$item['name']}</a></h2></div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	{/foreach}
+	</div>
+	<a href="index.php?m=Home&c=Index&a=new_post"><img src="Public/images/btn_paste_big.jpg" border="0"></a>
+	<div class="bar page">{$res['show']}</div>
+	<div class="footer">
+		<span>开发笔记 技术支持 </span>
+	</div>
+</div>
+<script type="text/javascript">
+	var elements = document.getElementById("contentarea").childNodes;
+	for (var i = 0; i < elements.length; i++) {
+		if(elements[i].tagName && elements[i].tagName=='DIV') {
+			elements[i].style.top = Math.ceil(350 * Math.random()) + "px"
+			elements[i].style.left = Math.ceil(550 * Math.random()) + "px";
+		}
+	}
+	
+	var Obj=''
+	var index=10000;//z-index;
+	document.onmouseup=onMouseUp
+	document.onmousemove=onMouseMove
+	function onMouseDown(Object){
+		Obj=Object.id
+		document.all(Obj).setCapture()
+		pX=event.x-parseInt(document.all(Obj).style.left);
+		pY=event.y-parseInt(document.all(Obj).style.top);
+	}
+	function onMouseMove(){
+		if(Obj!=''){
+			document.all(Obj).style.left=(event.x-pX)+"px";
+			document.all(Obj).style.top=(event.y-pY)+"px";
+		}
+	}	
+	function onMouseUp(){
+		if(Obj!=''){
+			document.all(Obj).releaseCapture();
+			Obj='';
+		}
+	}
+	function onFocus(obj){
+       if(obj.style.zIndex!=index) {
+		   index = index + 2;
+		   var idx = index;
+		   obj.style.zIndex=idx;
+       }
+	}
+	function onRemove(){
+		if (event){
+			lObj = event.srcElement ;
+			n=0;
+			while (lObj && n<2) {
+				lObj = lObj.parentElement ;
+				if(lObj.tagName=="DIV") n++;
+			}
+		}
+		var id=lObj.id
+		document.getElementById(id).remove();
+	}
+	
+	function showLogin(n) {
+		var formAry = new Array ("formOne","formTwo")
+		var Obj = getObject(formAry[n])
+		if (Obj.style.display == "none") {
+			Obj.style.display = ""
+		}
+		else {
+			Obj.style.display = "none"
+		}
+	}
+	function getObject(objectId) {
+		if(document.getElementById && document.getElementById(objectId)) {
+		// W3C DOM
+			return document.getElementById(objectId);
+		} else if (document.all && document.all(objectId)) {
+		// MSIE 4 DOM
+			return document.all(objectId);
+		} else if (document.layers && document.layers[objectId]) {
+		// NN 4 DOM.. note: this won't find nested layers
+			return document.layers[objectId];
+		} else {
+			return false;
+		}
+	}
+	function chkFM(obj) {
+		if(obj.nickname.value == "") {
+			alert("\n\n\n请输入需要寻找人的署名!\n\n");
+			obj.nickname.focus();
+			return false;
+		}
+		return true;
+	}
+</script>
+</body>
+</html>

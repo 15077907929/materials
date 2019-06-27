@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>后台管理-登录</title>
+<style type="text/css">
+	body { background: url(Public/images/bg.jpg); text-align:center; }
+	body table{ margin:auto; width:400px; border:0; }
+	a{ text-decoration:none; }
+</style>
+</head>
+<body>
+<form action="index.php?m=Admin&c=User&a=loginIn" name="login" method="post" onsubmit="return check();">
+	<table cellpadding="5" cellspacing="1">
+		<tr>
+			<td colspan="2" bgcolor="#fff">后台登录</td>
+		</tr>
+		<tr>
+			<td bgcolor="#fff">用户名</td>
+			<td bgcolor="#fff"><input name="username" type="text" id="username" /></td>
+		</tr>
+		<tr>
+			<td bgcolor="#fff">密码</td>
+			<td bgcolor="#fff"><input name="password" type="password" id="password" /></td>
+		</tr>
+		<tr>
+			<td colspan="2" bgcolor="#fff">
+				<input type="submit" name="Submit" value="登陆" />
+				<input type="reset" name="Submit2" value="重设" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" bgcolor="#fff"><a href="index.php">返回许愿墙</a></td>
+		</tr>
+	</table>
+</form>
+<script type="text/javascript">
+	function check(){
+		if(login.username.value==''){
+			alert("用户名不能为空！");
+			return false;
+		}
+		if(login.password.value==''){
+			alert("密码不能为空！");
+			return false;
+		}
+		return true;
+	}
+</script>
+</body>
+</html>
+

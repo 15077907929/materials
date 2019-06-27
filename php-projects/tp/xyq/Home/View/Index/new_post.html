@@ -1,0 +1,216 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="Public/css/style.css" type="text/css">
+<link rel="stylesheet" href="Public/css/default.css" type="text/css">
+<title>新春许愿墙</title>
+</head>
+<body>
+<div class="content">
+	<div class="banner"></div>
+	<div class="bar">
+		<div class="btn"><a href="index.php"><img src="Public/images/btn_visit.gif" /></a></div>
+		<span class="white">新年到了，许个愿望吧......</span>
+	</div>
+	<div class="post">
+		<form name="hopeFM" onSubmit="return chkFM();" method="post" action="index.php?m=Home&c=Index&a=new_post">
+			<input type="hidden" value="7" name="tagbgcolor" />
+			<input type="hidden" value="1" name="tagbgpic" />
+			<input type="hidden" value="1153391194039" name="tm" />
+			<input type="hidden" value="1" name="add" />
+			<img src="Public/images/spacer.gif" width="1" height="8" /><br />
+			<table class="posttable1">
+				<tr>
+					<td height="26"><img src="Public/images/pic_title_left.gif" width="12" height="26"></td>
+					<td width="652" class="f14_2167 pt4"><strong>我要贴祝福纸条</strong></td>
+					<td><img src="Public/images/pic_title_right.gif" width="12" height="26"></td>
+				</tr>
+			</table>
+			<br/>
+			<div class="main">
+				<img src="Public/images/spacer.gif" width="1" height="10" /><br>
+				<table width="608" background="Public/images/line_dot.gif" cellpadding="0" cellspacing="0">
+					<tr>
+						<td height="1"></td>
+					</tr>
+				</table>
+				<img src="Public/images/spacer.gif" width="1" height="10"/><br>
+				<div class="wrap clearfix">
+					<div class="pl">
+						<table width="398">
+							<tr>
+								<td width="110" class="f12_5050">请选择纸条颜色：</td>
+								<td>
+									<a href="javascript:setTagBColor('1');"><img src="Public/images/bcolor_11.gif" /></a>
+									&nbsp;<a href="javascript:setTagBColor('2');"><img src="Public/images/bcolor_12.gif" /></a>
+									&nbsp;<a href="javascript:setTagBColor('3');"><img src="Public/images/bcolor_13.gif" /></a>
+									&nbsp;<a href="javascript:setTagBColor('4');"><img src="Public/images/bcolor_14.gif" /></a>
+									&nbsp;<a href="javascript:setTagBColor('5');"><img src="Public/images/bcolor_15.gif" /></a>
+									&nbsp;<a href="javascript:setTagBColor('6');"><img src="Public/images/bcolor_16.gif" /></a>
+									&nbsp;<a href="javascript:setTagBColor('7');"><img src="Public/images/bcolor_17.gif" /></a>
+									&nbsp;<a href="javascript:setTagBColor('8');"><img src="Public/images/bcolor_18.gif" /></a>
+								</td>
+							</tr>
+						</table>
+						<table width="398">
+							<tr valign="top">
+								<td width="110" class='f12_5050 pt12'>请选择纸条图案：</td>
+								<td width="262">
+									<ul class="list clearfix">
+										<li><a href="javascript:setTagBPic('1')" ><img src="Public/images/bpic_11.gif"></a></li>
+										<li><a href="javascript:setTagBPic('2');" ><img src="Public/images/bpic_12.gif"></a></li>
+										<li><a href="javascript:setTagBPic('3');" ><img src="Public/images/bpic_13.gif"></a></li>
+										<li><a href="javascript:setTagBPic('4');" ><img src="Public/images/bpic_14.gif"></a></li>
+										<li><a href="javascript:setTagBPic('5');" ><img src="Public/images/bpic_15.gif"></a></li>
+										<li><a href="javascript:setTagBPic('6');" ><img src="Public/images/bpic_16.gif"></a></li>
+										<li><a href="javascript:setTagBPic('7');" ><img src="Public/images/bpic_17.gif"></a></li>
+										<li><a href="javascript:setTagBPic('8');" ><img src="Public/images/bpic_18.gif"></a></li>
+										<li><a href="javascript:setTagBPic('9');" ><img src="Public/images/bpic_19.gif"></a></li>
+										<li><a href="javascript:setTagBPic('10');" ><img src="Public/images/bpic_20.gif"></a></li>
+										<li><a href="javascript:setTagBPic('11');" ><img src="Public/images/bpic_21.gif"></a></li>
+										<li><a href="javascript:setTagBPic('12');" ><img src="Public/images/bpic_22.gif"></a></li>
+									</ul>
+								</td>
+								<td width="26"></td>
+							</tr>
+						</table>
+					</div>
+					<div id="preview" class="preview">
+						<table width="210">
+							<tr>
+								<td height="1"><img src="Public/images/line_top.gif" width="210" height="1"></td>
+							</tr>
+						</table>
+						<table width="210">
+							<tr>
+								<td>
+									<img src="Public/images/spacer.gif" width=1 height=10 /><br>
+									<table width="190">
+										<tr>
+											<td width="183" class="f12_0078">第[xx]条&nbsp;&nbsp;&nbsp;&nbsp; <?php echo date( 'Y-m-d H:i:s', time() ); ?> </td>
+											<td width="7"><a href="#" target="_blank"><img src="Public/images/pic_x.gif" width="7" height="7"></a></td>
+										</tr>
+									</table>
+									<table width="190">
+										<tr>
+											<td id="tagBPic" style='background: url(Public/images/bpic_11.gif) no-repeat bottom left; word-wrap: break-word'>
+												<br><br>
+												<DIV id="viewcontent" style="text-align:left">许愿墙-美好人生从你我开始，我们静静地欣赏，回忆自己人生岁月里沉淀下来的点点滴滴</DIV>
+												<br><br><br>
+												<table border="0"><tr><td width="40"></td><td width="150" align=right><DIV id=viewsign>我的署名</DIV></td></tr></table>
+											</td>
+										</tr>
+									</table>
+									<img src="Public/images/spacer.gif" width=1 height=10><br>
+								</td>
+							</tr>
+						</table>
+						<table width="210">
+							<tr>
+								<td><img src="Public/images/line_bottom.gif" width="210" height="1"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<img src="Public/images/spacer.gif" width=1 height=10 /><br>
+				<table width="608" background="Public/images/line_dot.gif" cellpadding="0" cellspacing="0">
+					<tr>
+						<td height=1></td>
+					</tr>
+				</table>
+				<table width="608">
+					<tr>
+						<td height="33" class="f12_5050">输入你的祝福纸条内容  ( 还能输入
+							<input readOnly maxLength="3" size="3" value="92" name="freeLength">个字 )
+						</td>
+					</tr>
+				</table>
+				<table width="608">
+					<tr>
+						<td>
+							<textarea cols="90" rows="5" style='color:#505050;font-size:12px;' align="left" onKeyDown="textCounter(this.form.messages,this.form.freeLength,120);" onKeyUp="textCounter(this.form.messages,this.form.freeLength,120);" name="messages" wrap="physical">小爱，你还在想我吗？我祝福你一切好！！</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td height="33" class="f12_5050">您的署名：
+							<input type="text" name="singnature" maxlength="10" value="佑恩" onKeyDown="javascript:viewsign.innerHTML=this.form.singnature.value" onKeyUp="javascript:viewsign.innerHTML=this.form.singnature.value" />
+						</td>
+					</tr>
+				</table>
+			</div>
+
+
+			<table width="174">
+				<tr>
+					<td><input type="image" src="Public/images/pic_submit.gif"></td>
+				</tr>
+				<tr>
+					<td height="5"></td>
+				</tr>
+			</table>
+		</form>		
+	</div>
+	
+	<div class="footer">
+		<span>开发笔记 技术支持 </span>
+	</div>
+</div>
+<script type="text/javascript">
+var ie = false;
+function getObj(id) {
+	if (ie) {
+		return document.all[id]; 
+	} else {
+		return document.getElementById(id);
+	}
+}
+function getBColor(i) {
+	i = (i<1 || i>8)?0:parseInt(parseInt(i)-1);
+	//colorArray = new Array ("#FFDFFF","#C5FFC2","#FFE3B8","#FFCECE","#CEECFF","#FFFFCC","#E8DEFF","#F0F0F0");
+	colorArray = new Array ("#FFDFFF","#C5FFC2","#FFE3B8","#FFCECE","#CEECFF","#FFFFCC","#E8DEFF","#F0F0F0");
+	return colorArray[i];
+}
+function setTagBColor(i) {
+	color = getBColor(i);
+	getObj('preview').style.background = '' + color;
+	hopeFM.tagbgcolor.value = i;
+}
+function setTagBPic(i) {
+	picurl = getBPic(i);
+	getObj('tagBPic').style.background = " transparent url(\"" + picurl + "\") no-repeat scroll bottom left";
+	hopeFM.tagbgpic.value = i;
+}
+function getBPic(i) {
+	i = (i<1 || i>12)?1:i;
+
+	//alert(parseInt(parseInt(i)+10));
+
+	return "Public/images/bpic_" + parseInt(parseInt(i)+10) +".gif";
+}
+function textCounter(field, countfield, maxlimit) {
+	if (field.value.length > maxlimit) 
+		field.value = field.value.substring(0, maxlimit);
+	else
+		countfield.value = maxlimit - field.value.length;
+	//field.value = field.value.replace(" ","&nbsp;");
+	//field.value = field.value.replace("\r\n","<br>");
+	viewcontent.innerHTML = field.value;
+}
+function chkFM() {
+	if (hopeFM.messages.value == "") {
+		alert("\n\n\n您的祝福内容?\n\n\n");
+		hopeFM.messages.focus();
+		return false;
+	}
+	if (hopeFM.singnature.value == "") {
+		alert("\n\n\n请留下您的署名!\n\n");
+		hopeFM.singnature.focus();
+		return false;
+	}
+	alert( "提交祝福成功!" );
+	return true;
+}
+</script>
+</body>
+</html>

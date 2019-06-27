@@ -1,0 +1,92 @@
+.form{ background:#f4ffd3; width:106px; color:#7a7a7a; padding-top:5px; border:#b0b0b0 1px solid; height:63px; 
+	  text-align:center; left:626px; position:absolute; top:-69px; }
+.form .input{ border:#c0c0c0 1px solid; margin-BOTTOM:4px;  width:94px; color:#7a7a7a; }
+
+.contentarea{ position:relative; height:543px; }
+
+.contentarea .scrip1{ color:#4b4b4b; position:absolute; }
+.contentarea .scrip1 a{ color:#4b4b4b; }
+.contentarea .scrip1 .shead{ padding-left:18px; background:url(../images/a1_1.gif); padding-top:50px; height:18px; }
+.contentarea .scrip1 .sbody{
+	padding:20px 25px 20px 26px; background:url(../images/a1_2.gif); width:186px; line-height:18px;  text-align:left; }
+.contentarea .scrip1 .sbot{ padding:20px 20px 5px 30px; background:url(../images/a1_3.gif); width:186px; height:47px; }
+.contentarea .scrip1 .sbot h2{ margin-top:7px; float:right; }
+
+.contentarea .scrip2{color:#1e7119; position:absolute; }
+.contentarea .scrip2 a{ color:#1e7119;  }
+.contentarea .scrip2 .shead{ padding-left:18px; background:url(../images/a2_1.gif); padding-top:50px; height:18px; }
+.contentarea .scrip2 .sbody{
+	padding:20px 25px 20px 26px; background:url(../images/a2_2.gif); width:186px; line-height:18px; text-align:left; }
+.contentarea .scrip2 .sbot{ padding:20px 20px 5px 30px; background:url(../images/a2_3.gif); width:186px; height:47px; }
+.contentarea .scrip2 .sbot h2{ margin-top:7px; float:right; }
+
+.contentarea .scrip3{ color:#cb2f3c; position:absolute; }
+.contentarea .scrip3 a{ color:#cb2f3c; }
+.contentarea .scrip3 .shead{ padding-left:18px; background:url(../images/a3_1.gif); padding-top:50px; height:18px }
+.contentarea .scrip3 .sbody{
+	padding:20px 25px 20px 26px; background:url(../images/a3_2.gif); width:186px; line-height:18px; text-align:left; }
+.contentarea .scrip3 .sbot{ padding:20px 20px 5px 30px; background:url(../images/a3_3.gif); width:186px; height:47px; }
+.contentarea .scrip3 .sbot h2{ margin-top:7px; float:right; }
+
+.contentarea .scrip4{ color:#8c4d00; position:absolute; }
+.contentarea .scrip4 a{ color:#8c4d00; }
+.contentarea .scrip4 .shead{ padding-left:18px; background:url(../images/a4_1.gif); padding-top:50px; height:18px; }
+.contentarea .scrip4 .sbody{
+	padding:20px 25px 20px 26px; background:url(../images/a4_2.gif); width:186px; line-height:18px; text-align:left;
+}
+.contentarea .scrip4 .sbot{ padding:20px 20px 5px 30px; background:url(../images/a4_3.gif); width:186px; height:47px; }
+.contentarea .scrip4 .sbot h2{ margin-top:7px; float:right; }
+
+.contentarea .scrip5{ color:#007845; position:absolute; }
+.contentarea .scrip5 a{ color:#007845; }
+.contentarea .scrip5 .shead{ padding-left:18px; background:url(../images/a5_1.gif); padding-top:50px; height:18px; }
+.contentarea .scrip5 .sbody{
+	padding:20px 25px 20px 26px; background:url(../images/a5_2.gif); width:186px; line-height:18px; text-align:left; }
+.contentarea .scrip5 .sbot{ padding:20px 20px 5px 30px; background:url(../images/a5_3.gif); width:186px; height:47px; }
+.contentarea .scrip5 .sbot h2{ margin-top:7px; float:right; }
+
+.contentarea .scrip6{ color:#417000; position:absolute; }
+.contentarea .scrip6 a{ color:#417000;  }
+.contentarea .scrip6 .shead{ padding-left:18px; background:url(../images/a6_1.gif); padding-top:50px; height:18px; }
+.contentarea .scrip6 .sbody{
+	padding:20px 25px 20px 26px; background:url(../images/a6_2.gif); width:186px; line-height:18px; text-align:left }
+.contentarea .scrip6 .sbot{ padding:20px 20px 5px 30px; background:url(../images/a6_3.gif); width:186px; height:47px; }
+.contentarea .scrip6 .sbot h2{ margin-top:7px; float:right; }
+
+.contentarea .scrip7{ color:#aa348c; position:absolute; }
+.contentarea .scrip7 a{ color:#aa348c; }
+.contentarea .scrip7 .shead{ padding-left:18px; background:url(../images/a7_1.gif); padding-top:50px; height:18px; }
+.contentarea .scrip7 .sbody{
+	padding:20px 25px 20px 26px; background:url(../images/a7_2.gif); width:186px; line-height:18px; text-align:left; }
+.contentarea .scrip7 .sbot{ padding:20px 20px 5px 30px; background:url(../images/a7_3.gif); width:186px; height:47px; }
+.contentarea .scrip7 .sbot h2{ margin-top:7px; float:right; }
+
+.contentarea .scrip8{ color:#006586; position:absolute; }
+.contentarea .scrip8 a{ color:#006586; }
+.contentarea .scrip8 .shead{ padding-left:18px; background:url(../images/a8_1.gif); padding-top:50px; height:18px; }
+.contentarea .scrip8 .sbody{
+	padding:20px 25px 20px 26px; background:url(../images/a8_2.gif); width:186px; line-height:18px; text-align:left
+}
+.contentarea .scrip8 .sbot{ padding:20px 20px 5px 30px; background:url(../images/a8_3.gif); width:186px; height:47px; }
+.contentarea .scrip8 .sbot h2{ margin-top:7px; float:right; }
+
+.left{ float:left; }
+
+/* post */
+.post{ width:702px; background:#fffaee; border:#bbb 1px solid; margin:20px auto; }
+.post table{ margin:auto; }
+.post .main{ width:676px; }
+.posttable1{ width:676px; background:#EEF1EC; }
+.post .main .wrap{ width:608px; } 
+.post .main .pl{ float:left; }
+.post .main .pl ul{ padding:10px 5px; }
+.post .main .pl ul li{ float:left; width:25%; padding:5px 0; }
+.post .main .pl ul li img{ height:32px; }
+.post .main .preview{ background-color:#E8DEFF; width:210px; float:right; } 
+
+.f12_5050{ font-size:12px; color:#505050; line-height:24px; }
+.f12_0078{ font-size:12px; color:#007847; line-height:18px; }
+.pt12{ padding-top:12px; }
+
+.page{ text-align:center !important; }
+.page span,.page a{ padding:0 5px; }
