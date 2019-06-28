@@ -1,0 +1,59 @@
+<!doctype html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="Public/css/base.css" rel="stylesheet" />
+<link href="Public/css/style.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+
+	{include file="../Public/navigation.html"}
+	
+	<div class="content">
+		<div class="tableBorder_gray wrap">
+			<div class="breadcrumb word_orange">当前位置：系统设置 &gt; 管理员设置 &gt;&gt;&gt;</div>
+			{if $res['users'] eq ''}
+			<div class="msg" >暂无管理员信息！
+				<br/><a href="#" onClick="window.open('manager_add.php','','width=292,height=175')">添加管理员信息</a><br/>
+			</div>
+			{else}
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="84%">&nbsp;</td>
+					<td width="16%" height="28">
+						<a href="#" onClick="window.open('index.php?m=home&c=user&a=manager&method=add','','width=322,height=195')">添加管理员信息</a> 
+					</td>	  
+				</tr>
+			</table>  
+			<table width="91%" border="1" cellpadding="0" cellspacing="0" bordercolor="#fff" bordercolordark="#D2E3E6" bordercolorlight="#fff">
+				<tr style="background:#e3F4F7">
+					<td width="26%">管理员名称</td>
+					<td width="12%">系统设置</td>
+					<td width="12%">读者管理</td>
+					<td width="12%">图书档案管理</td>
+					<td width="11%">图书借还</td>
+					<td width="11%">系统查询</td>
+					<td width="8%">权限设置</td>
+					<td width="8%">操作</td>
+				</tr>
+				{foreach $res['users'] as $item}
+				<tr>
+					<td style="padding:5px;">{$item['name']}</td>
+					<td><input name="checkbox" type="checkbox" class="noborder" {if $item['sysset'] eq 1}checked{/if} value="checkbox" disabled="disabled" ></td>
+					<td><input name="checkbox" type="checkbox" class="noborder" {if $item['readerset'] eq 1}checked{/if} value="checkbox" disabled="disabled" ></td>
+					<td><input name="checkbox" type="checkbox" class="noborder" {if $item['bookset'] eq 1}checked{/if} value="checkbox" disabled ></td>
+					<td><input name="checkbox" type="checkbox" class="noborder" {if $item['borrowback'] eq 1}checked{/if} value="checkbox" disabled ></td>
+					<td><input name="checkbox" type="checkbox" class="noborder" {if $item['sysquery'] eq 1}checked{/if} value="checkbox" disabled ></td>
+					<td><a href="#" onClick="window.open('index.php?m=home&c=user&a=manager&method=modify&id={$item['id']}','','width=322,height=195')">权限设置</a></td>
+					<td><a href="manager_del.php?id={$item['id']}">删除</a></td>
+				</tr>
+				{/foreach}
+			</table>
+			{/if}
+		</div>
+	</div>
+	
+	{include file="../Public/copyright.html"}
+	
+</div>
+</body>

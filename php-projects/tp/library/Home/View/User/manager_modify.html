@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="Public/css/style.css" rel="stylesheet" />
+</head>
+<body>
+<form class="modify" name="form1" method="post" action="index.php?m=home&c=user&a=manager&method=modify">
+	<table height="126"  border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td width="35%" height="29" style="text-align:right;">管理员名称：</td>
+			<td>
+				<input name="id" type="hidden" value="{$res['info']['id']}" />
+				<input name="name" type="text" readonly="yes" value="{$res['info']['name']}" />        
+			</td>
+		</tr>
+		<tr>
+			<td height="72" style="text-align:right;">拥有的权限：</td>
+			<td>
+				<input name="sysset" type="checkbox" class="noborder" id="sysset" value="1" {if $res['info']['sysset'] eq 1}checked{/if} /> 系统设置
+				<input name="readerset" type="checkbox" class="noborder" id="readerset" value="1" {if $res['info']['readerset'] eq 1}checked{/if} /> 读者管理<br/>
+				<input name="bookset" type="checkbox" class="noborder" id="bookset" value="1" {if $res['info']['bookset'] eq 1}checked{/if} /> 图书管理
+				<input name="borrowback" type="checkbox" class="noborder" id="borrowback" value="1" {if $res['info']['borrowback'] eq 1}checked{/if} />图书借还<br/>
+				<input name="sysquery" type="checkbox" class="noborder" id="sysquery" value="1" {if $res['info']['sysquery'] eq 1}checked{/if} />系统查询
+			</td>
+		</tr>
+		<tr>
+			<td height="20">&nbsp;</td>
+			<td><input name="submit" type="submit" class="btn_grey" value="保存">
+			&nbsp;
+			<input name="Submit2" type="button" class="btn_grey" value="关闭" onClick="window.close();"></td>
+		</tr>
+	</table>
+</form>
+</body>
