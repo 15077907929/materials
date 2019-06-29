@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="Public/css/style.css" rel="stylesheet" />
+<title>添加读者类型信息</title>
+<script type="text/javascript">
+function check(form){
+	if(form.name.value==""){
+		alert("请输入类型名称!");form.name.focus();return false;
+	}
+	if(form.number.value==""){
+		alert("请输入可借数量!");form.number.focus();return false;
+	}	
+}
+</script>
+</head>
+<body>
+<form class="add" name="form" method="post" action="index.php?m=Home&c=Reader&a=rtype&method=add">
+	<table height="123" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td width="35%" height="30" style="text-align:right;">类型名称：</td>
+			<td><input name="name" type="text"></td>
+		</tr>
+		<tr>
+			<td height="28" style="text-align:right;">可借数量：</td>
+			<td><input name="number" type="text" id="pwd"></td>
+		</tr>
+		<tr>
+			<td height="37">&nbsp;</td>
+			<td>
+				<input name="sub" type="submit" class="btn_grey" value="保存" onclick="return check(form)" />
+				&nbsp;<input name="sub2" type="button" class="btn_grey" value="关闭" onclick="window.close();" />
+			</td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>

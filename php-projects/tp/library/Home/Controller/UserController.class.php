@@ -71,6 +71,19 @@ class UserController extends Controller {
 					echo '<script type="text/javascript">alert("权限设置修改成功！");window.close();window.opener.location.reload();</script>';
 				}
 			break;
+			case 'del':
+				$find=$db2->where('id='.$_GET['id'])->find();
+				if($find){
+					if($db->where('id='.$_GET['id'])->delete() && $db2->where('mid='.$_GET['id'])->delete()){
+						echo '<script type="text/javascript">alert("管理员删除成功！");window.location="index.php?m=home&c=user&a=manager";</script>';
+					}
+				}else{
+					if($db->where('id='.$_GET['id'])->delete()){
+						echo '<script type="text/javascript">alert("管理员删除成功！");window.location="index.php?m=home&c=user&a=manager";</script>';
+					}
+				}
+				echo '<script type="text/javascript">alert("管理员删除失败！");history.back();</script>';
+			break;
 		}
 		
 		$this->assign('res',$res);

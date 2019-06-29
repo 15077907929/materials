@@ -1,4 +1,5 @@
 <!doctype html>
+<html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="Public/css/base.css" rel="stylesheet" />
@@ -39,16 +40,24 @@
 				{foreach $res['users'] as $item}
 				<tr>
 					<td style="padding:5px;">{$item['name']}</td>
-					<td><input name="checkbox" type="checkbox" class="noborder" {if $item['sysset'] eq 1}checked{/if} value="checkbox" disabled="disabled" ></td>
-					<td><input name="checkbox" type="checkbox" class="noborder" {if $item['readerset'] eq 1}checked{/if} value="checkbox" disabled="disabled" ></td>
-					<td><input name="checkbox" type="checkbox" class="noborder" {if $item['bookset'] eq 1}checked{/if} value="checkbox" disabled ></td>
-					<td><input name="checkbox" type="checkbox" class="noborder" {if $item['borrowback'] eq 1}checked{/if} value="checkbox" disabled ></td>
-					<td><input name="checkbox" type="checkbox" class="noborder" {if $item['sysquery'] eq 1}checked{/if} value="checkbox" disabled ></td>
-					<td><a href="#" onClick="window.open('index.php?m=home&c=user&a=manager&method=modify&id={$item['id']}','','width=322,height=195')">权限设置</a></td>
-					<td><a href="manager_del.php?id={$item['id']}">删除</a></td>
+					<td><input type="checkbox" class="noborder" {if $item['sysset'] eq 1}checked{/if} disabled="disabled" ></td>
+					<td><input type="checkbox" class="noborder" {if $item['readerset'] eq 1}checked{/if} disabled="disabled" ></td>
+					<td><input type="checkbox" class="noborder" {if $item['bookset'] eq 1}checked{/if} disabled ></td>
+					<td><input type="checkbox" class="noborder" {if $item['borrowback'] eq 1}checked{/if} disabled ></td>
+					<td><input type="checkbox" class="noborder" {if $item['sysquery'] eq 1}checked{/if} disabled ></td>
+					<td><a href="#" onclick="window.open('index.php?m=home&c=user&a=manager&method=modify&id={$item['id']}','','width=322,height=195')">权限设置</a></td>
+					<td><a href="#" onclick="javascript:check_del('index.php?m=home&c=user&a=manager&method=del&id={$item['id']}');">删除</a></td>
 				</tr>
 				{/foreach}
 			</table>
+			<script type="text/javascript">
+				function check_del(url){  
+					var mymessage=confirm("确认要删除该条记录吗？");  
+					if(mymessage==true){  
+						location.href=url;
+					} 
+				}  
+			</script>
 			{/if}
 		</div>
 	</div>
@@ -57,3 +66,4 @@
 	
 </div>
 </body>
+</html>

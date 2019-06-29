@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="Public/css/base.css" rel="stylesheet" />
+<link href="Public/css/style.css" rel="stylesheet" />
+<title>读者馆管理系统</title>
+</head>
+<script type="text/javascript">
+function check(form){
+	if(form.name.value==""){
+		alert("请输入读者姓名!");form.name.focus();return false;
+	}
+	if(form.barcode.value==""){
+		alert("请输入条形码!");form.barcode.focus();return false;
+	}
+	if(form.paperNO.value==""){
+		alert("请输入证件号码!");form.paperNO.focus();return false;
+	}
+}
+</script>
+<body>
+<div class="container">
+
+	{include file="../Public/navigation.html"}
+	
+	<div class="content book">
+		<div class="tableBorder_gray wrap">
+			<div class="breadcrumb word_orange">当前位置：读者管理 &gt; 读者档案管理 &gt; 修改读者信息 &gt;&gt;&gt;</div>
+			<form name="form" method="post" action="index.php?m=Home&c=Reader&a=index&method=modify">
+				<table width="600" height="432">
+					<tr>
+						<td width="173">姓名：</td>
+						<td width="427" height="39" style="text-align:left;">
+							<input name="name" type="text" value="{$res['info']['name']}" /> *
+							<input name="id" type="hidden" id="readerid" value="{$res['info']['id']}" /></td>
+						</td>
+					</tr>
+					<tr>
+						<td width="173">性别：</td>
+						<td height="35" style="text-align:left;">
+							<input name="sex" type="radio" class="noborder" id="radiobutton" value="男" checked>
+							<label for="radiobutton">男 </label>
+							<label>
+							<input name="sex" type="radio" class="noborder" value="女">
+							女</label>
+						</td>
+					</tr>
+					<tr>
+						<td>条形码：</td>
+						<td style="text-align:left;"><input name="barcode" type="text" id="barcode" value="{$res['info']['barcode']}" /> * </td>
+					</tr>
+					<tr>
+						<td>读者类型：</td>
+						<td style="text-align:left;">
+							<select name="typeid" class="wenbenkuang" id="typeid">
+							
+
+							<option value=""></option>
+						
+							</select>        
+						</td>
+					</tr>
+					<tr>
+						<td>职业：</td>
+						<td style="text-align:left;"><input name="vocation" type="text" id="vocation"></td>
+					</tr>
+					<tr>
+						<td>出生日期：</td>
+						<td style="text-align:left;"><input name="birthday" type="text" id="birthday"></td>
+					</tr>
+					<tr>
+						<td>有效证件：</td>
+						<td style="text-align:left;">
+							<select name="paperType" class="wenbenkuang" id="paperType">
+								<option value="身份证" selected>身份证</option>
+								<option value="学生证">学生证</option>
+								<option value="军官证">军官证</option>
+								<option value="工作证">工作证</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>证件号码：</td>
+						<td  style="text-align:left;"><input name="paperNO" type="text" id="paperNO" value="{$res['info']['paperNO']}" /> * </td>
+					</tr>
+					<tr>
+						<td>电话：</td>
+						<td style="text-align:left;"><input name="tel" type="text" id="tel"></td>
+					</tr>
+					<tr>
+						<td>E-mail：</td>
+						<td style="text-align:left;"><input name="email" type="text" id="email" size="50">
+						<input name="operator" type="hidden" id="operator" value="{$res['user']['name']}"></td>
+					</tr>
+					<tr>
+						<td>备注：</td>
+						<td style="text-align:left;"><textarea name="remark" cols="50" rows="5" class="wenbenkuang" id="remark"></textarea></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td style="text-align:left;">
+							<input name="sub" type="submit" class="btn_grey" value="保存" onClick="return check(form)" />&nbsp;
+							<input name="sub2" type="button" class="btn_grey" value="返回" onClick="history.back()" />
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+	
+	{include file="../Public/copyright.html"}
+	
+</div>
+</body>
+</html>

@@ -124,6 +124,12 @@ font-size:12px;font-family:Tahoma;font-style : oblique;line-height : normal ;fon
 form.add,form.modify{ background:url("../images/subBG.jpg"); width:292px; height:175px; }
 form.add table,form.modify table{ margin:auto; padding:30px 0px 0 0px; text-align:center; text-align:left; }
 
+.msg{ line-height:24px; }
+
+.book form{ padding:20px 0; }
+.book form table{ border-spacing:0; border-collapse:collapse; }
+.book form table td{ border:1px solid #eee; padding:0 10px; }
+
 .copyright{ line-height:27px; text-align:center; border:#ddd 1px solid; }
 
 .login{ padding-top:200px; text-align:center; }
