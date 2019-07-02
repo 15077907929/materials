@@ -202,14 +202,16 @@ tdbg.style.background='url(.images/item_out.gif)'
 tdbg.style.border=''
 }
 var sysmenu='<table width=80><tr><td id=library onMouseOver=overbg(library) onMouseOut=outbg(library)><a href=library_modify.php>图书馆信息</a></td></tr>\
-<tr><td id=manager onMouseOver=overbg(manager) onMouseOut=outbg(manager)><a href="index.php?m=Home&c=User&a=manager">管理员设置</a></td></tr>\
-<tr><td id=para onMouseOver=overbg(para) onMouseOut=outbg(para)><a href=parameter_modify.php>参数设置</a></td></tr>\
-<tr><td id=bookcase onMouseOver=overbg(bookcase) onMouseOut=outbg(bookcase)><a href=bookcase.php>书架设置</a></td></tr></table>'
+<tr><td id="manager" onMouseOver=overbg(manager) onMouseOut=outbg(manager)><a href="index.php?m=Home&c=User&a=manager">管理员设置</a></td></tr>\
+<tr><td id="para" onMouseOver=overbg(para) onMouseOut=outbg(para)><a href=parameter_modify.php>参数设置</a></td></tr>\
+<tr><td id="booktype" onMouseOver=overbg(booktype) onMouseOut=outbg(booktype)><a href="index.php?m=Home&c=Sysset&a=booktype">图书类型设置</a></td></tr>\
+<tr><td id="publishing" onMouseOver=overbg(publishing) onMouseOut=outbg(publishing)><a href="index.php?m=Home&c=Sysset&a=publishing">出版社设置</a></td></tr>\
+<tr><td id="bookcase" onMouseOver=overbg(bookcase) onMouseOut=outbg(bookcase)><a href="index.php?m=Home&c=Sysset&a=bookcase">书架设置</a></td></tr></table>'
 
 var readermenu='<table width=90><tr><td id=readerType onMouseOver=overbg(readerType) onMouseOut=outbg(readerType)><a href="index.php?m=Home&c=Reader&a=rtype">读者类型管理</a></td></tr>\
 <tr><td id=reader onMouseOver=overbg(reader) onMouseOut=outbg(reader)><a href="index.php?m=Home&c=Reader&a=index">读者档案管理</a></td></tr></table>'
 
-var borrowmenu='<table width=60><tr><td id=Borrow onMouseOver=overbg(Borrow) onMouseOut=outbg(Borrow)><a href=bookBorrow.php>图书借阅</a></td></tr>\
+var borrowmenu='<table width=60><tr><td id=Borrow onMouseOver=overbg(Borrow) onMouseOut=outbg(Borrow)><a href="index.php?m=Home&c=Bbb&a=borrow">图书借阅</a></td></tr>\
 <tr><td id=renew onMouseOver=overbg(renew) onMouseOut=outbg(renew)><a href=bookRenew.php>图书续借</a></td></tr>\
 <tr><td id=giveback onMouseOver=overbg(giveback) onMouseOut=outbg(giveback)><a href=bookBack.php>图书归还</a></td></tr></table>'
 

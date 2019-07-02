@@ -57,16 +57,21 @@ class ReaderController extends Controller {
 		}
 		$db=M('reader');
 		$db2=M('purview');
+		$db3=M('readertype');
 		$method = I('get.method') ? I('get.method') : 'show';
 		switch ($method) {
             case 'show':
-				$res['list']=$db->select();
-				// $res['books']=$db->query('select m.id,m.name,p.sysset,p.readerset,p.bookset,p.borrowback,p.sysquery from bookinfo as m left join (select * from purview)as p on m.id=p.mid');
+				// $res['list']=$db->select();
+				$res['list']=$db->query('select r.id,r.barcode,r.name,t.name as typename,r.paperType,r.paperNO,r.tel,r.email from reader as r join (select * from readertype) as t on r.typeid=t.id');
 			break;
 			case 'add':
+				$res['rtype']=$db3->select();
 				if($_POST['sub']!=""){
 					$data['name']=$_POST['name'];
+					$data['sex']=$_POST['sex'];
 					$data['barcode']=$_POST['barcode'];
+					$data['typeid']=$_POST['typeid'];
+					$data['paperType']=$_POST['paperType'];
 					$data['paperNO']=$_POST['paperNO'];
 					$data['operator']=cookie('user')['name'];
 					$data['createDate']=date("Y-m-d");
@@ -81,9 +86,13 @@ class ReaderController extends Controller {
 			case 'modify':
 				// $res['info']=$db->query('select m.id,m.name,p.sysset,p.readerset,p.bookset,p.borrowback,p.sysquery from bookinfo as m left join (select * from purview)as p on m.id=p.mid where m.id='.$_GET['id'])[0];
 				$res['info']=$db->where('id='.$_GET['id'])->find();
+				$res['rtype']=$db3->select();
 				if($_POST['sub']!=""){
 					$data['name']=$_POST['name'];
+					$data['sex']=$_POST['sex'];
 					$data['barcode']=$_POST['barcode'];
+					$data['typeid']=$_POST['typeid'];
+					$data['paperType']=$_POST['paperType'];
 					$data['paperNO']=$_POST['paperNO'];
 					$data['operator']=cookie('user')['name'];
 					$db->where('id='.$_POST['id'])->save($data);

@@ -39,11 +39,8 @@ function check(form){
 					<tr>
 						<td width="173">性别：</td>
 						<td height="35" style="text-align:left;">
-							<input name="sex" type="radio" class="noborder" id="radiobutton" value="男" checked>
-							<label for="radiobutton">男 </label>
-							<label>
-							<input name="sex" type="radio" class="noborder" value="女">
-							女</label>
+							<input name="sex" type="radio" class="noborder" value="1" {if $res['info']['sex'] eq 1}checked{/if} /> 男
+							<input name="sex" type="radio" class="noborder" value="0" {if $res['info']['sex'] eq 0}checked{/if}/> 女
 						</td>
 					</tr>
 					<tr>
@@ -54,10 +51,10 @@ function check(form){
 						<td>读者类型：</td>
 						<td style="text-align:left;">
 							<select name="typeid" class="wenbenkuang" id="typeid">
-							
-
-							<option value=""></option>
-						
+								<option value="">请选择读者类型</option>
+								{foreach $res['rtype'] as $item}
+								<option value="{$item['id']}" {if $res['info']['typeid'] eq $item['id']}selected{/if}>{$item['name']}</option>
+								{/foreach}
 							</select>        
 						</td>
 					</tr>
@@ -73,10 +70,11 @@ function check(form){
 						<td>有效证件：</td>
 						<td style="text-align:left;">
 							<select name="paperType" class="wenbenkuang" id="paperType">
-								<option value="身份证" selected>身份证</option>
-								<option value="学生证">学生证</option>
-								<option value="军官证">军官证</option>
-								<option value="工作证">工作证</option>
+								<option>请选择证件</option>
+								<option value="身份证" {if $res['info']['paperType'] eq '身份证'}selected{/if}>身份证</option>
+								<option value="学生证" {if $res['info']['paperType'] eq '学生证'}selected{/if}>学生证</option>
+								<option value="军官证" {if $res['info']['paperType'] eq '军官证'}selected{/if}>军官证</option>
+								<option value="工作证" {if $res['info']['paperType'] eq '工作证'}selected{/if}>工作证</option>
 							</select>
 						</td>
 					</tr>

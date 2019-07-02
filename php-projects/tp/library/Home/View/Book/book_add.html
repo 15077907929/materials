@@ -41,10 +41,11 @@ function check(form){
 					<tr>
 						<td>图书类型：</td>
 						<td style="text-align:left;">
-							<select name="typeId" class="wenbenkuang" id="typeId">
-
-								<option value=""></option>
-
+							<select name="typeid" class="wenbenkuang" id="typeId">
+								<option value="">请选择图书类型</option>
+								{foreach $res['booktype'] as $item}
+								<option value="{$item['id']}">{$item['name']}</option>
+								{/foreach}
 							</select>
 						</td>
 					</tr>
@@ -59,10 +60,11 @@ function check(form){
 					<tr>
 						<td>出&nbsp;版&nbsp;社：</td>
 						<td style="text-align:left;">
-							<select name="isbn" class="wenbenkuang">
-
-							<option value=""></option>
-
+							<select name="pubid" class="wenbenkuang">
+								<option value="">请选择出版社</option>
+								{foreach $res['publishing'] as $item}
+								<option value="{$item['id']}">{$item['name']}</option>
+								{/foreach}
 							</select>
 						</td>
 					</tr>
@@ -76,12 +78,15 @@ function check(form){
 					</tr>
 					<tr>
 						<td>书&nbsp;&nbsp;架：</td>
-						<td style="text-align:left;"><select name="bookcaseid" class="wenbenkuang" id="bookcaseid">
-
-						<option value=""></option>
-
-						</select>
-						<input name="operator" type="hidden" id="operator" value=""></td>
+						<td style="text-align:left;">
+							<select name="bookcaseid" class="wenbenkuang" id="bookcaseid">
+								<option value="">请选择书架</option>
+								{foreach $res['bookcase'] as $item}
+								<option value="{$item['id']}">{$item['name']}</option>
+								{/foreach}
+							</select>
+							<input name="operator" type="hidden" id="operator" value="{$res['user']['name']}" />
+						</td>
 					</tr>
 					<tr>
 					<td>&nbsp;</td>

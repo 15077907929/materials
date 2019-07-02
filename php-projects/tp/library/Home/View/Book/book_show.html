@@ -41,9 +41,9 @@
 				<tr>
 					<td style="padding:5px;">{$item['barcode']}</td>
 					<td>{$item['name']}</td>
-					<td>{$item['booktype']}</td>
-					<td>{$item['isbn']}</td>
-					<td>{$item['bookcase']}</td>
+					<td>{$item['typename']}</td>
+					<td>{$item['pubname']}</td>
+					<td>{$item['bookcasename']}</td>
 					<td><a href="index.php?m=home&c=Book&a=index&method=modify&id={$item['id']}">修改</a></td>
 					<td><a href="#" onclick="javascript:check_del('index.php?m=home&c=Book&a=index&method=del&id={$item['id']}');">删除</a></td>
 				</tr>

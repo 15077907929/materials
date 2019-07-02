@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="Public/css/base.css" rel="stylesheet" />
+<link href="Public/css/style.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+
+	{include file="../Public/navigation.html"}
+	
+	<div class="content">
+		<div class="tableBorder_gray wrap">
+			<div class="breadcrumb word_orange">当前位置：系统设置 &gt; 书架设置 &gt;&gt;&gt;</div>
+			{if $res['types'] eq ''}
+			<div class="msg" >暂无书架信息！
+				<br/><a href="#" onclick="window.open('index.php?m=Home&c=Sysset&a=bookcase&method=add','','width=312,height=195')">添加书架信息</a><br/>
+			</div>
+			{else}
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="84%">&nbsp;</td>
+					<td width="16%" height="28">
+						<a href="#" onclick="window.open('index.php?m=Home&c=Sysset&a=bookcase&method=add','','width=322,height=195')">添加书架信息</a> 
+					</td>	  
+				</tr>
+			</table>  
+			<table width="91%" border="1" cellpadding="0" cellspacing="0" bordercolor="#fff" bordercolordark="#D2E3E6" bordercolorlight="#fff">
+				<tr style="background:#e3F4F7">
+					<td width="68%">书架名称</td>
+					<td colspan="2" width="32%">删除</td>
+				</tr>
+				{foreach $res['types'] as $item}
+				<tr>
+					<td style="padding:5px;">{$item['name']}</td>
+					<td><a href="#" onclick="window.open('index.php?m=Home&c=Sysset&a=bookcase&method=modify&id={$item['id']}','','width=322,height=195')">修改</a></td>
+					<td><a href="#" onclick="javascript:check_del('index.php?m=Home&c=Sysset&a=bookcase&method=del&id={$item['id']}');">删除</a></td>
+				</tr>
+				{/foreach}
+			</table>
+			<script type="text/javascript">
+				function check_del(url){  
+					var mymessage=confirm("确认要删除该条记录吗？");  
+					if(mymessage==true){  
+						location.href=url;
+					} 
+				}  
+			</script>
+			{/if}
+		</div>
+	</div>
+	
+	{include file="../Public/copyright.html"}
+	
+</div>
+</body>
+</html>

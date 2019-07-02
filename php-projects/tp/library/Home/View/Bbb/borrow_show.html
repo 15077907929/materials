@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+<link href="Public/css/base.css" rel="stylesheet" />
+<link href="Public/css/style.css" rel="stylesheet" />
+<script type="text/javascript">
+	function checkreader(form){
+		if(form.barcode.value==""){
+			alert("请输入读者条形码!");form.barcode.focus();return false;
+		}
+		form.submit();
+	}
+	function checkbook(form){
+		if(form.barcode.value==""){
+			alert("请输入读者条形码!");form.barcode.focus();return false;
+		}		
+		if(form.inputkey.value==""){
+			alert("请输入查询关键字!");form.inputkey.focus();return false;
+		}
+
+		if(form.number.value-form.borrnum.value<=0){
+			alert("您不能再借阅其他图书了!");return false;
+		}
+	form.submit();
+   }
+</script>
+</head>
+<body>
+<div class="container borrow">
+
+	{include file="../Public/navigation.html"}
+	
+	<div class="content">
+		<div class="tableBorder_gray wrap">
+			<div class="breadcrumb word_orange">当前位置：图书借还 &gt; 图书借阅&gt;&gt;&gt; </div>      
+			<form name="form" method="post" action="index.php?m=Home&c=Bbb&a=borrow">	  
+				<div class="tableBorder_grey fwrap">
+					<img src="Public/images/bookborr.gif" />
+					<table width="100%" height="21" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td width="24%" height="18" style="padding-left:7px;padding-top:7px;">
+								<img src="Public/images/bg_line.gif" width="132" height="20" />
+							</td>
+							<td width="76%" style="padding-top:7px;">读者条形码：
+								<input name="barcode" type="text" id="barcode" size="24" value="{$res['info']['barcode']}" />
+								&nbsp;
+								<input name="Button" type="button" class="btn_grey" value="确定" onclick="checkreader(form)" />
+							</td>
+						</tr>
+					</table>
+					<hr width="90%" size="1">
+					<table width="96%" style="text-align:left;">
+						<tr>
+							<td height="27" style="text-align:right;">姓 名：</td><td>
+								<input name="rname" type="text" id="readername" value="{$res['info']['name']}" />
+								<input name="rid" type="hidden" id="readerid" value="{$res['info']['id']}" />
+							</td>
+							<td style="text-align:right;">性 别：</td>
+							<td><input name="sex" type="text" id="sex" value="{$res['info']['sex']}" /></td>
+							<td style="text-align:right;">读者类型：</td>
+							<td><input name="readerType" type="text" id="readerType" value="{$res['info']['typename']}" /></td>
+						</tr>
+						<tr>
+							<td height="27" style="text-align:right;">证件类型：</td>
+							<td><input name="paperType" type="text" id="paperType" value="{$res['info']['paperType']}" /></td>
+							<td style="text-align:right;">证件号码：</td>
+							<td><input name="paperNO" type="text" id="paperNo" value="{$res['info']['paperNO']}" /></td>
+							<td style="text-align:right;">可借数量：</td>
+							<td><input name="number" type="text" id="number" value="{$res['info']['number']}" size="17" /> 册</td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td height="32">添加的依据：
+								<input name="f" type="radio" class="noborder" value="barcode" checked />
+								图书条形码 &nbsp;&nbsp;
+								<input name="f" type="radio" class="noborder" value="name" />
+								图书名称&nbsp;&nbsp;
+								<input name="inputkey" type="text" id="inputkey" size="50" />
+								<input name="sub" type="button" class="btn_grey" onclick="checkbook(form);" value="确定" />
+								<input name="operator" type="hidden" id="operator" value="" />
+								<input name="btn2" type="button" class="btn_grey" onclick="window.location.href='index.php?m=Home&c=Bbb&a=borrow'" value="完成借阅" />                  
+							</td>
+						</tr>
+					</table> 
+					<table width="99%" border="1" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF" bordercolorlight="#FFFFFF" bordercolordark="#9ECFEE" bgcolor="#FFFFFF">
+						<tr bgcolor="#E2F4F6">
+							<td width="29%" height="25">图书名称</td>
+							<td width="12%">借阅时间</td>
+							<td width="14%">应还时间</td>
+							<td width="17%">出版社</td>
+							<td width="14%">书架</td>
+							<td colspan="2">定价(元)</td>
+						</tr>
+						{foreach $res['borr'] as $item}
+						<tr>
+							<td style="padding:5px;">{$item['bookname']}</td>
+							<td>{$item['borrowTime']}</td>
+							<td>{$item['backTime']}</td>
+							<td>{$item['pubname']}</td>
+							<td>{$item['bookcase']}</td>
+							<td>{$item['price']}</td>
+						</tr>
+						{/foreach}
+					</table>
+					<input name="borrnum" type="hidden" id="borrnum" value="{$res['borrnum']}" />
+				</div>
+			</form>
+		</div>
+	</div>
+    
+	{include file="../Public/copyright.html"}
+  
+</div>
+</body>
+</html>

@@ -10,17 +10,28 @@ class BookController extends Controller {
 		}
 		$db=M('bookinfo');
 		$db2=M('purview');
+		$db3=M('bookcase');
+		$db4=M('booktype');
+		$db5=M('publishing');
 		$method = I('get.method') ? I('get.method') : 'show';
 		switch ($method) {
             case 'show':
 				$res['books']=$db->select();
-				// $res['books']=$db->query('select m.id,m.name,p.sysset,p.readerset,p.bookset,p.borrowback,p.sysquery from bookinfo as m left join (select * from purview)as p on m.id=p.mid');
+				// $res['books']=$db->query('select book.barcode,book.id as bookid,book.bookname,bt.typename,pb.pubname,bc.name from bookinfo book join booktype bt on book.typeid=bt.id join publishing pb on book.ISBN=pb.ISBN join bookcase bc on book.bookcase=bc.id');
+				$res['books']=$db->query('select book.barcode,book.id,book.name,bc.name as bookcasename,bt.name as typename,pb.name as pubname from bookinfo book join booktype bt on book.typeid=bt.id join bookcase bc on book.bookcase=bc.id join publishing pb on book.pubid=pb.id');
 			break;
 			case 'add':
+				$res['bookcase']=$db3->select();
+				$res['booktype']=$db4->select();
+				$res['publishing']=$db5->select();
 				if($_POST['sub']!=""){
 					$data['barcode']=$_POST['barcode'];
 					$data['name']=$_POST['name'];
+					$data['typeid']=$_POST['typeid'];
+					$data['author']=$_POST['author'];
+					$data['pubid']=$_POST['pubid'];
 					$data['price']=$_POST['price'];
+					$data['bookcase']=$_POST['bookcaseid'];
 					$data['operator']=cookie('user')['name'];
 					$data['inTime']=date("Y-m-d");
 					if($db->add($data)){
@@ -35,10 +46,17 @@ class BookController extends Controller {
 			case 'modify':
 				// $res['info']=$db->query('select m.id,m.name,p.sysset,p.readerset,p.bookset,p.borrowback,p.sysquery from bookinfo as m left join (select * from purview)as p on m.id=p.mid where m.id='.$_GET['id'])[0];
 				$res['info']=$db->where('id='.$_GET['id'])->find();
+				$res['bookcase']=$db3->select();
+				$res['booktype']=$db4->select();
+				$res['publishing']=$db5->select();
 				if($_POST['sub']!=""){
 					$data['barcode']=$_POST['barcode'];
 					$data['name']=$_POST['name'];
+					$data['typeid']=$_POST['typeid'];
+					$data['author']=$_POST['author'];
+					$data['pubid']=$_POST['pubid'];
 					$data['price']=$_POST['price'];
+					$data['bookcase']=$_POST['bookcaseid'];
 					$data['operator']=cookie('user')['name'];
 					$data['inTime']=date("Y-m-d");
 					$db->where('id='.$_POST['id'])->save($data);

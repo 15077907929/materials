@@ -38,11 +38,8 @@ function check(form){
 					<tr>
 						<td width="173">性别：</td>
 						<td height="35" style="text-align:left;">
-							<input name="sex" type="radio" class="noborder" id="radiobutton" value="男" checked>
-							<label for="radiobutton">男 </label>
-							<label>
-							<input name="sex" type="radio" class="noborder" value="女">
-							女</label>
+							<input name="sex" type="radio" class="noborder" id="radiobutton" value="1" checked /> 男
+							<input name="sex" type="radio" class="noborder" value="0" /> 女
 						</td>
 					</tr>
 					<tr>
@@ -53,10 +50,10 @@ function check(form){
 						<td>读者类型：</td>
 						<td style="text-align:left;">
 							<select name="typeid" class="wenbenkuang" id="typeid">
-							
-
-							<option value=""></option>
-						
+							<option value="">请选择读者类型</option>
+							{foreach $res['rtype'] as $item}
+							<option value="{$item['id']}">{$item['name']}</option>
+							{/foreach}
 							</select>        
 						</td>
 					</tr>

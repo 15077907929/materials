@@ -116,7 +116,7 @@ font-size:12px;font-family:Tahoma;font-style : oblique;line-height : normal ;fon
 .navigation .nbar .menu{  }
 #labtime{ float:left; padding-left:15px; }
 
-.content{ background:#fff; height:510px; text-align:center; padding-top:5px; }
+.content{ background:#fff; min-height:510px; text-align:center; padding-top:5px; }
 .content table{ margin:auto; }
 .content .wrap{ width:99%; padding-bottom:10px; }
 .breadcrumb{ line-height:22px; text-align:left; padding-left:12px; }
@@ -129,6 +129,9 @@ form.add table,form.modify table{ margin:auto; padding:30px 0px 0 0px; text-alig
 .book form{ padding:20px 0; }
 .book form table{ border-spacing:0; border-collapse:collapse; }
 .book form table td{ border:1px solid #eee; padding:0 10px; }
+
+.borrow form{ margin:10px auto 10px; padding:15px 0; background:#F8BF73; width:776px; }
+.borrow form .fwrap{ width:95%; background:#9ECFEE; padding-bottom:10px; }
 
 .copyright{ line-height:27px; text-align:center; border:#ddd 1px solid; }
 
