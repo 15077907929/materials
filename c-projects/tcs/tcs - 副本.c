@@ -1,9 +1,9 @@
 /******头 文 件******/
 #include<stdio.h>	//标准输入输出函数库
 #include<time.h>	//用于获得随机数
-// #include<windows.h>	//控制dos界面
+#include<windows.h>	//控制dos界面
 #include<stdlib.h>	//即 standard library 标志库头文件，里面定义了一些宏和通用工具函数
-// #include<conio.h>	//接受键盘输入输出
+#include<conio.h>	//接受键盘输入输出
 
 /******宏 定 义******/
 #define U 1
@@ -23,7 +23,7 @@ int status,sleeptime=200;	//蛇前进状态，每次运行的时间间隔
 snake *head,*food;	//蛇头指针，食物指针
 snake *q;	//遍历蛇的时候用到的指针
 int endgamestatus=0;	//游戏结束的情况，1：撞到墙；2：咬到自己；3：主动退出游戏
-// HANDLE hOut;	//控制台句柄
+HANDLE hOut;	//控制台句柄
 
 /******函 数 声 明******/
 void gotoxy(int x,int y);	//设置光标位置
@@ -49,29 +49,162 @@ void explation();	//游戏说明
 
 /*文字颜色函数*/
 int color(int c){
-	// SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),C);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),c);
 	return 0;
 }
 
 /*设置光标位置*/
 void gotoxy(int x,int y){
-	// COORD c;
-	// c.X=x;
-	// c.Y=y;
-	// SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),c);
+	COORD c;
+	c.X=x;
+	c.Y=y;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),c);
 }
 
 /*字符画————蛇*/
 void printsnake(){
 	gotoxy(35,1);
 	color(6);
-	printf("^\\/^\\");
+	printf("/^\\/^\\");	//蛇眼睛
+	
+	gotoxy(34,2);
+	printf("|__|  O|");	//蛇眼睛
+	
+	gotoxy(33,2);
+	color(2);
+	printf("_");
+	
+	gotoxy(25,3);
+	color(12);
+	printf("\\/");	//蛇信
+	
+	gotoxy(31,3);
+	color(2);
+	printf("/");
+	
+	gotoxy(37,3);
+	color(6);
+	printf("\\_/");	//蛇眼睛
+	
+	gotoxy(41,3);
+	color(10);
+	printf("\\");
+	
+	gotoxy(26,4);
+	color(12);
+	printf("\\____");	//舌头
+	
+	gotoxy(32,4);
+	printf("________/");
+	
+	gotoxy(31,4);
+	color(2);
+	printf("|");
+	
+	gotoxy(43,4);
+	color(10);
+	printf("\\");
+	
+	gotoxy(32,5);
+	color(2);
+	printf("\\_______");	//蛇嘴
+	
+	gotoxy(44,5);
+	color(10);
+	printf("\\");
+	
+	gotoxy(39,6);	//下面都是画蛇身
+	printf("|     |	                 \\");
+	
+	gotoxy(38,7);
+	printf("/      /                    \\");
+	
+	gotoxy(37,8);
+	printf("/      /                     \\ \\");
+	
+	gotoxy(35,9);
+	printf("/      /                        \\ \\");
+	
+	gotoxy(34,10);
+	printf("/     /                           \\  \\");
+	
+	gotoxy(33,11);
+	printf("/     /             _----_          \\   \\");
+	
+	gotoxy(32,12);
+	printf("/     /           _-~      ~-_          |  |");
+	
+	gotoxy(31,13);
+	printf("(     (        _-~     _--_     ~-_     _/  |");
+	
+	gotoxy(32,14);
+	printf("\\    ~-____-~      _-~   ~-_     ~-_-~    /");
+	
+	gotoxy(33,15);
+	printf("~-_           _-~           ~-_       _-~");
+	
+	gotoxy(35,16);
+	printf("~--______-~                  ~-__-~");
+}
+
+/*开始界面*/
+void welcometogame(){
+	int n;
+	int i,j=1;
+	gotoxy(43,18);
+	printf("贪 吃 蛇 游 戏");
+	color(14);
+	for(i=20;i<=26;i++){
+		for(j=27;j<=74;j++){
+			gotoxy(j,i);
+			if(i==20 || i==26){
+				printf("-");
+			}else if(j==27 || j==74){
+				printf("|");
+			}
+		}
+	}
+	color(12);
+	gotoxy(35,22);
+	printf("1.开始游戏");
+	gotoxy(55,22);
+	printf("2.游戏说明");
+	gotoxy(35,24);
+	printf("3.退出游戏");
+	gotoxy(29,27);
+	color(3);
+	printf("请选择[1 2 3]:[]\b\b");
+	color(14);
+	scanf("%d",&n);
+	switch(n){
+		case 1:
+			system("cls");
+			break;
+		break;	
+		case 2:
+			break;
+		break;	
+		case 3:
+			exit(0);
+			break;
+		break;
+		default:
+			color(12);
+			gotoxy(40,28);
+			printf("请输入1~3之间的数！");
+			getch();
+			system("cls");
+			printsnake();
+			welcometogame();
+	}
 }
 
 /*主函数*/
 int main(){
-	// system("mode con cols=100 lines=30");
+	system("mode con cols=100 lines=30");
 	printsnake();
+	welcometogame();
+	getchar(); 
 }
 
 

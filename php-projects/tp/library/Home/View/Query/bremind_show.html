@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<title>图书馆管理系统</title>
+<link href="Public/css/base.css" rel="stylesheet" />
+<link href="Public/css/style.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+
+	{include file="../Public/navigation.html"}
+	
+	<div class="content">
+		<div class="tableBorder_gray wrap">
+			<div class="breadcrumb word_orange">当前位置：系统查询 &gt; 借阅到期提醒  &gt;&gt;&gt;</div>
+			{if empty($res['list'])}
+			<div class="msg">暂无到期提醒信息！</div>
+			{/if}
+			<table width="98%"  border="1" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF" bordercolordark="#D2E3E6" bordercolorlight="#FFFFFF">
+				<tr align="center" bgcolor="#e3F4F7">
+					<td width="15%">图书条形码</td>
+					<td width="28%">图书名称</td>
+					<td width="17%">读者条形码</td>
+					<td width="9%">读者名称</td>
+					<td width="15%">借阅时间</td>
+					<td width="16%">应还时间</td>
+				</tr>
+				{foreach $res['list'] as $item}
+				<tr>
+					<td style="padding:5px;">&nbsp;{$item['barcode']}</td>
+					<td>{$item['bookname']}</td>
+					<td>&nbsp;{$item['readerbarcode']}</td>
+					<td>&nbsp;{$item['readername']}</td>
+					<td>&nbsp;{$item['borrowTime']}</td>
+					<td>&nbsp;{$item['backTime']}</td>
+				</tr>
+				{/foreach}
+			</table>		
+
+		</div>				 
+	</div>
+	
+	{include file="../Public/copyright.html"}
+	
+</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<title>图书馆管理系统</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="Public/css/base.css" rel="stylesheet" />
+<link href="Public/css/style.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+
+	{include file="../Public/navigation.html"}
+	
+	<div class="content">
+		<div class="tableBorder_gray wrap">
+			<div class="breadcrumb word_orange">当前位置：图书档案管理 &gt; 图书详细信息 &gt;&gt;&gt;</div>
+				<table width="600" height="432">
+					<tr>
+						<td width="173">条&nbsp;形&nbsp;码：</td>
+						<td width="427" height="39" style="text-align:left;">
+							<input name="barcode" type="text" id="barcode" value="{$res['info']['barcode']}" />
+						</td>
+					</tr>
+					<tr>
+						<td>图书名称：</td>
+						<td height="39" style="text-align:left;">
+							<input name="bookName" type="text" id="bookName" value="{$res['info']['name']}" size="50" /> 
+						* </td>
+					</tr>
+					<tr>
+						<td>图书类型：</td>
+						<td style="text-align:left;">
+							<input type="text" value="{$res['info']['typename']}">
+						</td>
+					</tr>
+					<tr>
+						<td>作&nbsp;&nbsp;者：</td>
+						<td style="text-align:left;">
+							<input name="author" type="text" id="author" value="{$res['info']['author']}" size="40">
+						</td>
+					</tr>
+					<tr>
+						<td>译&nbsp;&nbsp;者：</td>
+						<td style="text-align:left;">
+							<input name="translator" type="text" id="translator" value="{$res['info']['translator']}" size="40">
+						</td>
+					</tr>
+					<tr>
+						<td>出&nbsp;版&nbsp;社：</td>
+						<td style="text-align:left;">
+							<input name="isbn" type="text" class="wenbenkuang" value="{$res['info']['pubname']}">
+						</td>
+					</tr>
+					<tr>
+						<td>价&nbsp;&nbsp;格：</td>
+						<td style="text-align:left;">
+							<input name="price" type="text" id="price" value="{$res['info']['price']}">(元)
+						</td>
+					</tr>
+					<tr>
+						<td>页&nbsp;&nbsp;码：</td>
+						<td style="text-align:left;">
+							<input name="page" type="text" id="page" value="{$res['info']['page']}">
+						</td>
+					</tr>
+					<tr>
+						<td>书&nbsp;&nbsp;架：</td>
+						<td style="text-align:left;">
+							<input name="bookcaseid" class="wenbenkuang" value="{$res['info']['bookcasename']}" />
+						</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td style="text-align:left;">
+							<input name="sub2" type="button" class="btn_grey" value="返回" onClick="history.back();" />
+						</td>
+					</tr>
+				</table>
+		</div>
+	</div>
+	
+	{include file="../Public/copyright.html"}
+	
+</div>
+</body>
+</html>

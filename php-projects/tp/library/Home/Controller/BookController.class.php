@@ -16,8 +16,6 @@ class BookController extends Controller {
 		$method = I('get.method') ? I('get.method') : 'show';
 		switch ($method) {
             case 'show':
-				$res['books']=$db->select();
-				// $res['books']=$db->query('select book.barcode,book.id as bookid,book.bookname,bt.typename,pb.pubname,bc.name from bookinfo book join booktype bt on book.typeid=bt.id join publishing pb on book.ISBN=pb.ISBN join bookcase bc on book.bookcase=bc.id');
 				$res['books']=$db->query('select book.barcode,book.id,book.name,bc.name as bookcasename,bt.name as typename,pb.name as pubname from bookinfo book join booktype bt on book.typeid=bt.id join bookcase bc on book.bookcase=bc.id join publishing pb on book.pubid=pb.id');
 			break;
 			case 'add':
@@ -69,8 +67,23 @@ class BookController extends Controller {
 				}
 			break;
 		}
-		
 		$this->assign('res',$res);
 		$this->display('book_'.$method);	
+	}
+	
+	public function look(){
+		$res['user']=cookie('user');
+		if($res['user']==''){
+			echo "<script>alert('对不起，请通过正确的途径登录博考图书馆管理系统!');window.location.href='index.php?m=Home&c=User&a=login';</script>";
+		}
+		$db=M('bookinfo');
+		$method = I('get.method') ? I('get.method') : 'show';
+		switch ($method) {
+            case 'show':
+				$res['info']=$db->query('select book.barcode,book.id,book.name,book.price,book.author,bc.name as bookcasename,bt.name as typename,pb.name as pubname from bookinfo book join booktype bt on book.typeid=bt.id join bookcase bc on book.bookcase=bc.id join publishing pb on book.pubid=pb.id where book.id='.$_GET['id'])[0];
+			break;
+		}
+		$this->assign('res',$res);
+		$this->display('look_'.$method);		
 	}
 }

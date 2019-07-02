@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<title>图书馆管理系统</title>
+<link href="Public/css/base.css" rel="stylesheet" />
+<link href="Public/css/style.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container renew">
+
+	{include file="../Public/navigation.html"}
+	
+	<div class="content">
+		<div class="tableBorder_gray wrap">
+            <img src="Public/images/dangan.gif" />
+			<form  name="form1" method="post" action="">
+				<table>
+					<tr>
+						<td><img src="Public/images/search.gif" width="37" height="29"></td>
+						<td>请选择查询依据：</td>
+						<td>
+							<select name="f" class="wenbenkuang" id="f">
+								<option value="book.barcode">条形码</option>
+								<option value="bt.name">类别</option>
+								<option value="book.name" selected>书名</option>
+								<option value="book.author">作者</option>
+								<option value="pb.name">出版社</option>
+								<option value="bc.name">书架</option>
+							</select>
+						</td>
+						<td><input name="key" type="text" size="50" /></td>
+						<td><input name="sub" type="submit" class="btn_grey" value="查询" /></td>
+					</tr>
+				</table>
+			</form>
+			{if empty($res['books'])}
+			<div class="msg">暂无图书信息！</div>
+			{else}
+			<table width="98%"  border="1" cellpadding="0" cellspacing="0" bordercolor="#fff" bordercolordark="#D2E3E6" bordercolorlight="#fff">
+				<tr align="center" bgcolor="#D0E9F8">
+					<td width="13%">条形码</td>  
+					<td width="26%">图书名称</td>
+					<td width="15%">图书类型</td>
+					<td width="14%">出版社</td>
+					<td width="12%">书架</td>
+				</tr>
+				{if $res['key'] eq ''}
+					{foreach $res['sbooks'] as $item}
+					<tr>
+						<td>{$item['barcode']}</td>  
+						<td><a href="index.php?m=Home&c=Book&a=look&id={$item['id']}">{$item['name']}</a></td>
+						<td>{$item['typename']}</td>  
+						<td>{$item['pubname']}</td>  
+						<td style="padding:5px;">{$item['bookcasename']}</td>  
+					</tr>
+					{/foreach}
+				{else}
+					{if !empty($res['sbooks'])}
+						{foreach $res['sbooks'] as $item}
+						<tr>
+							<td>{$item['barcode']}</td>  
+							<td><a href="index.php?m=Home&c=Book&a=look&id={$item['id']}">{$item['name']}</a></td>
+							<td>{$item['typename']}</td>  
+							<td>{$item['pubname']}</td>  
+							<td style="padding:5px;">{$item['bookcasename']}</td>  
+						</tr>
+						{/foreach}
+					{else}
+						<tr><td colspan="5"><div class="msg">您检索的图书信息不存在，请重新检索！</div></td></tr>
+					{/if}
+				{/if}
+			</table>
+			{/if}
+		</div>				 
+	</div>
+	
+	{include file="../Public/copyright.html"}
+	
+</div>
+</body>
+</html>

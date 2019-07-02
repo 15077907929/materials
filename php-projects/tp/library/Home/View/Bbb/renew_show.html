@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+<link href="Public/css/base.css" rel="stylesheet" />
+<link href="Public/css/style.css" rel="stylesheet" />
+</head>
+<body>
+<script language="javascript">
+	function checkreader(form){
+		if(form.barcode.value==""){
+			alert("请输入读者条形码!");form.barcode.focus();return;
+		}
+		form.submit();
+	}
+</script>
+<div class="container renew">
+
+	{include file="../Public/navigation.html"}
+		
+	<div class="content">
+		<div class="tableBorder_gray wrap">
+			<div class="breadcrumb word_orange">当前位置：图书借还 &gt; 图书续借&gt;&gt;&gt; </div>
+			<form name="form" method="post" action="index.php?m=Home&c=Bbb&a=renew">
+				<img src="Public/images/bookxj.gif" />
+				<table>
+					<tr>
+						<td><img src="Public/images/bg_line.gif" /><br/>
+							读者条形码：
+							<input name="barcode" type="text" id="barcode" value="{$res['info']['barcode']}" size="24" />
+							<input name="btn" type="button" class="btn_grey" value="确定" onclick="checkreader(form)" />
+						</td>
+						<td><img src="Public/images/borrow_fg.gif" width="18" height="111" /></td>
+						<td>
+							<table>
+								<tr>
+									<td height="27">姓名：
+										<input name="readername" type="text" id="readername" value="{$res['info']['name']}" />
+									</td>
+									<td>性别：
+										<input name="sex" type="text" id="sex" value="{$res['info']['sex']}" />
+									</td>
+								</tr>
+								<tr>
+									<td height="27">证件类型：
+										<input name="paperType" type="text" id="paperType" value="{$res['info']['paperType']}" />
+									</td>
+									<td>证件号码：
+										<input name="paperNO" type="text" id="paperNO" value="{$res['info']['paperNO']}" />
+									</td>
+								</tr>
+								<tr>
+									<td height="27">读者类型：
+										<input name="readerType" type="text" id="readerType" value="{$res['info']['typename']}" />
+									</td>
+									<td>可借数量：
+										<input name="number" type="text" id="number" value="{$res['info']['number']}" size="17"> 册
+									</td>
+								</tr>
+							</table>	
+						</td>
+					</tr>
+				</table>
+                
+				<table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#fff" bordercolorlight="#fff" bordercolordark="#D2E3E6">
+                   <tr align="center" bgcolor="#e3F4F7">
+                     <td width="24%" height="25">图书名称</td>
+                     <td width="12%">借阅时间</td>
+                     <td width="13%">应还时间</td>
+                     <td width="14%">出版社</td>
+                     <td width="12%">书架</td>
+                     <td>定价(元)</td>
+                     <td width="12%"><input name="btn2" type="button" class="btn_grey" value="完成续借" onclick="window.location.href='index.php?m=Home&c=Bbb&a=renew'"></td>
+                   </tr>
+				   {foreach $res['borr'] as $item}
+						<tr>
+						 	<td style="padding:5px;">{$item['bookname']}</td>
+							<td>{$item['borrowTime']}</td>
+							<td>{$item['backTime']}</td>
+							<td>{$item['pubname']}</td>
+							<td>{$item['bookcase']}</td>
+							<td>{$item['price']}</td>
+							<td width="12%" align="center"><a href="index.php?m=Home&c=Bbb&a=renew&method=borrow_oncemore&barcode={$res['info']['barcode']}&borrid={$item['borrid']}&backTime={$item['backTime']}">续借</a></td>
+						</tr>
+					{/foreach}
+				</table>    
+			</form>
+		</div>				 
+	</div>
+	
+	{include file="../Public/copyright.html"}
+	
+</div>
+</body>
+</html>

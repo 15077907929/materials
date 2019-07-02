@@ -208,13 +208,13 @@ var sysmenu='<table width=80><tr><td id=library onMouseOver=overbg(library) onMo
 <tr><td id="publishing" onMouseOver=overbg(publishing) onMouseOut=outbg(publishing)><a href="index.php?m=Home&c=Sysset&a=publishing">出版社设置</a></td></tr>\
 <tr><td id="bookcase" onMouseOver=overbg(bookcase) onMouseOut=outbg(bookcase)><a href="index.php?m=Home&c=Sysset&a=bookcase">书架设置</a></td></tr></table>'
 
-var readermenu='<table width=90><tr><td id=readerType onMouseOver=overbg(readerType) onMouseOut=outbg(readerType)><a href="index.php?m=Home&c=Reader&a=rtype">读者类型管理</a></td></tr>\
+var readermenu='<table width="90"><tr><td id=readerType onMouseOver=overbg(readerType) onMouseOut=outbg(readerType)><a href="index.php?m=Home&c=Reader&a=rtype">读者类型管理</a></td></tr>\
 <tr><td id=reader onMouseOver=overbg(reader) onMouseOut=outbg(reader)><a href="index.php?m=Home&c=Reader&a=index">读者档案管理</a></td></tr></table>'
 
-var borrowmenu='<table width=60><tr><td id=Borrow onMouseOver=overbg(Borrow) onMouseOut=outbg(Borrow)><a href="index.php?m=Home&c=Bbb&a=borrow">图书借阅</a></td></tr>\
-<tr><td id=renew onMouseOver=overbg(renew) onMouseOut=outbg(renew)><a href=bookRenew.php>图书续借</a></td></tr>\
-<tr><td id=giveback onMouseOver=overbg(giveback) onMouseOut=outbg(giveback)><a href=bookBack.php>图书归还</a></td></tr></table>'
+var borrowmenu='<table width="60"><tr><td id=Borrow onMouseOver=overbg(Borrow) onMouseOut=outbg(Borrow)><a href="index.php?m=Home&c=Bbb&a=borrow">图书借阅</a></td></tr>\
+<tr><td id=renew onMouseOver=overbg(renew) onMouseOut=outbg(renew)><a href="index.php?m=Home&c=Bbb&a=renew">图书续借</a></td></tr>\
+<tr><td id=giveback onMouseOver=overbg(giveback) onMouseOut=outbg(giveback)><a href="index.php?m=Home&c=Bbb&a=bookback">图书归还</a></td></tr></table>'
 
-var querymenu='<table width=90><tr><td id=bookQuery onMouseOver=overbg(bookQuery) onMouseOut=outbg(bookQuery)><a href=bookQuery.php>图书档案查询</a></td></tr>\
-<tr><td id=borrowQuery onMouseOver=overbg(borrowQuery) onMouseOut=outbg(borrowQuery)><a href=borrowQuery.php>图书借阅查询</a></td></tr>\
-<tr><td id=givebackQuery onMouseOver=overbg(givebackQuery) onMouseOut=outbg(givebackQuery)><a href=bremind.php>借阅到期提醒</a></td></tr></table>'
+var querymenu='<table width="90"><tr><td id="bookQuery" onMouseOver=overbg(bookQuery) onMouseOut=outbg(bookQuery)><a href="index.php?m=Home&c=Query&a=book">图书档案查询</a></td></tr>\
+<tr><td id="borrowQuery" onMouseOver=overbg(borrowQuery) onMouseOut=outbg(borrowQuery)><a href="index.php?m=Home&c=Query&a=borrow">图书借阅查询</a></td></tr>\
+<tr><td id="givebackQuery" onMouseOver=overbg(givebackQuery) onMouseOut=outbg(givebackQuery)><a href="index.php?m=Home&c=Query&a=bremind">借阅到期提醒</a></td></tr></table>'

@@ -40,7 +40,7 @@
 				{foreach $res['books'] as $item}
 				<tr>
 					<td style="padding:5px;">{$item['barcode']}</td>
-					<td>{$item['name']}</td>
+					<td><a href="index.php?m=Home&c=Book&a=look&id={$item['id']}">{$item['name']}</a></td>
 					<td>{$item['typename']}</td>
 					<td>{$item['pubname']}</td>
 					<td>{$item['bookcasename']}</td>
