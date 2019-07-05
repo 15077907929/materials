@@ -84,7 +84,7 @@ var mydiv = {
 	Open : function(width,height,showfoot){
 		obj = $('#floatwin');
 		//遮盖层
-		$("body").prepend('<div id="UIWinMask"><div style="position: absolute;z-index: 999;top: 0;left: 0;width: '+ $(document).width() +'px;height: '+ $(document).height() + 'px;opacity: 0.17;filter:alpha(opacity=17);background-color:#000;"><img height="100%" width="100%" src="img/place.gif" /></div></div>');
+		$("body").prepend('<div id="UIWinMask"><div style="position: absolute;z-index: 999;top: 0;left: 0;width: '+ $(document).width() +'px;height: '+ $(document).height() + 'px;opacity: 0.17;filter:alpha(opacity=17);background-color:#000;"><img height="100%" width="100%" src="Public/images/place.gif" /></div></div>');
 		obj.width(width);
 		obj.height(height);
 		if(showfoot == 1){
@@ -294,25 +294,25 @@ function copy_clip(copy,bid,func){
 
 function delete_pic(o,id){
     if(confirm('确定要删除吗?')){
-        var url = 'admin.php?ctl=album&act=ajax_delphoto&id='+id;
+        var url = 'index.php?m=Admin&c=Album&a=ajax_delphoto&id='+id;
         $.post(url,
-               {},
-               function(data){
-                    if(data.ret){
-                        $(o).parent().parent().animate( {opacity: 0.2} , 200)
-                                              .animate( {opacity: 1} , 200)
-                                              .fadeOut();
-                        var pic_count = $('#album_nav').find('span.total_count strong');
-                        pic_count.text(parseInt(pic_count.text())-1)
-                    }else{
-                        alert(data.msg);
-                    }
-                },
-                'json');
+		   {},
+		   function(data){
+				if(data.ret){
+					$(o).parent().parent().animate( {opacity: 0.2} , 200).animate( {opacity: 1} , 200).fadeOut();
+					var pic_count = $('#album_nav').find('span.total_count strong');
+					pic_count.text(parseInt(pic_count.text())-1)
+				}else{
+					alert(data.msg);
+				}
+			},
+			'json'
+		);
     }else{
         return false;
     }
 }
+
 function rename_pic(o,id){
     var info = $(o).parent();
     var info_txt = info.text();
@@ -322,18 +322,18 @@ function rename_pic(o,id){
     input.select();
     input.blur(
         function(){
-                var url = 'admin.php?ctl=album&act=ajax_renamephoto&id='+id;
-                $.post(url,
-                   {name:this.value},
-                   function(data){
-                        if(data.ret){
-                            info.html('<a onclick="rename_pic(this,'+id+')">'+data.picname+'</a>');
-                        }else{
-                            alert(data.msg);
-                            info.html('<a onclick="rename_pic(this,'+id+')">'+info_txt+'</a>');
-                        }
-                    },
-                'json');
+			var url = 'index.php?m=Admin&c=Album&a=ajax_renamephoto&id='+id;
+			$.post(url,
+				{name:this.value},
+				function(data){
+					if(data.ret){
+						info.html('<a onclick="rename_pic(this,'+id+')">'+data.picname+'</a>');
+					}else{
+						alert(data.msg);
+						info.html('<a onclick="rename_pic(this,'+id+')">'+info_txt+'</a>');
+					}
+				},
+			'json');
         }
     );
     input.unbind('keypress').bind('keypress',
@@ -347,21 +347,21 @@ function rename_pic(o,id){
 
 function delete_album(o,id){
     if(confirm('确定要删除相册吗?删除相册将会删除相册内所有的图片！')){
-        var url = 'admin.php?ctl=album&act=ajax_delalbum&id='+id;
-        $.post(url,
-               {},
-               function(data){
-                    if(data.ret){
-                        $(o).parent().parent().animate( {opacity: 0.2} , 200)
-                                              .animate( {opacity: 1} , 200)
-                                              .fadeOut();
-                        var pic_count = $('#album_nav').find('span.total_count strong');
-                        pic_count.text(parseInt(pic_count.text())-1)
-                    }else{
-                        alert(data.msg);
-                    }
-                },
-                'json');
+        var url = 'index.php?m=Admin&c=Album&a=ajax_delalbum&id='+id;
+        $.post(
+			url,
+			{},
+			function(data){
+				if(data.ret){
+					$(o).parent().parent().animate( {opacity: 0.2} , 200).animate( {opacity: 1} , 200).fadeOut();
+					var pic_count = $('#album_nav').find('span.total_count strong');
+					pic_count.text(parseInt(pic_count.text())-1)
+				}else{
+					alert(data.msg);
+				}
+			},
+			'json'
+		);
     }else{
         return false;
     }
@@ -375,7 +375,7 @@ function rename_album(o,id){
     input.select();
     input.blur(
         function(){
-                var url = 'admin.php?ctl=album&act=ajax_renamealbum&id='+id;
+                var url = 'index.php?m=Admin&c=Album&a=ajax_renamealbum&id='+id;
                 $.post(url,
                    {name:this.value},
                    function(data){
@@ -399,7 +399,7 @@ function rename_album(o,id){
 }
 
 function set_pic_cover(o,id){
-    var url = 'admin.php?ctl=album&act=ajax_set_cover&id='+id;
+    var url = 'index.php?m=Admin&c=Album&a=ajax_set_cover&id='+id;
     $.post(url,
        {name:this.value},
        function(data){
@@ -417,7 +417,7 @@ function set_pic_cover(o,id){
 }
 
 function move_pic_to(type,o,id){
-    var url = 'admin.php?ctl=album&act=ajax_get_albums';
+    var url = 'index.php?m=Admin&c=Album&a=ajax_get_albums';
     var pos = getElementOffset(o);
     
     $.post(url,
@@ -427,7 +427,7 @@ function move_pic_to(type,o,id){
                 var salbum = $('#movetoalbum').find('select[name=albums]');
                 salbum.empty();
                 for(v in data.list){
-                    salbum.addOption(data.list[v],v);
+                    salbum.addOption(data.list[v]['name'],data.list[v]['id']);
                 }
                 
                 if(pos.left+360 > document.documentElement.clientWidth){
@@ -452,7 +452,7 @@ function move_pic_to(type,o,id){
 }
 
 function do_move_pic_to(type,o,al_id,id){
-    var url = 'admin.php?ctl=album&act=ajax_move_to_albums';
+    var url = 'index.php?m=Admin&c=Album&a=ajax_move_to_albums';
     $.post(url,
        {album_id:al_id,id:id},
        function(data){
@@ -489,7 +489,7 @@ function reupload_pic(o,id){
     $('#reuploadpic').css('top',pos.top+pos.height);
     $('#reuploadpic').show();
     $('#reuploadpic').find('span.upfield').html('<input type="file" name="imgs">');
-    $('#reuploadpic').find('form').attr('action','admin.php?ctl=upload&act=reupload&id='+id);
+    $('#reuploadpic').find('form').attr('action','index.php?m=Admin&c=Upload&a=reupload&id='+id);
     $('#reuploadpic').find('form').submit(function(){
         $('#reuploadpic').find('div.uploading').width($('#reuploadpic').find('form').width()).show();
     });
@@ -676,7 +676,7 @@ function change_order(v){
 }
 
 function edit_priv_album(o,id){
-    var url = 'admin.php?ctl=album&act=ajax_edit_priv_albums';
+    var url = 'index.php?m=Admin&c=Album&a=ajax_edit_priv_albums';
     $.post(url,
        {id:id},
        function(data){
@@ -697,13 +697,13 @@ function edit_priv_album(o,id){
 }
 
 function do_edit_priv_album(o,id){
-    var private_val = $('#floatContent').find('input[name="private"]').attr('checked');
+    var private_val = $('#floatContent').find('input[name="private"]').is(':checked');
     if(private_val){
         var private_v = '1';
     }else{
         var private_v = '0';
     };
-    var url = 'admin.php?ctl=album&act=ajax_do_edit_priv_albums';
+    var url = 'index.php?m=Admin&c=Album&a=ajax_do_edit_priv_albums';
     $.post(url,
        {id:id,private_v:private_v},
        function(data){

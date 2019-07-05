@@ -117,4 +117,44 @@ class UploadController extends CommonController {
 		$this->assign('res',$res);
 		$this->display();
 	} 
+	
+	public function reupload(){
+		$db = M('imgs');
+    
+        $find = $db->where('id='.$_GET['id'])->find();
+        if(!$find){
+            echo '<script type="text/javascript"> top.reupload_alert("此照片不存在或已被删除!");</script>';
+            exit;
+        }
+        if(empty($_FILES['imgs']['name'])){
+            echo '<script type="text/javascript"> top.reupload_alert("请先选择要上传的图片!");</script>';
+            exit;
+        }
+        
+        $filename = $_FILES['imgs']['name'];
+        $tmpfile = $_FILES['imgs']['tmp_name'];
+        $fileext = strtolower(end(explode('.',$filename)));
+        $oldext = $find['ext'];
+        if($fileext != $oldext){
+            echo '<script type="text/javascript"> top.reupload_alert("上传的文件的格式必须跟原图片一致!");</script>';
+            exit;
+        }
+        if($_FILES['imgs']['size'] > C('size_allow')){
+            echo '<script type="text/javascript"> top.reupload_alert("上传图片过大！不得大于'.C('size_allow').'字节！");</script>';
+            exit;
+        }
+        $realpath = APP_PATH.'Uploads/'.mkImgLink($find['dir'],$find['pickey'],$find['ext'],'orig');
+        
+        delpicfile($find['dir'],$find['pickey'],$find['ext']);
+        if(@move_uploaded_file($tmpfile,$realpath)){
+            addwater($realpath);
+            if(!C('demand_resize')){
+                generatepic($find['dir'],$find['pickey'],$find['ext']);
+            }
+            @chmod($realpath,0755);
+            echo '<script type="text/javascript"> top.reupload_ok("'.$_GET['id'].'","Uploads/'.mkImgLink($find['dir'],$find['pickey'],$find['ext'],'orig').'","Uploads/'.mkImgLink($find['dir'],$find['pickey'],$find['ext'],'thumb').'");</script>';
+        }else{
+            echo '<script type="text/javascript"> top.reupload_alert("文件上传失败!");</script>';
+        }
+	}
 }

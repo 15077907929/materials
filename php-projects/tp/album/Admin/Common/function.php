@@ -185,3 +185,10 @@ function save_setting($st){
 	
 	return @file_put_contents(APP_PATH.'/Common/Conf/config_album.php',$st_content);
 }
+
+function delpicfile($dir,$key,$ext){
+	$list = array('small','square','medium','big','thumb','orig');
+	foreach($list as $v){
+		@unlink(APP_PATH.'Uploads/'.mkImgLink($dir,$key,$ext,$v));
+	}
+}
