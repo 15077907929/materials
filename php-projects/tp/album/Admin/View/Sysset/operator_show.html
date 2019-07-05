@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>西南传媒大学影视学院活动中心</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="Public/css/main.css" type="text/css" />
+<script type="text/javascript" src="Public/js/jquery.3.4.1.js"></script>
+<script type="text/javascript" src="Public/js/common.js"></script>
+<script type="text/javascript" src="js/zeroclipboard/ZeroClipboard.js"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
+</head>
+<body>
+
+{include file="../Public/header.html"}
+
+    <div class="mainbody">
+		<div id="setting_box">
+			
+			{include file="../Public/setting_nav.html"}
+			
+			<div id="setting_body">
+				<div id="operator_setting" class="stab">
+					<table>
+						{foreach $res['operators'] as $item}
+						<tr>
+							<td>{$item['username']}</td>
+							<td>{date('Y-m-d H:i:s',$item['create_time'])}</td>
+							<td>
+								<a href="index.php?m=Admin&c=Sysset&a=operator&method=edit&id={$item['id']}">修改密码</a> 
+								<a href="javascript:void(0)" onclick="if(confirm('确认删除？')){ window.location.href='index.php?m=Admin&c=Sysset&a=operator&method=del&id={$item['id']}' }">删除</a>
+							</td>
+						</tr>
+						{/foreach}
+					</table>
+					<div style="text-align:left;">
+						<input type="button" class="btn" value="添加管理员" onclick="window.location.href='index.php?m=Admin&c=Sysset&a=operator&method=add';">
+					</div>
+					<div class="pageset">{$res['show']}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{include file="../Public/footer.html"}
+
+</body>
+</html>

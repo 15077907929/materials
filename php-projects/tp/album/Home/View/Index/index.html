@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>{C('site_title')}</title>
+<meta name="description" content="{C('site_description')}" />
+<meta name="keywords" content="{C('site_keyword')}" />
+<link rel="stylesheet" href="Public/css/home.css" type="text/css" />
+<script type="text/javascript" src="Public/js/jquery.js"></script>
+</head>
+<body>
+
+{include file="../Public/header.html"}
+
+<div class="main box1">
+    <div class="bg1 title"><h3>相册列表</h3></div>
+    <div class="box_body">
+        <table class="table100">
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				{if $res['albums'] neq ''}
+					{foreach $res['albums'] as $key=>$item}
+						{if $key%5==0 && $key!=0}
+						</tr><tr>
+						{/if}
+						<td class="albumtd" id="i_{$item['id']}">
+							<a href="index.php?ctl=album&act=photos&album={$item['id']}"><img src="{$item['cover']}" /></a>
+							<div class="line35">
+							   <a href="index.php?ctl=album&act=photos&album={$item['id']}">{$item['name']}</a>
+							</div>
+						</td>
+					{/foreach}
+				{else}
+					<td><div class="warning"> 当前没有任何相册！ </div></td>
+				{/if}
+			</tr>
+        </table>
+        
+        <div class="pageset">{$res['show']}</div>
+    </div>
+</div>
+
+{include file="../Public/footer.html"}
+
+</body>
+</html>

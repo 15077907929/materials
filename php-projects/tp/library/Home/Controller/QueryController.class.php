@@ -2,12 +2,8 @@
 // 本类由系统自动生成，仅供测试用途
 namespace Home\Controller;
 use Think\Controller;
-class QueryController extends Controller {
+class QueryController extends CommonController {
 	public function book(){
-		$res['user']=cookie('user');
-		if($res['user']==''){
-			echo "<script>alert('对不起，请通过正确的途径登录博考图书馆管理系统!');window.location.href='index.php?m=Home&c=User&a=login';</script>";
-		}
 		$db=M('bookinfo');
 		$method = I('get.method') ? I('get.method') : 'show';
 		switch ($method) {
@@ -26,10 +22,6 @@ class QueryController extends Controller {
 	}
 	
 	public function borrow(){
-		$res['user']=cookie('user');
-		if($res['user']==''){
-			echo "<script>alert('对不起，请通过正确的途径登录博考图书馆管理系统!');window.location.href='index.php?m=Home&c=User&a=login';</script>";
-		}
 		$db=M('borrow');
 		$method = I('get.method') ? I('get.method') : 'show';
 		switch ($method) {
@@ -59,10 +51,6 @@ class QueryController extends Controller {
 	}
 	
 	public function bremind(){
-		$res['user']=cookie('user');
-		if($res['user']==''){
-			echo "<script>alert('对不起，请通过正确的途径登录博考图书馆管理系统!');window.location.href='index.php?m=Home&c=User&a=login';</script>";
-		}
 		$db=M('borrow');
 		$method = I('get.method') ? I('get.method') : 'show';
 		switch ($method) {
@@ -71,8 +59,6 @@ class QueryController extends Controller {
 				$res['list']=$db->query('select book.barcode,book.name as bookname,reader.barcode as readerbarcode,reader.name as readername,borr.borrowTime,borr.backTime,borr.ifback from bookinfo book join borrow as borr on book.id=borr.bookid join reader on borr.readerid=reader.id where borr.backTime<=\''.$time.'\' and borr.ifback=0');;
 			break;
 		}
-		// print_r($res);
-		// echo $db->getLastSql();
 		$this->assign('res',$res);
 		$this->display('bremind_'.$method);	
 	}

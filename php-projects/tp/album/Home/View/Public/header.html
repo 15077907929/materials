@@ -1,0 +1,17 @@
+<div class="header">
+    <div class="header_box">
+        <h1 class="logo"><img src="Public/images/logo.png" width="269" height="56" /></h1>
+        <ul class="nav">
+            <li class="first{if $res['current_nav'] eq 'index'} now{/if}">
+				<a href="index.php"><span>首页</span></a> <sub></sub>
+			</li>
+            <li {if $res['current_nav'] eq 'newphotos'}class="now"{/if}>
+				<a href="index.php?m=Home&c=Index&a=newphotos"><span>最新上传</span></a> <sub></sub>
+			</li>
+            <li {if $res['current_nav'] eq 'hotphotos'}class="now"{/if}>
+				<a href="index.php?m=Home&c=Index&a=hotphotos"><span>热门图片</span></a> <sub></sub>
+			</li>
+            <li class="last"><a href="index.php?m=Admin&c=Index&a=index"><span>管理相册</span></a> <sub></sub></li>
+        </ul>
+    </div>
+</div>

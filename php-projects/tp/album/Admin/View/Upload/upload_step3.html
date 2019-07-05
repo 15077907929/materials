@@ -1,0 +1,35 @@
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>西南传媒大学影视学院活动中心</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="Public/css/main.css" type="text/css" />
+<script type="text/javascript" src="Public/js/jquery.3.4.1.js"></script>
+<script type="text/javascript" src="Public/js/common.js"></script>
+<script type="text/javascript" src="Public/js/zeroclipboard/ZeroClipboard.js"></script>
+<script type="text/javascript" src="Public/js/swfobject.js"></script>
+</head>
+<body>
+
+{include file="../Public/header.html"}
+
+    <div class="mainbody">
+		<div id="upload_help"> 
+			<span>第一步：选择相册并上传图片</span>  >> 
+			<span>第二步：上传图片</span> >>
+			<span class="current">第三步：查看结果</span> >>
+			<span>完成</span>
+		</div>
+		<div id="save_album">
+			<div class="line"><img src="Public/images/loading.gif" /></div>
+			<div class="line" style="font-size:36px;line-height:80px;">上传成功，程序正在处理照片!</div>
+			<div class="line">您也可以<a href="index.php?m=Admin&c=Album&a=photos&album={$res['album']}">离开此页面</a>让后端自动处理！</div>
+		</div>
+	</div>
+
+{include file="../Public/footer.html"}
+
+<script type="text/javascript" src="index.php?m=Admin&c=Photo&a=resize&album={$res['album']}&time={time()}"></script>
+</body>
+</html>
+

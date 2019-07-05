@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>西南传媒大学影视学院活动中心</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="Public/css/main.css" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/zeroclipboard/ZeroClipboard.js"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
+</head>
+<body>
+
+{include file="../Public/header.html"}
+
+    <div class="mainbody">
+		<div id="allpic">
+			<div id="album_nav"> 
+				<span class="total_count">共 <strong>{$res['total_num']}</strong> 张图片</span> 
+				<input type="button" class="btn" value="我要上传图片" onclick="window.location.href='index.php?m=Admin&c=Upload&a=upload_step1'" />
+			</div>
+			<form name="pics_form" action="admin.php?ctl=photo&act=bat&referf=default&referp=" method="post" onsubmit="submit_bat(this);return false;">
+				<div id="batch_ctrl"> 
+					<input type="button" class="btn" value="全选" onclick="checkall('pics_form')" />  
+					<input type="button" class="btn" value="取消全选" onclick="uncheckall('pics_form')" /> 
+					<select name="do_action">
+						<option value="-1">批量操作</option>
+						<option value="delete">选中图片彻底删除</option>
+						<option value="move">选中图片移动到</option>
+					</select>
+					<select name="albums" style="display:none">
+						<option value="-1">选择相册</option>
+					</select>
+					<input name="do_pic_act" type="submit" value="执行" class="btn" disabled /> 
+					 <select name="do_sort" onchange="change_order(this.value);">
+						 <option value="-1">选择排序</option>
+						 <option value="admin.php?act=all&sort=time_desc&page=" {if $res['sort'] eq 'time_desc'}selected="selected"{/if}>按照时间从近到远排序</option>
+						 <option value="admin.php?act=all&sort=time_asc&page=" {if $res['sort'] eq 'time_asc'}selected="selected"{/if}>按照时间从远到近排序</option>
+					 </select>
+					 <input type="button" value="幻灯片查看" class="btn" onclick="slideshow(0)" />
+				</div>
+				{if cookie('msginfo')}{cookie('msginfo')}{/if}
+				<ul class="album">
+					{if $res['imgs'] neq ''}
+						{foreach $res['imgs'] as $item}
+							<li id="i_{$item['id']}" rel="{$item['id']}">
+								<span class="img">
+									<a href="admin.php?ctl=photo&act=view&id={$item['id']}">
+										<img src="Uploads/{mkImgLink($item['dir'],$item['pickey'],$item['ext'],'thumb')}" alt="{$item['name']}" />
+									</a>
+								</span>
+								<span class="info">
+									<a onclick="rename_pic(this,{$item['id']})">{$item['name']}</a>
+								</span>
+								<span class="control">
+									<a href="javascript:void(0)" onclick="copyUrl(this)">
+										<img src="Public/images/copyu.gif" alt="复制网址" title="复制网址" />
+									</a> 
+									<a href="javascript:void(0)" onclick="copyCode(this)">
+										<img src="Public/images/copyc.gif" alt="复制代码" title="复制代码" />
+									</a> 
+									<a href="javascript:void(0)" onclick="delete_pic(this,{$item['id']})">
+										<img src="Public/images/delete.gif" alt="删除" title="删除" />
+									</a> 
+									<a href="javascript:void(0)" onclick="reupload_pic(this,{$item['id']})">
+										<img src="Public/images/re_upload.gif" alt="重新上传" title="重新上传此图片" />
+									</a> 
+									<a href="javascript:void(0)" onclick="move_pic_to(1,this,{$item['id']})">
+										<img src="Public/images/moveto.gif" alt="移动到相册" title="移动到相册" />
+									</a>
+								</span>
+								<div class="cb"><input type="checkbox" name="picture[]" value="{$item['id']}" onclick="select_pic(this,{$item['id']})" /></div>
+								<div class="selected"></div>
+							</li>
+						{/foreach}
+					{else}
+						<li>无图片</li>
+					{/if}
+				</ul>
+			</form>
+			<div class="pageset">{$res['show']}</div>
+		</div>
+		<script type="text/javascript">
+			init_submit_bat();
+		</script>
+    </div>
+
+{include file="../Public/footer.html"}
+
+</body>
+</html>

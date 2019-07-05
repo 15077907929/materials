@@ -2,18 +2,13 @@
 // 本类由系统自动生成，仅供测试用途
 namespace Home\Controller;
 use Think\Controller;
-class SyssetController extends Controller {
+class SyssetController extends CommonController {
 	public function bookcase(){
-		$res['user']=cookie('user');
-		if($res['user']==''){
-			echo "<script>alert('对不起，请通过正确的途径登录博考图书馆管理系统!');window.location.href='index.php?m=Home&c=User&a=login';</script>";
-		}
 		$db=M('bookcase');
 		$method = I('get.method') ? I('get.method') : 'show';
 		switch ($method) {
             case 'show':
 				$res['types']=$db->select();
-				// $res['books']=$db->query('select m.id,m.name,p.sysset,p.readerset,p.bookset,p.borrowback,p.sysquery from bookinfo as m left join (select * from purview)as p on m.id=p.mid');
 			break;
 			case 'add':
 				if($_POST['sub']!=""){
@@ -27,7 +22,6 @@ class SyssetController extends Controller {
 				}
 			break;
 			case 'modify':
-				// $res['info']=$db->query('select m.id,m.name,p.sysset,p.readerset,p.bookset,p.borrowback,p.sysquery from bookinfo as m left join (select * from purview)as p on m.id=p.mid where m.id='.$_GET['id'])[0];
 				$res['info']=$db->where('id='.$_GET['id'])->find();
 				if($_POST['sub']!=""){
 					$data['name']=$_POST['name'];
@@ -43,16 +37,11 @@ class SyssetController extends Controller {
 				}
 			break;
 		}
-		
 		$this->assign('res',$res);
 		$this->display('bookcase_'.$method);	
 	}	
 	
 	public function booktype(){
-		$res['user']=cookie('user');
-		if($res['user']==''){
-			echo "<script>alert('对不起，请通过正确的途径登录博考图书馆管理系统!');window.location.href='index.php?m=Home&c=User&a=login';</script>";
-		}
 		$db=M('booktype');
 		$method = I('get.method') ? I('get.method') : 'show';
 		switch ($method) {
@@ -72,7 +61,6 @@ class SyssetController extends Controller {
 				}
 			break;
 			case 'modify':
-				// $res['info']=$db->query('select m.id,m.name,p.sysset,p.readerset,p.bookset,p.borrowback,p.sysquery from bookinfo as m left join (select * from purview)as p on m.id=p.mid where m.id='.$_GET['id'])[0];
 				$res['info']=$db->where('id='.$_GET['id'])->find();
 				if($_POST['sub']!=""){
 					$data['name']=$_POST['name'];
@@ -88,22 +76,16 @@ class SyssetController extends Controller {
 				}
 			break;
 		}
-		
 		$this->assign('res',$res);
 		$this->display('booktype_'.$method);	
 	}
 	
 	public function publishing(){
-		$res['user']=cookie('user');
-		if($res['user']==''){
-			echo "<script>alert('对不起，请通过正确的途径登录博考图书馆管理系统!');window.location.href='index.php?m=Home&c=User&a=login';</script>";
-		}
 		$db=M('publishing');
 		$method = I('get.method') ? I('get.method') : 'show';
 		switch ($method) {
             case 'show':
 				$res['types']=$db->select();
-				// $res['books']=$db->query('select m.id,m.name,p.sysset,p.readerset,p.bookset,p.borrowback,p.sysquery from bookinfo as m left join (select * from purview)as p on m.id=p.mid');
 			break;
 			case 'add':
 				if($_POST['sub']!=""){
@@ -118,7 +100,6 @@ class SyssetController extends Controller {
 				}
 			break;
 			case 'modify':
-				// $res['info']=$db->query('select m.id,m.name,p.sysset,p.readerset,p.bookset,p.borrowback,p.sysquery from bookinfo as m left join (select * from purview)as p on m.id=p.mid where m.id='.$_GET['id'])[0];
 				$res['info']=$db->where('id='.$_GET['id'])->find();
 				if($_POST['sub']!=""){
 					$data['ISBN']=$_POST['ISBN'];
@@ -135,8 +116,71 @@ class SyssetController extends Controller {
 				}
 			break;
 		}
-		
 		$this->assign('res',$res);
 		$this->display('publishing_'.$method);	
+	}
+	
+	public function library(){
+		$db=M('library');
+		$method = I('get.method') ? I('get.method') : 'show';
+		switch ($method) {
+            case 'show':
+			
+			break;
+			case 'modify':
+				$res['info']=$db->where('id=1')->find();
+				if($_POST['sub']!=""){
+					$data['name']=$_POST['name'];
+					$data['curator']=$_POST['curator'];
+					$data['tel']=$_POST['tel'];
+					$data['address']=$_POST['address'];
+					$data['email']=$_POST['email'];
+					$data['url']=$_POST['url'];
+					$data['createDate']=$_POST['createDate'];
+					$data['introduce']=$_POST['introduce'];
+					if(empty($res['info'])){
+						$query=$db->add($data);
+					}else{
+						$query=$db->where('id=1')->save($data);
+					}
+					if($query){
+						echo '<script type="text/javascript">alert("博考图书馆信息修改成功！");history.back();</script>';
+					}else{
+						echo '<script type="text/javascript">alert("博考图书馆信息修改失败！");history.back();</script>';
+					}
+				}			
+			break;
+		}
+		$this->assign('res',$res);
+		$this->display('library_'.$method);			
+	}	
+	
+	public function parameter(){
+		$db=M('parameter');
+		$method = I('get.method') ? I('get.method') : 'show';
+		switch ($method) {
+            case 'show':
+			
+			break;
+			case 'modify':
+				$res['info']=$db->where('id=1')->find();
+				if($_POST['sub']!=""){
+					$data['cost']=$_POST['cost'];
+					$data['validity']=$_POST['validity'];
+					if(empty($res['info'])){
+						$query=$db->add($data);
+					}else{
+						$query=$db->where('id=1')->save($data);
+					}
+					if($query){
+						echo '<script type="text/javascript">alert("修改成功！");history.back();</script>';
+					}else{
+						echo '<script type="text/javascript">alert("修改失败！");history.back();</script>';
+					}
+				}			
+			break;
+		}
+		$this->assign('res',$res);
+		$this->display('parameter_'.$method);			
 	}
 }

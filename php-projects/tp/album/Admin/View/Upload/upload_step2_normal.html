@@ -1,0 +1,43 @@
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>西南传媒大学影视学院活动中心</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="Public/css/main.css" type="text/css" />
+<script type="text/javascript" src="Public/js/jquery.3.4.1.js"></script>
+<script type="text/javascript" src="Public/js/common.js"></script>
+<script type="text/javascript" src="Public/js/zeroclipboard/ZeroClipboard.js"></script>
+<script type="text/javascript" src="Public/js/swfobject.js"></script>
+</head>
+<body>
+
+{include file="../Public/header.html"}
+
+    <div class="mainbody">
+		<div id="upload_help"> 
+			<span>第一步：选择相册并上传图片</span>  >> 
+			<span class="current">第二步：上传图片</span> >>
+			<span>第三步：查看结果</span> >>
+			<span>完成</span>
+		</div>
+		<div id="upload_field">
+			<form id="upload_photos_form" method="post" enctype="multipart/form-data" action="index.php?m=Admin&c=Upload&a=dopicupload&album={$res['album_id']}">
+				<div id="uploader" style="width: 100%; height: 210px;margin:10px;">
+					请选择您要上传的图片：<br /><br />
+					1. <input type="file" name="imgs[]" /><br /><br />
+					2. <input type="file" name="imgs[]" /><br /><br />
+					3. <input type="file" name="imgs[]" /><br /><br />
+					4. <input type="file" name="imgs[]" /><br /><br />
+					5. <input type="file" name="imgs[]" /><br /><br />
+				</div>
+				<div align="left"><input type="submit" class="btn" value="下一步" /></div>
+			</form>
+			<br />
+			<a href="index.php?m=Admin&c=Upload&a=upload_step2&album_id={$res['album_id']}">高级上传模式</a>
+		</div>
+	</div>
+
+{include file="../Public/footer.html"}
+
+</body>
+</html>

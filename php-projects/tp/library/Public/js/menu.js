@@ -201,9 +201,9 @@ function outbg(tdbg){
 tdbg.style.background='url(.images/item_out.gif)'
 tdbg.style.border=''
 }
-var sysmenu='<table width=80><tr><td id=library onMouseOver=overbg(library) onMouseOut=outbg(library)><a href=library_modify.php>图书馆信息</a></td></tr>\
+var sysmenu='<table width="80"><tr><td id="library" onMouseOver=overbg(library) onMouseOut=outbg(library)><a href="index.php?m=Home&c=Sysset&a=library&method=modify">图书馆信息</a></td></tr>\
 <tr><td id="manager" onMouseOver=overbg(manager) onMouseOut=outbg(manager)><a href="index.php?m=Home&c=User&a=manager">管理员设置</a></td></tr>\
-<tr><td id="para" onMouseOver=overbg(para) onMouseOut=outbg(para)><a href=parameter_modify.php>参数设置</a></td></tr>\
+<tr><td id="para" onMouseOver=overbg(para) onMouseOut=outbg(para)><a href="index.php?m=Home&c=Sysset&a=parameter&method=modify">参数设置</a></td></tr>\
 <tr><td id="booktype" onMouseOver=overbg(booktype) onMouseOut=outbg(booktype)><a href="index.php?m=Home&c=Sysset&a=booktype">图书类型设置</a></td></tr>\
 <tr><td id="publishing" onMouseOver=overbg(publishing) onMouseOut=outbg(publishing)><a href="index.php?m=Home&c=Sysset&a=publishing">出版社设置</a></td></tr>\
 <tr><td id="bookcase" onMouseOver=overbg(bookcase) onMouseOut=outbg(bookcase)><a href="index.php?m=Home&c=Sysset&a=bookcase">书架设置</a></td></tr></table>'

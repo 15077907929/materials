@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>西南传媒大学影视学院活动中心</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="Public/css/main.css" type="text/css" />
+<script type="text/javascript" src="Public/js/jquery.3.4.1.js"></script>
+<script type="text/javascript" src="Public/js/common.js"></script>
+<script type="text/javascript" src="js/zeroclipboard/ZeroClipboard.js"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
+</head>
+<body>
+
+{include file="../Public/header.html"}
+
+    <div class="mainbody">
+
+		<div id="setting_box">
+
+			{include file="../Public/setting_nav.html"}
+
+			<div id="setting_body">
+				<form method="post" action="index.php?m=Admin&c=Sysset&a=index">
+					<div id="base_setting" class="stab">
+						<h1 class="album_title1">基本设置</h1>
+						<table>
+							<tbody>
+								<tr>
+									<td class="tt">站点名称：</td>
+									<td class="tc">
+										<input name="st[site_title]" class="txtinput" type="text" value="{C('site_title')}" style="width:250px" />
+									</td>
+									<td class="ti">前台显示的TITLE</td>
+								</tr>
+								<tr>
+									<td class="tt">站点关键字：</td>
+									<td class="tc">
+										<input name="st[site_keyword]" class="txtinput" type="text" value="{C('site_keyword')}" style="width:250px" />
+									</td>
+									<td class="ti">前台META KEYWORD，关键字使用空格或,分割</td>
+								</tr>
+								<tr>
+									<td class="tt">站点描述：</td>
+									<td class="tc">
+										<input name="st[site_description]" class="txtinput" type="text" value="{C('site_description')}" style="width:250px" />
+									</td>
+									<td class="ti">前台META DESCRIPTION</td>
+								</tr>
+								<tr>
+									<td class="tt">相册URL：</td>
+									<td class="tc">
+										<input name="st[url]" class="txtinput" type="text" value="{C('url')}" style="width:250px" />
+									</td>
+									<td class="ti">设置复制图片地址的URL前缀, 需要带上末尾的"/"</td>
+								</tr>
+								<tr>
+									<td class="tt">按需生成各种尺寸图片：</td>
+									<td class="tc">
+										<input name="st[demand_resize]" type="checkbox" value="1" {if C('demand_resize') eq 1}checked="checked"{/if} />
+									</td>
+									<td class="ti">开启此项需要支持Rewrite,关闭此项则会在上传时生成各种尺寸图片</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div id="upload_setting" class="stab">
+						<h1 class="album_title1">上传设置</h1>
+						<table>
+							<tbody>
+								<tr>
+									<td class="tt">是否开启客户端预处理：</td>
+									<td class="tc">
+										<input id="setting_open_pre_resize" name="st[open_pre_resize]" type="checkbox" value="1" {if C('open_pre_resize')}checked="checked"{/if} onclick="switch_div(this,'imgsetting_div');" />
+									</td>
+									<td class="ti">在客户端预处理可以大大减少网络传输，缩短上传时间。开启后无法获取照片EXIF信息</td>
+								</tr>
+							</tbody>
+							<tbody id="imgsetting_div">
+								<tr>
+									<td class="tt">图片宽：</td>
+									<td class="tc"><input name="st[resize_img_width]" class="txtinput" type="text" value="{C('resize_img_width')}" style="width:50px" /></td>
+									<td class="ti">客户端预处理图片的最大宽度</td>
+								</tr>
+								<tr>
+									<td class="tt">图片高：</td>
+									<td class="tc"><input name="st[resize_img_height]" class="txtinput" type="text" value="{C('resize_img_height')}" style="width:50px" /></td>
+									<td class="ti">客户端预处理图片的最大高度</td>
+								</tr>
+								<tr>
+									<td class="tt">图片质量：</td>
+									<td class="tc"><input name="st[resize_quality]" class="txtinput" type="text" value="{C('resize_quality')}" style="width:50px" /></td>
+									<td class="ti">预处理图片的质量 1-100</td>
+								</tr>
+							</tbody>
+							<script>
+								if($('#setting_open_pre_resize').get(0).checked){
+									$("#imgsetting_div").show();
+								}else{
+									$("#imgsetting_div").hide();
+								}
+							</script>
+							<tbody>
+								<tr>
+									<td class="tt">上传子目录形式：</td>
+									<td class="tc">
+										<select name="st[imgdir_type]">
+											<option value="1" {if C('imgdir_type') eq 1}selected="selected"{/if}>YYYYMMDD</option>
+											<option value="2" {if C('imgdir_type') eq 2}selected="selected"{/if}>YYYYMM</option>
+										</select>
+									</td>
+									<td class="ti">如：Public/20100520/xxxx.jpg</td>
+								</tr>
+								<tr>
+									<td class="tt">普通上传允许的图片大小：</td>
+									<td class="tc">
+										<input name="st[size_allow]" class="txtinput" type="text" value="{C('size_allow')}" style="width:80px" />
+									</td>
+									<td class="ti">单位：字节</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div id="display_setting" class="stab">
+						<h1 class="album_title1">显示设置</h1>
+						<table>
+							<tbody>
+							<tr>
+								<td class="tt">每页显示图片数：</td>
+								<td class="tc">
+									<input name="st[pageset]" class="txtinput" type="text" value="{C('pageset')}" style="width:50px" />
+								</td>
+								<td class="ti"></td>
+							</tr>
+							<tr>
+								<td class="tt">幻灯片图片显示限制：</td>
+								<td class="tc">
+									<input name="st[gallery_limit]" class="txtinput" type="text" value="{C('gallery_limit')}" style="width:50px" />
+								</td>
+								<td class="ti"></td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+					<div id="display_setting" class="stab">
+						<h1 class="album_title1">图片设置</h1>
+						<table>
+							<tbody>
+								<tr>
+									<td class="tt">使用水印：</td>
+									<td class="tc">
+										<input id="setting_open_watermark" name="st[open_watermark]" type="checkbox" value="1" {if C('open_watermark')}checked="checked"{/if} onclick="switch_div(this,'watermark_div');" />
+									</td>
+									<td class="ti"></td>
+								</tr>
+							</tbody>
+							<tbody id="watermark_div">
+								<tr>
+									<td class="tt">水印图片路径：</td>
+									<td class="tc"><input name="st[watermark_path]" class="txtinput" type="text" value="{C('watermark_path')}" style="width:250px" /></td><td class="ti">如data/water.png，水印图片只支持png,gif,jpg</td>
+								</tr>
+								<tr>
+									<td class="tt">水印位置：</td>
+									<td class="tc">
+										<table>
+											<tr>
+												<td><input type="radio" name="st[watermark_pos]" value="1" {if C('watermark_pos') eq 1}checked="checked"{/if} /> #1</td>
+												<td><input type="radio" name="st[watermark_pos]" value="2" {if C('watermark_pos') eq 2}checked="checked"{/if} /> #2</td>
+												<td><input type="radio" name="st[watermark_pos]" value="3" {if C('watermark_pos') eq 3}checked="checked"{/if} /> #3</td>
+											</tr>
+											<tr>
+												<td><input type="radio" name="st[watermark_pos]" value="4" {if C('watermark_pos') eq 4}checked="checked"{/if} /> #4</td>
+												<td><input type="radio" name="st[watermark_pos]" value="5" {if C('watermark_pos') eq 5}checked="checked"{/if} /> #5</td>
+												<td><input type="radio" name="st[watermark_pos]" value="6" {if C('watermark_pos') eq 6}checked="checked"{/if} /> #6</td>
+											</tr>
+											<tr>
+												<td><input type="radio" name="st[watermark_pos]" value="7" {if C('watermark_pos') eq 7}checked="checked"{/if} /> #7</td>
+												<td><input type="radio" name="st[watermark_pos]" value="8" {if C('watermark_pos') eq 8}checked="checked"{/if} /> #8</td>
+												<td><input type="radio" name="st[watermark_pos]" value="9" {if C('watermark_pos') eq 9}checked="checked"{/if} /> #9</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													<input type="radio" name="st[watermark_pos]" value="0" {if C('watermark_pos') eq 0}checked="checked"{/if} /> 随机
+												</td>
+											</tr>
+										</table>
+									</td>
+									<td class="ti"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<script>
+						if($('#setting_open_watermark').get(0).checked){
+							$("#watermark_div").show();
+						}else{
+							$("#watermark_div").hide();
+						}
+					</script>
+					<div id="priv_setting" class="stab">
+						<h1 class="album_title1">权限设置</h1>
+						<table>
+							<tbody>
+								<tr>
+									<td class="tt">开放相册：</td>
+									<td class="tc">
+										<input id="setting_open_photo" name="st[open_photo]" type="checkbox" value="1" {if C('open_photo')}checked="checked"{/if} />
+									</td>
+									<td class="ti"></td>
+								</tr>
+								<tr>
+									<td class="tt">开启防盗链：</td>
+									<td class="tc">
+										<input id="setting_access_ctl" name="st[access_ctl]" type="checkbox" value="1" {if C('access_ctl')}checked="checked"{/if} />
+									</td>
+									<td class="ti"></td>
+								</tr>
+								<tr>
+									<td class="tt">允许的域名列表：</td>
+									<td class="tc">
+										<textarea name="st[access_domain]" style="margin-left: 4px; width:300px; height: 100px;">{C('access_domain')}</textarea>
+									</td>
+									<td class="ti">一行一条域名，请勿带上前面的http://</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td><input type="submit" class="btn" value="保存设置" /></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+{include file="../Public/footer.html"}
+
+</body>
+</html>

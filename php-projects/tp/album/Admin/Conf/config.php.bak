@@ -1,0 +1,23 @@
+<?php
+return array(
+	'site_title'=>'西南传媒大学影视学院活动中心',	//设置名称
+	'site_keyword'=>'site_keyword',	//设置密码
+	'site_description'=>'site_description',
+	'url'=>'http://127.0.0.1/meiupic/',	//设置网址
+	'demand_resize'=>false,	//按需生成各种尺寸图片
+	'open_pre_resize'=>false,	//
+	'resize_img_width'=>'1600',	//设置图片宽
+	'resize_img_height'=>'1200',	//设置图片高
+	'resize_quality'=>'100',	//设置图片质量
+	'imgdir_type'=>'2',
+	'size_allow'=>'1024000',	//允许大小
+	'pageset'=>'15',	//页面记录数
+	'gallery_limit'=>'60',	//设置图片显示限制
+	'allow_img_type' => 'jpg,jpeg,gif,png',
+	'open_watermark'=>true,
+	'watermark_path'=>'Public/images/logo.png',
+	'watermark_pos'=>0,
+	'open_photo'=>true,	//打开图片
+	'access_ctl'=>false,	
+	'access_domain'=>'127.0.0.1',	//服务器地址
+);

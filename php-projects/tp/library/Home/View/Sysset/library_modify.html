@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="Public/css/base.css" rel="stylesheet" />
+<link href="Public/css/style.css" rel="stylesheet" />
+</head>
+<script type="text/javascript">
+function checkForm(form){
+	for(i=0;i<form.length;i++){
+		if(form.elements[i].value==""){
+			alert("请将图书馆信息填写完整!");
+			form.elements[i].focus();
+			return false;
+		}
+	}
+}
+</script>
+<body>
+<div class="container">
+
+	{include file="../Public/navigation.html"}
+	
+	<div class="content">
+		<div class="tableBorder_gray wrap">
+			<div class="breadcrumb word_orange">当前位置：系统设置 &gt; 图书馆信息 &gt;&gt;&gt; </div>
+			<form name="form" method="post" action="index.php?m=Home&c=Sysset&a=library&method=modify">
+				<table style="text-align:left;">
+					<tr>
+						<td> 图书馆名称： </td>
+						<td>
+							<input name="name" type="text" value="{$res['info']['name']}" size="30" />
+						</td>
+					</tr>
+					<tr>
+						<td> 馆长： </td>
+						<td><input name="curator" type="text" size="30" value="{$res['info']['curator']}" /></td>
+					</tr>
+					<tr>
+						<td> 联系电话： </td>
+						<td><input name="tel" type="text" size="30" value="{$res['info']['tel']}" /></td>
+					</tr>
+					<tr>
+						<td> 联系地址： </td>
+						<td><input name="address" type="text" size="30" value="{$res['info']['address']}" /></td>
+					</tr>
+					<tr>
+						<td> E-mail： </td>
+						<td><input name="email" type="text" size="30" value="{$res['info']['email']}" /></td>
+					</tr>
+					<tr>
+						<td> 图书馆网址： </td>
+						<td><input name="url" type="text" size="30" value="{$res['info']['url']}" /></td>
+					</tr>
+					<tr>
+						<td> 建馆时间： </td>
+						<td><input name="createDate" type="text" size="30" value="{$res['info']['createDate']}" /></td>
+					</tr>
+					<tr>
+						<td height="84"> 图书馆简介： </td>
+						<td><textarea name="introduce" cols="50" rows="5" class="wenbenkuang">{$res['info']['introduce']}</textarea></td>
+					</tr>
+					<tr>
+					<td height="65"></td>
+					<td>        
+						<input name="sub" type="submit" class="btn_grey" value="保存" onclick="return checkForm(form)">
+						<input name="sub2" type="reset" class="btn_grey" value="取消"></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+	
+	{include file="../Public/copyright.html"}
+	
+</div>
+</body>
+</html>

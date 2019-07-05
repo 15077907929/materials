@@ -2,12 +2,8 @@
 // 本类由系统自动生成，仅供测试用途
 namespace Home\Controller;
 use Think\Controller;
-class BookController extends Controller {
+class BookController extends CommonController {
 	public function index(){
-		$res['user']=cookie('user');
-		if($res['user']==''){
-			echo "<script>alert('对不起，请通过正确的途径登录博考图书馆管理系统!');window.location.href='index.php?m=Home&c=User&a=login';</script>";
-		}
 		$db=M('bookinfo');
 		$db2=M('purview');
 		$db3=M('bookcase');
@@ -36,13 +32,11 @@ class BookController extends Controller {
 						echo '<script type="text/javascript">alert("图书信息添加成功！");history.back();</script>';
 					}
 					else{
-						// echo $db->getLastSql();exit;
 						echo '<script type="text/javascript">alert("图书信息添加失败！");history.back();</script>';
 					}
 				}
 			break;
 			case 'modify':
-				// $res['info']=$db->query('select m.id,m.name,p.sysset,p.readerset,p.bookset,p.borrowback,p.sysquery from bookinfo as m left join (select * from purview)as p on m.id=p.mid where m.id='.$_GET['id'])[0];
 				$res['info']=$db->where('id='.$_GET['id'])->find();
 				$res['bookcase']=$db3->select();
 				$res['booktype']=$db4->select();
@@ -72,10 +66,6 @@ class BookController extends Controller {
 	}
 	
 	public function look(){
-		$res['user']=cookie('user');
-		if($res['user']==''){
-			echo "<script>alert('对不起，请通过正确的途径登录博考图书馆管理系统!');window.location.href='index.php?m=Home&c=User&a=login';</script>";
-		}
 		$db=M('bookinfo');
 		$method = I('get.method') ? I('get.method') : 'show';
 		switch ($method) {

@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<head>
+<title>西南传媒大学图书馆</title>
+<link href="Public/css/base.css" rel="stylesheet" />
+<link href="Public/css/style.css" rel="stylesheet" />
+<script type="text/javascript">
+function check(form){
+	if (form.name.value==""){
+		alert("请输入管理员名称!");
+		form.name.focus();
+		return false;
+	}
+	if (form.pwd.value==""){
+		alert("请输入密码!");
+		form.pwd.focus();
+		return false;
+	}	
+}
+</script>
+</head>
+<body>
+<div class="login clearfix">
+	<div class="fl" width="30%">&nbsp;</div>
+	<form class="fl" name="form1" method="post" action="index.php?m=Home&c=Login&a=chklogin" width="32%">
+		<table width="603" height="243" cellpadding="0" cellspacing="0" bordercolorlight="#FFFFFF" bordercolordark="#D2E3E6">
+			<tr>
+				<td width="65%" height="100">&nbsp;</td>
+				<td width="20%">&nbsp;</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td height="90" rowspan="3">&nbsp;</td>
+				<td height="30">
+					管理员名称：</td>
+					<td><input name="name" type="text" class="logininput" id="name3" size="25" />
+				</td>
+			</tr>
+			<tr>
+				<td height="30">管理员密码：</td><td>
+					<input name="pwd" type="password" class="logininput" id="pwd2" size="25" />
+				</td>
+			</tr>
+			<tr><td></td>
+				<td height="30">
+					<input name="submit" type="submit" class="btn_grey" value="确定" onclick="return check(form1);" />
+					&nbsp;
+					<input name="submit3" type="reset" class="btn_grey" value="重置" />
+					&nbsp;
+					<input name="submit2" type="button" class="btn_grey" value="关闭" onclick="window.close();" />
+				</td>
+			</tr>
+			<tr>
+				<td height="53" colspan="3"></td>
+			</tr>
+		</table>
+	</form>
+	<div class="fr" width="30%"></div>
+</div>
+<div style="text-align:center;"><br>开发笔记 技术支持</div>
+</body>
+</html>

@@ -2,7 +2,7 @@
 // 本类由系统自动生成，仅供测试用途
 namespace Home\Controller;
 use Think\Controller;
-class BbbController extends Controller {
+class BbbController extends CommonController {
 	public function borrow(){
 		$method = I('get.method') ? I('get.method') : 'show';
 		$db=M('borrow');
@@ -22,9 +22,6 @@ class BbbController extends Controller {
 					}
 					$res['borr']=$db->query('select r.*,borr.borrowTime,borr.backTime,book.name as bookname,book.price,pub.name as pubname,bc.name as bookcase from borrow as borr join bookinfo as book on book.id=borr.bookid join publishing as pub on book.pubid=pub.id  join bookcase as bc on book.bookcase=bc.id join reader as r on borr.readerid=r.id  where borr.readerid='.$res['info']['id'].' and borr.ifback=0');
 					$res['borrnum']=count($res['borr']);
-					// echo '<pre>';
-					// print_r($arr);
-					// echo '</pre>';
 				}
 				if($_POST['inputkey']!=""){
 					$f=$_POST['f'];
@@ -79,9 +76,6 @@ class BbbController extends Controller {
 						}
 					}
 					$res['borr']=M('borrow')->query('select borr.id as borrid,borr.borrowTime,borr.backTime,borr.ifback,t.name as typename,t.number,book.name as bookname,book.price,pub.name as pubname,bc.name as bookcase from borrow as borr join reader r on borr.readerid=r.id join readertype t on r.typeid=t.id join bookinfo as book on book.id=borr.bookid join publishing as pub on book.pubid=pub.id  join bookcase as bc on book.bookcase=bc.id where r.barcode=\''.$_POST['barcode'].'\' and borr.ifback=0');
-					// echo '<pre>';
-					// print_r($res);
-					// echo '</pre>';
 				}
 			break;
 			case 'borrow_oncemore':
@@ -99,10 +93,6 @@ class BbbController extends Controller {
 	}
 	
 	public function bookback(){
-		$res['user']=cookie('user');
-		if($res['user']==''){
-			echo "<script>alert('对不起，请通过正确的途径登录博考图书馆管理系统!');window.location.href='index.php?m=Home&c=User&a=login';</script>";
-		}
 		$method = I('get.method') ? I('get.method') : 'show';
 		$db=M('borrow');
 		switch ($method) {
@@ -120,9 +110,6 @@ class BbbController extends Controller {
 						}
 					}
 					$res['borr']=M('borrow')->query('select borr.id as borrid,borr.borrowTime,borr.backTime,borr.ifback,t.name as typename,t.number,book.name as bookname,book.price,pub.name as pubname,bc.name as bookcase from borrow as borr join reader r on borr.readerid=r.id join readertype t on r.typeid=t.id join bookinfo as book on book.id=borr.bookid join publishing as pub on book.pubid=pub.id  join bookcase as bc on book.bookcase=bc.id where r.barcode=\''.$_POST['barcode'].'\' and borr.ifback=0');
-					// echo '<pre>';
-					// print_r($res);
-					// echo '</pre>';
 				}
 			break;
 			case 'back':
@@ -133,7 +120,6 @@ class BbbController extends Controller {
 				echo '<script type="text/javascript">alert("图书归还操作成功！");window.location.href="index.php?m=Home&c=Bbb&a=bookback&barcode='.$barcode.'";</script>';
 			break;
 		}
-		
 		$this->assign('res',$res);
 		$this->display('bookback_'.$method);	
 	}

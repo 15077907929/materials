@@ -2,18 +2,13 @@
 // 本类由系统自动生成，仅供测试用途
 namespace Home\Controller;
 use Think\Controller;
-class ReaderController extends Controller {
+class ReaderController extends CommonController {
 	public function rtype(){
-		$res['user']=cookie('user');
-		if($res['user']==''){
-			echo "<script>alert('对不起，请通过正确的途径登录博考图书馆管理系统!');window.location.href='index.php?m=Home&c=User&a=login';</script>";
-		}
 		$db=M('readertype');
 		$method = I('get.method') ? I('get.method') : 'show';
 		switch ($method) {
             case 'show':
 				$res['types']=$db->select();
-				// $res['books']=$db->query('select m.id,m.name,p.sysset,p.readerset,p.bookset,p.borrowback,p.sysquery from bookinfo as m left join (select * from purview)as p on m.id=p.mid');
 			break;
 			case 'add':
 				if($_POST['sub']!=""){
@@ -28,7 +23,6 @@ class ReaderController extends Controller {
 				}
 			break;
 			case 'modify':
-				// $res['info']=$db->query('select m.id,m.name,p.sysset,p.readerset,p.bookset,p.borrowback,p.sysquery from bookinfo as m left join (select * from purview)as p on m.id=p.mid where m.id='.$_GET['id'])[0];
 				$res['info']=$db->where('id='.$_GET['id'])->find();
 				if($_POST['sub']!=""){
 					$data['name']=$_POST['name'];
@@ -45,23 +39,17 @@ class ReaderController extends Controller {
 				}
 			break;
 		}
-		
 		$this->assign('res',$res);
 		$this->display('rtype_'.$method);	
 	}
 	
 	public function index(){
-		$res['user']=cookie('user');
-		if($res['user']==''){
-			echo "<script>alert('对不起，请通过正确的途径登录博考图书馆管理系统!');window.location.href='index.php?m=Home&c=User&a=login';</script>";
-		}
 		$db=M('reader');
 		$db2=M('purview');
 		$db3=M('readertype');
 		$method = I('get.method') ? I('get.method') : 'show';
 		switch ($method) {
             case 'show':
-				// $res['list']=$db->select();
 				$res['list']=$db->query('select r.id,r.barcode,r.name,t.name as typename,r.paperType,r.paperNO,r.tel,r.email from reader as r join (select * from readertype) as t on r.typeid=t.id');
 			break;
 			case 'add':
@@ -84,7 +72,6 @@ class ReaderController extends Controller {
 				}
 			break;
 			case 'modify':
-				// $res['info']=$db->query('select m.id,m.name,p.sysset,p.readerset,p.bookset,p.borrowback,p.sysquery from bookinfo as m left join (select * from purview)as p on m.id=p.mid where m.id='.$_GET['id'])[0];
 				$res['info']=$db->where('id='.$_GET['id'])->find();
 				$res['rtype']=$db3->select();
 				if($_POST['sub']!=""){
@@ -96,7 +83,6 @@ class ReaderController extends Controller {
 					$data['paperNO']=$_POST['paperNO'];
 					$data['operator']=cookie('user')['name'];
 					$db->where('id='.$_POST['id'])->save($data);
-					// echo $db->getLastSql();exit;
 					echo '<script type="text/javascript">alert("读者信息修改成功！");window.location="index.php?m=Home&c=Reader&a=index";</script>';
 				}
 			break;
@@ -106,7 +92,6 @@ class ReaderController extends Controller {
 				}
 			break;
 		}
-		
 		$this->assign('res',$res);
 		$this->display('reader_'.$method);	
 	}

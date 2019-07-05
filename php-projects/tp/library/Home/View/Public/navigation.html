@@ -2,7 +2,7 @@
 <div class="navigation">
 	<div class="banner" style="background:#FD9C11">
 		<img src="Public/images/banner.jpg" />
-		<span class="admin">当前登录的用户：{$res['user']['name']}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		<span class="admin">当前登录的用户：{$user['name']}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	</div>
 	<div class="nbar clearfix">
 		<script type="text/javascript">
@@ -10,14 +10,24 @@
 			setInterval("labtime.innerText=new Date().toLocaleString()",1000)
 		</script>
 		<div class="menu fr">
-			<a href="index.php" class="a1">首页</a> ┊ 
+			<a href="index.php" class="a1">首页</a> ┊
+			{if $preview['sysset'] eq 1}
 			<a onmouseover="showmenu(event,sysmenu)" onmouseout="delayhidemenu()" style="CURSOR:hand" class="a1">系统设置</a> ┊ 
+			{/if}
+			{if $preview['readerset'] eq 1}
 			<a onmouseover="showmenu(event,readermenu)" onmouseout="delayhidemenu()" style="CURSOR:hand" class="a1">读者管理</a> ┊ 
+			{/if}
+			{if $preview['bookset'] eq 1}
 			<a href="index.php?m=Home&c=Book&a=index" class="a1">图书档案管理</a> ┊ 
+			{/if}
+			{if $preview['borrowback'] eq 1}
 			<a onmouseover="showmenu(event,borrowmenu)" onmouseout="delayhidemenu()" style="CURSOR:hand"class="a1">图书借还</a> ┊ 
+			{/if}
+			{if $preview['sysquery'] eq 1}
 			<a onmouseover="showmenu(event,querymenu)" onmouseout="delayhidemenu()" style="CURSOR:hand" class="a1">系统查询</a> ┊
-			<a href="pwd_Modify.php" class="a1">更改口令</a> ┊
-			<a href="index.php?m=Home&c=User&a=safequit" class="a1">注销</a>
+			{/if}
+			<a href="index.php?m=Home&c=User&a=manager&method=modify_pwd" class="a1">更改口令</a> ┊
+			<a href="index.php?m=Home&c=Login&a=safequit" class="a1">注销</a>
 			<div class="menuskin" id="popmenu" onmouseover="clearhidemenu();highlightmenu(event,'on')"
 				onmouseout="highlightmenu(event,'off');dynamichide(event)" style="Z-index:100;position:absolute;">
 			</div>

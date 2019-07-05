@@ -1,0 +1,16 @@
+<div id="setting_nav">
+	<ul>
+		<li {if $res['setting_nav'] eq 'index'}class="current"{/if}>
+			<a href="index.php?m=Admin&c=Sysset&a=index">常规设置</a>
+		</li>
+		<li {if $res['setting_nav'] eq 'operator'}class="current"{/if}>
+			<a href="index.php?m=Admin&c=Sysset&a=operator">管理员设置</a>
+		</li>
+		<li {if $res['setting_nav'] eq 'password'}class="current"{/if}>
+			<a href="index.php?m=Admin&c=Sysset&a=password">修改密码</a>
+		</li>
+		<li {if $res['setting_nav'] eq 'task'}class="current"{/if}>
+			<a href="index.php?m=Admin&c=Sysset&a=task">后台任务</a>
+		</li>
+	</ul>
+</div>

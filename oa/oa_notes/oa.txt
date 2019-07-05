@@ -1,5 +1,0 @@
-1、在php文件头加上ob_start('ob_gzhandler');
-	ob_gzhandler是php 4.0.4新增的一个输出缓存函数，并通过gzip压缩后发送到客户端,
-	减小代码在传输中的大小，就能提高页面的传输速度，打开网页也就快了。
-2、session_id() 返回当前会话ID。 如果当前没有会话，则返回空字符串（""）。
-3、session_is_registered() 返回 TRUE 则表示 name 变量已经在当前会话中注册使用，否则返回 FALSE 

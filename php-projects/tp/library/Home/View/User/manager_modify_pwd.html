@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="Public/css/base.css" rel="stylesheet" />
+<link href="Public/css/style.css" rel="stylesheet" />
+<script type="text/javascript" src="Public/js/jquery.3.4.1.js"></script>
+<script type="text/javascript" src="Public/js/md5.js"></script>
+<title>图书馆管理系统</title>
+</head>
+<body>
+<div class="container">
+
+	{include file="../Public/navigation.html"}
+	
+	<div class="content">
+		<div class="tableBorder_gray wrap">
+			<div class="breadcrumb word_orange">当前位置：更改口令 &gt;&gt;&gt;</div>
+			<form name="form" method="post" action="index.php?m=Home&c=User&a=manager&method=modify_pwd">
+				<table>
+					<tr>
+						<td>管理员名称：</td>
+						<td>
+							<input name="name" type="text" value="{$res['user']['name']}" readonly="yes" size="30" />    
+						</td>
+					</tr>
+					<tr>
+						<td>原密码：</td>
+						<td><input name="oldpwd" type="password" size="30" />
+							<input name="holdpwd" type="hidden" value="{$res['user']['pwd']}" />
+						</td>
+					</tr>
+					<tr>
+						<td>新密码：</td>
+						<td><input name="pwd" type="password" size="30"></td>
+					</tr>
+					<tr>
+						<td>确认新密码：</td>
+						<td><input name="pwd1" type="password" size="30"></td>
+					</tr>
+					<tr>
+						<td height="65"></td>
+						<td>
+							<input name="sub" type="submit" class="btn_grey" value="保存" onclick="return checkForm(form)">
+							&nbsp;
+							<input name="sub2" type="reset" class="btn_grey" value="取消" />
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+	
+	{include file="../Public/copyright.html"}
+	
+</div>
+<script type="text/javascript">
+function checkForm(form){
+	if(form.oldpwd.value==""){
+		alert("请输入的原密码!");form.oldpwd.focus();return false;
+	}
+	if($.md5(form.oldpwd.value)!=form.holdpwd.value){
+		alert("您输入的原密码不正确，请重新输入!");form.oldpwd.value="";
+		form.oldpwd.focus();return false;
+	}
+	if(form.pwd.value==""){
+		alert("请输入的新密码!");form.pwd.focus();return false;
+	}	
+	if(form.pwd1.value==""){
+		alert("请确认新密码!");form.pwd1.focus();return false;
+	}	
+	if(form.pwd.value!=form.pwd1.value){
+		alert("您两次输入的新密码不一致，请重新输入!");
+		form.pwd.value="";form.pwd1.value="";
+		form.pwd.focus();return false;
+	}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>西南传媒大学影视学院活动中心</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="Public/css/main.css" type="text/css" />
+<script type="text/javascript" src="Public/js/jquery.3.4.1.js"></script>
+<script type="text/javascript" src="Public/js/common.js"></script>
+<script type="text/javascript" src="js/zeroclipboard/ZeroClipboard.js"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
+</head>
+<body>
+
+{include file="../Public/header.html"}
+
+    <div class="mainbody">
+		<div id="setting_box">
+			<div id="setting_nav">
+				
+				{include file="../Public/setting_nav.html"}
+				
+			</div>
+			<div id="setting_body">
+				<div id="operator_setting" class="stab">
+					<h1 class="album_title1">修改管理员密码</h1>
+					<form method="post" action="index.php?m=Admin&c=Sysset&a=operator&method=edit">
+						<input type="hidden" name="id" value="{$res['info']['id']}" />
+						<table>
+							<tr>
+								<td class="tt">登录名</td>
+								<td>{$res['info']['username']}</td>
+							</tr>
+							<tr>
+								<td class="tt">密码</td>
+								<td><input type="password" name="userpass" class="txtinput" /></td>
+							</tr>
+							<tr>
+								<td class="tt">重复密码</td>
+								<td><input type="password" name="passagain" class="txtinput" /></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><input type="submit" class="btn" value="确定修改" /></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{include file="../Public/footer.html"}
+
+</body>
+</html>

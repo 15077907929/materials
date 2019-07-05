@@ -1,7 +1,0 @@
-* { margin: 0; padding: 0; }
-a:link, a:visited { color: #656565; text-decoration: none; font-family: "Microsoft YaHei","Tahoma","Arial",'宋体'; }
-body { font-family: "Microsoft YaHei","Tahoma","Arial",'宋体'; line-height: 150%; color: #656565; }
-
-/*footer*/
-#footer{font-size:12px; width:100%;}
-.footer_pad{padding:5px 9px 0 9px;}
