@@ -535,19 +535,19 @@ function check_form(o){
 
 function slideshow(id){
 	$("body").prepend('<div id="slide_show_flash"></div>');
-	$("body").prepend('<iframe id="slide_show_iframe" frameborder="0" style="z-index:988;border:0;position:absolute;z-index:998px;width:100%;height:100%"></iframe>');
+	$("body").prepend('<div id="slide_show_iframe" style="z-index:988;border:0;position:absolute;z-index:998px;width:100%;height:100%"></div>');
 	var height = document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight;
 	var top = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop;
 	$('#slide_show_iframe').height(height);
 	
 	var flashvars = {};
-	flashvars.galleryURL = escape("admin.php?ctl=photo&act=gallery&album="+id);
+	flashvars.galleryURL = escape("index.php?m=Admin&c=Photo&a=gallery&album="+id);
 	var params = {};
 	params.allowfullscreen = true;
 	params.wmode = 'transparent';
 	params.allowscriptaccess = "always";
 	params.bgcolor = "222222";
-	swfobject.embedSWF("js/simpleviewer.swf", "slide_show_flash", "100%",document.documentElement.clientHeight, "9.0.124", false, flashvars, params);
+	swfobject.embedSWF("Public/js/simpleviewer.swf", "slide_show_flash", "100%",document.documentElement.clientHeight, "9.0.124", false, flashvars, params);
 	$("body").prepend('<div id="slide_show_close" onclick="close_slideshow()" title="关闭"></div>');
 	$('#slide_show_flash').css('top',top);
 	$('#slide_show_close').css('top',top+16);

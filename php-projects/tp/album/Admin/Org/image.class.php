@@ -307,7 +307,7 @@ class Image {
             0x5D => "打开(自动/防红眼/不探测返回光线)",
             0x5F => "打开(自动/防红眼/探测返回光线)"
         );
-
+$img='/opt/lampp/htdocs/album.hd/Public/abc.jpg';
         $exif = @exif_read_data($img,"IFD0");
         if ($exif===false) {
             return false;

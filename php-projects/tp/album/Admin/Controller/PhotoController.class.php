@@ -69,4 +69,62 @@ class PhotoController extends CommonController {
         }
         exit;
 	}
+	
+	public function gallery(){
+		$db=M('imgs');
+        if($_GET['album'] > 0){
+            $title = M('albums')->where('id='.$_GET['album'])->find()['name'];
+        }else{
+            $title = '所有图片';
+        }
+        
+        @ob_clean();
+        echo '<?xml version="1.0" encoding="UTF-8"?>
+<simpleviewergallery 
+ title="'.$title.'"
+ textColor="FFFFFF"
+ frameColor="FFFFFF"
+ thumbPosition="BOTTOM"
+ galleryStyle="MODERN"
+ thumbColumns="10"
+ thumbRows="1"
+ showOpenButton="TRUE"
+ showFullscreenButton="TRUE"
+ frameWidth="10"
+ maxImageWidth="1280"
+ maxImageHeight="1024"
+ imagePath="data/"
+ thumbPath="data/"
+ useFlickr="false"
+ flickrUserName=""
+ flickrTags=""
+ languageCode="AUTO"
+ languageList="">'."\n";
+        $pictures = $db->where('album='.$_GET['album'])->select();
+        if(is_array($pictures)){
+            foreach($pictures as $v){
+                echo '<image imageURL="Uploads/'.mkImgLink($v['dir'],$v['pickey'],$v['ext'],'big').'" thumbURL="Uploads/'.mkImgLink($v['dir'],$v['pickey'],$v['ext'],'square').'" linkURL="Uploads/'.mkImgLink($v['dir'],$v['pickey'],$v['ext'],'orig').'" linkTarget="">
+        <caption><![CDATA['.$v['name'].']]></caption>	
+    </image>'."\n";
+            }
+        }
+
+        echo '</simpleviewergallery>';
+	}
+	
+	public function view(){
+		$db=M('imgs');
+		$res['current_nav']='album';
+		$res['info']=$db->where('id='.$_GET['id'])->find();
+		 if(!$res['info']){
+            showInfo('您要查看的图片不存在！',false);
+        }
+        include_once(LIB_PATH.'Org/image.class.php');
+        $imgobj = new \Image();
+        $res['imginfo'] = $imgobj->GetImageInfo(APP_PATH.'Uploads/'.mkImgLink($res['info']['dir'],$res['info']['pickey'],$res['info']['ext'],'orig'));
+		$res['pre']=$db->where('album='.$_GET['album'].' and id<'.$_GET['id'])->order('id desc')->find();
+		$res['next']=$db->where('album='.$_GET['album'].' and id>'.$_GET['id'])->order('id asc')->find();
+		$this->assign('res',$res);
+		$this->display();
+	}
 }

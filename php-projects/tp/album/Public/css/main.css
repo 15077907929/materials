@@ -520,8 +520,8 @@ margin-bottom:10px;
 	right:100px;
 	width:30px;
 	height:30px;
-	background:url(close.png) no-repeat !important;
-	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/close.png', sizingMethod='scale');
+	background:url(../images/close.png) no-repeat !important;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/close.png', sizingMethod='scale');
 	_background:none;
 	color:#fff;
 	cursor:pointer;
@@ -549,14 +549,14 @@ margin-bottom:10px;
     float:left;
 }
 #photo-body .sh1 {
-    background:url(s1.png) no-repeat right bottom transparent;
+    background:url(../images/s1.png) no-repeat right bottom transparent;
     float:left;
 }
 #photo-body .sh2 {
-    background:url(s2.png) no-repeat right top transparent;
+    background:url(../images/s2.png) no-repeat right top transparent;
 }
 #photo-body .sh3 {
-    background:url(s3.png) no-repeat left bottom transparent;
+    background:url(../images/s3.png) no-repeat left bottom transparent;
     display:block;
     padding:0 6px 6px 0;
     position:relative;

@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>西南传媒大学影视学院活动中心</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="Public/css/main.css" type="text/css" />
+<script type="text/javascript" src="Public/js/jquery.3.4.1.js"></script>
+<script type="text/javascript" src="Public/js/common.js"></script>
+<script type="text/javascript" src="Public/js/zeroclipboard/ZeroClipboard.js"></script>
+<script type="text/javascript" src="Public/js/swfobject.js"></script>
+</head>
+<body>
+
+{include file="../Public/header.html"}
+
+    <div class="mainbody">
+		<div id="allpic">
+			<div id="album_nav" class="album_detail">
+				<h1 class="album_title">{$res['info']['name']}</h1>
+				<div class="photoinfo">
+					上传时间: {date('Y-m-d H:i:s',$res['info']['create_time'])}
+					<input type="button" class="btn" onclick="window.location.href='index.php?m=Admin&c=Album&a=photos&album={$res['info']['album']}'" value="返回 {$res['info']['album_name']}" />
+				</div>
+			</div>
+			<div id="photo-body">
+				 <div class="picnt">
+					  <img class="p-tag" src="Public/images/pic_loading.gif" />
+				 </div>
+			</div>
+			<div class="photo-right">
+				<input type="button" class="btn" value="拍摄信息" onclick="show_exif(this)" /> 
+				<div id="exif_info">
+					<div class="top"><a href="javascript:void(0)" onclick="close_exif()">拍摄信息</a></div>
+						{if $res['imginfo'] neq ''}
+							<div class="content">
+								<ul>
+									{foreach $res['imginfo'] as $key=>$item}
+										<li><span class="exif_tit">{$key}</span><span class="exif_val">{$item}</span></li>
+									{/foreach}
+								</ul>
+							</div>
+						{else}
+							<div class="content"><div class="inf">没有EXIF信息！</div></div>
+						{/if}
+				</div>
+				<div id="photo_control">
+					<ul>
+						{if $res['pre'] neq ''}
+						<li>
+							<a href="index.php?m=Admin&c=Photo&a=view&id={$res['pre']['id']}&album={$res['info']['album']}#photo-body">
+							<img src="Uploads/{mkImgLink($res['pre']['dir'],$res['pre']['pickey'],$res['pre']['ext'],'square')}" /></a>
+						</li>
+						{else}
+						<li>这是首张</li>
+						{/if}
+						<li class="current">
+							<a href="javascript:void(0)">
+								<img src="Uploads/{mkImgLink($res['info']['dir'],$res['info']['pickey'],$res['info']['ext'],'square')}" />
+							</a>
+						</li>
+						
+						{if $res['next'] neq ''}
+						<li>
+							<a href="index.php?m=Admin&c=Photo&a=view&id={$res['next']['id']}&album={$res['info']['album']}#photo-body">
+								<img src="Uploads/{mkImgLink($res['next']['dir'],$res['next']['pickey'],$res['next']['ext'],'square')}" />
+							</a>
+						</li>
+						{else}
+						<li>这是末张</li>
+						{/if}
+					</ul>
+					<div class="prebtn">
+						{if $res['pre'] neq ''}
+							<a class="btnpre" href="index.php?m=Admin&c=Photo&a=view&id={$res['pre']['id']}&album={$res['info']['album']}#photo-body">上一张</a>
+						{/if}
+					</div>
+					<div class="nextbtn">
+						{if $res['next'] neq ''}
+							<a class="btnnext" href="index.php?m=Admin&c=Photo&a=view&id={$res['next']['id']}&album={$res['info']['album']}#photo-body">下一张</a>
+						{/if}
+					</div>
+					<div class="slideshow">
+						<a href="javascript:void(0)" onclick="slideshow({$res['info']['album']})">幻灯片</a>
+					</div>
+				</div>
+				<div id="copyspics">
+					<textarea id="copyspics_content" style="margin-left:4px;width:250px;height:150px;"></textarea><br />
+					选择图片大小: <br />
+					<input type="radio" name="size" value="Uploads/{mkImgLink($res['info']['dir'],$res['info']['pickey'],$res['info']['ext'],'square')}" onclick="select_copypics(this.value)" /> 方块图(75*75) 
+					<a href="Uploads/{mkImgLink($res['info']['dir'],$res['info']['pickey'],$res['info']['ext'],'square')}" target="_blank">预览</a><br />
+					<input type="radio" name="size" value="Uploads/{mkImgLink($res['info']['dir'],$res['info']['pickey'],$res['info']['ext'],'thumb')}" onclick="select_copypics(this.value)" /> 缩略图(110*150) 
+					<a href="Uploads/{mkImgLink($res['info']['dir'],$res['info']['pickey'],$res['info']['ext'],'thumb')}" target="_blank">预览</a><br />
+					<input type="radio" name="size" value="Uploads/{mkImgLink($res['info']['dir'],$res['info']['pickey'],$res['info']['ext'],'small')}" onclick="select_copypics(this.value)" /> 小图(240*240) 
+					<a href="Uploads/{mkImgLink($res['info']['dir'],$res['info']['pickey'],$res['info']['ext'],'small')}" target="_blank">预览</a><br />
+					<input type="radio" name="size" value="Uploads/{mkImgLink($res['info']['dir'],$res['info']['pickey'],$res['info']['ext'],'medium')}" onclick="select_copypics(this.value)" checked="checked" /> 中图(550*550) 
+					<a href="Uploads/{mkImgLink($res['info']['dir'],$res['info']['pickey'],$res['info']['ext'],'medium')}" target="_blank">预览</a><br />
+					<input type="radio" name="size" value="Uploads/{mkImgLink($res['info']['dir'],$res['info']['pickey'],$res['info']['ext'],'big')}" onclick="select_copypics(this.value)" /> 大图(900*900) 
+					<a href="Uploads/{mkImgLink($res['info']['dir'],$res['info']['pickey'],$res['info']['ext'],'big')}" target="_blank">预览</a><br />
+					<input type="radio" name="size" value="Uploads/{mkImgLink($res['info']['dir'],$res['info']['pickey'],$res['info']['ext'],'orig')}" onclick="select_copypics(this.value)" /> 原图 
+					<a href="Uploads/{mkImgLink($res['info']['dir'],$res['info']['pickey'],$res['info']['ext'],'orig')}" target="_blank">预览</a><br /><br />
+					<input type="button" value="复制到剪切板" class="btn" id="copyspics_click" />
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<script type="text/javascript">
+			function select_copypics(url){
+				$("#copyspics textarea").val('<div align="center"><img src="'+url+'" /></div><br />');
+			}
+			
+			$(function(){
+				var select_url = $('#copyspics input[name=size]:checked').val();
+				select_copypics(select_url);
+				{if $res['next'] neq ''}
+				var imghref = 'index.php?m=Admin&c=Photo&a=view&id={$res["next"]["id"]}&album={$res["info"]["album"]}#photo-body';
+				var nexttile = '点击查看下一张';
+				{else}
+				var imghref = 'javascript:void(0)';
+				var nexttile = '已经是最后一张';
+				{/if}
+				var img = new Image();
+				img.onload = function(){
+					var img_width = img.width;
+					var max_width = $('body').width()-350;
+					if (img.width > max_width) {
+						img_width = max_width;
+					};
+					var imgload = '<div class="sh1"><div class="sh2"><div class="sh3"><a class="p-tag" hidefocus="true" href="'+imghref+'" title="'+nexttile+'"><img class="p-tag" width="'+img_width+'" src="'+img.src+'"></a></div></div></div>';
+					$('#photo-body div.picnt').html(imgload);
+				};
+				img.src = "Uploads/{mkImgLink($res['info']['dir'],$res['info']['pickey'],$res['info']['ext'],'big')}";
+				
+				var clip = new ZeroClipboard.Client();
+				clip.setText('');
+				clip.setHandCursor( true );
+				clip.glue('copyspics_click');
+				clip.addEventListener('mouseOver',function(client) { 
+					clip.setText($('#copyspics_content').val());
+				});
+				clip.addEventListener('complete',function(o){
+					var pos = getElementOffset($('#copyspics_click').get(0));
+					$('#copyedok').css('left',pos.left);
+					$('#copyedok').css('top',pos.top+22);
+					$('#copyedok').show().animate({ opacity: 1.0}, 1000).fadeOut();
+				});
+				
+				window.onresize = function(){
+					var img_width = img.width;
+					var max_width = $('body').width()-350;
+					if (img.width > max_width) {
+						img_width = max_width;
+					};
+					$('#photo-body img').attr('width',img_width);
+					clip.reposition('copyspics_click');
+				}
+
+				document.onkeydown = keydown;
+				function keydown(event){
+					event = event ? event : (window.event ? window.event : null); 
+					if($("#photo_control").find("a.btnpre").length > 0 && event.keyCode==37){
+						window.location=$("#photo_control").find("a.btnpre").attr("href");
+					}
+					if($("#photo_control").find("a.btnnext").length > 0 && event.keyCode==39){
+						window.location=$("#photo_control").find("a.btnnext").attr("href");
+					}
+				}
+			});
+		</script>
+	</div>
+
+{include file="../Public/footer.html"}
+
+</body>
+</html>

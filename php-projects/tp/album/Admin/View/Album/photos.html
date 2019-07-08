@@ -9,7 +9,7 @@
 <script type="text/javascript" src="Public/js/jquery.3.4.1.js"></script>
 <script type="text/javascript" src="Public/js/common.js"></script>
 <script type="text/javascript" src="Public/js/zeroclipboard/ZeroClipboard.js"></script>
-<script type="text/javascript" src="js/swfobject.js"></script>
+<script type="text/javascript" src="Public/js/swfobject.js"></script>
 </head>
 <body>
 
@@ -43,7 +43,7 @@
 						  <option value="index.php?m=Admin&c=Album&a=photos&album={$res['info']['id']}&sort=time_desc&page={$res['page']}" {if $res['sort'] eq 'time_desc'}selected="selected"{/if}>按照时间从近到远排序</option>
 						  <option value="index.php?m=Admin&c=Album&a=photos&album={$res['info']['id']}&sort=time_asc&page={$res['page']}" {if $res['sort'] eq 'time_asc'}selected="selected"{/if}>按照时间从远到近排序</option>
 					</select>
-					<input type="button" value="幻灯片查看" class="btn" onclick="slideshow({$res['album']})" />
+					<input type="button" value="幻灯片查看" class="btn" onclick="slideshow({$res['info']['id']})" />
 				</div>
 				{$res['msginfo']}
 				<ul class="album">
