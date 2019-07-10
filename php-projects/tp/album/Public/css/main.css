@@ -478,7 +478,7 @@ margin-bottom:10px;
 .album li div.selected{
 	width:30px;
 	height:30px;
-	background:url(checked.png) no-repeat !important;
+	background:url(../images/checked.png) no-repeat !important;
 	position:absolute;
 	left:47px;
 	top:20px;

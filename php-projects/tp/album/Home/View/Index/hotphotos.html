@@ -30,9 +30,9 @@
 						</tr><tr>
 						{/if}
 						<td class="phototd" id="i_{$item['id']}">
-							<a href="index.php?ctl=photo&act=view&album={$item['album']}#photo={$item['id']}"><img src="Uploads/{mkImgLink($item['dir'],$item['pickey'],$item['ext'],'thumb')}" /></a>
+							<a href="index.php?m=Home&c=Photo&a=view&album={$item['album']}#photo={$item['id']}"><img src="Uploads/{mkImgLink($item['dir'],$item['pickey'],$item['ext'],'thumb')}" /></a>
 							<div class="line35">
-								<a href="index.php?ctl=photo&act=view&album={$item['album']}#photo={$item['id']}">{$item['name']}</a>
+								<a href="index.php?m=Home&c=Photo&a=view&album={$item['album']}#photo={$item['id']}">{$item['name']}</a>
 							</div>
 							<div>浏览数：{$item['hits']}</div>
 						</td>

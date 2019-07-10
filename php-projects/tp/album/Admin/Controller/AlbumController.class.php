@@ -148,7 +148,7 @@ class AlbumController extends CommonController {
 	}
 	
 	public function ajax_get_albums(){
-        $find = M('albums')->where('id='.$_POST['id'])->find();
+        $find = M('imgs')->where('id='.$_POST['id'])->find();
         $album_id = $find['album'];
         
         $list = AlbumsModel::get_albums_assoc($album_id);
@@ -230,11 +230,11 @@ class AlbumController extends CommonController {
 		$res['albums'] = AlbumsModel::get_albums_assoc($_GET['album']);
 		$res['info'] = $db->where('id='.$_GET['album'])->find();
 		
-		$sort = $_GET['sort'];
-		if(!$sort){
-			$sort='time_desc';
+		$res['sort'] = $_GET['sort'];
+		if(!$res['sort']){
+			$res['sort']='time_desc';
 		}
-		if($sort == 'time_asc'){
+		if($res['sort'] == 'time_asc'){
             $order = 'create_time asc';
         }else{
             $order = 'create_time desc';

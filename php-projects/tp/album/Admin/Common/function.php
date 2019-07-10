@@ -192,3 +192,14 @@ function delpicfile($dir,$key,$ext){
 		@unlink(APP_PATH.'Uploads/'.mkImgLink($dir,$key,$ext,$v));
 	}
 }
+
+function where_is_tmp(){
+    $uploadtmp=ini_get('upload_tmp_dir');
+    $envtmp=(getenv('TMP'))?getenv('TMP'):getenv('TEMP');
+    if(is_dir($uploadtmp) && is_writable($uploadtmp))return $uploadtmp;
+    if(is_dir($envtmp) && is_writable($envtmp))return $envtmp;
+    if(is_dir('/tmp') && is_writable('/tmp'))return '/tmp';
+    if(is_dir('/usr/tmp') && is_writable('/usr/tmp'))return '/usr/tmp';
+    if(is_dir('/var/tmp') && is_writable('/var/tmp'))return '/var/tmp';
+    return ".";
+}

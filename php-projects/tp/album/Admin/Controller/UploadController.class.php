@@ -2,6 +2,7 @@
 // 本类由系统自动生成，仅供测试用途
 namespace Admin\Controller;
 use Think\Controller;
+use Admin\Model\UploadModel;
 class UploadController extends CommonController {
     public function upload_step1(){
 		$res['current_nav']='upload';
@@ -157,4 +158,70 @@ class UploadController extends CommonController {
             echo '<script type="text/javascript"> top.reupload_alert("文件上传失败!");</script>';
         }
 	}
+	
+	public function process(){
+		UploadModel::plupload();
+	}
+	
+	function doupload(){
+        set_time_limit(0);
+        $this->_save_and_resize();
+		$res['current_nav']='upload';
+		$res['album']=$_GET['album'];	
+		$this->assign('res',$res);
+        $this->display('upload_step3');
+    }
+	
+	function _save_and_resize(){
+		$db=M('albums');
+		$db2=M('imgs');
+        $tmp_dir = where_is_tmp();
+        $targetDir =  $tmp_dir. DIRECTORY_SEPARATOR . "plupload";
+        
+        $album_id = intval($_GET['album']);
+		$album_arr = $db->where('id='.$album_id)->find();
+        if($album_arr){
+            $photo_private = $album_arr['private'];
+        }else{
+            $photo_private = 1;
+        }
+        
+        $date = get_updir_name(C('imgdir_type'));
+		if(!is_dir(APP_PATH.'Uploads/'.$date)){
+            mkdir(APP_PATH.'Uploads/'.$date);
+            chmod(APP_PATH.'Uploads/'.$date,0777);
+        }
+
+        if(C('demand_resize')){
+            $pic_status = 1;
+        }else{
+            $pic_status = 3;
+        }
+
+        $files_count = intval($_POST['flash_uploader_count']);
+        for($i=0;$i<$files_count;$i++){
+            $tmpfile = $targetDir . DIRECTORY_SEPARATOR . $_POST["flash_uploader_{$i}_tmpname"];
+            $filename = $_POST["flash_uploader_{$i}_name"];
+            $status =  $_POST["flash_uploader_{$i}_status"];
+            $fileext = strtolower(end(explode('.',$filename)));
+            $key = md5(str_replace('.','',microtime(true)).mt_rand(10,99));
+            $realpath = APP_PATH.'Uploads/'.mkImgLink($date,$key,$fileext,'orig');
+            if($status == 'done' && file_exists($tmpfile)){
+                if(@copy($tmpfile,$realpath)){
+                    addwater($realpath);
+                    @chmod($realpath,0755);
+					 $db2->add(array('album'=>$album_id,
+						'name'=>$filename,
+						'dir'=>$date,
+						'pickey'=>$key,
+						'ext'=>$fileext,
+						'author'=>cookie('user')['id'],
+						'create_time'=>time(),
+						'private' => $photo_private,
+						'status' => $pic_status
+					));
+                }
+            }
+        }
+    }
 }

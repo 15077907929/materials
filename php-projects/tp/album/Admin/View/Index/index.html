@@ -6,10 +6,10 @@
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <link rel="stylesheet" href="Public/css/main.css" type="text/css" />
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/common.js"></script>
-<script type="text/javascript" src="js/zeroclipboard/ZeroClipboard.js"></script>
-<script type="text/javascript" src="js/swfobject.js"></script>
+<script type="text/javascript" src="Public/js/jquery.3.4.1.js"></script>
+<script type="text/javascript" src="Public/js/common.js"></script>
+<script type="text/javascript" src="Public/js/zeroclipboard/ZeroClipboard.js"></script>
+<script type="text/javascript" src="Public/js/swfobject.js"></script>
 </head>
 <body>
 
@@ -21,7 +21,7 @@
 				<span class="total_count">共 <strong>{$res['total_num']}</strong> 张图片</span> 
 				<input type="button" class="btn" value="我要上传图片" onclick="window.location.href='index.php?m=Admin&c=Upload&a=upload_step1'" />
 			</div>
-			<form name="pics_form" action="admin.php?ctl=photo&act=bat&referf=default&referp=" method="post" onsubmit="submit_bat(this);return false;">
+			<form name="pics_form" action="index.php?m=Admin&c=Photo&a=bat&referf=default&referp={$res['page']}" method="post" onsubmit="submit_bat(this);return false;">
 				<div id="batch_ctrl"> 
 					<input type="button" class="btn" value="全选" onclick="checkall('pics_form')" />  
 					<input type="button" class="btn" value="取消全选" onclick="uncheckall('pics_form')" /> 
@@ -32,22 +32,25 @@
 					</select>
 					<select name="albums" style="display:none">
 						<option value="-1">选择相册</option>
+						{foreach $res['albums'] as $item}
+							<option value="{$item['id']}">{$item['name']}</option>
+						{/foreach}
 					</select>
 					<input name="do_pic_act" type="submit" value="执行" class="btn" disabled /> 
 					 <select name="do_sort" onchange="change_order(this.value);">
 						 <option value="-1">选择排序</option>
-						 <option value="admin.php?act=all&sort=time_desc&page=" {if $res['sort'] eq 'time_desc'}selected="selected"{/if}>按照时间从近到远排序</option>
-						 <option value="admin.php?act=all&sort=time_asc&page=" {if $res['sort'] eq 'time_asc'}selected="selected"{/if}>按照时间从远到近排序</option>
+						 <option value="index.php?m=Admin&c=Index&a=index&sort=time_desc&page={$res['page']}" {if $res['sort'] eq 'time_desc'}selected="selected"{/if}>按照时间从近到远排序</option>
+						 <option value="index.php?m=Admin&c=Index&a=index&sort=time_asc&page={$res['page']}" {if $res['sort'] eq 'time_asc'}selected="selected"{/if}>按照时间从远到近排序</option>
 					 </select>
 					 <input type="button" value="幻灯片查看" class="btn" onclick="slideshow(0)" />
 				</div>
-				{if cookie('msginfo')}{cookie('msginfo')}{/if}
+				{$res['msginfo']}
 				<ul class="album">
 					{if $res['imgs'] neq ''}
 						{foreach $res['imgs'] as $item}
-							<li id="i_{$item['id']}" rel="{$item['id']}">
+							<li id="i_{$item['id']}" rel="{C('url')}/Uploads/{mkImgLink($item['dir'],$item['pickey'],$item['ext'],'orig')}">
 								<span class="img">
-									<a href="admin.php?ctl=photo&act=view&id={$item['id']}">
+									<a href="index.php?m=Admin&c=Photo&a=view&id={$item['id']}">
 										<img src="Uploads/{mkImgLink($item['dir'],$item['pickey'],$item['ext'],'thumb')}" alt="{$item['name']}" />
 									</a>
 								</span>

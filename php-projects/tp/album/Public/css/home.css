@@ -59,7 +59,7 @@ a{
     line-height:35px;
 }
 .header{
-    background:#fff url(bg_head_repeat.png) repeat-x;
+    background:#fff url(../images/bg_head_repeat.png) repeat-x;
     height:78px;
     border-bottom:2px solid #F2A533;
 }
@@ -258,12 +258,12 @@ ul.thumblist li div.photo{
     min-height:500px;
 }
 .imgloading{
-    background:url(bg_line_loading.gif) no-repeat center;
+    background:url(../images/bg_line_loading.gif) no-repeat center;
 }
 
 span.next_cur{
-    cursor: url("img/next.cur"),url("next.cur"),auto;
+    cursor: url("../images/next.cur"),url("./images/next.cur"),auto;
 }
 span.pre_cur{
-    cursor: url("img/pre.cur"),url("pre.cur"),auto;
+    cursor: url("../images/pre.cur"),url("../images/pre.cur"),auto;
 }

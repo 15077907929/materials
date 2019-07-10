@@ -2,6 +2,7 @@
 // 本类由系统自动生成，仅供测试用途
 namespace Home\Controller;
 use Think\Controller;
+use Admin\Model\AlbumsModel;
 class IndexController extends Controller {
     public function index(){
 		$res['current_nav']='index';
@@ -14,12 +15,13 @@ class IndexController extends Controller {
 		// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
 		$res['albums'] = $db->limit($Page->firstRow.','.$Page->listRows)->select();
 		foreach($res['albums'] as $key=>$val){
-			$cover=$db2->where('album='.$val['id'])->find();
+			$cover=AlbumsModel::get_cover($val['id'],$val['cover']);
 			$res['albums'][$key]['cover'] = $cover?'Uploads/'.mkImgLink($cover['dir'],$cover['pickey'],$cover['ext'],'thumb'):'Public/images/nopic.jpg';
 		}
 		// echo '<pre>';
 		// print_r($res);
 		// echo '</pre>';
+		C('site_title',C('site_title').' - 相册列表');
 		$this->assign('res',$res);
 		$this->display();
 	}

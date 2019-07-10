@@ -32,7 +32,7 @@ class PhotoController extends CommonController {
         $album_id = $_GET['album'];
         if(!is_array($pics)){
             if($referfunc=='default'){
-                header('Location: index.php?act=all&page='.$referpage.'&flag=1');
+                header('Location: index.php?m=Admin&c=Index&a=index&page='.$referpage.'&flag=1');
             }elseif($referfunc=='album'){
                 header('Location: index.php?m=Admin&c=Album&a=photos&album='.$album_id.'&page='.$referpage.'&flag=1');
             }
@@ -63,7 +63,7 @@ class PhotoController extends CommonController {
             }
         }
         if($referfunc=='default'){
-            header('Location: index.php?act=all&page='.$referpage.'&flag=3');
+            header('Location: index.php?m=Admin&c=index&act=index&page='.$referpage.'&flag=3');
         }elseif($referfunc=='album'){
             header('Location: index.php?m=Admin&c=album&a=photos&album='.$album_id.'&page='.$referpage.'&flag=3');
         }
@@ -74,6 +74,7 @@ class PhotoController extends CommonController {
 		$db=M('imgs');
         if($_GET['album'] > 0){
             $title = M('albums')->where('id='.$_GET['album'])->find()['name'];
+			$where='album='.$_GET['album'];
         }else{
             $title = '所有图片';
         }
@@ -100,7 +101,7 @@ class PhotoController extends CommonController {
  flickrTags=""
  languageCode="AUTO"
  languageList="">'."\n";
-        $pictures = $db->where('album='.$_GET['album'])->select();
+        $pictures = $db->where($where)->select();
         if(is_array($pictures)){
             foreach($pictures as $v){
                 echo '<image imageURL="Uploads/'.mkImgLink($v['dir'],$v['pickey'],$v['ext'],'big').'" thumbURL="Uploads/'.mkImgLink($v['dir'],$v['pickey'],$v['ext'],'square').'" linkURL="Uploads/'.mkImgLink($v['dir'],$v['pickey'],$v['ext'],'orig').'" linkTarget="">

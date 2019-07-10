@@ -30,9 +30,9 @@
 						</tr><tr>
 						{/if}
 						<td class="albumtd" id="i_{$item['id']}">
-							<a href="index.php?ctl=album&act=photos&album={$item['id']}"><img src="{$item['cover']}" /></a>
+							<a href="index.php?m=Home&c=Album&a=photos&album={$item['id']}"><img src="{$item['cover']}" /></a>
 							<div class="line35">
-							   <a href="index.php?ctl=album&act=photos&album={$item['id']}">{$item['name']}</a>
+							   <a href="index.php?m=Home&c=Album&a=photos&album={$item['id']}">{$item['name']}</a>
 							</div>
 						</td>
 					{/foreach}
