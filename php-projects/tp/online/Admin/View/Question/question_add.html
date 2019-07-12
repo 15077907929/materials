@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>网络在线考试</title>
+<link rel="stylesheet" type="text/css" href="Public/css/admin.css" />
+<style type="text/css">
+body { background-color: #D9D6D1; }
+</style>
+</head>
+<body>
+
+{include file="../Public/header.html"}
+
+<div class="container">
+	<div class="breadcrumb">考题信息管理</div>
+	<div class="main">
+		<form name="question" method="post" action="index.php?m=Admin&c=Question&a=index&method=add">
+			<table width="744" height="41" border="1" cellpadding="1" cellspacing="1" bordercolor="#fff" bgcolor="#676767">
+				<tr>
+					<td bgcolor="#eee">考题类别</td>
+					<td>
+						<select name="subject">
+						{foreach $res['subjects'] as $key=>$item}
+							<option value="{$item['id']}">{$item['name']}</option>
+						{/foreach}
+						</select>
+					</td>
+					<td width="166">所属套题
+						<select name="small_cate">
+							<option value="1">第一套题</option>
+							<option value="2">第二套题</option>
+							<option value="3">第三套题</option>
+							<option value="4">第四套题</option>
+						</select>
+					</td>
+					<td width="151">考题类型      
+						<select name="cate">
+							<option value="1">单选</option>
+							<option value="2">多选</option>
+							<option value="4">简答</option>
+							<option value="3">论述</option>
+						</select>
+					</td>
+					<td>分数
+						<input name="score" type="text" size="10" />
+					</td>
+				</tr>
+				<tr>
+					<td width="114" bgcolor="#eee">添加考题内容</td>
+					<td colspan="4">
+						<textarea name="content" cols="60" rows="5"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td bgcolor="#eee">考题答案</td>
+					<td colspan="4">
+						<textarea name="answer" cols="60" rows="5"></textarea>
+						<span style="color:#c06;"><br/>选择题请使用*分隔答案</span>
+					</td>
+				</tr>
+				<tr>
+				<td bgcolor="#eee">考题正确答案</td>
+					<td colspan="4">
+						<textarea name="correct_answer" cols="60" rows="5"></textarea>
+						<span style="color:#c06;"><br/>选择题请使用*分隔答案</span>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td colspan="4"><input name="sub2" type="submit" value="提交考题" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div class="bottom">在线考试系统 www.bcty365.com 版权所有</div>
+</div>
+</body>
+</html>

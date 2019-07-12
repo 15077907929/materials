@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>在线考试系统</title>
+<link rel="stylesheet" href="Public/css/style.css" type="text/css" />
+</head>
+<body>
+
+{include file="../Public/header.html"}
+
+<table width="1002" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="111" valign="top" bgcolor="#F0EFEB">&nbsp;</td>
+		<td width="778" valign="top" bgcolor="#F0EFEB">
+			<div class="container">
+				<div class="breadcrumb">当前位置：在线考试系统 &gt; 成绩查询</div>
+				<div class="main score" style="text-align:center;">
+					<form name="score" method="post" action="index.php?m=Home&c=User&a=score">
+						<table width="592" border="1" cellpadding="1" cellspacing="1" bordercolor="#fff" bgcolor="#676767">
+							<tr>
+								<td width="165">&nbsp;</td>
+								<td colspan="2">考试科目：
+									<select name="subject">
+										{foreach $res['subjects'] as $key=>$item}
+											<option {if $item['id'] eq $res['subject']}selected{/if} value="{$item['id']}">{$item['name']}</option>
+										{/foreach}
+									</select>
+								</td>
+								<td width="203"><input name="sub" type="submit" value="提交" /></td>
+							</tr>
+						</table>
+					</form>
+					<table width="592" border="1" cellpadding="1" cellspacing="1" bordercolor="#fff" bgcolor="#676767">
+						<tr class="hd">
+							<td>准考证号</td>
+							<td>考试科目</td>
+							<td>考试时间</td>
+							<td>考试分数</td>
+						</tr>
+						{if $res['subject'] neq ''}
+							{if $res['users'] eq ''}
+								<tr><td colspan="4">您没有该科目的成绩！</td></tr>
+							{else}
+								{foreach $res['users'] as $key=>$item}
+									<tr>
+										<td>{$item['number']}</td>
+										<td>{$item['subject']}</td>
+										<td>{$item['date']}</td>
+										<td>{$item['score']}</td>
+									</tr>
+								{/foreach}
+							{/if}
+						{/if}
+					</table>
+				</div>
+			</div>
+			<img src="Public/images/bg_7.jpg" />
+		</td>
+		<td width="113" valign="top" bgcolor="#F0EFEB">&nbsp;</td>
+	</tr>
+</table>
+</body>
+</html>

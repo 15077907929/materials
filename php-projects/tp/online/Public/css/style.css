@@ -1,0 +1,34 @@
+body{ font-size:12px; }
+div,table{ margin:auto; }
+
+.nav{ width:1002px; }
+
+.banner{ width:1002px; } 
+
+.breadcrumb{ line-height:26px; height:26px; padding-left:225px; background:url(../images/bg_4.jpg); 
+	color:#fff; }
+	
+.main{ background:#fff; padding:15px 10px; }
+
+form[name="login"]{ text-align:center; }
+form[name="login"] tr td:nth-child(odd){ background:#eee; }
+form[name="login"] tr td:nth-child(even){ background:#fff; }
+
+form[name="register"]{ text-align:center; }
+form[name="register"] tr td:nth-child(odd){ background:#eee; }
+form[name="register"] tr td:nth-child(even){ background:#fff; }
+
+.hall .intro{ color:#999; line-height:24px; }
+.hall .btn{ text-align:center; }
+
+form[name="choose"]{ text-align:center; }
+form[name="choose"] td{ background:#fff; }
+
+form[name="exam"] table td{ padding:0 5px; }
+
+.score td{ background:#fff; }
+.score .hd td{ background:#eee; }
+
+form[name="password"]{ text-align:center; }
+form[name="password"] tr td:nth-child(odd){ background:#eee; }
+form[name="password"] tr td:nth-child(even){ background:#fff; }

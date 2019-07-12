@@ -1,0 +1,24 @@
+body{ font-size:12px; }
+div,table{ margin:auto; }
+
+.top{ text-align:center; }
+
+form[name='login']{ margin-top:10%; }
+form[name='login'] table{ background:url(../images/bg_33.jpg); }
+
+form[name="question"]{ text-align:center; }
+form[name="question"] td{ background:#fff; }
+
+.question_edit{ text-align:center; text-align:center; }
+.question_edit td{ padding:0 5px; }
+
+.container{ width:801px; }
+
+.main{ background:#fff; }
+
+.breadcrumb{ background:url(../images/index_line.gif); line-height:35px; padding-left:225px; }
+
+.main{ padding:15px 10px; }
+
+.bottom{ background:#5d554a; line-height:50px; color:#fff; text-align:center; }
+

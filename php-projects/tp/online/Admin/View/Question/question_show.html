@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>网络在线考试</title>
+<link rel="stylesheet" type="text/css" href="Public/css/admin.css" />
+<style type="text/css">
+body { background-color: #D9D6D1; }
+</style>
+</head>
+<body>
+
+{include file="../Public/header.html"}
+
+<div class="container">
+	<div class="breadcrumb">考题类别管理</div>
+	<div class="main">
+		<form name="question" method="post" action="index.php?m=Admin&c=Question&a=index" >
+			<table width="685" height="35" border="0" cellpadding="0" cellspacing="1" bgcolor="#5D554A">
+				<tr bgcolor="#ddd">
+					<td width="232">考题类别</td>
+					<td width="436">
+						<select name="subject">
+							{foreach $res['subjects'] as $key=>$item}
+								<option {if $res['subject'] eq $item['id']}selected{/if} value="{$item['id']}">{$item['name']}</option>
+							{/foreach}
+						</select>
+						<input type="submit" name="sub" value="考题查找" />
+					</td>
+				</tr>
+			</table>
+		</form>
+		{foreach $res['questions'] as $key=>$item}
+		<form class="question_edit" name="question{$key+1}" method="post" action="index.php?m=Admin&c=Question&a=index&method=edit">
+			<table width="682" height="168" border="0" cellpadding="0" cellspacing="1" bgcolor="#5D554A">
+				<tr>
+					<td width="112" height="27" bgcolor="#ddd">考题类别</td>
+					<td width="117" bgcolor="#ddd">
+						<select name="subject">
+							{foreach $res['subjects'] as $sub_key=>$sub_item}
+								<option {if $sub_item['id'] eq $item['subject']}selected{/if} value="{$sub_item['id']}">{$sub_item['name']}</option>
+							{/foreach}
+						</select>
+					</td>
+					<td width="180" bgcolor="#ddd">
+						考题类型
+						<select name="cate">
+							<option {if $item['cate'] eq 1}selected{/if} value="1">单选</option>
+							<option {if $item['cate'] eq 2}selected{/if} value="2">多选</option>
+							<option {if $item['cate'] eq 3}selected{/if} value="3">简答</option>
+							<option {if $item['cate'] eq 4}selected{/if} value="4">论述</option>
+						</select>
+					</td>
+					<td width="148" bgcolor="#ddd">分数
+						<input name="score" type="text" value="{$item['score']}" size="5" />
+					</td>
+					<td width="99" rowspan="4" bgcolor="#fff">
+						<input type="hidden" name="id" value="{$item['id']}">
+						<input type="submit" name="sub2" value="修改" /><br/>
+						<input onclick="javascript:check_del('index.php?m=Admin&c=Question&a=index&method=del&id={$item['id']}');" type="button" name="btn" value="删除" />
+					</td>
+				</tr>
+				<tr>
+					<td height="43" bgcolor="#ddd">考题内容</td>
+					<td colspan="3" bgcolor="#fff">
+						<textarea name="content" cols="60" rows="5">{$item['content']}</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td height="46" bgcolor="#ddd">考题答案</td>
+					<td colspan="3" bgcolor="#fff">
+						<textarea name="answer" cols="60" rows="5">{$item['answer']}</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td height="33" bgcolor="#ddd">考题正确答案</td>
+					<td colspan="3" bgcolor="#fff">
+						<textarea name="correct_answer" cols="60" rows="5">{$item['correct_answer']}</textarea>
+					</td>
+				</tr>
+			</table>
+		</form>
+		{/foreach}
+		<script type="text/javascript">
+			function check_del(url){  
+				var mymessage=confirm("确认要删除该条记录吗？");  
+				if(mymessage==true){  
+					location.href=url;
+				} 
+			}  
+		</script>
+	</div>
+	<div class="bottom">在线考试系统 www.bcty365.com 版权所有</div>
+</div>
+</body>
+</html>

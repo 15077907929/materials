@@ -1,0 +1,200 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>在线考试系统</title>
+<link rel="stylesheet" href="Public/css/style.css" type="text/css" />
+<script type="text/javascript" src="Public/js/common.js"></script>
+<script type="text/javascript" src="Public/js/xmlHttpRequest.js"></script>
+<script type="text/javascript">
+//document.oncontextmenu=click;
+</script>
+</head>
+<body onkeydown="keydown()">
+<table width="1002" height="30" border="1" cellpadding="1" cellspacing="1" bordercolor="#fff" bgcolor="#666">
+	<tr style="text-align:center;">
+		<td height="23" style="text-align:right; background:#eee;" nowrap>考试时间：</td>
+		<td width="82" nowrap bgcolor="#eee"><font color="#f00">20</font>分钟</td>
+		<td width="88" nowrap bgcolor="#eee">计 时</td>
+		<td width="193" nowrap bgcolor="#eee">
+			<div id="show_time">20:00</div>
+		</td>
+		<td width="77" nowrap bgcolor="#eee">剩余时间：</td>
+		<td width="182" nowrap bgcolor="#eee">
+			<div id="sparetime">00:00</div>
+		</td>
+	</tr>
+</table>
+<script type="text/javascript">
+	{if $res['sub'] eq ''}
+	time = window.setInterval("sparetime()",1000); 
+	{/if}
+	function sparetime(){
+		xmlHttp.open("post","index.php?m=Home&c=Exam&a=sparetime", true);
+		xmlHttp.onreadystatechange = function(){
+			if(xmlHttp.readyState == 4){
+				tet = xmlHttp.responseText;
+				document.getElementById("show_time").innerHTML = formatTime(20*60-tet);
+				document.getElementById("sparetime").innerHTML = formatTime(tet);
+				if(tet==0){
+					
+					exam.submit();
+				}
+			}
+		}
+		xmlHttp.send(null);
+	}
+</script>
+<form name="exam" method="post" action="index.php?m=Home&c=Exam&a=start" style="font-size:12px;">
+	<table width="1002" border="1" cellpadding="1" cellspacing="1" bordercolor="#fff" bgcolor="#666">
+		<tr>
+			<td height="20" colspan="2" bgcolor="#eee">单选</td>
+		</tr>
+		{foreach $res['sc'] as $key=>$item}
+			<tr>
+				<td height="20" bgcolor="#fff">
+					{$key+1}.{$item['content']} 
+				</td>
+				<td width="250" style="color:#f00; background:#fff; text-align:center;">{$item['score']}分</td>
+			</tr>
+			{foreach $item['answer'] as $sub_key=>$sub_item}
+				<tr>
+					<td height="20" bgcolor="#fff">
+						
+						<input type="radio" {if $item['_answer_key'] eq $sub_key}checked{/if} name="{$item['id']}" value="{$sub_key}" />
+						{$sub_item}
+					</td>
+					<td style="background:#fff;">
+						{if $res['sub'] neq '' and $sub_key eq 0}
+							{if $item["correct_answer"] eq $item['_answer']}
+								您输入的答案
+								<font color='#f00'>{$item['_answer']}</font>
+								正确 分数:
+								<font color='#f00'>{$item['score']}</font> 
+							{else}
+								您输入的答案
+								<font color='#f00'>{$item['_answer']}</font>
+								错误 正确答案: <font color='#f00'>{$item['correct_answer']}</font>
+							{/if}
+						{/if}
+					</td>
+				</tr>
+			{/foreach}
+		{/foreach}
+		
+		<tr>
+			<td height="20" bgcolor="#fff"></td>
+			<td bgcolor="#fff"></td>
+		</tr>
+		<tr>
+			<td height="20" colspan="2" bgcolor="#eee">多选</td>
+		</tr>
+		{foreach $res['mc'] as $key=>$item}
+			<tr>
+				<td height="20" bgcolor="#fff">
+					{$key+1}.{$item['content']}
+				</td>
+				<td style="color:#f00; background:#fff; text-align:center;">{$item['score']}分</td>
+			</tr>
+			{foreach $item['answer'] as $sub_key=>$sub_item}
+				<tr>
+					<td height="20" bgcolor="#fff">
+						
+						<input type="checkbox" {if in_array($sub_key,$item['_answer_key'])}checked{/if} name="{$item['id']}[]" value="{$sub_key}" />
+						{$sub_item}
+					</td>
+					<td style="background:#fff;">
+						{if $res['sub'] neq '' and $sub_key eq 0}
+							{if $item["correct_answer"] eq $item['_answer']}
+								您输入的答案
+								<font color='#f00'>{$item['_answer']}</font>
+								正确 分数:
+								<font color='#f00'>{$item['score']}</font> 
+							{else}
+								您输入的答案
+								<font color='#f00'>{$item['_answer']}</font>
+								错误 正确答案: <font color='#f00'>{$item['correct_answer']}</font>
+
+							{/if}
+						{/if}
+					</td>
+				</tr>
+			{/foreach}
+		{/foreach}   
+
+		<tr>
+			<td height="20" bgcolor="#fff"></td>
+			<td bgcolor="#fff"></td>
+		</tr>
+		<tr>
+			<td height="20" colspan="2" bgcolor="#eee">简答</td>
+		</tr>
+		{foreach $res['jd'] as $key=>$item}
+			<tr>
+				<td style="line-height:24px;" colspan="2" bgcolor="#FFFFDF">
+					<span style="color:#f00;">{$key+1}.{$item["content"]} {$item['score']}分</span>
+				</td>
+			</tr>
+			<tr>
+				<td height="20" colspan="2" bgcolor="#fff">
+					
+					<textarea name="{$item['id']}" cols="80" rows="3">
+					
+					</textarea>	
+				</td>
+			</tr>
+			<tr>
+				<td height="20" colspan="2" bgcolor="#fff"></td>
+			</tr>
+		{/foreach}   
+
+
+		<tr>
+			<td height="20" colspan="2" bgcolor="#fff"></td>
+		</tr>
+		<tr>
+			<td height="20" colspan="2" bgcolor="#eee">论述</td>
+		</tr>
+		{foreach $res['ls'] as $key=>$item}
+		<tr>
+			<td style="line-height:24px;" colspan="2" bgcolor="#FFFFDF">
+				<span style="color:#f00;">{$key+1}.{$item["content"]} {$item['score']}分</span>
+			</td>
+		</tr>
+		<tr>
+			<td height="20" colspan="2" bgcolor="#fff">
+				
+				<textarea name="{$item['id']}" cols="80" rows="3">
+				
+				</textarea>	
+			</td>
+		</tr>
+		<tr>
+			<td height="20" colspan="2" bgcolor="#fff"></td>
+		</tr>
+		{/foreach}  
+
+		<tr>
+			<td height="20" bgcolor="#fff">&nbsp;
+				{if $res['sub'] neq ''}您的总成绩是:{$res['score']}{/if}
+			</td>
+			<td bgcolor="#fff"></td>
+		</tr>
+
+  
+		<tr>
+			<td bgcolor="#fff">
+				<input type="hidden" name="sub" value="提交试卷" />
+				<input type="hidden" value="{$res['subject']}" name="subject" />
+				<input type="hidden" value="{$res['small_cate']}" name="small_cate" />
+				<input type="submit" name="sub2" value="提交" />
+			</td>
+			<td bgcolor="#fff"></td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>
+
+
+
