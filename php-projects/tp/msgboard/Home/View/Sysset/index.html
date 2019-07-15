@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>设置留言本 - {C('gb_name')}</title>
+<link href="Public/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="main">
+
+	{include file="../Public/header.html"}
+	
+	<div id="submit">
+		{if $res['ac'] neq 'gb_set'}
+			<form name="set" method="post" action="index.php?m=Home&c=Sysset&a=index" onsubmit="return FrontPage_Form1_Validator(this)">
+				<p><img src="Public/images/admin_set.gif" />
+				<img src="Public/images/set.gif" /></p><br />
+				<div id="submit_set_left">
+					<ul>
+						<li><a href="index.php?m=Home&c=Sysset&a=password">修改管理密码</a>
+						<li><a href="index.php?m=Home&c=Sysset&a=index">系统参数设置</a>
+					</ul>
+				</div>
+				<div id="submit_set_right">
+					<label for="gb_name">留言本的名称：</label>
+					<input type="text" name="gb_name" id="gb_name" value="{C('gb_name')}" />* 将显示在IE标题栏<br />
+					<label for="gb_logo">留言本LOGO：</label>
+					<input type="text" name="gb_logo" id="gb_logo" value="{C('gb_logo')}" />* 将显示在左上角<br />
+					<label for="index_url">网站首页地址：</label>
+					<input type="text" name="index_url" id="index_url" value="{C('index_url')}" />* 点击“网站首页”的地址<br />
+					<label for="email">每页留言条数：</label>
+					<select name="pageT" id="pageT">
+						{foreach $res['pages'] as $item}
+							<option value="{$item}" {if $item eq C('page')}selected{/if}>{$item}</option>
+						{/foreach}
+					</select>条 <br />
+					<label for="comment">连续留言间隔：</label>
+					<select name="timejgT" id="timejgT">
+						{foreach $res['jgs'] as $item}
+							<option value="{$item}" {if $item eq C('timejg')}selected{/if}>{$item}</option>;
+						{/foreach}
+					</select>秒 (同一IP连续留言的时间间隔，以防滥发留言)<br />
+					<label for="replyadmtit">回复时显示：</label>
+					<input type="text"name="replyadmtit" id="replyadmtit" value="{C('replyadmtit')}"><br /> 
+					<label for="ifauditing">留言需审开关：</label>
+					<input name="ifauditing" type="checkbox" id="ifauditing" {if C('ifauditing') eq 1}checked{/if} value="1">选中此项后，新留言需要管理员审核后才能显示<br /> 
+					<input name="ac" type="hidden" value="gb_set" />
+					<input type="submit" style="margin-left:110px;" name="sub" value=" 提 交 设 置 " />
+				</div>   
+				<div class="clear"></div>
+				<script type="text/javascript">
+					function FrontPage_Form1_Validator(theForm){
+						if (theForm.gb_name.value == ""){
+							alert("留言本名称不能空！");
+							theForm.gb_name.focus();
+							return (false);
+						}
+						if (theForm.gb_logo.value == ""){
+							alert("留言本LOGO不能空！");
+							theForm.gb_logo.focus();
+							return (false);
+						}
+						if (theForm.index_url.value == ""){
+							alert("网站首页地址不能空！");
+							theForm.index_url.focus();
+							return (false);
+						}
+					   return (true);
+					}
+				</script>
+			</form>
+		{else}
+			<div id="alertmsg">{$res['msg']}</div>
+		{/if}
+	</div>
+</div>
+
+{include file="../Public/footer.html"}
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>管理登录 - {C('gb_name')}</title>
+<link href="Public/css/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+function FrontPage_Form1_Validator(theForm){
+	if (theForm.name.value == ""){
+		alert("请输入管理员帐号!");
+		theForm.name.focus();
+		return (false);
+	}
+	if (theForm.pwd.value == ""){
+		alert("请输入管理员密码");
+		theForm.pwd.focus();
+		return (false);
+	}
+	if (theForm.unum.value == ""){
+		alert("请您输入验证码");
+		theForm.unum.focus();
+		return (false);
+	}
+	return (true);
+}
+</script>
+</head>
+<body onload="i=0;document.getElementsByName('unum')[0].value=''">
+<div id="main">
+
+	{include file="../Public/header.html"}
+
+	<div id="submit">
+		{if $res['action'] neq 'add'}
+			<form name="login" method="post" action="index.php?m=Home&c=Login&a=login" onsubmit="return FrontPage_Form1_Validator(this)">
+				<p><img src="Public/images/i3.gif" /><img src="Public/images/login.gif" /></p><br />
+				<div id="submit_div">
+					<label for="name">管理员账号：</label><input name="name" type="text" id="name"><br />
+					<label for="pwd">管理员密码：</label><input name="pwd" type="password" id="pwd"><br />
+					<label for="unum">登录验证码：</label>
+					<input name="unum" type="text" id="unum" size="10">* 
+					<img src="index.php?m=Home&c=Code&a=randnum&id=-1" title="点击刷新" style="cursor:pointer" onclick=eval('this.src="index.php?m=Home&c=Code&a=randnum&id='+i+++'"') /><br />
+					<input type="submit" value="确  定" /><br />
+					<input name="action" type="hidden" value="add" />
+				</div>
+			</form>
+		{else}
+			<div id="alertmsg">{$res['msg']}</div>
+		{/if}
+	</div>
+</div>
+
+{include file="../Public/footer.html"}
+
+</body>
+</html>

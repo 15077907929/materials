@@ -1,0 +1,11 @@
+<?php
+return array(
+	//'配置项'=>'配置值'
+	'timejg'=>'120',
+	'gb_name'=>'XX大学影视学院学生会',
+	'ifauditing'=>1,
+	'replyadmtit'=>'管理员-回复',
+	'gb_logo'=>'Public/images/logo.gif',
+	'page'=>10,
+	'index_url'=>'/',
+);

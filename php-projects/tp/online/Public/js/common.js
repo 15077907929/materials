@@ -102,7 +102,7 @@ function checkphone(tel){
 	}
 }	
 
-function keydown1(){
+function keydown(){
 	if(event.keyCode==8){
 		event.keyCode=0;
 		event.returnValue=false;
@@ -132,7 +132,7 @@ function keydown1(){
 	}
 }
 
-function click1() {
+function click() {
 	event.returnValue=false;
 	alert("当前设置不允许使用右键！");
 }

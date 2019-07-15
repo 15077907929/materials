@@ -1,0 +1,364 @@
+var stock_5day={
+		data:null,
+		name:"",
+		xy:[],
+		load:function(name,c,o){
+			this.name=name;
+			stock.ajax({Action:name,stockID:stock.stockID,stockType:stock.stockType},function(result,data){
+				if(!result||data==""){
+					c.call(o,false);
+				}else{
+					data=data.split("\n");
+					stock_5day.data=data;
+					c.call(o,true);
+				}
+				delete data;
+			});
+		},
+		//画图
+		canvas:function(c,o){
+			this.dispose();//先处理数据
+			this.k.load();//加载K线图
+			this.l.load();//加载K线图
+			this.touch.load();//监听
+			c.call(o);
+		},
+		k:{
+			width:1260,
+			height:300,
+			define:{max:0,min:0,avg:0,differ:0},//自定义变量(最高价格)
+			id:null,
+			load:function(){
+				var data=stock_5day.data;
+				var $this=null,index=0,price=0;
+				if(data==null){return false;}
+				this.id=stock_5day.name+"-k";
+				
+				var cans=document.getElementById(this.id).getContext('2d');
+				
+				$("#"+this.id).attr("width",this.width);
+				$("#"+this.id).attr("height",this.height);
+				
+				cans.beginPath();
+				  
+				cans.translate(0.5,0.5);
+				cans.lineWidth = 1;  
+	
+				cans.strokeStyle=stock.color.border;
+				
+				//画框
+				cans.strokeRect(0, 0, this.width-1,this.height-1);
+				
+				//内框线
+				cans.strokeStyle=stock.color.withinBorder;
+				for(var i=1;i<5;i++){
+					cans.moveTo(this.width/5*i,0);
+					cans.lineTo(this.width/5*i,this.height);
+				}
+				
+				//价格线
+				index=0;
+				for(var i=1;i<7;i++){
+					if(i%2==1){
+						cans.moveTo(0,this.height/7*i);
+						cans.lineTo(this.width,this.height/7*i);
+						//当前价格
+						price=stock.addNum(this.define.max,-this.define.differ/7*i);
+						//价格
+						$this=$("#"+stock_5day.name).find(".price li").eq(index);
+						$this.css({top:parseInt(this.height/7*i/2)});
+						$this.html(price.toFixed(2));
+						//涨幅
+						$this=$("#"+stock_5day.name).find(".range li").eq(index);
+						$this.css({top:parseInt(this.height/7*i/2)});
+						$this.html(((price-this.define.avg)/(this.define.avg)*100).toFixed(2)+"%");
+						index++;
+					}
+				}
+				cans.stroke();
+				cans.closePath();
+				
+			
+				//曲线
+				cans.beginPath();
+				cans.lineWidth = 2; 
+				cans.strokeStyle=stock.color.trend;
+				var _data=data[0].split(",");
+				var x=0;
+				var y=this.getY(_data[2]);
+				cans.moveTo(x,y);
+				stock_5day.xy.push({x:x,y:y});
+				//从1开始
+				for(var i=1;i<data.length;i++){
+					var _data=data[i];
+					if(_data!=""){
+						_data=_data.split(",");
+					
+						x+=this.width/(data.length-1);
+						y=this.getY(_data[2]);
+						cans.lineTo(x,y);
+						stock_5day.xy.push({x:x,y:y});
+					}
+				}
+	 
+				cans.stroke();
+				
+				//背景
+				cans.lineTo(x, this.height);
+				cans.lineTo(0, this.height);
+				   
+				cans.fillStyle=stock.color.fill;
+				cans.fill();
+				
+				cans.closePath();
+				cans.save();
+				
+				//释放内存
+				$this=null,index=null,price=null;
+				cans=null;
+			},
+			//Y坐标
+			getY:function(price){
+				return (this.define.max-price)/this.define.differ*this.height;
+			}
+		},
+		//L线
+		l:{
+			width:0,
+			height:0,	
+			define:{max:0,allsize:0},//自定义变量(成交量)
+			id:null,
+			load:function(){
+				var data=stock_5day.data;
+				var $this=null,index=0,price=0;
+				if(data==null){return false;}
+				this.id=stock_5day.name+"-l";
+				
+				var cans=document.getElementById(this.id).getContext('2d');
+				
+				this.width=parseInt($("#"+this.id).width())*2;
+				this.height=parseInt($("#"+this.id).height())*2;
+
+				$("#"+this.id).attr("width",this.width);
+				$("#"+this.id).attr("height",this.height);
+				
+				cans.beginPath();
+				  
+				cans.translate(0.5,0.5);
+				cans.lineWidth = 1;  
+	
+				cans.strokeStyle=stock.color.border;
+				
+				//画框
+				cans.strokeRect(0, 0, this.width-1,this.height-1);
+				
+				
+				cans.stroke();
+				cans.closePath();
+				
+				
+				
+				cans.beginPath();
+				cans.fillStyle =stock.color.volume;
+				//cans.strokeStyle =stock.color.volume;
+				//cans.translate(0.5,0.5);
+				cans.linewidth=0;
+				var y=0;
+				var w=this.width/data.length*0.6;
+				var h=0;
+				var max_volume=5000/100;
+				
+				if(this.define.max*1>100000000){
+					$("#"+stock_5day.name).find(".max-volume").html((this.define.max/100000000).toFixed(2)+"亿手");
+				}else{
+					$("#"+stock_5day.name).find(".max-volume").html((this.define.max/1000000).toFixed(2)+"万手");
+				}
+				
+				
+				//最大成交量
+				for(var i=0;i<data.length;i++){
+					var _data=data[i];
+					if(_data!=""){
+						_data=_data.split(",");
+						h=(_data[5]/this.define.max)*this.height*0.98;
+						if(h!=0){
+							y=this.height-h;
+							cans.fillRect(stock_5day.xy[i].x-w/2,y,w,h);
+						}
+					}
+				}
+				
+				cans.closePath();
+				
+				cans=null;
+				data=null;
+			}
+		},
+		//处理数据
+		dispose:function(){
+			var data=this.data,_data,define;
+			var price_max=0,price_min=100000000,volume_max=0,volume_count=0;
+			var length=data.length;
+			for(var i=0;i<length;i++){
+				_data=data[i].split(",");
+				if(parseFloat(_data[2])>price_max){price_max=_data[2];}
+				if(parseFloat(_data[2])<price_min){price_min=_data[2];}
+				if(parseFloat(_data[5])>volume_max){volume_max=_data[5];}
+				
+				volume_count+=parseFloat(_data[5]/100000000);
+			}
+
+			price_max*=1;
+			price_min*=1;
+
+			price_max+=(price_max-price_min)/11;
+			price_min-=(price_max-price_min)/11;
+			define={
+				max:price_max.toFixed(2),
+				min:price_min.toFixed(2),
+				avg:(stock.addNum(price_max,price_min)/2).toFixed(2),
+				differ:(price_max-price_min).toFixed(2)
+			}
+
+			//时间
+			for(var i=1;i<5;i++){
+				_data=data[parseInt(length/5*i)].split(",");
+				_data=_data[0].split(" ");
+				$("#"+this.name).find(".KL-time li").eq(i-1).html(_data[0]);
+			}
+		
+			//赋值
+			stock_5day.k.define=define;
+			
+			define={
+				max:volume_max,
+				allsize:volume_count
+			}
+			stock_5day.l.define=define;
+			
+			//释放内存
+			data=null;
+			_data=null;
+			length=null;
+			define=null;
+			
+			price_max=null,price_min=null,volume_max=null,volume_count=null;
+	},
+	//监听事件
+	touch:{
+		map:null,
+		spirit:null,
+		load:function(){
+
+			var touchID=$("#"+stock_5day.name).find(".touch").attr("id");//当前ID
+			this.map=document.getElementById(touchID);
+			
+			if(stock.isPC){
+				$("#"+touchID).mousedown(function(e){
+					stock_5day.touch.touchStart(e.clientX,e.clientY);
+					
+					document.onmousemove = function(e) {
+						if (!stock_5day.touch.spirit) return;
+						stock_5day.touch.touchMove(e.clientX,e.clientY);	
+					}
+					document.onmouseup = function () {
+						if (!stock_5day.touch.spirit) return;
+						stock_5day.touch.touchEnd();	
+					}
+				});
+			}else{
+			
+				function touchStart(event) {
+					//阻止网页默认动作（即网页滚动）
+					event.preventDefault();	
+					if (stock_5day.touch.spirit || !event.touches.length) return;
+					var touch = event.touches[0];
+					stock_5day.touch.touchStart(touch.pageX,touch.pageY);
+				}
+				function touchMove(event) {
+					event.preventDefault();
+					if (!stock_5day.touch.spirit || !event.touches.length) return;
+					var touch = event.touches[0];
+					stock_5day.touch.touchMove(touch.pageX,touch.pageY);
+				}
+				function touchEnd(event) {
+					if (!stock_5day.touch.spirit) return;
+					stock_5day.touch.touchEnd();	
+				}
+				this.map.addEventListener("touchstart", touchStart, false);
+				this.map.addEventListener("touchmove", touchMove, false);
+				this.map.addEventListener("touchend", touchEnd, false);
+					 
+			}
+		},
+		handle:function(x,y){
+			var index=Math.round(stock_5day.data.length/stock_5day.k.width/stock.touch.zoom*x*2);
+			var data=stock_5day.data[index];
+
+			if(data==undefined){
+				if($("#"+stock_5day.name).find(".x").css("top")=="-1000px"){
+					$("#header ul").hide();
+					return false;
+				}
+				index=stock_5day.xy.length-1;
+				data=stock_5day.data[index];
+			}
+			$("#header ul").show();
+			
+			data=data.split(",");
+			
+			y=stock_5day.xy[index].y/2;
+			
+			$("#"+stock_5day.name).find(".x").css({top:y});
+			
+			$("#"+stock_5day.name).find(".x").find(".current-price").html(data[2]);
+			
+			$("#"+stock_5day.name).find(".x").find(".current-range").html(((data[2]-stock_5day.k.define.max/2)/(stock_5day.k.define.max/2)*100).toFixed(2)+"%");
+			
+			
+			x=(stock_5day.xy[index].x/2)-1;
+			if(index==0){x=0;}
+			$("#"+stock_5day.name).find(".y").css({left:x});
+			
+			var volume=data[5]/100;
+			if(volume>100000000){
+				volume=(volume/100000000).toFixed(2)+"亿股";
+			}else{
+				volume=(volume/10000).toFixed(2)+"万股";	
+			}
+		
+			var str="";
+			str+='<li>当前价：'+data[2]+'</li>';
+			str+='<li>成交量：'+volume+'</li>';
+			str+='<li>时间：'+data[0]+'</li>';
+
+			$("#header ul").html(str);
+			data=null;
+		},
+		touchStart:function(x,y){
+			x-=stock.touch.left;
+			y-=stock.touch.top;
+			
+			this.spirit = document.createElement("div");	
+			this.map.appendChild(this.spirit);
+			this.spirit.className = "xy";
+			$("#"+stock_5day.name).find(".xy").html('<div class="x"><span class="current-price"></span><span class="current-range"></span></div><div class="y"></div>');
+
+			this.handle(x,y);
+		},
+		touchMove:function(x,y){
+			x-=stock.touch.left;
+			y-=stock.touch.top;
+			
+			if(x<0){x=0;}
+			if(y<0){y=0;}
+			
+			this.handle(x,y);
+		},
+		touchEnd:function(){
+			this.map.removeChild(this.spirit);
+			$("#header ul").hide();
+			this.spirit = null;
+		}
+	}		
+}

@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>浏览留言 - {C('gb_name')}</title>
+<script type="text/javascript" src="Public/js/checkform.js"></script>
+<link href="Public/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body onload="i=0">
+<!--最外层主要区域开始-->
+<div id="main">
+  
+	{include file="../Public/header.html"}
+  
+	<div id="list">
+		<div id="listmain">
+			{if $res['total'] neq 0}
+				{foreach $res['list'] as $item}
+					<h2>
+						<span class="leftarea">
+							<img src="Public/images/icon_write.gif" />{$item['name']}
+							<font style="color:#999;"> 于 {date("Y-m-d H:i",$item["systime"])} 发表留言：</font>
+							{if date("Y-m-d",$item["systime"]) eq date("Y-m-d")}
+								<img src="Public/images/new.gif" />
+							{/if}
+							{if $item['settop'] neq 0}<img src="Public/images/settop.gif" alt="已置顶" />{/if}
+						</span>
+						<span class="midarea">
+							{if cookie('admin') neq ''}
+								{if $ifauditing neq 1} 
+									{if $item['ifshow'] eq 0}
+										<a href="index.php?m=Home&c=Index&a=setshow&id={$item['id']}&p={$res['p']}">
+											<img src="Public/images/setshow.gif" alt="审核并显示" />
+										</a>
+									{else}
+									<a href="index.php?m=Home&c=Index&a=unshow&id={$item['id']}&p={$res['p']}">
+										<img src="Public/images/unshow.gif" alt="隐藏此留言" />
+									</a>
+									{/if}
+								{/if}
+								<a href="javascript:if(confirm('确认删除此留言?'))location='index.php?m=Home&c=Index&a=del&id={$item['id']}&p={$res['p']}'">
+									<img src="Public/images/icon_del.gif" alt="删除此留言" />
+								</a> 
+								<a href="index.php?m=Home&c=Index&a=index&method=edit&id={$item['id']}&p={$res['p']}">
+									<img src="Public/images/icon_rn.gif" alt="编辑/回复此留言" />
+								</a>
+								{if $item['settop'] eq 0}
+									<a href="index.php?m=Home&c=Index&a=settop&id={$item['id']}&p={$res['p']}">
+										<img src="Public/images/settop.gif" alt="将本留言置顶" />
+									</a>
+								{else}
+									<a href="index.php?m=Home&c=Index&a=unsettop&id={$item['id']}&p={$res['p']}">
+										<img src="Public/images/unsettop.gif" alt="取消置顶" />
+									</a>
+								{/if}
+							{/if}
+						</span>
+						<span class="rightarea">
+							{if $item['email'] neq ''}
+								<a href="mailto:{$item['email']}">
+									<img src="Public/images/email.gif" alt="点击用OutLook发送邮件至：{$item['email']}">
+								</a> 
+							{/if}
+							{if cookie('admin') neq ''}
+								<img src="Public/images/ip.gif" alt="留言者IP：{long2ip($item['ip'])}" /> 
+							{/if}
+						</span>
+					</h2>
+					<div class="content">
+						{if cookie('admin') eq ''}
+							{if $item["ifqqh"] eq 1}
+									<span class="ftcolor_999">（此留言为悄悄话，只有管理员才能看哦……）</span>
+							{elseif C('ifauditing') eq 1}
+								{if $item['ifshow'] eq 0}
+									<span class="ftcolor_999">（此留言正在通过审核，当前不可见……）</span>
+								{else}
+									{$item['content']}
+								{/if}
+							{else}
+								{$item['content']}
+							{/if}
+						{else}
+							{$item['content']}
+						{/if}
+			
+					</div>
+					{if $item['reply'] neq ''}
+						<div class="reply">
+							<p>
+								<span class="ftcolor_FF9">
+									<b>{C('replyadmtit')}：</b>{date('Y-m-d H:i',$item['replytime'])}
+								</span>
+							</p>
+							{$item['reply']}
+						</div>
+					{/if}
+				{/foreach}
+			{else}
+				没有留言……
+			{/if}
+		</div><!--listmain结束-->
+	</div><!--list结束-->
+	<div class="clear"></div>
+	<div id="pages" align="center">留言总数：{$res['total']} 条 　{$res['show']}</div>
+	<div class="clear"></div>
+	<div id="submit">
+		<form name="msg" method="post" action="index.php?m=Home&c=Index&a=index&method=add" onSubmit="return FrontPage_Form1_Validator(this)">
+			<p><img src="Public/images/i1.gif" /><img src="Public/images/add.gif" /></p><br />
+			<label for="name">昵称：</label>
+			<input type="text" id="name" name="name" value="" />*<br />
+			<label for="email">Email：</label>
+			<input type="text" id="email" name="email" value="" /><br />
+			<label for="content">内容：</label>
+			<textarea id="content" name="content"></textarea>*<br />
+			<label for="content">　</label>
+			<span>提交前请按Ctrl+C保存留言内容，以免程序出错而丢失！留言内容不能少于5个字符！</span><br />
+			<label for="ifqqh">悄悄话：</label>
+			<input name="ifqqh" type="checkbox" id="ifqqh" value="1" /> 
+			<span>当选中时，此留言只有管理员可见</span><br />
+			<label for="unum">验证码：</label>
+			<input name="unum" type="text" id="unum" size="10" />* 
+			<img src="index.php?m=Home&c=Code&a=randnum&id=-1" title="点击刷新" style="cursor:pointer" onclick=eval('this.src="index.php?m=Home&c=Code&a=randnum&id='+i+++'"') />
+			<br />
+			<input type="submit" value="确  定" name="sub" /><br />
+			<input name="ac" type="hidden" value="add" />
+		</form>
+	</div>
+<!--最外层主要区域结束-->
+</div>
+
+{include file="../Public/footer.html"}
+
+</body>
+</html>

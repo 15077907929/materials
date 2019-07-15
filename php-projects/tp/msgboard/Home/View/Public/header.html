@@ -1,0 +1,26 @@
+<div id="top">
+	<!--logo-->
+	<div id="logoarea">
+		<a href="index.php"><img src="{C('gb_logo')}" alt="{C('gb_name')} - 留言本"></a>
+	</div>
+	<!--菜单-->
+	<div id="menu">
+		<ul>
+			<li><a href="index.php"><img src="Public/images/i2.gif"><br>浏览留言</a></li>
+			<li>
+				<a href="index.php?m=Home&c=Index&a=index&method=add">
+					<img src="Public/images/i1.gif"><br>签写留言
+				</a>
+			</li>
+			{if cookie('admin') eq ''}
+				<li><a href="index.php?m=Home&c=Login&a=login"><img src="Public/images/i3.gif"><br>管理留言</a></li>
+				<li><a href="{$index_url}"></a></li>
+			{else}
+				<li><a href="index.php?m=Home&c=Sysset&a=index"><img src="Public/images/admin_set.gif"><br>系统设置</a></li>
+				<li><a href="javascript:if(confirm('您确认要退出吗?'))location='index.php?m=Home&c=Login&a=logout'">
+					<img src="Public/images/i3.gif"><br>退出管理</a>
+				</li>
+			{/if}
+		</ul>
+	</div>
+</div>

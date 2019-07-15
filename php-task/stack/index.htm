@@ -1,0 +1,53 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>股票行情-财急送</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0" />
+<meta name="MobileOptimized" content="320">
+<meta content="telephone=no" name="format-detection"/>
+<meta content="yes" name="apple-touch-fullscreen">
+<meta name="viewport" content="width=device-width">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<link type="text/css" rel="stylesheet" href="css/style.css"/>
+<script type="text/javascript" src="js/jquery-1.6.js"></script>
+<script type="text/javascript" src="js/lib/stock.js"></script>   	
+<script type="text/javascript">
+		eval('var hq_str_sz002024=null');
+		var data={};
+		 data.stockID="002024";
+		 data.stockType="sz";
+		 data.time=parseInt("1563151178");
+		 data.hq=eval("hq_str_sz002024");
+		 data.day="2019-07-15";
+		 data.isHqReload=eval("true");
+		 
+		 //菜单
+		 data.menu=[];
+		 
+		 data.menu.push({name:"minute",	title:"分时"});
+		 data.menu.push({name:"dayK",	title:"日K"});
+		 data.menu.push({name:"weekK",	title:"周K"});
+		 data.menu.push({name:"monthK",	title:"月K"});
+		 data.menu.push({name:"5day",	title:"5日"});
+		 data.menu.push({name:"1month",	title:"1月"});
+		 data.menu.push({name:"6month",	title:"6月"});
+		 data.menu.push({name:"3year",	title:"3年"});
+		 data.menu.push({name:"all",	title:"全部"});
+		 //默认加载
+		 data.default="minute";
+</script>
+
+
+<script language="javascript">
+	 $(document).ready(function() {
+		 stock.load(data);
+	 });
+</script>
+</head>
+
+<body>
+<a style="position:absolute; right:10px; top:0px; width:30px; height:30px; font-size:32px">x</a>
+</body>
+</html>

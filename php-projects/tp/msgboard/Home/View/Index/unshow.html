@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>管理留言</title>
+<link href="Public/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="main">
+	{include file="../Public/header.html"}
+	<div id="list">
+		<div id="alertmsg">
+			留言已隐藏，3秒后返回，请稍候……
+			<br><a href="index.php?p={$res['p']}">如果您的浏览器没有自动返回，请点击此处手动返回</a>
+			<meta http-equiv="refresh" content="3; url=index.php?p={$res['p']}" />		
+		</div>
+	</div>
+</div>
+
+{include file="../Public/footer.html"}
+
+</body>
+</html>

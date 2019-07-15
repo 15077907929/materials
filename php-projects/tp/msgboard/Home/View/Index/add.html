@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>签写留言 - {C('gb_name')}</title>
+<script type="text/javascript" src="Public/js/checkform.js"></script>
+<link href="Public/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body onload="i=0">
+<div id="main">
+
+	{include file="../Public/header.html"}
+
+	<div id="submit">
+		{if $res['forbidden'] eq 1}
+			<div id="alertmsg">
+				对不起，您不是刚留言过吗？请{C('timejg')}秒后再留言……您还需等待：{C('timejg')-time()+cookie('timer')}秒<br>
+				<a href="javascript:history.back();">如果没有自动返回，请点击此处手动返回</a>
+			</div>
+			<meta http-equiv="refresh" content="3; url=index.php" />
+		{else if $res['ac'] neq 'add'}
+			<form name="msg" method="post" action="index.php?m=Home&c=Index&a=index&method=add" onSubmit="return FrontPage_Form1_Validator(this)">
+				<p>
+					<img src="Public/images/i1.gif" />
+					<img src="Public/images/add.gif" />
+				</p><br />
+				<label for="name">昵称：</label>
+				<input type="text" name="name" id="name" value="" />*<br />
+				<label for="email">Email：</label>
+				<input type="text" name="email" id="email" value="" /><br />
+				<label for="content">内容：</label>
+				<textarea name="content" id="content"></textarea>*<br />
+				<label for="content">　</label>
+				<span>提交之前请先按CTRL+C保存您的留言内容，以免程序出错而丢失！留言内容最少5个字符！</span><br />
+				<label for="ifqqh">悄悄话：</label>
+				<input name="ifqqh" type="checkbox" value="1"> 
+				<span>当选中时，此留言只有管理员可见</span><br />
+				<label for="unum">验证码：</label>
+				<input name="unum" id="unum" type="text" size="10" />* 
+				<img src="index.php?m=Home&c=Code&a=randnum&id=-1" title="点击刷新" style="cursor:pointer" onclick=eval('this.src="index.php?m=Home&c=Code&a=randnum&id='+i+++'"') /><br />
+				<input type="submit" value="确  定" /><br />
+				<input name="ac" type="hidden" value="add" />
+			</form>
+		{else}
+			<div id="alertmsg">{$res['msg']}</div>
+		{/if}
+	</div>
+</div>
+
+{include file="../Public/footer.html"}
+
+</body>
+</html>
