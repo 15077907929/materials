@@ -11,7 +11,7 @@ var stock_weekK={
 				if(!result||data==""){
 					c.call(o,false);
 				}else{
-					data=data.split("\n");
+					data=data.split(" ");
 					stock_weekK.data=data;
 					
 					if(name=="dayK"){

@@ -8,7 +8,7 @@ var stock_6month={
 				if(!result||data==""){
 					c.call(o,false);
 				}else{
-					data=data.split("\n");
+					data=data.split(" ");
 					stock_6month.data=data;
 					c.call(o,true);
 				}

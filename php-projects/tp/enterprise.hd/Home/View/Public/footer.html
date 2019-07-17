@@ -1,0 +1,30 @@
+<div class="foot">
+	<div class="footnav"> |
+		{foreach $common['navfoot_list'] as $key=>$item}
+			<a href="{$item['c_url']}" {$item['new_windows']}>{$item['c_name']}</a> |
+		{/foreach}
+	</div>
+	<div class="foottext">
+		{if $met_c_footright neq ''}
+			{$met_c_footright}
+		{/if}
+
+		{if $met_c_footaddress neq ''}
+			&nbsp;&nbsp;{$met_c_footaddress}
+		{/if}
+			
+		{if $met_c_foottel neq ''}
+			&nbsp;&nbsp;{$met_c_foottel}
+		{/if}	
+
+		{if $met_c_footother neq ''}
+			&nbsp;&nbsp;{$met_c_footother}
+		{/if}
+
+		版权所有 未经许可 不得转载
+
+		{if $met_c_foottext neq ''}
+			<br />{$met_c_foottext}
+		{/if}
+	</div>
+</div>

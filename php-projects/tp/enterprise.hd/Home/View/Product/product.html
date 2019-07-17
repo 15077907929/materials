@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="description" content="$show[c_description]" />
+<meta name="keywords" content="$show[c_keywords]">
+<meta name="language" content="zh-CN" />
+<meta name="robots" content="all" />
+<meta name="GOOGLEBOT" content="all" />
+<meta name="author" content="$met_c_webname" />
+<meta name="copyright" content="Copyright 2008 -MetInfo" />
+<LINK href="$rooturl/favicon.ico" rel="shortcut icon" />
+<link rel="stylesheet" type="text/css" href="Public/css/metinfo.css" />
+<title>{$res['c_title_keywords']}--{$res['met_c_webname']}</title>
+</head>
+<body>
+
+	{include file="../Public/header.html"}
+
+	<div class="web">
+		<div class="webleft">
+			<div class="nav_x">&nbsp;<a href='$index_c_url'>首页</a> > {$res['class1_info']['c_name']}</div>
+			<div class="content">
+				{foreach $res['product_list'] as $key=>$item}
+					<div class="product_list">
+						<div class="product_list_img">
+							<a href="$val[c_url]" target="_blank"><img src="$val[imgurls]" /></a>
+						</div>
+						<div class="product_list_title"><a href="$val[c_url]" target="_blank">$val[c_title]</a></div>
+						<div class="product_list_para">
+							{foreach $res['product_para200'] as $sub_key=>$sub_item}
+								{$val1[c_mark]}:{$val[$para_no]}<br />
+							{/foreach}
+						</div>
+						<div class="product_list_detail"><a href="$val[c_url]" target="_blank">查看详细>></a></div>
+					</div>
+				{/foreach}
+			</div>
+			{$c_page_list}
+		</div>
+
+		<div class="webright">
+			<div class="nav_x">&nbsp;>>{$res['class1_info']['c_name']}</div>
+			<div class="navright">{$nav_c_list}</div>
+
+			{include file="../Public/online.html"}
+
+		</div>
+	</div>
+
+{include file="../Public/footer.html"}
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="description" content="$show[c_description]" />
+<meta name="keywords" content="$show[c_keywords]">
+<meta name="language" content="zh-CN" />
+<meta name="robots" content="all" />
+<meta name="GOOGLEBOT" content="all" />
+<meta name="author" content="$met_c_webname" />
+<meta name="copyright" content="Copyright 2008 -MetInfo" />
+<LINK href="$rooturl/favicon.ico" rel="shortcut icon" />
+<link rel="stylesheet" type="text/css" href="Public/css/metinfo.css" />
+<title>{$res['c_title_keywords']}--{$res['met_c_webname']}</title>
+</head>
+<body>
+
+	{include file="../Public/header.html"}
+
+	<div class="web">
+		<div class="webleft">
+			<div class="nav_x">&nbsp;<a href='$index_c_url'>首页</a> > {$res['info']['c_name']} </div>
+			<div class="content">
+				<div class="job_list">
+					{foreach $res['$job_list'] as $key=>$item}
+						<div class="job_list_img"><img src="$img_url/list.gif" /></div>
+						<div class="job_list_title">
+							招聘职位：<a href="$val[c_url]" target="_blank">
+								<b>$val[c_position]</b></a>&nbsp;&nbsp;&nbsp;&nbsp;
+							招聘人数：$val[count]&nbsp;&nbsp;&nbsp;&nbsp;
+							工作地点：$val[c_place]&nbsp;&nbsp;&nbsp;&nbsp;
+							发布日期：$val[addtime]&nbsp;&nbsp;&nbsp;&nbsp;
+						</div>
+						<div class="job_list_right"><a href="$val[c_url]" target="_blank">查看详细>></a></div>
+					{/foreach}
+				</div>
+			</div>
+		</div>
+		<div class="webright">
+
+			{include file="../Public/online.html"}
+
+		</div>
+	</div>
+
+{include file="../Public/footer.html"}
+
+</body>
+</html>

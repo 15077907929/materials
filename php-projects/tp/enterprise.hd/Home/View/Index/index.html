@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="description" content="$show[c_description]" />
+<meta name="keywords" content="$show[c_keywords]">
+<meta name="language" content="zh-CN" />
+<meta name="robots" content="all" />
+<meta name="GOOGLEBOT" content="all" />
+<meta name="author" content="$met_c_webname" />
+<meta name="copyright" content="Copyright 2008 -MetInfo" />
+<LINK href="$rooturl/favicon.ico" rel="shortcut icon" />
+<link rel="stylesheet" type="text/css" href="Public/css/metinfo.css" />
+<title>{$res['c_title_keywords']}--{$res['met_c_webname']}</title>
+</head>
+<body>
+
+	{include file="../Public/header.html"}
+
+	<div class="web">
+		<div class="index_webleft">
+			<div class="nav_x">&nbsp;公司简介</div>
+			<div class="index_content">{$index[c_content]}</div>
+		</div>
+		<div class="index_webright">
+			<div class="nav_x">&nbsp;最新动态</div>
+			{foreach $common['news_list'] as $key=>$item}
+				<div class="index_news_list">
+					<img src="Public/images/list.gif" />
+					<a href="$val[c_url]" target="_blank">utf8substr($val[c_title], 0, 19)</a> [$val[updatetime]] 
+				</div>
+				<div class="index_news_list">
+					<img src="Public/images/list.gif" />
+					<a href="$val[c_url]" target="_blank">$val[c_title]</a> [$val[updatetime]] 
+				</div>
+				{if $key>=$index[news_no]}break{/if}
+			{/foreach}
+		</div>
+		<div class="index_product">
+			<div class="nav_x">&nbsp;推荐产品</div>
+			<div class="index_content">
+				{foreach $res['product_listhits_com'] as $key=>$item}
+					<div class="index_product_list">
+						<a href="$val[c_url]" target="_blank">
+							<img src="$val[imgurls]" />
+						</a><br />
+						<a href="$val[c_url]" target="_blank">$val[c_title]</a>
+					</div>
+			
+					{if $key>=$index[product_no]}break{/if}
+				{/foreach}
+			</div>
+		</div>
+		{if $index[link_ok]}
+			<div class="index_product">
+				<div class="nav_x">&nbsp;友情链接</div>
+				<div class="index_link">
+					<div class="index_link_img">
+						{foreach $res['link_img_com'] as $key=>$item}
+							<a href="$val[weburl]" target="_blank"><img src="$val[weblogo]" alt="$val[c_webname]" /></a>
+							{if $key>=$index[link_img]}break{/if}
+						{/foreach}
+					</div>
+					<div class="index_link_text">
+						{foreach $res['link_text_com'] as $key=>$item}
+							<a href="$val[weburl]" target="_blank" title="$val[c_info]">$val[c_webname]</a>
+							{if $key>=$index[link_text]}break{/if}
+						{/foreach}
+					</div>
+				</div>
+			</div>
+		{/if}
+	</div>
+
+	{include file="../Public/online.html"}
+
+	{include file="../Public/footer.html"}
+	
+</body>
+</html>

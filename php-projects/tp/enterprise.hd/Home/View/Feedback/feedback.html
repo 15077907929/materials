@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="description" content="$show[c_description]" />
+<meta name="keywords" content="$show[c_keywords]">
+<meta name="language" content="zh-CN" />
+<meta name="robots" content="all" />
+<meta name="GOOGLEBOT" content="all" />
+<meta name="author" content="$met_c_webname" />
+<meta name="copyright" content="Copyright 2008 -MetInfo" />
+<LINK href="$rooturl/favicon.ico" rel="shortcut icon" />
+<link rel="stylesheet" type="text/css" href="Public/css/metinfo.css" />
+<title>{$res['c_title_keywords']}--{$res['met_c_webname']}</title>
+</head>
+<body>
+
+	{include file="../Public/header.html"}
+
+	<div class="web">
+		<div class="webleft">
+			<div class="nav_x">&nbsp;<a href='$index_c_url'>首页</a> > 咨询反馈</div>
+			<div class="content">
+				<form method="POST" name="myform" onSubmit="return Checkfeedback();" action="index.php?action=add" target="_self">
+					<table width="90%" cellpadding="2" cellspacing="1" bgcolor="#ccc" align="center">
+						{foreach $res['fd_para'] as $key=>$item}
+							<tr>
+								<td width="20%" height="25" align="right" bgcolor="#fff">$val[c_name]</td>
+								<td width="70%" bgcolor="#fff">$val[c_input]</td>
+								<td bgcolor="#fff" style="color:#990">$val[wr_must]</td>
+							</tr>
+						{/foreach}
+						<tr>
+							<td colspan="3" bgcolor="#fff" align="center">
+								<input type="hidden" name="fdtitle" value="$title" />
+								<input type="hidden" name="fromurl" value="$fromurl" />
+								<input type="hidden" name="ip" value="$ip" />
+								<input type="submit" name="sub" value="提交信息" class="tj">
+								<input type="reset" name="sub2" value="重新填写" class="tj">
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+		<div class="webright">
+
+			{include file="../Public/online.html"}
+
+		</div>
+	</div>
+
+{include file="../Public/footer.html"}
+
+</body>
+</html>

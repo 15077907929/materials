@@ -11,7 +11,7 @@ var stock_monthK={
 				if(!result||data==""){
 					c.call(o,false);
 				}else{
-					data=data.split("\n");
+					data=data.split(" ");
 					stock_monthK.data=data;
 					
 					if(name=="dayK"){

@@ -2,7 +2,7 @@
 // 本类由系统自动生成，仅供测试用途
 namespace Home\Controller;
 use Think\Controller;
-class SyssetController extends Controller {
+class SyssetController extends CommonController {
     public function index(){
 		$res['pages']=['5','8','10','15','20','25'];
 		$res['jgs']=['20','40','60','120','240','360'];

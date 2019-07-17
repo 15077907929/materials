@@ -14,7 +14,7 @@ class IndexController extends Controller {
 		switch ($method) {
             case 'show':
 				$res['total']      = $db->order('settop desc')->count();// 查询满足要求的总记录数
-				$Page       = new \Think\Page($res['total'],10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+				$Page       = new \Think\Page($res['total'],C('page'));// 实例化分页类 传入总记录数和每页显示的记录数(25)
 				$res['show']       = $Page->show();// 分页显示输出
 				// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
 				$res['list'] = $db->limit($Page->firstRow.','.$Page->listRows)->order('settop desc')->select();

@@ -8,7 +8,7 @@ var stock_all={
 				if(!result||data==""){
 					c.call(o,false);
 				}else{
-					data=data.split("\n");
+					data=data.split(" ");
 					stock_all.data=data;
 					c.call(o,true);
 				}
