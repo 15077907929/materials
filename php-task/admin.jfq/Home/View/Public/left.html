@@ -1,0 +1,444 @@
+<div class="sidebar" id="sidebar">
+	<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+		<a class="btn btn-sm btn-warning" href="/" title="网站首页" target="_blank" data-toggle="tooltip">
+			<i class="fa fa-home"></i>
+		</a>
+		<!--
+		<a class="btn btn-sm btn-success" href="javascript:openapp('/portal/admin_category/index.html','index_termlist','文章分类管理');" title="文章分类管理">
+		<i class="fa fa-th"></i>
+		</a>
+		<a class="btn btn-sm btn-info" href="javascript:openapp('/portal/admin_article/index.html','index_postlist','文章管理');" title="文章管理">
+		<i class="fa fa-pencil"></i>
+		</a>
+		-->
+		<a class="btn btn-sm btn-info" href="javascript:openapp('/user/admin_asset/index.html','userAdminAssetindex','资源管理',true);" title="资源管理" data-toggle="tooltip">
+			<i class="fa fa-file"></i>
+		</a>
+		<a class="btn btn-sm btn-danger" href="javascript:openapp('/admin/setting/clearcache.html','index_clearcache','清除缓存',true);" title="清除缓存" data-toggle="tooltip">
+		<i class="fa fa-trash-o"></i>
+			</a>
+		<a class="btn btn-sm btn-danger" href="javascript:openapp('/admin/recycle_bin/index.html','index_recycle','回收站',true);" title="回收站" data-toggle="tooltip">
+			<i class="fa fa-recycle"></i>
+		</a>
+		<a class="btn btn-sm btn-default" href="javascript:openapp('/admin/menu/index.html','index_menu','后台菜单',true);" title="后台菜单" data-toggle="tooltip">
+			<i class="fa fa-list"></i>
+		</a>
+	</div>
+	<div id="nav-wrapper">
+		<ul class="nav nav-list">
+			<li>
+				<a href="#" class="dropdown-toggle">
+					<i class="fa fa-bank normal"></i>
+					<span class="menu-text normal"> 任务管理 </span>
+					<b class="arrow fa fa-angle-right normal"></b>
+					<i class="fa fa-reply back"></i>
+					<span class="menu-text back">返回</span>
+				</a>
+				<ul class="submenu">
+					<li>
+						<a href="javascript:openapp('index.php?m=Home&c=Task&a=task&method=list','166admin','任务列表',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">任务列表</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('index.php?m=Home&c=Task&a=task&method=add','184admin','添加任务',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">添加任务</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/task/download.html','215admin','任务下载记录',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">任务下载记录</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" class="dropdown-toggle">
+					<i class="fa fa-reorder normal"></i>
+					<span class="menu-text normal"> 任务审核 </span>
+					<b class="arrow fa fa-angle-right normal"></b>
+					<i class="fa fa-reply back"></i>
+					<span class="menu-text back">返回</span>
+				</a>
+				<ul class="submenu">
+					<li>
+						<a href="javascript:openapp('/admin/order/index.html','186admin','已抢任务',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">已抢任务</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/order/mine.html','187admin','任务审核',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">任务审核</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" class="dropdown-toggle">
+					<i class="fa fa-smile-o normal"></i>
+					<span class="menu-text normal"> 分类管理 </span>
+					<b class="arrow fa fa-angle-right normal"></b>
+					<i class="fa fa-reply back"></i>
+					<span class="menu-text back">返回</span>
+				</a>
+				<ul class="submenu">
+					<li>
+						<a href="javascript:openapp('/admin/cat/index.html','178admin','分类列表',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">分类列表</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/cat/add.html','180admin','添加分类',true);">
+						<i class="fa fa-caret-right"></i>
+						<span class="menu-text">添加分类</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" class="dropdown-toggle">
+					<i class="fa fa-handshake-o normal"></i>
+					<span class="menu-text normal"> 金额管理 </span>
+					<b class="arrow fa fa-angle-right normal"></b>
+					<i class="fa fa-reply back"></i>
+					<span class="menu-text back">返回</span>
+				</a>
+				<ul class="submenu">
+					<li>
+						<a href="javascript:openapp('/admin/entrustion/index.html','191admin','提现列表',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">提现列表</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/entrustion/capital.html','193admin','任务收益',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">任务收益</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/entrustion/umi_order.html','220admin','有米订单',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">有米订单</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" class="dropdown-toggle">
+					<i class="fa fa-cogs normal"></i>
+					<span class="menu-text normal"> 系统设置 </span>
+					<b class="arrow fa fa-angle-right normal"></b>
+					<i class="fa fa-reply back"></i>
+					<span class="menu-text back">返回</span>
+				</a>
+				<ul class="submenu">
+					<li>
+						<a href="javascript:openapp('/admin/setting/site.html','71admin','网站信息',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">网站信息</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/setting/charge.html','256admin','充值设置',true);">
+						<i class="fa fa-caret-right"></i>
+						<span class="menu-text">充值设置</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/sms/index.html','164admin','短信设置',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">短信设置</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/setting/user.html','173admin','参数设置',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">参数设置</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/setting/hp_img.html','190admin','轮播图设置',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">轮播图设置</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/setting/youmi.html','234admin','有米广告设置',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">有米广告设置</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/setting/poster.html','235admin','海报设置',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">海报设置</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/setting/upgrade.html','239admin','升级设置',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">升级设置</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/setting/pay.html','240admin','支付设置',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">支付设置</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/setting/paylist.html','241admin','支付方式',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">支付方式</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/setting/selftask.html','248admin','发任务配置',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">发任务配置</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/setting/userxieyi.html','251admin','用户协议',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">用户协议</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/setting/shop.html','253admin','商城设置',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">商城设置</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" class="dropdown-toggle">
+					<i class="fa fa-user-circle normal"></i>
+					<span class="menu-text normal"> 会员管理 </span>
+					<b class="arrow fa fa-angle-right normal"></b>
+					<i class="fa fa-reply back"></i>
+					<span class="menu-text back">返回</span>
+				</a>
+				<ul class="submenu">
+					<li>
+						<a href="javascript:openapp('/admin/rbac/index.html','50admin','角色管理',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">角色管理</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/user/index.html','110admin','会员列表',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">会员列表</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/user/index2.html','189admin','管理员列表',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">管理员列表</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" class="dropdown-toggle">
+					<i class="fa fa-history  normal"></i>
+					<span class="menu-text normal"> 日志中心 </span>
+					<b class="arrow fa fa-angle-right normal"></b>
+					<i class="fa fa-reply back"></i>
+					<span class="menu-text back">返回</span>
+				</a>
+				<ul class="submenu">
+					<li>
+						<a href="javascript:openapp('/admin/log/yonglog.html','201admin','分销日志',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">分销日志</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/log/upgradelog.html','214admin','升级订单',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">升级订单</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" class="dropdown-toggle">
+					<i class="fa fa-bar-chart-o normal"></i>
+					<span class="menu-text normal"> 统计报表 </span>
+					<b class="arrow fa fa-angle-right normal"></b>
+					<i class="fa fa-reply back"></i>
+					<span class="menu-text back">返回</span>
+				</a>
+				<ul class="submenu">
+					<li>
+						<a href="javascript:openapp('/admin/report/indexagent.html','204admin','收入报表(代理商)',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">收入报表(代理商)</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/report/index.html','205admin','统计报表',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">统计报表</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" class="dropdown-toggle">
+					<i class="fa fa-gamepad normal"></i>
+					<span class="menu-text normal"> 游戏管理 </span>
+					<b class="arrow fa fa-angle-right normal"></b>
+					<i class="fa fa-reply back"></i>
+					<span class="menu-text back">返回</span>
+				</a>
+				<ul class="submenu">
+					<li>
+						<a href="javascript:openapp('/admin/game/index.html','217admin','游戏列表',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">游戏列表</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/game/add.html','218admin','添加游戏',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">添加游戏</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/game/index_count.html','219admin','游戏收益统计',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">游戏收益统计</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" class="dropdown-toggle">
+					<i class="fa fa-shopping-bag normal"></i>
+					<span class="menu-text normal"> 商城管理 </span>
+					<b class="arrow fa fa-angle-right normal"></b>
+					<i class="fa fa-reply back"></i>
+					<span class="menu-text back">返回</span>
+				</a>
+				<ul class="submenu">
+					<li>
+						<a href="javascript:openapp('/admin/shop/good.html','228admin','商品管理',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">商品管理</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/shop/cate.html','229admin','分类管理',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">分类管理</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/shop/order.html','230admin','订单管理',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">订单管理</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/shop/skuattr.html','231admin','SKU属性',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">SKU属性</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/shop/banner.html','232admin','商城幻灯片',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">商城幻灯片</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" class="dropdown-toggle">
+					<i class="fa fa-certificate normal"></i>
+					<span class="menu-text normal"> 代理商管理 </span>
+					<b class="arrow fa fa-angle-right normal"></b>
+					<i class="fa fa-reply back"></i>
+					<span class="menu-text back">返回</span>
+				</a>
+				<ul class="submenu">
+					<li>
+						<a href="javascript:openapp('/admin/agent/index.html','237admin','代理商列表',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">代理商列表</span>
+						</a>
+					</li>
+					<li>
+					<a href="javascript:openapp('/admin/agent/mine.html','238admin','申请审核',true);">
+						<i class="fa fa-caret-right"></i>
+						<span class="menu-text">申请审核</span>
+					</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" class="dropdown-toggle">
+					<i class="fa fa-desktop normal"></i>
+					<span class="menu-text normal"> 发任务管理 </span>
+					<b class="arrow fa fa-angle-right normal"></b>
+					<i class="fa fa-reply back"></i>
+					<span class="menu-text back">返回</span>
+				</a>
+				<ul class="submenu">
+					<li>
+						<a href="javascript:openapp('/admin/selftask/addtask.html','245admin','发布任务',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">发布任务</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/selftask/index.html','246admin','任务列表',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">任务列表</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/selftask/tasksort.html','247admin','任务分类',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">任务分类</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:openapp('/admin/selftask/taskreply.html','252admin','回复列表',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">回复列表</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" class="dropdown-toggle">
+					<i class="fa fa-bullhorn normal"></i>
+					<span class="menu-text normal"> 公告管理 </span>
+					<b class="arrow fa fa-angle-right normal"></b>
+					<i class="fa fa-reply back"></i>
+					<span class="menu-text back">返回</span>
+				</a>
+				<ul class="submenu">
+					<li>
+						<a href="javascript:openapp('/admin/notice/index.html','255admin','公告列表',true);">
+							<i class="fa fa-caret-right"></i>
+							<span class="menu-text">公告列表</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>

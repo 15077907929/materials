@@ -1,0 +1,394 @@
+<!doctype html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="Public/admin/css/metinfo_admin.css" />
+<title>维斯特网站管理系统</title>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" width="180" align="center">
+	<tr>
+		<td class="menu_title1" height="25">
+			<a target="_blank" href="index.php?m=Home&c=Index&a=index">前台首页</a>&nbsp;|&nbsp;
+			<a href="index.php?m=Admin&c=Index&a=index" target="main">后台首页</a>&nbsp;|&nbsp;
+			<a target="_top" href="index.php?m=Admin&c=Login&a=logout">&nbsp;退出&nbsp;</a>
+		</td>
+	</tr>
+</table>
+<table width="180" align="center" cellpadding="0" cellspacing="0" class="tablemain">
+	<!--系统配置开始-->	
+	<tr>
+		<td id="imgmenu10000" class="menu_title" onMouseOver="this.className='menu_title2';" onClick="showsubmenu(10000)" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
+			<span>基本配置</span>
+		</td>
+	</tr>
+	<tr>
+		<td id="submenu10000" style="DISPLAY: none">
+			<div class="sec_menu" style="WIDTH: 158px">			
+				<table cellspacing="3" cellpadding="0" width="130" align="center">
+					{if $common['admin']['type'] eq 1}
+						<tr> 
+							<td><a target="main" href="admin/">管理员管理</a></td>
+						</tr>
+					{else}
+						<tr> 
+							<td><a target="main" href="admin/editor_pass.php?id=$admin_list[id]">个人资料</a></td>
+						</tr>
+					{/if}
+					{if $common['admin']['type'] eq 1}
+						<tr> 
+							<td><a target="main" href="set/basic.php">基本信息</a></td>
+						</tr>
+					{/if}
+					{if $common['admin']['type'] eq 1}
+						<tr> 
+							<td><a target="main" href="set/skin.php">界面风格</a></td>
+						</tr>
+					{/if}
+					{if $common['admin']['type'] eq 1}
+						<tr> 
+							<td><a target="main" href="set/img.php">图片配置</a></td>
+						</tr>
+					{/if}
+					{if $common['admin']['type'] eq 1}        
+					<tr> 
+						<td><a target="main" href="column/">栏目配置</a></td>
+					</tr>
+					{/if}
+					{if $common['admin']['type'] eq 1}       
+						<tr> 
+							<td><a target="main" href="set/index_set.php">首页配置</a></td>
+						</tr>
+					{/if}
+					{if $common['admin']['type'] eq 1}
+						<tr> 
+							<td><a target="main" href="set/seo.php">优化推广</a></td>
+						</tr>
+					{/if}
+					{if $common['admin']['type'] eq 1}
+						<tr> 
+							<td><a target="main" href="set/foot.php">底部信息</a></td>
+						</tr>
+					{/if}
+					{if $common['admin']['type'] eq 1}
+						<tr> 
+							<td><a target="main" href="set/flash.php">flash管理</a></td>
+						</tr>
+					{/if}
+					{if $common['admin']['type'] eq 1}
+						<tr> 
+							<td><a target="main" href="set/strcontent.php">热门标签</a></td>
+						</tr>
+					{/if}
+					{if $common['admin']['type'] eq 1}
+						<tr> 
+							<td><a target="main" href="online/">在线交流</a></td>
+						</tr>
+					{/if}
+					{if $common['admin']['type'] eq 1}
+						<tr> 
+							<td><a target="main" href="set/htm.php">静态页面生成</a></td>
+						</tr>
+					{/if}
+					{if $common['admin']['type'] eq 1}
+						<tr> 
+							<td><a target="main" href="parameter/parameter.php?type=3">产品模块参数</a></td>
+						</tr>
+					{/if}
+					{if $common['admin']['type'] eq 1}
+						<tr> 
+							<td><a target="main" href="parameter/parameter.php?type=4">下载模块参数</a></td>
+						</tr>
+					{/if}
+					{if $common['admin']['type'] eq 1}
+						<tr> 
+							<td><a target="main" href="parameter/parameter.php?type=5">图片模块参数</a></td>
+						</tr>
+					{/if}
+					{if $common['admin']['type'] eq 1}
+						<tr> 
+							<td><a target="main" href="set/database.php">数据库备份</a></td>
+						</tr>
+					{/if}
+						<tr> 
+							<td><a target="_blank" href="http://bbs.metinfo.cn/">技术支持</a></td>
+						</tr> 
+				</table>
+			</div>
+			<br>		
+		</td>
+	</tr>
+	<!--系统配置结束-->	
+	<!--简介模型开始-->
+	{foreach $lnav['list1'] as $key=>$item}
+		{if $common['admin']['type'] eq 1}
+			<tr>
+				<td id="imgmenu{$item['id']}" class="menu_title" onMouseOver="this.className='menu_title2';" onclick="showsubmenu({$item['id']})" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
+					<span>{$item['c_name']}</span>
+				</td>
+			</tr>
+			<tr>
+				<td id="submenu{$item['id']}" style="DISPLAY: none">
+					<div class="sec_menu" style="WIDTH: 158px">
+						<table cellspacing="3" cellpadding="0" width="130" align="center">
+							<tr> 
+								<td><a target="main" href="index.php?m=Admin&c=About&a=about&id={$item['id']}">{$item['c_name']}</a></td>
+							</tr>
+							{foreach $res['list11'] as $sub_key=>$sub_item}
+								{if $sub_item['bigclass'] eq $item['id']}
+									<tr> 
+										<td><a target="main" href="about/about.php?id=$val1[id]">$val1[c_name]</a></td>
+									</tr>
+								{/if}
+							{/foreach}
+							{foreach $res['list12'] as $sub_key=>$sub_item}
+								{if $sub_item['bigclass'] eq $item['id']}
+									<tr> 
+										<td>&nbsp;&nbsp;-<a target="main" href="about/about.php?id=$val2[id]">$val2[c_name]</a></td>
+									</tr>
+								{/if}
+							{/foreach}
+						</table>
+					</div><br>		
+				</td>
+			</tr>
+		{/if}
+	{/foreach}
+	<!--简介模型结束-->
+	<!--文章模型开始-->
+	{foreach $lnav['list2'] as $key=>$item}
+		{if $common['admin']['type'] eq 1}
+			<tr>
+				<td id="imgmenu{$item['id']}" class="menu_title" onMouseOver="this.className='menu_title2';" onClick="showsubmenu({$item['id']})" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
+				<span>{$item['c_name']}</span></td>
+			</tr>
+			<tr>
+				<td id="submenu{$item['id']}" style="DISPLAY: none">
+					<div class="sec_menu" style="WIDTH: 158px">
+						<table cellspacing="3" cellpadding="0" width="130" align="center">
+							<tr> 
+								<td><a target="main" href="index.php?m=Admin&c=Article&a=article&method=add&class1={$item['id']}">添加{$item['c_name']}</a></td>
+							</tr>
+							<tr> 
+								<td><a target="main" href="index.php?m=Admin&c=Article&a=article&class1={$item['id']}">管理{$item['c_name']}</a></td>
+							</tr>
+						</table>
+					</div>
+					<br>		
+				</td>
+			</tr>
+		{/if}
+	{/foreach}
+	<!--文章模型结束-->
+	<!--产品模型开始-->
+	{foreach $res['list3'] as $key=>$item}
+		{if $common['admin']['type'] eq 1}
+			<tr>
+				<td id="imgmenu$val[id]" class="menu_title" onMouseOver="this.className='menu_title2';" onClick="showsubmenu($val[id])" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
+					<span>$val[c_name]</span>
+				</td>
+			</tr>
+			<tr>
+				<td id="submenu$val[id]" style="DISPLAY: none">
+					<div class="sec_menu" style="WIDTH: 158px">
+						<table cellspacing="3" cellpadding="0" width="130" align="center">
+							<tr> 
+								<td><a target="main" href="product/add.php?class1=$val[id]">添加$val[c_name]</a></td>
+							</tr>
+							<tr> 
+								<td><a target="main" href="product/index.php?class1=$val[id]">管理$val[c_name]</a></td>
+							</tr>
+						</table>
+					</div>
+					<br>		
+				</td>
+			</tr>
+		{/if}
+	{/foreach}
+	<!--产品模型结束-->
+	<!--下载模型开始-->
+	{foreach $res['list4'] as $key=>$item}
+		{if $common['admin']['type'] eq 1}
+			<tr>
+				<td id="imgmenu$val[id]" class="menu_title" onMouseOver="this.className='menu_title2';" onClick="showsubmenu($val[id])" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
+				<span>$val[c_name]</span></td>
+			</tr>
+			<tr>
+				<td id="submenu$val[id]" style="DISPLAY: none">
+					<div class="sec_menu" style="WIDTH: 158px">
+						<table cellspacing="3" cellpadding="0" width="130" align="center">
+							<tr> 
+								<td><a target="main" href="download/add.php?class1=$val[id]">添加$val[c_name]</a></td>
+							</tr>
+							<tr> 
+								<td><a target="main" href="download/index.php?class1=$val[id]">管理$val[c_name]</a></td>
+							</tr>
+						</table>
+					</div><br>		
+				</td>
+			</tr>
+		{/if}
+	{/foreach}
+	<!--下载模型结束-->
+	<!--图片模型开始-->
+	{foreach $res['list5'] as $key=>$item}
+		{if $common['admin']['type'] eq 1}
+			<tr>
+				<td id="imgmenu$val[id]" class="menu_title" onMouseOver="this.className='menu_title2';" onClick="showsubmenu($val[id])" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
+					<span>$val[c_name]</span>
+				</td>
+			</tr>
+			<tr>
+				<td id="submenu$val[id]" style="DISPLAY: none">
+					<div class="sec_menu" style="WIDTH: 158px">
+						<table cellspacing="3" cellpadding="0" width="130" align="center">
+							<tr> 
+								<td><a target="main" href="img/add.php?class1=$val[id]">添加$val[c_name]</a></td>
+							</tr>
+							<tr> 
+								<td><a target="main" href="img/index.php?class1=$val[id]">管理$val[c_name]</a></td>
+							</tr>
+						</table>
+					</div>
+					<br>		
+				</td>
+			</tr>
+		{/if}
+	{/foreach}
+	<!--图片模型结束-->
+	<!--招聘模型开始-->
+	{foreach $res['list6'] as $key=>$item}
+		{if $common['admin']['type'] eq 1}
+			<tr>
+				<td id="imgmenu$val[id]" class="menu_title" onMouseOver="this.className='menu_title2';" onClick="showsubmenu($val[id])" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
+					<span>$val[c_name]</span>
+				</td>
+			</tr>
+			<tr>
+				<td id="submenu$val[id]" style="DISPLAY: none">
+					<div class="sec_menu" style="WIDTH: 158px">
+						<table cellspacing="3" cellpadding="0" width="130" align="center">
+							<tr> 
+								<td><a target="main" href="job/add.php?class1=$val[id]">添加$val[c_name]</a></td>
+							</tr>
+							<tr> 
+								<td><a target="main" href="job/index.php?class1=$val[id]">管理$val[c_name]</a></td>
+							</tr>
+						</table>
+					</div>
+					<br>		
+				</td>
+			</tr>
+		{/if}
+	{/foreach}
+	<!--招聘模型结束-->
+	<!--留言系统开始-->
+	{foreach $res['list7'] as $key=>$item}
+		{if $common['admin']['type'] eq 1}
+			<tr>
+				<td id="imgmenu$val[id]" class="menu_title" onMouseOver="this.className='menu_title2';" onClick="showsubmenu($val[id])" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
+				<span>$val[c_name]</span></td>
+			</tr>
+			<tr>
+				<td id="submenu$val[id]" style="DISPLAY: none">
+					<div class="sec_menu" style="WIDTH: 158px">
+						<table cellspacing="3" cellpadding="0" width="130" align="center">
+							<tr> 
+								<td><a target="main" href="message/inc.php">$val[c_name]配置</a></td>
+							</tr>
+							<tr> 
+								<td><a target="main" href="message/index.php">留言信息管理</a></td>
+							</tr>
+						</table>
+					</div><br>	
+				</td>
+			</tr>
+		{/if}
+	{/foreach}
+	<!--留言系统结束-->
+	<!--反馈系统开始-->
+	{if $common['admin']['type'] eq 1}	
+		<tr>
+		<td id="imgmenu9999" class="menu_title" onMouseOver="this.className='menu_title2';" onClick="showsubmenu(9999)" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
+			<span>反馈系统</span>
+		</td>
+		</tr>
+		<tr>
+			<td id="submenu9999" style="DISPLAY: none">
+				<div class="sec_menu" style="WIDTH: 158px">
+
+					<table cellspacing="3" cellpadding="0" width="130" align="center">
+						<tr> 
+							<td><a target="main" href="feedback/inc.php">反馈系统设置</a></td>
+						</tr>
+						<tr> 
+							<td><a target="main" href="feedback/parameter.php">反馈列表字段设置</a></td>
+						</tr>
+						<tr> 
+							<td><a target="main" href="feedback/index.php">反馈信息管理</a></td>
+						</tr>
+					</table>
+				</div><br>		
+			</td>
+		</tr>
+	{/if}
+	<!--反馈系统结束-->
+	<!--友情链接开始-->
+	{if $common['admin']['type'] eq 1}	
+		<tr>
+			<td id="imgmenu9998" class="menu_title" onMouseOver="this.className='menu_title2';" onClick="showsubmenu(9998)" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
+				<span>友情链接</span>
+			</td>
+		</tr>
+		<tr>
+			<td id="submenu9998" style="DISPLAY: none">
+				<div class="sec_menu" style="WIDTH: 158px">
+					
+					<table cellspacing="3" cellpadding="0" width="130" align="center">
+						<tr> 
+							<td><a target="main" href="link/index.php">友情链接管理</a></td>
+						</tr>
+						<tr> 
+							<td><a target="main" href="link/add.php">添加友情链接</a></td>
+						</tr>
+					</table>
+				</div><br>		
+			</td>
+		</tr>
+	{/if}	
+	<!--友情链接结束-->
+	<tr><td height="1" bgcolor="#003366"></td></tr>
+	<tr>
+		<td>		
+			<div class="sec_menu" style="WIDTH: 158px">
+				<table width="100%" height="60" cellpadding="0" cellspacing="3">
+					<tr>
+						<td height="20" align="center">
+							<b>版权所有: <a href="http://www.360meila.com" target="_blank">维斯特信息</a>&nbsp;&nbsp;&nbsp;&nbsp;<br>
+								企业网站管理系统V1.0
+							</b>
+						</td>
+					</tr>
+				</table>
+	     
+			</div>	  
+		</td>
+	</tr>
+</table>
+<script type="text/javascript">
+function showsubmenu(sid){
+	whichEl = eval("submenu" + sid);
+	imgmenu = eval("imgmenu" + sid);
+	if (whichEl.style.display == "none"){
+		eval("submenu" + sid + ".style.display=\"\";");
+		imgmenu.background="Public/admin/images/menuup.gif";
+	}else{
+		eval("submenu" + sid + ".style.display=\"none\";");
+		imgmenu.background="Public/admin/images/menudown.gif";
+	}
+}
+top.document.title="维斯特网站管理系统"; 
+</script>
+</body>
+</html>
+
+

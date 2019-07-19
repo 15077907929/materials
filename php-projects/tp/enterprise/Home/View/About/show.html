@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="description" content="{$res['info']['c_description']}" />
+<meta name="keywords" content="{$res['info']['c_keywords']}" />
+<meta name="language" content="zh-CN" />
+<meta name="robots" content="all" />
+<meta name="GOOGLEBOT" content="all" />
+<meta name="author" content="$met_c_webname" />
+<meta name="copyright" content="Copyright 2008 -MetInfo" />
+<LINK href="$rooturl/favicon.ico" rel="shortcut icon" />
+<link rel="stylesheet" type="text/css" href="Public/css/metinfo.css" />
+<title>{$res['c_title_keywords']}--{$res['met_c_webname']}</title>
+</head>
+<body>
+
+	{include file="../Public/header.html"}
+
+	<div class="web">
+		<div class="webleft">
+			<div class="nav_x">&nbsp;<a href='$index_c_url'>首页</a> > {$res['info']['c_name']}</div>
+			<div class="content">{$res['info']['c_content']}</div>
+		</div>
+
+		<div class="webright">
+			<div class="nav_x">&nbsp;>>{$res['info']['c_name']}</div>
+			<div class="navright">{$nav_c_list}</div>
+
+			{include file="../Public/online.html"}
+
+		</div>
+	</div>
+
+{include file="../Public/footer.html"}
+
+</body>
+</html>

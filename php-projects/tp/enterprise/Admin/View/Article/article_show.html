@@ -1,0 +1,101 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="Public/admin/css/metinfo_admin.css" />
+<title>文章管理</title>
+<script type="text/javascript" src="Public/admin/js/zh_cn.js"></script>
+<script type="text/javascript" src="Public/admin/js/metinfo.js"></script>
+</head>
+<body>
+<br>
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr> 
+		<td align="center" valign="top">
+			<table width="95%" border="0" cellpadding="2" cellspacing="1" class="table_southidc">
+				<tr> 
+					<td class="back_southidc" height="30" align="center">{$res['info']['c_name']}管理</td>
+				</tr>
+				{if $res['class2_listok'] eq 1}
+					<tr>
+						<td height="25" align="left" class="class2">二级栏目：
+							{foreach $res['class2_list'] as $key=>$item}
+								<a {if $item['id'] eq $res['class2']}style="color:#FF0000;"{/if} href="index.php?class1=$class1&class2=$val[id]">{$item['c_name']}</a>&nbsp;&nbsp;|&nbsp;
+							{/foreach}
+						</td> 
+
+					</tr>
+					{if $res['class3_listok'] eq 1}
+						<tr>
+							<td height="25" align="left" class="class3"><b>三级栏目：</b>
+								{foreach $res['class3_list'] as $key=>$item}
+									<a {if $item['id'] eq $res['class3']}style="color:#FF0000;"{/if} href="index.php?class1=$class1&class2=$val[id]" $style>$val[c_name]</a>&nbsp;&nbsp;|&nbsp;
+								{/foreach}	
+							</td>
+						</tr>
+					{/if}
+				{/if}
+				<tr> 
+					<td valign="top">
+						<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366" class="border" style="word-break:break-all">
+							<tr class="back_southidc2">
+								<td width="5%" height="25" align="center">选中</td>
+								<td width="5%" height="25" align="center">ID</td>
+								<td width="50%" height="25" align="center">文章标题</td>
+								<td width="8%" align="center" >图片文章</td>
+								<td width="8%" align="center" >推荐文章</td>
+								<td width="14%" align="center" >更新日期</td>
+								<td width="10%" align="center" >操作</td>
+							</tr>
+								{foreach $res['news'] as $key=>$item}
+									<tr class="tdbg">
+										<td height="22" align="center" class="left1">
+											<input name='id' type='checkbox' onClick="unselectall()" id="id" value="{$item['id']}" class="xz">
+										</td>
+										<td  bgcolor="#ECF5FF" align="center">{$item['id']}</td>
+										<td align="left" bgcolor="#ECF5FF">
+											<a href="../../$class1_info[foldername]/shownews.php?id={$item['id']}" title="查看详细" target="_blank">{$item['c_title']}</a>
+										</td>
+										<td  bgcolor="#ECF5FF" align="center">{$item['img_ok']}</td>
+										<td  bgcolor="#ECF5FF" align="center">{$item['com_ok']}</td>
+										<td  bgcolor="#ECF5FF" align="center">{$item['updatetime']}</td>
+										<td align="center" bgcolor="#ECF5FF" >
+											<a href="editor.php?id=$val[id]" >编辑</a> | 
+											<a href="delete.php?id=$val[id]&class1=$class1&class2=$class2&class3=$class3" onClick="return ConfirmDel();" >删除</a>
+										</td>
+									</tr>
+								{/foreach}
+						</table>
+					</td>
+				</tr> 
+				<tr> 
+					<td height="20" align="left" bgcolor="#ECF5FF">
+						<form name="del" method="Post" action="delete.php?class1=$class1&class2=$class2&class3=$class3">
+							<input name="chkAll" class="xz" type="checkbox" id="chkAll" onclick=CheckAll(this.form) value="checkbox">
+							选中本页显示的所有文章 <input name="submit" type='submit' value='删除选定的条目'> 
+							<input name="action" type="hidden" id="action" value="del">
+							<input name="allid" type="hidden" id="allid" value="">
+						</form>
+					</td>
+				</tr>
+				<tr bgcolor="#ECF5FF">
+					<td height="20" align="left">
+						<form method="POST" name="myform"  action="index.php?search=detail_search" target="_self">
+							<b>当前栏目文章查找：</b> 
+							<input name="class1" type="hidden" size="30" value="$class1">
+							<input name="class2" type="hidden" size="30" value="$class2">
+							<input name="class3" type="hidden" size="30" value="$class3">
+							<input name="c_title" type="text" size="30">
+							<input type="submit" name="Submit2" value="查询" class="tj">  
+							请输入文章标题关键字。如果为空，则查找所有文章。
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td height="0" align="center" bgcolor="#ECF5FF">$page_list</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

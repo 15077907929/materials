@@ -1,0 +1,74 @@
+<!doctype html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="Public/admin/css/metinfo_admin.css" />
+<title>简介内容修改</title>
+</head>
+<body>
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr> 
+		<td align="center" valign="top">
+			<form method="POST" name="myform" action="index.php?m=Admin&c=About&a=about&method=modify" target="_self">
+				<input name="id" type="hidden" value="{$res['info']['id']}" />
+				<table width="95%" border="0" cellpadding="2" cellspacing="1" class="table_southidc">
+					<tr> 
+						<td class="back_southidc" height="30" colspan="3">修改{$res['info']['c_name']}</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="20%" height="25"><b style="width:100%;">中文关键词：</b></td>
+						<td width="80%" >
+							<input name="c_keywords" type="text" size="40" value="{$res['info']['c_keywords']}" />
+							用于搜索引擎优化，多个关键词请用","隔开
+						</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="20%" height="25">
+							<b>中文简短描述：</b><br>用于搜索引擎优化
+						</td>
+						<td width="80%" >
+							<textarea name="c_description" cols="60" rows="5">{$res['info']['c_description']}</textarea>
+						</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="20%" height="25"><b>中文内容：</b></td>
+						<td width="80%" >
+							{$res['oFCKeditor']->Create()}
+						</td>
+					</tr>
+					{if $met_en_lang neq 1}
+						<tr bgcolor="#999999"> <td  height="25" colspan="2"><b>英文内容</b></td></tr>
+						<tr bgcolor="#ECF5FF"> 
+							<td width="20%" height="25"><b>英文关键词：</b></td>
+							<td width="80%" >
+								<input name="e_keywords" type="text" size="40" value="{$res['info']['e_keywords']}" />
+								用于搜索引擎优化，多个关键词请用","隔开
+							</td>
+						</tr>
+						<tr bgcolor="#ECF5FF"> 
+							<td width="20%" height="25">
+								<b>英文简短描述：</b><br>用于搜索引擎优化
+							</td>
+							<td width="80%">
+								<textarea name="e_description" cols="60" rows="5">{$res['info']['e_description']}</textarea>
+							</td>
+						</tr>
+						<tr bgcolor="#ECF5FF"> 
+							<td width="20%" height="25">英文内容：</td>
+							<td width="80%">{$res['e_oFCKeditor']->Create()}</td>
+						</tr>
+					{/if}
+					<tr bgcolor="#ECF5FF"><td colspan="3" style="border:0px;">&nbsp;</td></tr>
+					<tr> 
+						<td height="30" colspan="2" align="center" bgcolor="#ECF5FF"> 
+							<input type="submit" name="Submit" value="提交" class="tj" />
+							<input type="reset" name="Submit" value="重置" class="tj" /> 
+						</td>
+					</tr>
+				</table>
+			</form>
+			<script type="text/javascript" src="Public/admin/js/metinfo.js"></script>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

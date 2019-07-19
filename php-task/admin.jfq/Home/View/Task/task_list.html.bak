@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- Set render engine for 360 browser -->
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- HTML5 shim for IE8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <![endif]-->
+
+
+    <link href="/Public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Public/css/simplebootadmin.css" rel="stylesheet">
+    <link href="/Public/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        form .input-order { 
+            margin-bottom: 0px;
+            padding: 0 2px;
+            width: 42px;
+            font-size: 12px;
+         }
+
+        form .input-order:focus { 
+            outline: none;
+         }
+
+        .table-actions { 
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding: 0px;
+         }
+
+        .table-list { 
+            margin-bottom: 0px;
+         }
+
+        .form-required { 
+            color: red;
+         }
+    </style>
+    <script type="text/javascript">
+        //全局变量
+        var GV = { 
+            ROOT: "/",
+            WEB_ROOT: "/",
+            JS_ROOT: "static/js/",
+            APP: 'admin'/*当前应用名*/
+         };
+    </script>
+    <script src="/Public/js/jquery-1.10.2.min.js"></script>
+    <script src="/Public/js/wind.js"></script>
+    <script src="/Public/js/bootstrap.min.js"></script>
+    <script>
+        Wind.css('artDialog');
+        Wind.css('layer');
+        $(function () { 
+            $("[data-toggle='tooltip']").tooltip({ 
+                container:'body',
+                html:true,
+             });
+            $("li.dropdown").hover(function () { 
+                $(this).addClass("open");
+             }, function () { 
+                $(this).removeClass("open");
+             });
+         });
+    </script>
+            <style>
+            #think_page_trace_open { 
+                z-index: 9999;
+             }
+        </style>
+        <script src="/static/js/layer/layer.js"></script>
+<link rel="stylesheet" href="/Public/css/bootstrap-datepicker.min.css">
+<script src="/Public/js/bootstrap-datetimepicker.js"></script>
+<script src="/Public/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="/admin/task/index.html">任务列表</a></li>
+        <li><a href="index.php?m=Home&c=Task&a=task&method=add">新增任务</a></li>
+    </ul>
+
+    <form class="well form-inline" method="post" action="/admin/task/index.html">
+        <input type="text" class="form-control" name="title" style="width: 120px;" value="" placeholder="任务名称">
+        <input type="text" class="form-control" name="game_id" style="width: 120px;" value="" placeholder="游戏编号">
+        <input type="text" class="form-control js-bootstrap-date" name="create_time" style="width: 120px;" value="" placeholder="发布时间">
+        <select name="recharge"  class="form-control" style="width: 120px;">
+            <option value="" selected>任务类型:</option>
+            <option value="0" >分期任务</option>
+            <option value="1" >充值任务</option>
+            <option value="2" >应用任务</option>
+        </select>
+        <select name="invalid"  class="form-control" style="width: 120px;">
+            <option value="" selected>任务状态:</option>
+            <option value="0" >上架</option>
+            <option value="1" >下架</option>
+        </select>
+
+        <input type="submit" class="btn btn-primary" value="搜索" />
+        <a class="btn btn-danger" href="/admin/task/index.html">清空</a>
+    </form>
+    <form action="" method="post" class="js-ajax-form">
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>所属游戏</th>
+                <th width="40">任务ID</th>
+                <th>缩略图</th>
+                <th>任务名称</th>
+                <th>期数</th>
+                <th>任务金额</th>
+                <th>游戏区服</th>
+                <th>任务类型</th>
+                <th>发布时间</th>
+                <th>开始时间</th>
+                <th>结束时间</th>
+                <th>下载地址</th>
+                <th>任务描述</th>
+                <th width="200">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+                            <tr>
+                    <td onclick="artdialogAlert('享物说')"><a href="javascript:;">159</a></td>
+                    <td>57</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190712/8e77db35633a92a5ce43065d248ac0c1.png')"><img src="http://task.yqin.cn/upload/admin/20190712/8e77db35633a92a5ce43065d248ac0c1.png" alt="" width="40"></td>
+                    <td>测试问答？？？？？？？</td>
+                    <td>0</td>
+                    <td>13123213.00</td>
+                    <td>二区</td>
+                    <td>
+                        充值任务                    </td>
+                    <td>2019-07-12 15:09:07</td>
+                    <td>2019-07-12 15:05:00</td>
+                    <td>2019-07-12 23:05:00</td>
+
+                    <td onclick="artdialogAlert('https://www.baidu.com/')">https://www.baidu.com/</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;&lt;span style=&quot;font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);&quot;&gt;求测人：某人，男，庚申(1980年)，自动起卦(起卦方式)&lt;/span&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;span style=&quot;font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);&quot;&gt;占问事宜：要问的事情&lt;/span&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;span style=&quot;font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);&quot;&gt;公历：2008年12月23日8时37分，星期二。&lt;/span&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;span style=&quot;font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);&quot;&gt;农历：戊子年 十一月&amp;nbsp;廿六日&amp;nbsp;辰时。&lt;/span&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;span style=&quot;font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);&quot;&gt;神煞：驿马-亥　桃花-午　干禄-午　贵人-亥、酉&lt;/span&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;span style=&quot;color:#000000ff&quot;&gt;干支：戊子年&amp;nbsp;&amp;nbsp;甲子月&amp;nbsp;&amp;nbsp;丁酉日&amp;nbsp;&amp;nbsp;甲辰时&lt;/span&gt;&lt;span style=&quot;font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);&quot;&gt;&amp;nbsp;(卦身：丑)&lt;/span&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;span style=&quot;color:#ff000000&quot;&gt;主变卦&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;天山遁(乾宫)&amp;nbsp;&amp;nbsp;之&amp;nbsp;&amp;nbsp;泽山咸(兑宫)&amp;nbsp;&amp;nbsp;[空亡:辰、巳]&lt;/span&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;span style=&quot;font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);&quot;&gt;青龙&amp;nbsp;　　　　　&amp;nbsp;▅▅▅▅▅○父母壬戌土&amp;nbsp;　　　▅▅　▅▅　父母丁未土&amp;nbsp;应　&lt;/span&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;span style=&quot;font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);&quot;&gt;玄武&amp;nbsp;　　　　　&amp;nbsp;▅▅▅▅▅　兄弟壬申金&amp;nbsp;应　　▅▅▅▅▅　兄弟丁酉金&amp;nbsp;　　&lt;/span&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;span style=&quot;font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);&quot;&gt;白虎&amp;nbsp;　　　　　&amp;nbsp;▅▅▅▅▅　官鬼壬午火&amp;nbsp;　　　▅▅▅▅▅　子孙丁亥水&amp;nbsp;　　&lt;/span&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;span style=&quot;font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);&quot;&gt;螣蛇&amp;nbsp;　　　　　&amp;nbsp;▅▅▅▅▅　兄弟丙申金&amp;nbsp;　　　▅▅▅▅▅　兄弟丙申金&amp;nbsp;世　&lt;/span&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;span style=&quot;font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);&quot;&gt;勾陈&amp;nbsp;妻财甲寅木&amp;nbsp;▅▅　▅▅　官鬼丙午火&amp;nbsp;世　　▅▅　▅▅　官鬼丙午火&amp;nbsp;　　&lt;/span&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;br style=&quot;font-family: 宋体; font-size: 14.6667px; white-space: normal;&quot;/&gt;&lt;span style=&quot;font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);&quot;&gt;朱雀&amp;nbsp;子孙甲子水&amp;nbsp;▅▅　▅▅　父母丙辰土&amp;nbsp;　　　▅▅　▅▅　父母丙辰土&amp;nbsp;　　&lt;/span&gt;&lt;/p&gt;')"><p><span style="font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);">求测人：某人，男，庚申(1980年)，自动起卦(起卦方式)</span><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><span style="font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);">占问事宜：要问的事情</span><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><span style="font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);">公历：2008年12月23日8时37分，星期二。</span><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><span style="font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);">农历：戊子年 十一月&nbsp;廿六日&nbsp;辰时。</span><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><span style="font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);">神煞：驿马-亥　桃花-午　干禄-午　贵人-亥、酉</span><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><span style="color:#000000ff">干支：戊子年&nbsp;&nbsp;甲子月&nbsp;&nbsp;丁酉日&nbsp;&nbsp;甲辰时</span><span style="font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);">&nbsp;(卦身：丑)</span><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><span style="color:#ff000000">主变卦&nbsp;&nbsp;&nbsp;&nbsp;天山遁(乾宫)&nbsp;&nbsp;之&nbsp;&nbsp;泽山咸(兑宫)&nbsp;&nbsp;[空亡:辰、巳]</span><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><span style="font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);">青龙&nbsp;　　　　　&nbsp;▅▅▅▅▅○父母壬戌土&nbsp;　　　▅▅　▅▅　父母丁未土&nbsp;应　</span><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><span style="font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);">玄武&nbsp;　　　　　&nbsp;▅▅▅▅▅　兄弟壬申金&nbsp;应　　▅▅▅▅▅　兄弟丁酉金&nbsp;　　</span><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><span style="font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);">白虎&nbsp;　　　　　&nbsp;▅▅▅▅▅　官鬼壬午火&nbsp;　　　▅▅▅▅▅　子孙丁亥水&nbsp;　　</span><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><span style="font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);">螣蛇&nbsp;　　　　　&nbsp;▅▅▅▅▅　兄弟丙申金&nbsp;　　　▅▅▅▅▅　兄弟丙申金&nbsp;世　</span><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><span style="font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);">勾陈&nbsp;妻财甲寅木&nbsp;▅▅　▅▅　官鬼丙午火&nbsp;世　　▅▅　▅▅　官鬼丙午火&nbsp;　　</span><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><br style="font-family: 宋体; font-size: 14.6667px; white-space: normal;"/><span style="font-family: 宋体; font-size: 14.6667px; background-color: rgb(255, 255, 255);">朱雀&nbsp;子孙甲子水&nbsp;▅▅　▅▅　父母丙辰土&nbsp;　　　▅▅　▅▅　父母丙辰土&nbsp;　　</span></p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/57.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,57)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/57.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/57.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,57)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('京粉卡激活')"><a href="javascript:;">134</a></td>
+                    <td>56</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190710/af4ab977e8556374eb94ce9f12fdb061.jpg')"><img src="http://task.yqin.cn/upload/admin/20190710/af4ab977e8556374eb94ce9f12fdb061.jpg" alt="" width="40"></td>
+                    <td>应用下载标题</td>
+                    <td>0</td>
+                    <td>1.00</td>
+                    <td></td>
+                    <td>
+                        应用任务                    </td>
+                    <td>2019-07-10 16:11:53</td>
+                    <td>2019-07-10 16:10:00</td>
+                    <td>2019-07-10 16:11:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com/1.apk')">http://www.baidu.com/1.apk</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;测试&lt;/p&gt;')"><p>测试</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/56.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,56)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/56.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/56.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,56)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('白条有米')"><a href="javascript:;">135</a></td>
+                    <td>55</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190710/af4ab977e8556374eb94ce9f12fdb061.jpg')"><img src="http://task.yqin.cn/upload/admin/20190710/af4ab977e8556374eb94ce9f12fdb061.jpg" alt="" width="40"></td>
+                    <td>测试任务</td>
+                    <td>0</td>
+                    <td>1.00</td>
+                    <td>1</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-07-10 16:06:35</td>
+                    <td>2019-07-10 16:00:00</td>
+                    <td>2019-07-10 16:06:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com/1.apk')">http://www.baidu.com/1.apk</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;ceshi&lt;/p&gt;')"><p>ceshi</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/55.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,55)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/55.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/55.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,55)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('测试20190614')"><a href="javascript:;">160</a></td>
+                    <td>54</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190614/d42cbed9b2e847c696f5be04c9e486d7.jpg')"><img src="http://task.yqin.cn/upload/admin/20190614/d42cbed9b2e847c696f5be04c9e486d7.jpg" alt="" width="40"></td>
+                    <td>分期任务01</td>
+                    <td>1</td>
+                    <td>10.00</td>
+                    <td>88</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-06-14 09:29:35</td>
+                    <td>2019-06-14 09:29:00</td>
+                    <td>2019-06-26 18:10:00</td>
+
+                    <td onclick="artdialogAlert('xxxxx.apk')">xxxxx.apk</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;测试&lt;/p&gt;')"><p>测试</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/54.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,54)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/54.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/54.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,54)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('贝壳找房')"><a href="javascript:;">74</a></td>
+                    <td>53</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190614/51f3dc78e910046e59f43744758073fe.jpg')"><img src="http://task.yqin.cn/upload/admin/20190614/51f3dc78e910046e59f43744758073fe.jpg" alt="" width="40"></td>
+                    <td>阿基德好看的阿萨德</td>
+                    <td>1</td>
+                    <td>10.00</td>
+                    <td>88</td>
+                    <td>
+                        充值任务                    </td>
+                    <td>2019-06-14 09:27:51</td>
+                    <td>2019-06-14 09:27:00</td>
+                    <td>2019-10-18 22:50:00</td>
+
+                    <td onclick="artdialogAlert('xxxxx.apk')">xxxxx.apk</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;测试&lt;/p&gt;')"><p>测试</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/53.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,53)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/53.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/53.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,53)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('大话西游')"><a href="javascript:;">24</a></td>
+                    <td>51</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190511/96924884fcbbfbf597643c63adb07f92.png')"><img src="http://task.yqin.cn/upload/admin/20190511/96924884fcbbfbf597643c63adb07f92.png" alt="" width="40"></td>
+                    <td>大话西游3</td>
+                    <td>1</td>
+                    <td>8.00</td>
+                    <td>逍遥镇1区</td>
+                    <td>
+                        充值任务                    </td>
+                    <td>2019-05-11 18:01:14</td>
+                    <td>2019-05-25 09:00:00</td>
+                    <td>2020-01-28 01:05:00</td>
+
+                    <td onclick="artdialogAlert('http://image.baidu.com/search/index?tn=baiduimage&amp;ipn=r&amp;ct=201326592&amp;cl=2&amp;lm=-1&amp;st=-1&amp;fm=result&amp;fr=&amp;sf=1&amp;fmq=1557568619749_R&amp;pv=&amp;ic=&amp;nc=1&amp;z=&amp;hd=&amp;latest=&amp;copyright=&amp;se=1&amp;showtab=0&amp;')">http://image.baidu.com/search/index?tn...</td>
+                    <td onclick="artdialogAlert('&lt;ol class=&quot; list-paddingleft-2&quot; style=&quot;list-style-type: decimal;&quot;&gt;&lt;li&gt;&lt;p&gt;一个手机注册一个号码&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;升到15级&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;充值6元&lt;br/&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;')"><ol class=" list-paddingleft-2" style="list-style-type: decimal;"><li><p>一个手机注册一个号码</p></li><li><p>升到15级</p></li><li><p>充值6元<br/></p></li></ol></td>
+                    <td>
+                        <a href="/admin/task/edit/id/51.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,51)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/51.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/51.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,51)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('趣步纯注册')"><a href="javascript:;">109</a></td>
+                    <td>50</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190511/eec0da30cdcceca5a6222cfbbe498e94.png')"><img src="http://task.yqin.cn/upload/admin/20190511/eec0da30cdcceca5a6222cfbbe498e94.png" alt="" width="40"></td>
+                    <td>贝壳找房 </td>
+                    <td>1</td>
+                    <td>2.00</td>
+                    <td>天下一霸1区</td>
+                    <td>
+                        应用任务                    </td>
+                    <td>2019-05-11 17:51:29</td>
+                    <td>2019-05-11 00:00:00</td>
+                    <td>2020-06-02 05:00:00</td>
+
+                    <td onclick="artdialogAlert('http://image.baidu.com/search/index?tn=baiduimage&amp;ipn=r&amp;ct=201326592&amp;cl=2&amp;lm=-1&amp;st=-1&amp;fm=result&amp;fr=&amp;sf=1&amp;fmq=1557567880622_R&amp;pv=&amp;ic=&amp;nc=1&amp;z=&amp;hd=&amp;latest=&amp;copyright=&amp;se=1&amp;showtab=0&amp;')">http://image.baidu.com/search/index?tn...</td>
+                    <td onclick="artdialogAlert('&lt;ol class=&quot; list-paddingleft-2&quot; style=&quot;list-style-type: decimal;&quot;&gt;&lt;li&gt;&lt;p&gt;下载贝壳找房APP&lt;br/&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;手机注册&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;截图上传&lt;br/&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;')"><ol class=" list-paddingleft-2" style="list-style-type: decimal;"><li><p>下载贝壳找房APP<br/></p></li><li><p>手机注册</p></li><li><p>截图上传<br/></p></li></ol></td>
+                    <td>
+                        <a href="/admin/task/edit/id/50.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,50)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/50.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/50.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,50)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('大话西游')"><a href="javascript:;">24</a></td>
+                    <td>49</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20181110/6c94fd0998a97cf26d7b7bdebf535540.png')"><img src="http://task.yqin.cn/upload/admin/20181110/6c94fd0998a97cf26d7b7bdebf535540.png" alt="" width="40"></td>
+                    <td>大话西游</td>
+                    <td>2</td>
+                    <td>18.00</td>
+                    <td>全部</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-05-11 17:51:16</td>
+                    <td>2019-05-11 00:00:00</td>
+                    <td>2019-05-19 00:00:00</td>
+
+                    <td onclick="artdialogAlert('https://ally.gdl.netease.com/g17_netease_netease.mj3897_weichuanbo_cpc_dev_1.1.169_com.netease.dhxy_19ziff7.apk')">https://ally.gdl.netease.com/g17_netea...</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;仅适用于新用户！&lt;/p&gt;')"><p>仅适用于新用户！</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/49.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,49)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/49.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/49.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,49)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('铁甲战神纯注册')"><a href="javascript:;">146</a></td>
+                    <td>48</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190426/d53278c5cbc5c5a8c768b011560f7d0f.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190426/d53278c5cbc5c5a8c768b011560f7d0f.jpeg" alt="" width="40"></td>
+                    <td>测试任务1</td>
+                    <td>1</td>
+                    <td>100.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-26 18:14:07</td>
+                    <td>2019-04-26 10:50:00</td>
+                    <td>2019-06-13 14:10:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com/aaaa.apk')">http://www.baidu.com/aaaa.apk</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;100&lt;/p&gt;')"><p>100</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/48.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,48)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/48.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/48.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,48)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('享物说')"><a href="javascript:;">159</a></td>
+                    <td>46</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190415/88bc77fb2cc7af716abab1253761e9d3.jpg')"><img src="http://task.yqin.cn/upload/admin/20190415/88bc77fb2cc7af716abab1253761e9d3.jpg" alt="" width="40"></td>
+                    <td>测试任务3应用任务</td>
+                    <td>1</td>
+                    <td>100.00</td>
+                    <td></td>
+                    <td>
+                        应用任务                    </td>
+                    <td>2019-04-15 15:23:05</td>
+                    <td>2019-04-15 05:05:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('https://api.boss.mgp.mi.com/cms/micar/download?channel=GuanWang')">https://api.boss.mgp.mi.com/cms/micar/...</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;安达市大所大大所大&lt;/p&gt;')"><p>安达市大所大大所大</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/46.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,46)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/46.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/46.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,46)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('胡来了真人麻将')"><a href="javascript:;">157</a></td>
+                    <td>45</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190413/0a2d9a05759086189d4dd0be1fa72bcb.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190413/0a2d9a05759086189d4dd0be1fa72bcb.jpeg" alt="" width="40"></td>
+                    <td>测试任务2充值任务</td>
+                    <td>1</td>
+                    <td>20.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        充值任务                    </td>
+                    <td>2019-04-15 15:21:20</td>
+                    <td>2019-04-15 15:05:00</td>
+                    <td>2019-06-06 10:50:00</td>
+
+                    <td onclick="artdialogAlert('http://s.toutiao.com/UsMYE/')">http://s.toutiao.com/UsMYE/</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;3031030&lt;/p&gt;&lt;p&gt;30&lt;/p&gt;')"><p>3031030</p><p>30</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/45.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,45)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/45.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/45.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,45)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>44</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>1</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('https://api.boss.mgp.mi.com/cms/micar/download?channel=GuanWang')">https://api.boss.mgp.mi.com/cms/micar/...</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/44.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,44)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/44.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/44.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,44)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>43</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/43.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,43)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/43.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/43.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,43)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>42</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/42.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,42)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/42.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/42.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,42)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>41</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-13 15:41:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/41.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,41)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/41.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/41.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,41)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>40</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/40.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,40)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/40.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/40.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,40)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>39</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/39.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,39)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/39.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/39.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,39)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>38</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/38.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,38)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/38.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/38.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,38)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>37</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/37.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,37)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/37.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/37.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,37)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>36</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/36.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,36)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/36.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/36.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,36)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>35</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/35.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,35)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/35.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/35.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,35)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>34</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/34.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,34)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/34.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/34.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,34)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>33</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/33.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,33)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/33.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/33.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,33)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>32</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/32.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,32)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/32.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/32.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,32)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>31</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/31.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,31)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/31.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/31.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,31)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>30</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/30.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,30)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/30.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/30.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,30)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>29</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/29.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,29)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/29.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/29.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,29)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>28</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/28.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,28)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/28.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/28.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,28)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>27</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/27.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,27)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/27.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/27.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,27)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>26</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/26.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,26)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/26.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/26.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,26)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>25</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/25.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,25)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/25.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/25.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,25)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>24</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/24.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,24)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/24.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/24.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,24)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>23</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/23.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,23)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/23.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/23.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,23)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>22</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/22.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,22)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/22.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/22.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,22)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>21</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/21.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,21)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/21.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/21.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,21)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>20</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/20.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,20)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/20.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/20.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,20)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>19</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/19.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,19)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/19.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/19.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,19)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>18</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/18.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,18)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/18.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/18.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,18)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>17</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/17.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,17)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/17.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/17.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,17)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>16</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/16.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,16)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/16.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/16.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,16)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>15</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/15.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,15)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/15.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/15.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,15)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>14</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/14.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,14)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/14.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/14.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,14)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>13</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/13.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,13)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/13.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/13.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,13)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>12</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/12.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,12)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/12.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/12.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,12)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>11</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/11.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,11)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/11.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/11.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,11)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>10</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/10.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,10)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/10.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/10.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,10)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>9</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/9.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,9)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/9.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/9.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,9)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>8</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/8.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,8)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/8.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/8.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,8)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>7</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/7.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,7)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/7.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/7.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,7)">删除</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td onclick="artdialogAlert('梦想世界')"><a href="javascript:;">57</a></td>
+                    <td>6</td>
+                    <td onclick="imagePreviewDialog('http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg')"><img src="http://task.yqin.cn/upload/admin/20190412/c9ba61836ac7c854ae1509563dd7e10e.jpeg" alt="" width="40"></td>
+                    <td>试玩游戏梦三国抢红包36元</td>
+                    <td>0</td>
+                    <td>36.00</td>
+                    <td>网通一区</td>
+                    <td>
+                        分期任务                    </td>
+                    <td>2019-04-12 17:22:59</td>
+                    <td>2019-04-12 17:22:00</td>
+                    <td>2019-08-15 10:30:00</td>
+
+                    <td onclick="artdialogAlert('http://www.baidu.com')">http://www.baidu.com</td>
+                    <td onclick="artdialogAlert('&lt;p&gt;试玩游戏梦三国抢红包36元&lt;/p&gt;')"><p>试玩游戏梦三国抢红包36元</p></td>
+                    <td>
+                        <a href="/admin/task/edit/id/6.html">编辑</a>
+                                                    <a href="#" onclick="invalid(1,6)" class="">下架</a>
+                        
+                        <a href="/admin/task/branch/id/6.html">任务分期</a>
+                        <!--<a href="/admin/task/delete/id/6.html" class="js-ajax-delete">删除</a>-->
+                        <a href="#" onclick="invalid(2,6)">删除</a>
+                    </td>
+                </tr>
+                        </tbody>
+        </table>
+        <div class="pagination"><li class="page-item disabled"><span class="page-link">&laquo;</span></li> <li class="active page-item disabled" ><span class="page-link">1</span></li><li class="page-item"><a class="page-link" href="/admin/task/index.html?page=2">2</a></li> <li class="page-item"><a class="page-link" href="/admin/task/index.html?page=2">&raquo;</a></li></div>
+    </form>
+</div>
+<script src="/Public/js/admin.js"></script>
+    <script>
+        //任务上架下架操作
+        function invalid(type,id)
+        { 
+            if(type == 1){ 
+                var url = '/admin/task/invalid.html';
+             }else{ 
+                var url = '/admin/task/delete.html';
+             }
+
+            $.ajax({ 
+                url:url,
+                type:"post",
+                data:{ 'id':id },
+                dataType:'json',
+                success:function(ret){ 
+                    if(ret.code){ 
+                        alert(ret.msg);
+                        location.reload();
+                     }else{ 
+                        alert(ret.msg);
+                     }
+                 }
+             })
+         }
+    </script>
+
+</body>
+</html>
