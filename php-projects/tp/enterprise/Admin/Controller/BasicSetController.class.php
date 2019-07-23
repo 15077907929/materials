@@ -105,4 +105,66 @@ class BasicSetController extends CommonController {
 		$this->assign('res',$res);
 		$this->display();		
 	}
+	
+	public function img(){
+		$this->assign('res',$res);
+		$this->display();
+	}
+	
+	public function column(){
+		$method = I('get.method') ? I('get.method') : 'show';
+		$db=M('column');
+		$db2=M('admin');
+		switch ($method) {
+			case 'show':
+				$temp=$db->select();
+				foreach($temp as $key=>$val){
+					if($val['bigclass']==0){
+						$res['column'][]=$val;
+					}
+					foreach($res['column'] as $k=>$v){
+						if($v['id']==$val['bigclass']){
+							$res['column'][$k]['sub'][]=$val;
+						}
+						foreach($res['column'][$k]['sub'] as $sub_k=>$sub_v){
+							if($sub_v['id']==$val['bigclass']){
+								$res['column'][$k]['sub'][$sub_k]['sub'][]=$val;
+							}
+						}
+					}
+				}
+				// echo '<pre>';
+				// print_r($res);exit;
+			break;
+		}
+		$this->assign('res',$res);
+		$this->display('column_'.$method);		
+	}
+	
+	public function index_set(){
+		require_once(APP_PATH.'Admin/Org/fckeditor/fckeditor.php');
+		$res['oFCKeditor'] = new \FCKeditor('c_content'); 
+		$res['oFCKeditor']->BasePath = 'Admin/Org/fckeditor/';
+		$res['oFCKeditor']->Value = $res['info']['c_content'];
+		$res['oFCKeditor']->Width = '100%';   
+		$res['oFCKeditor']->Height = '300';
+		
+		$res['e_oFCKeditor'] = new \FCKeditor('e_content'); 
+		$res['e_oFCKeditor']->BasePath = 'Admin/Org/fckeditor/';
+		$res['e_oFCKeditor']->Value = $res['info']['e_content'];
+		$res['e_oFCKeditor']->Width = '100%';   
+		$res['e_oFCKeditor']->Height = '300';
+		$this->assign('res',$res);
+		$this->display();		
+	}
+	
+	public function seo(){
+		$this->assign('res',$res);
+		$this->display();			
+	}
+	
+	public function foot(){
+		$this->assign('res',$res);
+		$this->display();			
+	}
 }

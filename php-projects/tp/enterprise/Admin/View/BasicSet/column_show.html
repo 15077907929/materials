@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="Public/admin/css/metinfo_admin.css" />
+<title>栏目管理</title>
+<script type="text/javascript" src="Public/js/zh_cn.js"></script>
+<script type="text/javascript" src="Public/js/metinfo.js"></script>
+</head>
+<body>
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr> 
+		<td align="center" valign="top">
+			<table width="95%" border="0" cellpadding="2" cellspacing="1" class="table_southidc">
+				<tr> 
+					<td class="back_southidc" height="30" colspan="4" align="center">栏目管理</td>
+				</tr>
+				<tr>
+					<td class="title_add" height="20" colspan="2" align="left">
+						<a href="index.php?m=Admin&c=BasicSet&a=column&method=add">添加一级栏目</a>
+					</td>
+					<td width="20%" height="20" align="center" >&nbsp;</td>
+					<td width="60%" align="right" ></td>
+				</tr>
+				<tr> 
+					<td colspan="4" valign="top">
+						<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#003366" class="border" style="word-break:break-all">
+							<tr class="back_southidc2"> 
+								<td width="15%" align="center" height="25" >栏目名称[排序]</td>
+								<td width="3%" align="center">ID</td>
+								<td width="8%" align="center">导航栏显示</td>
+								<td width="8%" align="center">栏目属性</td>
+								<td width="8%" align="center">栏目模型</td>
+								<td width="8%" align="center">栏目文件夹</td>
+								<td width="16%" align="center">中文链接地址</td>
+								<td width="4%" height="25" align="center">选中</td>
+								<td width="20%" align="center" >操作</td>
+							</tr>
+							{foreach $res['column'] as $key=>$item}  
+								<tr class="tdbg">
+									<td bgcolor="#DCDCDC" >
+									<img src="/Public/admin/images/tree_big.gif">{$item['c_name']}[<font color="#FF6600">{$item['no_order']}</font>]</td>
+									<td align="center" bgcolor="#DCDCDC">{$item['id']}</td>
+									<td bgcolor="#DCDCDC" align="center">{$item['nav']}</td>
+									<td bgcolor="#DCDCDC" align="center">{$item['if_in']}</td>
+									<td align="center" bgcolor="#DCDCDC">{$item['module']}</td>
+									<td bgcolor="#DCDCDC" align="center" >{$item['foldername']} </td>
+									<td align="center" bgcolor="#DCDCDC">{$item['c_out_url']}</td>
+									<td height="22" align="center" bgcolor="#DCDCDC">
+									<input name='id' type='checkbox' onClick="unselectall()" id="id" value="{$item['id']}" class="xz"></td>
+
+									{if $item['module']>5}				
+
+									<td align="center" bgcolor="#DCDCDC" > <a href="editor.php?id=$val[id]" >编辑</a> | <a href="delete.php?id=$val[id]" onClick="return ConfirmDel();" >删除</a></td>
+								</tr>
+							{else}				
+									<td align="center" bgcolor="#DCDCDC" ><a href="add.php?class1=$val[id]" style="color:#003399" >添加二级栏目</a> | <a href="editor.php?id=$val[id]" >编辑</a> | <a href="delete.php?id=$val[id]" onClick="return ConfirmDel();" >删除</a></td>
+								</tr>	
+							{/if}			 
+								{foreach $item['sub'] as $sub_key=>$sub_item} 			 
+									<tr class="tdbg">
+										<td bgcolor="#FFCCCC" >&nbsp;&nbsp;<img src="Public/admin/images/tree_small.gif">{$sub_item['c_name']}[<font color="#FF6600">{$sub_item['no_order']}</font>]</td>
+										<td align="center" bgcolor="#FFCCCC">{$sub_item['id']}</td>
+										<td bgcolor="#FFCCCC" align="center">{$sub_item['nav']}</td>
+										<td bgcolor="#FFCCCC" align="center">{$sub_item['if_in']}</td>
+										<td align="center" bgcolor="#FFCCCC">{$sub_item['module']}</td>
+										<td bgcolor="#FFCCCC" align="center" >{$sub_item['foldername']}</td>
+										<td align="center" bgcolor="#FFCCCC">{$sub_item['out_url']}</td>
+										<td height="22" align="center" bgcolor="#FFCCCC"><input name='id' type='checkbox' onClick="unselectall()" id="id" value="{$sub_item['id']}" class="xz"></td>
+										<td align="center" bgcolor="#FFCCCC">
+											<a href="add.php?class2={$sub_item['id']}" style="color:#FF6600">添加三级栏目</a> | 
+											<a href="editor.php?id={$sub_item['id']}" >编辑</a> | 
+											<a href="delete.php?id=$val[id]" onClick="return ConfirmDel();" >删除</a>
+										</td>
+									</tr>
+									{foreach $sub_item['sub'] as $sub_sub_key=>$sub_sub_item} 	
+										<tr class="tdbg">
+											<td bgcolor="#ffffff" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="Public/admin/images/tree_small.gif">{$sub_sub_item['c_name']}[<font color="#FF6600">{$sub_sub_item['no_order']}</font>]</td>
+											<td align="center" bgcolor="#ffffff">{$sub_sub_item['id']}</td>
+											<td bgcolor="#ffffff" align="center">{$sub_sub_item['nav']}</td>
+											<td bgcolor="#ffffff" align="center">{$sub_sub_item['if_in']}</td>
+											<td align="center" bgcolor="#ffffff">{$sub_sub_item['module']}</td>
+											<td bgcolor="#ffffff" align="center" >{$sub_sub_item['foldername']} </td>
+											<td align="center" bgcolor="#ffffff">{$sub_sub_item['out_url']}</td>
+											<td height="22" align="center" bgcolor="#ffffff"><input name='id' type='checkbox' onClick="unselectall()" id="id" value="" class="xz"></td>
+											<td align="center" bgcolor="#ffffff" > 
+												<a href="editor.php?id={$sub_sub_item['id']}" >编辑</a> | 
+												<a href="delete.php?id=$val[id]" onClick="return ConfirmDel();" >删除</a>
+											</td>
+										</tr>
+									{/foreach}
+								{/foreach}
+							{/foreach}
+						</table>
+					</td>
+				</tr> 
+				<tr> 
+					<td height="20" colspan="4" align="left" bgcolor="#FFCCCC">
+						<form name="del" method="Post" action="delete.php" onSubmit="return ConfirmDelall();"> 
+							<input name="chkAll" class="xz" type="checkbox" id="chkAll" onclick=CheckAll(this.form) value="checkbox">
+							选中本页显示的所有栏目<input name="submit" type='submit' value='删除选定的条目'> 
+							<input name="action" type="hidden" id="action" value="del">
+							<input name="allid" type="hidden" id="allid" value="">
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td height="0" colspan="4" align="center" bgcolor="#FFCCCC">{$res['show']}</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

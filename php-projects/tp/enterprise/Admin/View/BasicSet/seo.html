@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="Public/admin/css/metinfo_admin.css" />
+<title>网站推广优化设置</title>
+</head>
+<body>
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr> 
+		<td align="center" valign="top">
+			<form method="POST" name="myform" action="" target="_self">
+			<input name="action" type="hidden" value="modify">
+				<table width="95%" border="0" cellpadding="2" cellspacing="1" class="table_southidc">
+					<tr> 
+						<td class="back_southidc" height="30" colspan="3" align="center">网站推广优化设置</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="140" height="25">网站标题关键词：</td>
+						<td colspan="2"> <input name="c_title_keywords" type="text" class="input" size="55" maxlength="200" value="{$c_title_keywords}">多个关键词请用“|”或“，”隔开。</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="140" height="25">网站关键词：</td>
+						<td colspan="2"> <input name="c_keywords" type="text" class="input" size="55" maxlength="200" value="{$c_keywords}">多个关键词请用“，”隔开。</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="140" height="25" valign="middle">网站描述:</td>
+						<td colspan="2" valign="top"> <textarea name="c_description" cols="45" rows="5" >{$c_description}</textarea>将出现在搜索引擎收录首页描述中</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="140" height="25">头部优化文字（时间下方显示）：</td>
+						<td colspan="2"> <input name="c_seo" type="text" class="input" size="55" maxlength="800" value="{$c_seo}">支持HTML语言，不能包含双引号</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="140" height="25">图片默认ALT：</td>
+						<td colspan="2"> <input name="c_alt" type="text" class="input" size="55" maxlength="200" value="{$c_alt}">鼠标移至图片显示的文字</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="140" height="25">超链接默认Title：</td>
+						<td colspan="2"> <input name="c_atitle" type="text" class="input" size="55" maxlength="200" value="{$c_atitle}">鼠标移至超链接显示的文字</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="140" height="25">友情链接本站名称：</td>
+						<td colspan="2"> <input name="c_linkname" type="text" class="input" size="55" maxlength="200" value="{$c_linkname}"></td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="140" height="25" valign="middle">网站底部优化字:</td>
+						<td colspan="2" valign="top"> <textarea name="c_foottext" cols="45" rows="5" >{$c_foottext}</textarea>支持HTML语言，不能包含双引号</td>
+					</tr>
+					{if $en_lang neq 1}	  
+						<tr bgcolor="#999999"> <td  height="25" colspan="3"><b>英文内容</b></td></tr>
+						<tr bgcolor="#ECF5FF"> 
+							<td width="140" height="25">英文标题关键词：</td>
+							<td colspan="2"> <input name="e_title_keywords" type="text" class="input" size="55" maxlength="200" value="{$e_title_keywords}">多个关键词请用“|”或“，”隔开。</td>
+						</tr>
+						<tr bgcolor="#ECF5FF"> 
+							<td width="140" height="25">英文关键词：</td>
+							<td colspan="2"> <input name="e_keywords" type="text" class="input" size="55" maxlength="200" value="{$e_keywords}">多个关键词请用“，”隔开。</td>
+						</tr>
+						<tr bgcolor="#ECF5FF"> 
+							<td width="140" height="25" valign="middle">网站英文描述:</td>
+							<td colspan="2" valign="top"> <textarea name="e_description" cols="45" rows="5" >{$e_description}</textarea>将出现在搜索引擎收录首页描述中</td>
+						</tr>
+						<tr bgcolor="#ECF5FF"> 
+							<td width="140" height="25">头部优化文字（时间下方显示）：</td>
+							<td colspan="2"> <input name="e_seo" type="text" class="input" size="55" maxlength="200" value="{$e_seo}">支持HTML语言，不能包含双引号</td>
+						</tr>
+						<tr bgcolor="#ECF5FF"> 
+							<td width="140" height="25">图片默认ALT：</td>
+							<td colspan="2"> <input name="e_alt" type="text" class="input" size="55" maxlength="200" value="{$e_alt}">鼠标移至图片显示的文字</td>
+						</tr>
+						<tr bgcolor="#ECF5FF"> 
+							<td width="140" height="25">超链接默认Title：</td>
+							<td colspan="2"> <input name="e_atitle" type="text" class="input" size="55" maxlength="200" value="{$e_atitle}">鼠标移至超链接显示的文字</td>
+						</tr>
+						<tr bgcolor="#ECF5FF"> 
+							<td width="140" height="25">友情链接本站英文名称：</td>
+							<td colspan="2"> 
+								<input name="e_linkname" type="text" class="input" size="55" maxlength="200" value="{$e_linkname}" />
+							</td>
+						</tr>
+						<tr bgcolor="#ECF5FF"> 
+							<td width="140" height="25" valign="middle">网站底部优化字:</td>
+							<td colspan="2" valign="top"> 
+								<textarea name="e_foottext" cols="45" rows="5" >{$e_foottext}</textarea>
+								支持HTML语言，不能包含双引号
+							</td>
+						</tr>
+					{/if}		  
+					<tr> 
+						<td height="30" colspan="3" align="center" bgcolor="#ECF5FF"> 
+							<input type="submit" name="sub" value="提交" class="tj" />
+							<input type="reset" name="res" value="重置" class="tj" /> 
+						</td>
+					</tr>
+				</table>
+			</form>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

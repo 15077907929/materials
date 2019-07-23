@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="Public/admin/css/metinfo_admin.css" />
+<title>网站底部信息设置</title>
+</head>
+<body>
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr> 
+		<td align="center" valign="top">
+			<form method="POST" name="myform" action="" target="_self">
+				<input name="action" type="hidden" value="modify">
+				<table width="95%" border="0" cellpadding="2" cellspacing="1" class="table_southidc">
+					<tr> 
+						<td class="back_southidc" height="30" colspan="3" align="center">网站底部信息设置</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="140" height="25">版权信息：</td>
+						<td colspan="2"> <input name="c_footright" type="text" class="input" size="60" maxlength="500" value="{$c_footright}">支持HTML语言，不能包含双引号</td>
+					</tr> 
+					<tr bgcolor="#ECF5FF"> 
+						<td width="140" height="25">地址邮编：</td>
+						<td colspan="2"> <input name="c_footaddress" type="text" class="input" size="60" maxlength="500" value="{$c_footaddress}">支持HTML语言，不能包含双引号</td>
+					</tr> 
+					<tr bgcolor="#ECF5FF"> 
+						<td width="140" height="25">联系方式：</td>
+						<td colspan="2"> <input name="c_foottel" type="text" class="input" size="60" maxlength="500" value="{$c_foottel}">支持HTML语言，不能包含双引号</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="140" height="25" valign="middle">底部其他信息:</td>
+						<td colspan="2" valign="top"> <textarea name="c_footother" cols="50" rows="5" >{$c_footother}</textarea>支持HTML语言，不能包含双引号</td>
+					</tr>
+					{if $en_lang neq 1}	  	  
+						<tr bgcolor="#999999"> <td  height="25" colspan="3"><b>英文内容</b></td></tr>
+						<tr bgcolor="#ECF5FF"> 
+							<td width="140" height="25">版权信息：</td>
+							<td colspan="2"> <input name="e_footright" type="text" class="input" size="60" maxlength="500" value="{$e_footright}">支持HTML语言，不能包含双引号</td>
+						</tr> 
+						<tr bgcolor="#ECF5FF"> 
+							<td width="140" height="25">地址邮编：</td>
+							<td colspan="2"> <input name="e_footaddress" type="text" class="input" size="60" maxlength="500" value="{$e_footaddress}">支持HTML语言，不能包含双引号</td>
+						</tr> 
+						<tr bgcolor="#ECF5FF"> 
+							<td width="140" height="25">联系方式：</td>
+							<td colspan="2"> <input name="e_foottel" type="text" class="input" size="60" maxlength="500" value="{$e_foottel}">支持HTML语言，不能包含双引号</td>
+						</tr>
+						<tr bgcolor="#ECF5FF"> 
+							<td width="140" height="25" valign="middle">底部其他信息:</td>
+							<td colspan="2" valign="top"> <textarea name="e_footother" cols="50" rows="5" >{$e_footother}</textarea>支持HTML语言，不能包含双引号</td>
+						</tr>
+					{/if}			  
+					<tr> 
+						<td height="30" colspan="3" align="center" bgcolor="#ECF5FF"> 
+							<input type="submit" name="sub" value="提交" class="tj" />
+							<input type="reset" name="res" value="重置" class="tj" /> 
+						</td>
+					</tr>
+				</table>
+			</form>
+		</td>
+	</tr>
+</table>
+</body>
+</html>
