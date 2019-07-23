@@ -24,19 +24,19 @@ class CommonController extends Controller {
 						$lnav['list2'][]=$val;
 					break;
 					case 3;
-						$list3[]=$val;
+						$lnav['list3'][]=$val;
 					break;
 					case 4;
-						$list4[]=$val;
+						$lnav['list4'][]=$val;
 					break;
 					case 5;
-						$list5[]=$val;
+						$lnav['list5'][]=$val;
 					break;
 					case 6;
-						$list6[]=$val;
+						$lnav['list6'][]=$val;
 					break;
 					case 7;
-						$list7[]=$val;
+						$lnav['list7'][]=$val;
 					break;
 				} 
 			}else{

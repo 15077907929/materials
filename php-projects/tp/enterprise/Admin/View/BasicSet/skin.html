@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="Public/admin/css/metinfo_admin.css" />
+<title>界面风格设置</title>
+</head>
+<body>
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr> 
+		<td align="center" valign="top">
+			<form method="POST" name="myform" action="" target="_self">
+				<input name="action" type="hidden" value="modify">
+				<table width="95%" border="0" cellpadding="2" cellspacing="1" class="table_southidc">
+					<tr> 
+						<td class="back_southidc" height="30" colspan="2" align="center">网站界面风格设置</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="120" height="25"><font color="#FF0000">*</font>网站模板：</td>
+						<td>
+							<select name="skin_user">
+								{foreach $res['skin'] as $key=>$item}   
+									<option value="$val[skin_file]" {if $item['skin_file'] eq C('skin_user')}select{/if}>{$item['skin_name']}</option>
+								{/foreach}
+							</select>			
+							<a href="skin_manager.php" class="title_add">管理模板</a>
+						</td>
+					</tr> 
+					<tr bgcolor="#ECF5FF"> 
+						<td width="120" height="25">在线交流样式：</td>
+						<td><input name="online_type" type="radio" value="0" $online_type1[0]>固定于页面中  <input name="online_type" type="radio" value="1" $online_type1[1]>居左随屏幕滚动  <input name="online_type" type="radio" value="2" $online_type1[2]>居右随屏幕滚动  <input name="online_type" type="radio" value="3" $online_type1[3]>关闭</td>
+					</tr> 
+					<tr bgcolor="#ECF5FF"> 
+						<td width="120" height="25"><font color="#FF0000">*</font>产品列表页面：</td>
+						<td> 每页显示	
+							<input name="product_list" type="text" class="input" size="3" maxlength="20" value="{$product_list}">条</td>
+					</tr> 
+					<tr bgcolor="#ECF5FF"> 
+						<td width="120" height="25"><font color="#FF0000">*</font>新闻列表页面：</td>
+						<td> 每页显示<input name="news_list" type="text" class="input" size="3" maxlength="20" value="{$news_list}">条</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="120" height="25"><font color="#FF0000">*</font>下载列表页面：</td>
+						<td> 每页显示<input name="download_list" type="text" class="input" size="3" maxlength="20" value="{$download_list}">条</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="120" height="25"><font color="#FF0000">*</font>图片列表页面：</td>
+						<td> 每页显示<input name="img_list" type="text" class="input" size="3" maxlength="20" value="{$img_list}">条</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="120" height="25"><font color="#FF0000">*</font>招聘列表页面：</td>
+						<td> 每页显示<input name="job_list" type="text" class="input" size="3" maxlength="20" value="{$job_list}">条</td>
+					</tr>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="120" height="25"><font color="#FF0000">*</font>搜索列表页面：</td>
+						<td> 每页显示<input name="search_list" type="text" class="input" size="3" maxlength="20" value="{$search_list}">条</td>
+					</tr>
+					<tr> 
+						<td height="30" colspan="2" align="center" bgcolor="#ECF5FF"> 
+							<input type="submit" name="sub" value="提交" class="tj" />
+							<input type="reset" name="sub2" value="重置" class="tj" /> 
+						</td>
+					</tr>
+				</table>
+			</form>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

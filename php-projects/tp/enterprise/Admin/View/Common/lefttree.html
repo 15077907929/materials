@@ -27,7 +27,7 @@
 				<table cellspacing="3" cellpadding="0" width="130" align="center">
 					{if $common['admin']['type'] eq 1}
 						<tr> 
-							<td><a target="main" href="admin/">管理员管理</a></td>
+							<td><a target="main" href="index.php?m=Admin&c=BasicSet&a=admin">管理员管理</a></td>
 						</tr>
 					{else}
 						<tr> 
@@ -36,12 +36,12 @@
 					{/if}
 					{if $common['admin']['type'] eq 1}
 						<tr> 
-							<td><a target="main" href="set/basic.php">基本信息</a></td>
+							<td><a target="main" href="index.php?m=Admin&c=BasicSet&a=basic">基本信息</a></td>
 						</tr>
 					{/if}
 					{if $common['admin']['type'] eq 1}
 						<tr> 
-							<td><a target="main" href="set/skin.php">界面风格</a></td>
+							<td><a target="main" href="index.php?m=Admin&c=BasicSet&a=skin">界面风格</a></td>
 						</tr>
 					{/if}
 					{if $common['admin']['type'] eq 1}
@@ -113,8 +113,7 @@
 							<td><a target="_blank" href="http://bbs.metinfo.cn/">技术支持</a></td>
 						</tr> 
 				</table>
-			</div>
-			<br>		
+			</div>	
 		</td>
 	</tr>
 	<!--系统配置结束-->	
@@ -148,7 +147,7 @@
 								{/if}
 							{/foreach}
 						</table>
-					</div><br>		
+					</div>	
 				</td>
 			</tr>
 		{/if}
@@ -173,133 +172,129 @@
 							</tr>
 						</table>
 					</div>
-					<br>		
 				</td>
 			</tr>
 		{/if}
 	{/foreach}
 	<!--文章模型结束-->
 	<!--产品模型开始-->
-	{foreach $res['list3'] as $key=>$item}
+	{foreach $lnav['list3'] as $key=>$item}
 		{if $common['admin']['type'] eq 1}
 			<tr>
-				<td id="imgmenu$val[id]" class="menu_title" onMouseOver="this.className='menu_title2';" onClick="showsubmenu($val[id])" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
-					<span>$val[c_name]</span>
+				<td id="imgmenu{$item['id']}" class="menu_title" onMouseOver="this.className='menu_title2';" onclick="showsubmenu({$item['id']})" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
+					<span>{$item['c_name']}</span>
 				</td>
 			</tr>
 			<tr>
-				<td id="submenu$val[id]" style="DISPLAY: none">
+				<td id="submenu{$item['id']}" style="DISPLAY: none">
 					<div class="sec_menu" style="WIDTH: 158px">
 						<table cellspacing="3" cellpadding="0" width="130" align="center">
 							<tr> 
-								<td><a target="main" href="product/add.php?class1=$val[id]">添加$val[c_name]</a></td>
+								<td><a target="main" href="index.php?m=Admin&c=Product&a=product&method=add&class1={$item['id']}">添加{$item['c_name']}</a></td>
 							</tr>
 							<tr> 
-								<td><a target="main" href="product/index.php?class1=$val[id]">管理$val[c_name]</a></td>
+								<td><a target="main" href="index.php?m=Admin&c=Product&a=product&class1={$item['id']}">管理{$item['c_name']}</a></td>
 							</tr>
 						</table>
 					</div>
-					<br>		
 				</td>
 			</tr>
 		{/if}
 	{/foreach}
 	<!--产品模型结束-->
 	<!--下载模型开始-->
-	{foreach $res['list4'] as $key=>$item}
+	{foreach $lnav['list4'] as $key=>$item}
 		{if $common['admin']['type'] eq 1}
 			<tr>
-				<td id="imgmenu$val[id]" class="menu_title" onMouseOver="this.className='menu_title2';" onClick="showsubmenu($val[id])" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
-				<span>$val[c_name]</span></td>
+				<td id="imgmenu{$item['id']}" class="menu_title" onMouseOver="this.className='menu_title2';" onclick="showsubmenu({$item['id']})" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
+				<span>{$item['c_name']}</span></td>
 			</tr>
 			<tr>
-				<td id="submenu$val[id]" style="DISPLAY: none">
+				<td id="submenu{$item['id']}" style="DISPLAY: none">
 					<div class="sec_menu" style="WIDTH: 158px">
 						<table cellspacing="3" cellpadding="0" width="130" align="center">
 							<tr> 
-								<td><a target="main" href="download/add.php?class1=$val[id]">添加$val[c_name]</a></td>
+								<td><a target="main" href="index.php?m=Admin&c=Download&a=download&method=add&class1={$item['id']}">添加{$item['c_name']}</a></td>
 							</tr>
 							<tr> 
-								<td><a target="main" href="download/index.php?class1=$val[id]">管理$val[c_name]</a></td>
+								<td><a target="main" href="index.php?m=Admin&c=Download&a=download&class1={$item['id']}">管理{$item['c_name']}</a></td>
 							</tr>
 						</table>
-					</div><br>		
+					</div>	
 				</td>
 			</tr>
 		{/if}
 	{/foreach}
 	<!--下载模型结束-->
 	<!--图片模型开始-->
-	{foreach $res['list5'] as $key=>$item}
+	{foreach $lnav['list5'] as $key=>$item}
 		{if $common['admin']['type'] eq 1}
 			<tr>
-				<td id="imgmenu$val[id]" class="menu_title" onMouseOver="this.className='menu_title2';" onClick="showsubmenu($val[id])" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
-					<span>$val[c_name]</span>
+				<td id="imgmenu{$item['id']}" class="menu_title" onMouseOver="this.className='menu_title2';" onClick="showsubmenu({$item['id']})" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
+					<span>{$item['c_name']}</span>
 				</td>
 			</tr>
 			<tr>
-				<td id="submenu$val[id]" style="DISPLAY: none">
+				<td id="submenu{$item['id']}" style="DISPLAY: none">
 					<div class="sec_menu" style="WIDTH: 158px">
 						<table cellspacing="3" cellpadding="0" width="130" align="center">
 							<tr> 
-								<td><a target="main" href="img/add.php?class1=$val[id]">添加$val[c_name]</a></td>
+								<td><a target="main" href="index.php?m=Admin&c=Img&a=img&method=add&class1={$item['id']}">添加{$item['c_name']}</a></td>
 							</tr>
 							<tr> 
-								<td><a target="main" href="img/index.php?class1=$val[id]">管理$val[c_name]</a></td>
+								<td><a target="main" href="index.php?m=Admin&c=Img&a=img&class1={$item['id']}">管理{$item['c_name']}</a></td>
 							</tr>
 						</table>
-					</div>
-					<br>		
+					</div>	
 				</td>
 			</tr>
 		{/if}
 	{/foreach}
 	<!--图片模型结束-->
 	<!--招聘模型开始-->
-	{foreach $res['list6'] as $key=>$item}
+	{foreach $lnav['list6'] as $key=>$item}
 		{if $common['admin']['type'] eq 1}
 			<tr>
-				<td id="imgmenu$val[id]" class="menu_title" onMouseOver="this.className='menu_title2';" onClick="showsubmenu($val[id])" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
-					<span>$val[c_name]</span>
+				<td id="imgmenu{$item['id']}" class="menu_title" onMouseOver="this.className='menu_title2';" onClick="showsubmenu({$item['id']})" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
+					<span>{$item['c_name']}</span>
 				</td>
 			</tr>
 			<tr>
-				<td id="submenu$val[id]" style="DISPLAY: none">
+				<td id="submenu{$item['id']}" style="DISPLAY: none">
 					<div class="sec_menu" style="WIDTH: 158px">
 						<table cellspacing="3" cellpadding="0" width="130" align="center">
 							<tr> 
-								<td><a target="main" href="job/add.php?class1=$val[id]">添加$val[c_name]</a></td>
+								<td><a target="main" href="index.php?m=Admin&c=Job&a=job&method=add&class1={$item['id']}">添加{$item['c_name']}</a></td>
 							</tr>
 							<tr> 
-								<td><a target="main" href="job/index.php?class1=$val[id]">管理$val[c_name]</a></td>
+								<td><a target="main" href="index.php?m=Admin&c=Job&a=job&class1={$item['id']}">管理{$item['c_name']}</a></td>
 							</tr>
 						</table>
-					</div>
-					<br>		
+					</div>		
 				</td>
 			</tr>
 		{/if}
 	{/foreach}
 	<!--招聘模型结束-->
 	<!--留言系统开始-->
-	{foreach $res['list7'] as $key=>$item}
+	{foreach $lnav['list7'] as $key=>$item}
 		{if $common['admin']['type'] eq 1}
 			<tr>
-				<td id="imgmenu$val[id]" class="menu_title" onMouseOver="this.className='menu_title2';" onClick="showsubmenu($val[id])" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
-				<span>$val[c_name]</span></td>
+				<td id="imgmenu{$item['id']}" class="menu_title" onmouseOver="this.className='menu_title2';" onclick="showsubmenu({$item['id']})" onMouseOut="this.className='menu_title';" style="cursor:hand" background="Public/admin/images/menudown.gif" height="25"> 
+				<span>{$item['c_name']}</span></td>
 			</tr>
 			<tr>
-				<td id="submenu$val[id]" style="DISPLAY: none">
+				<td id="submenu{$item['id']}" style="DISPLAY: none">
 					<div class="sec_menu" style="WIDTH: 158px">
 						<table cellspacing="3" cellpadding="0" width="130" align="center">
 							<tr> 
-								<td><a target="main" href="message/inc.php">$val[c_name]配置</a></td>
+								<td><a target="main" href="index.php?m=Admin&c=Message&a=message&method=inc">{$item['c_name']}配置</a></td>
 							</tr>
 							<tr> 
-								<td><a target="main" href="message/index.php">留言信息管理</a></td>
+								<td><a target="main" href="index.php?m=Admin&c=Message&a=message">留言信息管理</a></td>
 							</tr>
 						</table>
-					</div><br>	
+					</div>
 				</td>
 			</tr>
 		{/if}
@@ -315,19 +310,18 @@
 		<tr>
 			<td id="submenu9999" style="DISPLAY: none">
 				<div class="sec_menu" style="WIDTH: 158px">
-
 					<table cellspacing="3" cellpadding="0" width="130" align="center">
 						<tr> 
-							<td><a target="main" href="feedback/inc.php">反馈系统设置</a></td>
+							<td><a target="main" href="index.php?m=Admin&c=Feedback&a=feedback&method=inc">反馈系统设置</a></td>
 						</tr>
 						<tr> 
-							<td><a target="main" href="feedback/parameter.php">反馈列表字段设置</a></td>
+							<td><a target="main" href="index.php?m=Admin&c=Feedback&a=feedback&method=para">反馈列表字段设置</a></td>
 						</tr>
 						<tr> 
-							<td><a target="main" href="feedback/index.php">反馈信息管理</a></td>
+							<td><a target="main" href="index.php?m=Admin&c=Feedback&a=feedback">反馈信息管理</a></td>
 						</tr>
 					</table>
-				</div><br>		
+				</div>	
 			</td>
 		</tr>
 	{/if}
@@ -342,16 +336,15 @@
 		<tr>
 			<td id="submenu9998" style="DISPLAY: none">
 				<div class="sec_menu" style="WIDTH: 158px">
-					
 					<table cellspacing="3" cellpadding="0" width="130" align="center">
 						<tr> 
-							<td><a target="main" href="link/index.php">友情链接管理</a></td>
+							<td><a target="main" href="index.php?m=Admin&c=Friendlink&a=friendlink">友情链接管理</a></td>
 						</tr>
 						<tr> 
-							<td><a target="main" href="link/add.php">添加友情链接</a></td>
+							<td><a target="main" href="index.php?m=Admin&c=Friendlink&a=friendlink&method=add">添加友情链接</a></td>
 						</tr>
 					</table>
-				</div><br>		
+				</div>	
 			</td>
 		</tr>
 	{/if}	

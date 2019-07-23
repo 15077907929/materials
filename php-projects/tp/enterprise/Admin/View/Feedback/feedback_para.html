@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="Public/admin/css/metinfo_admin.css" />
+<title>添加参数</title>
+<script type="text/javascript" src="Public/admin/js/zh_cn.js"></script>
+<script type="text/javascript" src="Public/admin/js/metinfo.js"></script>
+</head>
+<body>
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr> 
+		<td align="center" valign="top">
+			<form method="POST" name="myform"  action="parameter.php?action=Modify&type=$type" target="_self">
+				<table width="98%" border="0" cellpadding="2" cellspacing="1" class="table_southidc">
+					<tr> 
+						<td class="back_southidc" height="25" colspan="6" align="center">反馈表单字段设置</td>
+					<tr bgcolor="#ECF5FF"> 
+						<td width="10%" height="25" align="center">字段排序</td>
+						<td width="25%">字段名称</td>
+						<td width="25%" >英文名称</td>
+						<td width="10%" align="center">是否启用</td>
+						<td width="10%" align="center">是否必填</td>
+						<td width="20%" align="center">字段类型</td>
+					</tr>
+					{foreach $res['para'] as $key=>$item}
+						<tr bgcolor="#ECF5FF"> 
+							<td  height="25" align="center">
+								<input name="no_order{$item['id']}" type="text" class="input" size="3" maxlength="10" value="{$item['no_order']}" />
+							</td>
+							<td ><input name="c_name{$item['id']}" type="text" class="input" size="25" maxlength="255" value="{$item['c_name']}"></td>
+							<td ><input name="e_name{$item['id']}" type="hidden" class="input" size="25" maxlength="255" value="{$item['e_name']}"><input name="e_name{$item['id']}" type="text" class="input" size="25" maxlength="255" value="{$item['e_name1']}" $e_markok></td>
+							<td align="center"><input type="checkbox" name=use_ok{$item['id']} value=1 class="xz" {$item['use_ok']}/></td>
+							<td align="center"><input type="checkbox" name=wr_ok{$item['id']} value=1 class="xz" {$item['wr_ok']}/></td>
+							<td align="center">
+								{if $item['type'] eq 1}
+									简短字段
+								{else if $item['type'] eq 2}
+									<font color='#ff0000'>下拉菜单</font> <a href='list.php?bigid=$list1[id]'>设置参数</a>
+								{else if $item['type'] eq 3}
+									文本字段
+								{/if}
+							</td>
+						</tr>
+					{/foreach}		   
+					<tr> 
+						<td height="30" colspan="6" align="center" bgcolor="#ECF5FF"> 
+							<input type="submit" name="sub" value="提交" class="tj" />
+							<input type="reset" name="sub2" value="重置" class="tj" /> 
+						</td>
+					</tr>
+				</table>
+			</form>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

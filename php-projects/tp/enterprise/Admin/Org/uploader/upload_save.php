@@ -107,18 +107,18 @@ echo "'; </script>";
 
 //上传Flash图		
 if($_FILES['imgurl']['name']!=''&&$_REQUEST['flash']=="flash") { 
-            $f->savepath = $f->savepath;
-            $imgurls = $f->upload('imgurl');
-echo "<SCRIPT language=javascript>\n";
-echo "parent.document.myform.".$returnid.".value='".$imgurls."';\n";
-echo "alert('上传成功,图片大小：";
-echo round($file_size/1024,2);
-echo "K');";
-echo "location.href='upload_photo.php?returnid=";
-echo $returnid;
-echo "&flash=";
-echo $flash;
-echo "'; </script>";	
+	$f->savepath = $f->savepath;
+	$imgurls = $f->upload('imgurl');
+	echo "<SCRIPT language=javascript>\n";
+	echo "parent.document.myform.".$returnid.".value='".$imgurls."';\n";
+	echo "alert('上传成功,图片大小：";
+	echo round($file_size/1024,2);
+	echo "K');";
+	echo "location.href='upload_photo.php?returnid=";
+	echo $returnid;
+	echo "&flash=";
+	echo $flash;
+	echo "'; </script>";	
 }
     /**end**/
 	

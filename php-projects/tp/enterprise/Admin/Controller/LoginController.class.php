@@ -51,7 +51,7 @@ class LoginController extends Controller {
 	}
 	
 	public function logout(){
-		cookie('user',null);
+		cookie('admin',null);
 		cookie('flag',2);	//成功退出
 		redirect('index.php?m=Admin&c=Login&a=login');
 	}

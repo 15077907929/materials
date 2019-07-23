@@ -5,7 +5,7 @@ use Think\Controller;
 class TaskController extends CommonController {
     public function task(){
 		$method = I('get.method') ? I('get.method') : 'show';
-		$db=M('task');
+		$db=M('tasks');
 		switch ($method) {
             case 'list':
 				$res['list']=$db->select();

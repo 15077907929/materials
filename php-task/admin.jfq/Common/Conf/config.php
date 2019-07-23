@@ -9,6 +9,6 @@ return array(
     'DB_PREFIX'=> '',
     'DB_NAME'=>'jfq',
     'DB_HOST'=>'127.0.0.1',
-    'DB_USER'=> 'root',
-    'DB_PWD'=>'123456',
+    'DB_USER'=> 'game',
+    'DB_PWD'=>'game@2015.run',
 );
