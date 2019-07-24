@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="Public/admin/css/metinfo_admin.css" />
+<title>数据备份</title>
+</head>
+<script type="text/javascript" src="Public/js/zh_cn.js"></script>
+<script type="text/javascript" src="Public/js/metinfo.js"></script>
+<body>
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.php?m=Admin&c=BasicSet&a=database&method=import"><b>备份数据导入</b></a></td></tr>
+	<tr> 
+		<td align="center" valign="top">
+			<form method="POST" name="myform" action="database.php?action=export" target="_self">
+				<table width="95%" border="0" cellpadding="2" cellspacing="1" class="table_southidc">
+					<tr> 
+						<td class="back_southidc" height="30" colspan="4" align="center">数据备份</td>
+					</tr>
+					<tr bgcolor="#ECF5FF" align="center"> 
+						<td width="15%" height="25"><input name='chkAll' type='checkbox' id='chkAll' onclick='CheckAll(this.form)' value='check' checked>全选/反选</td>
+						<td width="50%">数据库表</td>
+						<td width="15%">记录条数</td>
+						<td width="20%">大小 [共 {$res['totalsize']} M]</td>
+					</tr>
+					{foreach $res['tables'] as $key=>$item} 	 
+						<tr bgcolor="#ECF5FF" align="center"> 
+							<td width="15%" height="25"><input type="checkbox" name="tables[]" value="$val" checked></td>
+							<td width="50%">{$item['name']}</td>
+							<td width="15%">{$item['count']}</td>
+							<td width="20%">{$item['size']} M</td>
+						</tr>
+					{/foreach}
+					<tr>
+						<td colspan="4" bgcolor="#ECF5FF"  align="center">每个分卷文件大小：<input type=text name="sizelimit" value="2048" size=5> K <input type="submit" name="dosubmit" value=" 开始备份数据 "></td>
+					</tr>
+				</table>
+			</form>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

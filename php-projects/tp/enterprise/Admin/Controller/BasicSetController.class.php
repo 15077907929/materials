@@ -166,5 +166,80 @@ class BasicSetController extends CommonController {
 	public function foot(){
 		$this->assign('res',$res);
 		$this->display();			
+	}	
+	
+	public function flash(){
+		$this->assign('res',$res);
+		$this->display();			
+	}
+	
+	public function label(){
+		$this->assign('res',$res);
+		$this->display();		
+	}	
+	
+	public function online(){
+		$method = I('get.method') ? I('get.method') : 'show';
+		$db=M('column');
+		$db2=M('admin');
+		switch ($method) {
+			case 'show':
+			
+			break;
+		}
+		$this->assign('res',$res);
+		$this->display('online_'.$method);		
+	}
+	
+	public function html(){
+		$db=M('column');
+		$temp_arr=$db->where('bigclass=0 and if_in=0')->select();
+		foreach($temp_arr as $val){
+			$res['module'.$val['module']][]=$val;
+		}
+		$this->assign('res',$res);
+		$this->display();			
+	}
+	
+	public function parameter(){
+		$db=M('parameter');
+		switch($_GET['type']){
+			case "3";
+				$res['p_title']='产品参数设置';
+				$k=1;
+			break;
+			case "4";
+				$res['p_title']='下载参数设置';
+				$k=11;
+			break;
+			case "5";
+				$res['p_title']='图片参数设置';
+				$k=21;
+			break;
+		}
+		$res['para']=$db->where('type='.$_GET['type'])->select();
+		// print_r($res);
+		$this->assign('res',$res);
+		$this->display();		
+	}
+	
+	public function database(){
+		$method = I('get.method') ? I('get.method') : 'show';
+		switch ($method) {
+			case 'show':
+				$temp_arr=M()->query('show tables');
+				foreach($temp_arr as $val){
+					$data=[];
+					$data['name']=$val['Tables_in_enterprise'];
+					$data['count']=M($data['name'])->count();
+					$data['size']= M()->query('SHOW TABLE STATUS FROM enterprise LIKE \''.$data['name'].'\'')[0]['Data_length'];
+					$data['size'] = round($data['size']/1024/1024, 2);
+					$res['totalsize']+=$data['size'];
+					$res['tables'][]=$data;
+				}
+			break;
+		}
+		$this->assign('res',$res);
+		$this->display('database_'.$method);			
 	}
 }

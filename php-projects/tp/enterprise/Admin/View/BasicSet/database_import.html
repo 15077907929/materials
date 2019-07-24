@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="Public/admin/css/metinfo_admin.css" />
+<title>备份数据导入</title>
+</head>
+<script type="text/javascript" src="Public/js/zh_cn.js"></script>
+<script type="text/javascript" src="Public/js/metinfo.js"></script>
+<body>
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.php?m=Admin&c=BasicSet&a=database"><b>数据备份</b></a></td>
+	</tr>
+	<tr> 
+		<td align="center" valign="top">
+			<table width="95%" border="0" cellpadding="2" cellspacing="1" class="table_southidc">
+				<tr> 
+					<td class="back_southidc" height="30" colspan="6" align="center">备份数据导入</td>
+				</tr>
+				<tr bgcolor="#ECF5FF" align="center"> 
+					<td width="8%" >ID</td>
+					<td width="30%" >文件名</td>
+					<td width="10%" >文件大小</td>
+					<td width="20%" >备份时间</td>
+					<td width="8%" >卷号</td>
+					<td width="24%" >操作</td>
+				</tr>
+				{foreach $res['infos'] as $key=>$item} 
+					<tr bgcolor="#ECF5FF" align="center"> 
+						<td width="8%" >$id</td>
+						<td width="30%" >$info[filename]</td>
+						<td width="10%" >$info[filesize]</td>
+						<td width="20%" >$info[maketime]</td>
+						<td width="8%" >$info[number]</td>
+						<td width="24%" >
+							<a href="?action=import&pre=$info[pre]&dosubmit=1">导入</a> | 
+							<a href="?action=delete&filenames=$info[filename]">删除</a> | 
+							<a href="../databack/$info[filename]">下载</a>
+						</td>
+					</tr>
+				{/foreach}
+				<tr bgcolor="#ECF5FF" >
+					<form enctype="multipart/form-data" method="POST" name="myform" action="database.php?action=uploadsql" target="_self">
+						<td height="25" colspan="2" align="center"><b>上传数据文件：</b>文件名<input name="met_sqlname" type="text" class="input" size="16" maxlength="200" ></td>
+						<td colspan="4"><input name="met_upsql" type="file" class="input" size="30" maxlength="200" ><input type="submit" name="Submit" value="提交" class="tj"></td>
+					</form>
+				</tr> 
+				<tr bgcolor="#ECF5FF" ><td colspan="6" style="color:#990000; padding-left:50px;">请按照met_20090314_7215_1格式设置文件名，即"数据库名称(如met)_时期_随机数字_数据文件序号"</td></tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</body>
+</html>
